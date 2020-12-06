@@ -1,1 +1,1 @@
-DROP DATABASE IF EXISTS `linker_db`;
+DROP DATABASE IF EXISTS `adlinker_db`;
