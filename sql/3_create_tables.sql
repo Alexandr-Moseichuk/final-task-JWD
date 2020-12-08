@@ -1,5 +1,4 @@
-USE
-`adlinker_db`;
+USE `adlinker_db`;
 
 CREATE TABLE `user`
 (
@@ -15,7 +14,7 @@ CREATE TABLE `user`
      */
     `role`     TINYINT      NOT NULL CHECK (`role` IN (0, 1, 2, 3)),
     PRIMARY KEY (`id`)
-) ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+);
 
 CREATE TABLE `campaign`
 (
@@ -28,7 +27,7 @@ CREATE TABLE `campaign`
     `requirement` VARCHAR(1024) NOT NULL,
     `budget`      INTEGER       NOT NULL,
     PRIMARY KEY (`id`)
-) ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+);
 
 CREATE TABLE `user_campaign_m2m`
 (
@@ -37,41 +36,48 @@ CREATE TABLE `user_campaign_m2m`
     PRIMARY KEY (`user_id`, `campaign_id`) ,
     FOREIGN KEY (`user_id`)     REFERENCES `user`     (`id`) ,
     FOREIGN KEY (`campaign_id`) REFERENCES `campaign` (`id`)
-) ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+);
 
 CREATE TABLE `role`
 (
     `id`   TINYINT     NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(32) NOT NULL UNIQUE ,
     FOREIGN KEY (`id`) REFERENCES `user` (`role`)
-) ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+);
 
 CREATE TABLE  `user_info`
 (
-    `id`           INTEGER     NOT NULL AUTO_INCREMENT ,
     `user_id`      INTEGER     NOT NULL UNIQUE ,
     `last_name`    VARCHAR(32) NOT NULL ,
     `first_name`   VARCHAR(32) NOT NULL ,
     `second_name`  VARCHAR(32) NOT NULL ,
     `description`  VARCHAR(512) ,
-    `phone_number` TINYINT(15) ,
+    `phone_number` VARCHAR(15) ,
     `photo_url`    VARCHAR(2083),
-    PRIMARY KEY (`id`) ,
+    PRIMARY KEY (`user_id`) ,
     FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+);
 
 CREATE TABLE `social_link`
 (
-    `user_info_id` INTEGER      NOT NULL UNIQUE ,
-    //TODO social type
-    `link`         VARCHAR(128) NOT NULL ,
-    FOREIGN KEY (`user_info_id`) REFERENCES `user_info`(`id`)
-) ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+    `user_id` INTEGER      NOT NULL UNIQUE ,
+    `title`   VARCHAR(16)  NOT NULL ,
+    `link`    VARCHAR(128) NOT NULL ,
+    FOREIGN KEY (`user_id`) REFERENCES `user`(`id`)
+);
 
 CREATE TABLE `file`
 (
-    `campaign_id`        INTEGER,
-    `path`      VARCHAR,
-    `full_name` VARCHAR,
+    `campaign_id` INTEGER NOT NULL,
+    `path`        VARCHAR NOT NULL,
+    `full_name`   VARCHAR NOT NULL,
     FOREIGN KEY (`campaign_id`) REFERENCES `campaign`(`id`)
-) ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+);
+
+CREATE TABLE `manager_influencer`
+(
+    `manager_id`    INTEGER NOT NULL ,
+    `influencer_id` INTEGER NOT NULL UNIQUE ,
+    FOREIGN KEY (`manager_id`)    REFERENCES `user`(`id`),
+    FOREIGN KEY (`influencer_id`) REFERENCES `user`(`id`),
+);

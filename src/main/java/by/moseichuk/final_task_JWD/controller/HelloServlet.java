@@ -1,4 +1,4 @@
-package by.moseichuk.final_task_JWD;
+package by.moseichuk.final_task_JWD.controller;
 
 import java.io.*;
 import javax.servlet.http.*;
