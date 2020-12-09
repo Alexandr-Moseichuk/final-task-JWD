@@ -46,4 +46,15 @@ public abstract class User extends Entity {
     public void setApproved(boolean approved) {
         isApproved = approved;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", mail='" + mail + '\'' +
+                ", role=" + role +
+                ", isApproved=" + isApproved +
+                "} " + super.toString();
+    }
 }

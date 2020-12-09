@@ -26,4 +26,11 @@ public abstract class Entity implements Serializable {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public String toString() {
+        return "Entity{" +
+                "id=" + id +
+                '}';
+    }
 }

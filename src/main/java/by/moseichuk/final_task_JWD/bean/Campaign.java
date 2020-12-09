@@ -102,6 +102,6 @@ public class Campaign extends Entity {
                 ", budget=" + budget +
                 ", userFileList=" + userFileList +
                 ", influencerList=" + influencerList +
-                '}';
+                "} " + super.toString();
     }
 }
