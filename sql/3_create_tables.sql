@@ -64,11 +64,12 @@ CREATE TABLE  `user_info`
 
 CREATE TABLE `social_link`
 (
+    `id`      INTEGER      NOT NULL AUTO_INCREMENT,
     `user_id` INTEGER      NOT NULL ,
     `title`   VARCHAR(16)  NOT NULL ,
     `link`    VARCHAR(128) NOT NULL ,
     `views`   INTEGER      NOT NULL ,
-    PRIMARY KEY (`user_id`, `link`) ,
+    PRIMARY KEY (`id`) ,
     FOREIGN KEY (`user_id`) REFERENCES `user`(`id`)
 );
 
@@ -86,7 +87,7 @@ CREATE TABLE `manager_influencer`
 CREATE TABLE `campaign_file`
 (
     `campaign_id` INTEGER NOT NULL ,
-    `file_id`     INTEGER NOT NULL ,
+    `file_id`     INTEGER NOT NULL UNIQUE ,
     PRIMARY KEY (`campaign_id`, `file_id`) ,
     FOREIGN KEY (`campaign_id`) REFERENCES `campaign`(`id`) ,
     FOREIGN KEY (file_id)       REFERENCES `file`(`id`)
@@ -96,8 +97,8 @@ CREATE TABLE `registration_application`
 (
     `user_id`      INTEGER      NOT NULL UNIQUE ,
     `date`         DATETIME     NOT NULL ,
-    `comment`      VARCHAR(512) ,
-    `mobile_phone` VARCHAR(15) ,
+    `comment`      VARCHAR(512) NOT NULL ,
+    `mobile_phone` VARCHAR(15)  NOT NULL ,
     PRIMARY KEY (`user_id`) ,
     FOREIGN KEY (`user_id`) REFERENCES `user`(`id`)
 );
