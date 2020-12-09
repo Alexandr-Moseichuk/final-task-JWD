@@ -1,81 +1,82 @@
-INSERT INTO `users` (
-	`identity`,
+USE `adlinker_db`;
+
+INSERT INTO `user` (
+
 	`login`,
 	`password`,
-    `mail`
-	`role`
+    `mail`,
+	`role`,
+    `approved`
 ) VALUES (
-	2,
-	"user1",
-	"EE11CBB19052E40B07AAC0CA060C23EE", /* MD5 хэш пароля "user" */
-	"user1@mail.ru",
-	1
+
+	'user1',
+	'EE11CBB19052E40B07AAC0CA060C23EE', /* MD5 хэш пароля "user" */
+	'user1@mail.ru',
+	1,
+    true
 ), (
-	3,
-	"user2",
-	"EE11CBB19052E40B07AAC0CA060C23EE", /* MD5 хэш пароля "user" */
-    "user2@mail.ru",
-	2
+
+	'user2',
+	'EE11CBB19052E40B07AAC0CA060C23EE', /* MD5 хэш пароля 'user' */
+    'user2@mail.ru',
+	2,
+    true
 );
 
 INSERT INTO `campaign`
-(`id`, `create_date`,  `begin_date`, `end_date`, `title`,
+( `create_date`,  `begin_date`, `end_date`, `title`,
  `description`,
  `requirement`,
  `budget`)
 VALUES
-(1,    2020-12-07,     2020-12-10,   2020-12-10, "BigBon",
- "Рекламная кампания лапши быстрого приготовления",
- "50 тыс. просмотров, нативная интерграция",
+(    '2020-12-07 12:00:00',     '2020-12-10 16:00:00',   '2020-12-10 18:00:00', 'BigBon',
+ 'Рекламная кампания лапши быстрого приготовления',
+ '50 тыс. просмотров, нативная интерграция',
  50),
-(2,    2020-11-30,     2020-11-31,    2020-12-01, "RAID",
- "Реклама мобильной игры в стиле дарк фентези",
- "100 тыс. просмотров"
+(    '2020-11-30 08:36:00',     '2020-11-30 14:00:00',    '2020-12-01 18:00:00', 'RAID',
+ 'Реклама мобильной игры в стиле дарк фентези',
+ '100 тыс. просмотров',
  100);
 
-INSERT INTO `user_campaign_m2m`
+INSERT INTO `file`
+( `path`,   `name`, `file_type`)
+VALUES
+(     '/somedir', 'text', '.txt'),
+(     '/somedir2', 'photo' , '.png'),
+(     '/somedir2', 'text', '.txt'),
+(     '/somedir2', 'photo2', '.png'),
+(     '/userphoto', 'user1', '.png'),
+(     '/userphoto', 'user2', '.png');
+
+INSERT INTO `user_campaign`
 (`user_id`, `campaign_id`)
 VALUES
 (1,         1),
 (1,         2),
 (2,         2);
 
-INSERT INTO `role`
-(`id`, `name`)
-VALUES
-(0,    "administrator"),
-(1,    "advertiser"),
-(2,    "influencer"),
-(3,     "manager");
-
 INSERT INTO `user_info`
-(`id`, `user_id`, `last_name`, `first_name`, `second_name`,
+(`user_id`, `last_name`, `first_name`, `second_name`,
  `description`,
  `phone_number`,
- `photo_url`)
+ `photo_id`)
  VALUES
-(1,    1,         "Петров",     "Пётр",      "Петрович",
- "Стример на платформе Twitch",
+(1,         'Петров',    'Пётр',      'Петрович',
+ 'Стример на платформе Twitch',
  375444568714,
- "https://cdnimg.rg.ru/img/content/168/10/26/kotik_d_850_d_850.jpg"),
-(2,    2,         "Иванов",     "Иван",      "Иванович",
- "Блоггер на платформе YouTube",
+ 5),
+(2,         'Иванов',     'Иван',      'Иванович',
+ 'Блоггер на платформе YouTube',
  375897584425,
- "https://m.buro247.ru/images/senina/max-baskakov-OzAeZPNsLXk-unsplash.jpg");
+ 6);
 
-INSERT INTO `sotial_link`
-(`user_info_id` , `link`)
+INSERT INTO `social_link`
+(`user_id` , `title`, `link`, `views`)
 VALUES
-(1,  "vk.com/user1"),
-(1, "twitch.tv/user1"),
-(2, "youtube.com/user2"),
-(2, "vk.com/user2"),
-(2, "instagram.com/user2");
+(1, 'VK', 'vk.com/user1', 100000),
+(1, 'Twitch', 'twitch.tv/user1', 35000),
+(2, 'YouTube', 'youtube.com/user2', 2000000),
+(2, 'VK', 'vk.com/user2', 55000),
+(2, 'Instagram', 'instagram.com/user2', 135000);
 
-INSERT INTO `file`
-(`campaign_id`, `path`,     `full_name`)
-VALUES
-(1,             "/somedir", "text.txt"),
-(2,             "/somedir2", "photo.png"),
-(2,             "/somedir2", "text.txt"),
-(2,             "/somedir2", "photo2.png")
+

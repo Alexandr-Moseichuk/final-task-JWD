@@ -1,6 +1,6 @@
 package by.moseichuk.final_task_JWD.bean;
 
-public abstract class User {
+public abstract class User extends Entity {
     private String login;
     private String password;
     private String mail;
