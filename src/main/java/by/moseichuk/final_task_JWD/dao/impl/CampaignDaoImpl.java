@@ -1,18 +1,24 @@
 package by.moseichuk.final_task_JWD.dao.impl;
 
 import by.moseichuk.final_task_JWD.bean.Campaign;
+import by.moseichuk.final_task_JWD.bean.UserFile;
 import by.moseichuk.final_task_JWD.dao.CampaignDao;
 import by.moseichuk.final_task_JWD.dao.exception.DaoException;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 public class CampaignDaoImpl extends BaseDao implements CampaignDao {
     private static final String CREATE = "INSERT INTO `campaign` (`title`, `create_date`, `begin_date`, `end_date`, `description`, `requirement`, `budget`) VALUES(?, ?, ?, ?, ?, ?, ?)";
-    private static final String READ = "SELECT `title`, `create_date`, `begin_date`, `end_date`, `description`, `requirement`, `budget` FROM `campaign` WHERE `id` = ?";
+    private static final String READ   = "SELECT `title`, `create_date`, `begin_date`, `end_date`, `description`, `requirement`, `budget` FROM `campaign` WHERE `id` = ?";
     private static final String UPDATE = "UPDATE `campaign` SET `title` = ?, `create_date` = ?, `begin_date` = ?, `end_date` = ?, `description` = ?, `requirement` = ?, `budget` = ? WHERE `id` = ?";
     private static final String DELETE = "DELETE FROM `campaign` WHERE `id` = ?";
+
+    private static final String READ_FILES_ID = "SELECT `file_id` FROM `campaign_file` WHERE `campaign_id` = ?";
+    private static final String READ_ALL = "SELECT * FROM `campaign`";
 
     @Override
     public Integer create(Campaign campaign) throws DaoException {
@@ -90,9 +96,6 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
         }
     }
 
-    /**
-     * "UPDATE `campaign` SET `title` = ?, `create_date` = ?, `begin_date` = ?, `end_date` = ?, `description` = ?, `requirement` = ?, `budget` = ? WHERE `id` = ?";
-     */
     @Override
     public void update(Campaign campaign) throws DaoException {
         try (PreparedStatement statement = connection.prepareStatement(UPDATE)) {
@@ -120,6 +123,82 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         }
+    }
+
+    @Override
+    public List<Campaign> readAll() throws DaoException {
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = connection.prepareStatement(READ_ALL);
+            statement.executeQuery();
+            resultSet = statement.getResultSet();
+
+            List<Campaign> campaignList = new ArrayList<>();
+            while (resultSet.next()) {
+                Campaign campaign = new Campaign();
+                campaign.setId(resultSet.getInt("id"));
+                campaign.setTitle(resultSet.getString("title"));
+                campaign.setCreateDate(parseDate(resultSet.getDate("create_date")));
+                campaign.setBeginDate(parseDate(resultSet.getDate("begin_date")));
+                campaign.setEndDate(parseDate(resultSet.getDate("end_date")));
+                campaign.setDescription(resultSet.getString("description"));
+                campaign.setRequirement(resultSet.getString("requirement"));
+                campaign.setBudget(resultSet.getBigDecimal("budget"));
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            try {
+                statement.close();
+            } catch (SQLException | NullPointerException e) {
+                //TODO
+            }
+            try {
+                resultSet.close();
+            } catch (SQLException | NullPointerException e) {
+                //TODO
+            }
+        }
+        return null;
+    }
+
+
+    public List<Integer> readCampaignFileIds(Integer id) throws DaoException {
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = connection.prepareStatement(READ_FILES_ID);
+            statement.setInt(1, id);
+            statement.executeQuery();
+            resultSet = statement.getResultSet();
+
+            List<Integer> idList = new ArrayList<>();
+            while (resultSet.next()) {
+                idList.add(resultSet.getInt("file_id"));
+            }
+
+            return idList;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            try {
+                statement.close();
+            } catch (SQLException | NullPointerException e) {
+                //TODO
+            }
+            try {
+                resultSet.close();
+            } catch (SQLException | NullPointerException e) {
+                //TODO
+            }
+        }
+    }
+
+    @Override
+    public List<Integer> readUserIds() throws DaoException {
+        //TODO
+        return null;
     }
 
     private Calendar parseDate(Date date) {
