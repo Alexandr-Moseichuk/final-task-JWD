@@ -1,6 +1,6 @@
 package by.moseichuk.final_task_JWD.bean;
 
-public class SocialLink {
+public class SocialLink extends Entity {
     private String title;
     private String link;
     private Integer views;
