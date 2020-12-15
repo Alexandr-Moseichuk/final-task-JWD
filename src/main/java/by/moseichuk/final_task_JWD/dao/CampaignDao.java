@@ -8,5 +8,5 @@ import java.util.List;
 public interface CampaignDao extends Dao<Campaign> {
     List<Integer> readCampaignFileIds(Integer id) throws DaoException;
 
-    List<Integer> readUserIds() throws DaoException;
+    List<Integer> readUserIds(Integer id) throws DaoException;
 }
