@@ -2,49 +2,49 @@ USE `adlinker_db`;
 
 INSERT INTO `user` (
     `id`,
-	`login`,
-	`password`,
     `mail`,
-	`role`,
-    `approved`
+    `password`,
+    `role`,
+    `registration_date` ,
+    `status`
 ) VALUES (
-2,
-	'Influencer1',
-	'EE11CBB19052E40B07AAC0CA060C23EE', /* MD5 хэш пароля "user" */
-	'user1@mail.ru',
-	2,
-    true
-), (
-3,
-	'Influencer2',
-	'EE11CBB19052E40B07AAC0CA060C23EE', /* MD5 хэш пароля 'user' */
+    2,
     'user2@mail.ru',
-	2,
-    true
-), (4,
-    'Advertiser',
-    'EE11CBB19052E40B07AAC0CA060C23EE',
-    'advert@mail.ru',
-    1,
-    true
-), (5,
-    'Manager',
-    'EE11CBB19052E40B07AAC0CA060C23EE',
-    'manager@gmail.com',
+	'EE11CBB19052E40B07AAC0CA060C23EE', /* MD5 хэш пароля "user" */
+	1,
+    '2020-12-07 12:00:00',
+	2
+), (
     3,
-    true
+    'user3@mail.ru',
+    'EE11CBB19052E40B07AAC0CA060C23EE', /* MD5 хэш пароля "user" */
+    1,
+    '2020-12-07 12:00:00',
+    2
+), (4,
+    'user4@mail.ru',
+    'EE11CBB19052E40B07AAC0CA060C23EE', /* MD5 хэш пароля "user" */
+    1,
+    '2020-12-07 12:00:00',
+    2
+), (5,
+    'user5@mail.ru',
+    'EE11CBB19052E40B07AAC0CA060C23EE', /* MD5 хэш пароля "user" */
+    1,
+    '2020-12-07 12:00:00',
+    2
 ), (6,
-    'Influenc',
-    'EE11CBB19052E40B07AAC0CA060C23EE',
-    'inf@gmail.ru',
-    2,
-    false
+    'user6@mail.ru',
+    'EE11CBB19052E40B07AAC0CA060C23EE', /* MD5 хэш пароля "user" */
+    1,
+    '2020-12-07 12:00:00',
+    2
 ), (7,
-    'Infl',
-    'EE11CBB19052E40B07AAC0CA060C23EE',
-    'mail@mail.ru',
-    2,
-    false
+    'user7@mail.ru',
+    'EE11CBB19052E40B07AAC0CA060C23EE', /* MD5 хэш пароля "user" */
+    1,
+    '2020-12-07 12:00:00',
+    2
 );
 
 INSERT INTO `campaign`
@@ -63,14 +63,14 @@ VALUES
  100);
 
 INSERT INTO `file`
-(`id`, `path`,   `name`, `file_type`)
+(`id`, `path`)
 VALUES
-(1,     '/somedir', 'text', '.txt'),
-(2,     '/somedir2', 'photo' , '.png'),
-(3,     '/somedir2', 'text', '.txt'),
-(4,     '/somedir2', 'photo2', '.png'),
-(5,     '/userphoto', 'user1', '.png'),
-(6,     '/userphoto', 'user2', '.png');
+(1,     '/somedir/text.txt'),
+(2,     '/somedir2/photo.png'),
+(3,     '/somedir2/text.txt'),
+(4,     '/somedir2/photo2.png'),
+(5,     '/userphoto/user1.png'),
+(6,     '/userphoto/user2.png');
 
 INSERT INTO `user_campaign`
 (`user_id`, `campaign_id`)
@@ -85,11 +85,15 @@ INSERT INTO `user_info`
  `phone_number`,
  `photo_id`)
  VALUES
-(1,         'Петров',    'Пётр',      'Петрович',
+ (1,         'Петров',    'Пётр',      'Петрович',
+ 'Главный администратор',
+ 375444568714,
+ 5),
+(2,         'Петров',    'Пётр',      'Петрович',
  'Стример на платформе Twitch',
  375444568714,
  5),
-(2,         'Иванов',     'Иван',      'Иванович',
+(3,         'Иванов',     'Иван',      'Иванович',
  'Блоггер на платформе YouTube',
  375897584425,
  6);
@@ -118,8 +122,8 @@ VALUES
 (2, 5);
 
 INSERT INTO `registration_application`
-(`user_id`, `date`, `comment`, `mobile_phone`)
+(`user_id`, `comment`)
 VALUES
-(6, '2020-12-09 22:45:23', 'Прошу рассмотреть заявку. Звоните в любое время', 375444658247),
-(7, '2020-11-30 12:11:47', 'Перспективный стример на платформе youtube', 375296874596);
+(6, 'Прошу рассмотреть заявку. Звоните в любое время'),
+(7, 'Перспективный стример на платформе youtube');
 

@@ -1,14 +1,14 @@
 USE `adlinker_db`;
 
 INSERT INTO `user` (`id`,
-                     `login`,
-                     `password`,
-                     `mail`,
-                     `role`,
-                     `approved`)
+                    `mail`,
+                    `password`,
+                    `role`,
+                    `registration_date` ,
+                    `status`)
 VALUES (1,
-        'admin',
-        '21232F297A57A5A743894A0E4A801FC3', /* MD5 хэш пароля "admin" */
         'admin@mail.ru',
+        '21232F297A57A5A743894A0E4A801FC3', /* MD5 хэш пароля "admin" */
         0,
-        true);
+        '2020-12-07 12:00:00' ,
+        1);

@@ -3,9 +3,8 @@ USE `adlinker_db`;
 CREATE TABLE `user`
 (
     `id`       INTEGER      NOT NULL AUTO_INCREMENT,
-    `login`    VARCHAR(255) NOT NULL UNIQUE,
-    `password` CHAR(32)     NOT NULL,
     `mail`     varchar(255) NOT NULL UNIQUE,
+    `password` CHAR(32)     NOT NULL,
     /*
      * 0 - администратор (Role.ADMINISTRATOR)
      * 1 - рекламодатель (Role.ADVERTISER)
@@ -13,7 +12,13 @@ CREATE TABLE `user`
      * 3 - менеджер (Role.MANAGER)
      */
     `role`     TINYINT      NOT NULL CHECK (`role` IN (0, 1, 2, 3)),
-    `approved` BOOLEAN      NOT NULL ,
+    `registration_date`     DATETIME     NOT NULL ,
+    /*
+     * 0 - на рассмотрении
+     * 1 - одобрен
+     * 2 - в архиве
+     */
+    `status` TINYINT      NOT NULL CHECK ( `status` IN (0, 1, 2)) ,
     PRIMARY KEY (`id`)
 );
 
@@ -33,9 +38,7 @@ CREATE TABLE `campaign`
 CREATE TABLE `file`
 (
     `id`          INTEGER      NOT NULL AUTO_INCREMENT ,
-    `path`        VARCHAR(128) NOT NULL,
-    `name`        VARCHAR(32)  NOT NULL,
-    `file_type`   VARCHAR(15)  NOT NULL ,
+    `path`        VARCHAR(255) NOT NULL ,
     PRIMARY KEY (`id`)
 );
 
@@ -96,9 +99,7 @@ CREATE TABLE `campaign_file`
 CREATE TABLE `registration_application`
 (
     `user_id`      INTEGER      NOT NULL UNIQUE ,
-    `date`         DATETIME     NOT NULL ,
     `comment`      VARCHAR(512) NOT NULL ,
-    `mobile_phone` VARCHAR(15)  NOT NULL ,
     PRIMARY KEY (`user_id`) ,
     FOREIGN KEY (`user_id`) REFERENCES `user`(`id`)
 );
