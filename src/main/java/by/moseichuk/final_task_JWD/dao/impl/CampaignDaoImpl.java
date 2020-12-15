@@ -16,9 +16,11 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
     private static final String READ   = "SELECT `title`, `create_date`, `begin_date`, `end_date`, `description`, `requirement`, `budget` FROM `campaign` WHERE `id` = ?";
     private static final String UPDATE = "UPDATE `campaign` SET `title` = ?, `create_date` = ?, `begin_date` = ?, `end_date` = ?, `description` = ?, `requirement` = ?, `budget` = ? WHERE `id` = ?";
     private static final String DELETE = "DELETE FROM `campaign` WHERE `id` = ?";
+    private static final String READ_ALL = "SELECT * FROM `campaign`";
 
     private static final String READ_FILES_ID = "SELECT `file_id` FROM `campaign_file` WHERE `campaign_id` = ?";
-    private static final String READ_ALL = "SELECT * FROM `campaign`";
+    private static final String READ_USERS_ID = "SELECT `user_id` FROM `user_campaign` WHERE `campaign_id` = ?";
+
 
     @Override
     public Integer create(Campaign campaign) throws DaoException {
@@ -196,9 +198,35 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
     }
 
     @Override
-    public List<Integer> readUserIds() throws DaoException {
-        //TODO
-        return null;
+    public List<Integer> readUserIds(Integer id) throws DaoException {
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = connection.prepareStatement(READ_USERS_ID);
+            statement.setInt(1, id);
+            statement.executeQuery();
+            resultSet = statement.getResultSet();
+
+            List<Integer> idList = new ArrayList<>();
+            while (resultSet.next()) {
+                idList.add(resultSet.getInt("user_id"));
+            }
+
+            return idList;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            try {
+                statement.close();
+            } catch (SQLException | NullPointerException e) {
+                //TODO
+            }
+            try {
+                resultSet.close();
+            } catch (SQLException | NullPointerException e) {
+                //TODO
+            }
+        }
     }
 
     private Calendar parseDate(Date date) {
