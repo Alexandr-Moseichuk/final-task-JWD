@@ -7,6 +7,12 @@ import by.moseichuk.final_task_JWD.dao.exception.DaoException;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
+    private static final String CREATE = "INSERT INTO `user` (`mail`, `password`, `role`, `registration_date`, `status`) VALUES(?, ?, ?, ?, ?)";
+    private static final String READ   = "SELECT `mail`, `password`, `role`, `registration_date`, `status` FROM `user` WHERE `id` = ?";
+    private static final String UPDATE = "UPDATE `user` SET `mail` = ?, `password` = ?, `role` = ?, `registration_date` = ?, `status` = ? WHERE `id` = ?";
+    private static final String DELETE = "DELETE FROM `user` WHERE `id` = ?";
+    private static final String READ_ALL = "SELECT * FROM `user`";
+
     @Override
     public Integer create(User entity) throws DaoException {
         return null;
