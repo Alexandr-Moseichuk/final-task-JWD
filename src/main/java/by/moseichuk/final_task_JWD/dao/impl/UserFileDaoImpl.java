@@ -6,13 +6,15 @@ import by.moseichuk.final_task_JWD.dao.UserFileDao;
 import by.moseichuk.final_task_JWD.dao.exception.DaoException;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserFileDaoImpl extends BaseDao implements UserFileDao {
-    private static final String CREATE = "INSERT INTO `file` (`path`, `name`, `file_type`) VALUES(?, ?, ?)";
-    private static final String READ = "SELECT `path`, `name`, `file_type` FROM `file` WHERE `id` = ?";
-    private static final String UPDATE = "UPDATE `file` SET `path` = ?, `name` = ?, `file_type` = ? WHERE `id` = ?";
+    private static final String CREATE = "INSERT INTO `file` (`path`) VALUES(?)";
+    private static final String READ = "SELECT `path` FROM `file` WHERE `id` = ?";
+    private static final String UPDATE = "UPDATE `file` SET `path` = ? WHERE `id` = ?";
     private static final String DELETE = "DELETE FROM `file` WHERE `id` = ?";
+    private static final String READ_ALL = "SELECT * FROM `file`";
 
     @Override
     public Integer create(UserFile userFile) throws DaoException {
@@ -21,8 +23,6 @@ public class UserFileDaoImpl extends BaseDao implements UserFileDao {
         try {
             statement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, userFile.getPath());
-            statement.setString(2, userFile.getName());
-            statement.setString(3, userFile.getFileType());
 
             statement.executeUpdate();
             resultSet = statement.getResultSet();
@@ -62,8 +62,6 @@ public class UserFileDaoImpl extends BaseDao implements UserFileDao {
                 userFile = new UserFile();
                 userFile.setId(id);
                 userFile.setPath(resultSet.getString("path"));
-                userFile.setName(resultSet.getString("name"));
-                userFile.setFileType(resultSet.getString("file_type"));
             }
             return userFile;
         } catch (SQLException e) {
@@ -87,8 +85,6 @@ public class UserFileDaoImpl extends BaseDao implements UserFileDao {
     public void update(UserFile userFile) throws DaoException {
         try (PreparedStatement statement = connection.prepareStatement(UPDATE)) {
             statement.setString(1, userFile.getPath());
-            statement.setString(2, userFile.getName());
-            statement.setString(3, userFile.getFileType());
 
             statement.setInt(4, userFile.getId());
             statement.executeUpdate();
@@ -113,7 +109,19 @@ public class UserFileDaoImpl extends BaseDao implements UserFileDao {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
+            preparedStatement = connection.prepareStatement(READ_ALL);
 
+            preparedStatement.executeQuery();
+            resultSet = preparedStatement.getResultSet();
+
+            List<UserFile> userFileList = new ArrayList<>();
+            while (resultSet.next()) {
+                UserFile userFile = new UserFile();
+                userFile.setId(resultSet.getInt("id"));
+                userFile.setPath(resultSet.getString("path"));
+                userFileList.add(userFile);
+            }
+            return userFileList;
         } catch (SQLException e) {
             throw new DaoException(e);
         } finally {
