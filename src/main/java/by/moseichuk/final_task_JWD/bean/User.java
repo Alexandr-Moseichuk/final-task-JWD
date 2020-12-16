@@ -1,18 +1,20 @@
 package by.moseichuk.final_task_JWD.bean;
 
-public  class User extends Entity {
-    private String login;
-    private String password;
-    private String mail;
-    private UserRole role;
-    private boolean isApproved;
+import java.util.Calendar;
 
-    public String getLogin() {
-        return login;
+public  class User extends Entity {
+    private String mail;
+    private String password;
+    private UserRole role;
+    private Calendar registrationDate;
+    private UserStatus status;
+
+    public String getMail() {
+        return mail;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public String getPassword() {
@@ -23,14 +25,6 @@ public  class User extends Entity {
         this.password = password;
     }
 
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
     public UserRole getRole() {
         return role;
     }
@@ -39,22 +33,30 @@ public  class User extends Entity {
         this.role = role;
     }
 
-    public boolean isApproved() {
-        return isApproved;
+    public Calendar getRegistrationDate() {
+        return registrationDate;
     }
 
-    public void setApproved(boolean approved) {
-        isApproved = approved;
+    public void setRegistrationDate(Calendar registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
+    public UserStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(UserStatus status) {
+        this.status = status;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "login='" + login + '\'' +
+                "mail='" + mail + '\'' +
                 ", password='" + password + '\'' +
-                ", mail='" + mail + '\'' +
                 ", role=" + role +
-                ", isApproved=" + isApproved +
-                "} " + super.toString();
+                ", registrationDate=" + registrationDate +
+                ", status=" + status +
+                '}';
     }
 }
