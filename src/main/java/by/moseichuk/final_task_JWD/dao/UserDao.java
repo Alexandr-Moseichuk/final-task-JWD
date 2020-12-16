@@ -11,4 +11,6 @@ public interface UserDao extends Dao<User> {
 
     List<User> readManagerInfluencers(Integer managerId) throws DaoException;
 
+    User readManagerId(Integer influencerId) throws DaoException;
+
 }
