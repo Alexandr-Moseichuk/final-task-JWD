@@ -110,7 +110,24 @@ public class UserFileDaoImpl extends BaseDao implements UserFileDao {
 
     @Override
     public List<UserFile> readAll() throws DaoException {
-        return null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            try {
+                preparedStatement.close();
+            } catch (SQLException | NullPointerException e) {
+                //TODO
+            }
+            try {
+                resultSet.close();
+            } catch (SQLException | NullPointerException e) {
+                //TODO
+            }
+        }
     }
 
 }
