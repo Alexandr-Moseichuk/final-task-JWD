@@ -1,6 +1,7 @@
 package by.moseichuk.final_task_JWD.bean;
 
 public class UserInfo {
+    private Integer userId;
     private String lastName;
     private String firstName;
     private String secondName;
@@ -9,6 +10,14 @@ public class UserInfo {
     private UserFile userFile;
 
     public UserInfo() {
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getLastName() {
@@ -62,7 +71,8 @@ public class UserInfo {
     @Override
     public String toString() {
         return "UserInfo{" +
-                "lastName='" + lastName + '\'' +
+                "userId=" + userId +
+                ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
                 ", description='" + description + '\'' +
