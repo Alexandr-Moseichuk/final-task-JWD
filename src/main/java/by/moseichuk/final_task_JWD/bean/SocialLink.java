@@ -1,11 +1,31 @@
 package by.moseichuk.final_task_JWD.bean;
 
 public class SocialLink extends Entity {
+    private Integer id;
+    private Integer userId;
     private String title;
     private String link;
     private Integer views;
 
     public SocialLink() {
+    }
+
+    @Override
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {
@@ -35,7 +55,9 @@ public class SocialLink extends Entity {
     @Override
     public String toString() {
         return "SocialLink{" +
-                "title='" + title + '\'' +
+                "id=" + id +
+                ", userId=" + userId +
+                ", title='" + title + '\'' +
                 ", link='" + link + '\'' +
                 ", views=" + views +
                 '}';
