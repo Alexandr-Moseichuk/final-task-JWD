@@ -1,6 +1,5 @@
 package by.moseichuk.final_task_JWD.dao;
 
-import by.moseichuk.final_task_JWD.bean.Entity;
 import by.moseichuk.final_task_JWD.dao.exception.DaoException;
 
 import java.util.List;
