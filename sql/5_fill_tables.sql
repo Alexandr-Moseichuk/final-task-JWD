@@ -108,10 +108,10 @@ VALUES
 (5,    2, 'Instagram', 'instagram.com/user2', 135000);
 
 INSERT INTO `manager_influencer`
-(`manager_id`, `influencer_id`)
+(`manager_id`, `influencer_id`, `begin_date`)
 VALUES
-(5, 2),
-(5, 3);
+(5, 2, '2020-12-11 13:11:11'),
+(5, 3, '2020-12-20 13:32:45');
 
 INSERT INTO `campaign_file`
 (`campaign_id`, `file_id`)
@@ -122,8 +122,8 @@ VALUES
 (2, 5);
 
 INSERT INTO `registration_application`
-(`user_id`, `comment`)
+(`user_id`, `comment`, `date`)
 VALUES
-(6, 'Прошу рассмотреть заявку. Звоните в любое время'),
-(7, 'Перспективный стример на платформе youtube');
+(6, 'Прошу рассмотреть заявку. Звоните в любое время', '2020-12-15 13:35:23'),
+(7, 'Перспективный стример на платформе youtube', '2020-12-01 18:01:03');
 

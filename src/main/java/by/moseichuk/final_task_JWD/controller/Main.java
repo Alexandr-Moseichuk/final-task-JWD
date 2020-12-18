@@ -1,31 +1,31 @@
 package by.moseichuk.final_task_JWD.controller;
 
 import by.moseichuk.final_task_JWD.bean.Campaign;
+import by.moseichuk.final_task_JWD.dao.exception.ConnectionPoolException;
 import by.moseichuk.final_task_JWD.dao.exception.DaoException;
 import by.moseichuk.final_task_JWD.dao.impl.CampaignDaoImpl;
+import by.moseichuk.final_task_JWD.dao.pool.ConnectionPool;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) {
         //TODO test DB
         try {
-            Class.forName("org.mariadb.jdbc.Driver");
+            ConnectionPool.getInstance().init("org.mariadb.jdbc.Driver",
+                    "jdbc:mariadb://localhost:3306/adlinker_db", "root", "root",
+                    3, 5, 2);
 
-            Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/adlinker_db", "root", "root");
             CampaignDaoImpl campaignDao = new CampaignDaoImpl();
-            campaignDao.setConnection(connection);
+            campaignDao.setConnection(ConnectionPool.getInstance().getConnection());
             Campaign campaign1 = campaignDao.read(1);
             Campaign campaign2 = campaignDao.read(2);
             System.out.println(campaign1);
             System.out.println(campaign2);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+
+
         } catch (DaoException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (ConnectionPoolException e) {
             e.printStackTrace();
         }
 

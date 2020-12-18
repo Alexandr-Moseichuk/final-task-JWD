@@ -3,19 +3,10 @@ package by.moseichuk.final_task_JWD.bean;
 import java.util.Calendar;
 
 public class RegistrationApplication extends User {
-    private Calendar applicationDate;
     private String comment;
-    private String mobilePhone;
+    private Calendar date;
 
     public RegistrationApplication() {
-    }
-
-    public Calendar getApplicationDate() {
-        return applicationDate;
-    }
-
-    public void setApplicationDate(Calendar applicationDate) {
-        this.applicationDate = applicationDate;
     }
 
     public String getComment() {
@@ -26,20 +17,19 @@ public class RegistrationApplication extends User {
         this.comment = comment;
     }
 
-    public String getMobilePhone() {
-        return mobilePhone;
+    public Calendar getDate() {
+        return date;
     }
 
-    public void setMobilePhone(String mobilePhone) {
-        this.mobilePhone = mobilePhone;
+    public void setDate(Calendar date) {
+        this.date = date;
     }
 
     @Override
     public String toString() {
         return "RegistrationApplication{" +
-                "applicationDate=" + applicationDate +
-                ", comment='" + comment + '\'' +
-                ", mobilePhone='" + mobilePhone + '\'' +
-                "} " + super.toString();
+                "comment='" + comment + '\'' +
+                ", date=" + date +
+                '}';
     }
 }

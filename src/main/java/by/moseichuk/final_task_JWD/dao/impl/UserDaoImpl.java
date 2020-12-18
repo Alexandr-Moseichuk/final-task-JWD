@@ -1,5 +1,6 @@
 package by.moseichuk.final_task_JWD.dao.impl;
 
+import by.moseichuk.final_task_JWD.bean.Influencer;
 import by.moseichuk.final_task_JWD.bean.User;
 import by.moseichuk.final_task_JWD.bean.UserRole;
 import by.moseichuk.final_task_JWD.bean.UserStatus;
@@ -20,8 +21,6 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     private static final String READ_ALL = "SELECT * FROM `user`";
 
     private static final String READ_CAMPAIGN_IDS = "SELECT `campaign_id` FROM `user_campaign` WHERE `user_id` = ?";
-    private static final String READ_INFLUENCER_IDS = "SELECT `influencer_id` FROM `manager_influencer` WHERE `manager_id` = ?";
-    private static final String READ_MANAGER_ID = "SELECT `manager_id` FROM `manager_influencer` WHERE `influencer_id` = ?";
 
     @Override
     public Integer create(User user) throws DaoException {
@@ -177,74 +176,6 @@ public class UserDaoImpl extends BaseDao implements UserDao {
                 integerList.add(resultSet.getInt("campaign_id"));
             }
             return integerList;
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-        }
-    }
-
-    @Override
-    public List<User> readManagerInfluencers(Integer managerId) throws DaoException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            preparedStatement = connection.prepareStatement(READ_INFLUENCER_IDS);
-            preparedStatement.setInt(1, managerId);
-
-            preparedStatement.executeQuery();
-            resultSet = preparedStatement.getResultSet();
-
-            List<User> userList = new ArrayList<>();
-            while (resultSet.next()) {
-                User user = new User();
-                user.setId(resultSet.getInt("influencer_id"));
-                userList.add(user);
-            }
-            return userList;
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-        }
-    }
-
-    @Override
-    public User readManagerId(Integer influencerId) throws DaoException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            preparedStatement = connection.prepareStatement(READ_MANAGER_ID);
-            preparedStatement.setInt(1, influencerId);
-
-            preparedStatement.executeQuery();
-            resultSet = preparedStatement.getResultSet();
-
-            if (resultSet.next()) {
-                User user = new User();
-                user.setId(resultSet.getInt("influencer_id"));
-                return user;
-            } else {
-                return null;
-            }
         } catch (SQLException e) {
             throw new DaoException(e);
         } finally {

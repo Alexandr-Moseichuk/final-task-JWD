@@ -1,10 +1,12 @@
 package by.moseichuk.final_task_JWD.bean;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class Influencer extends User {
     private UserInfo userInfo;
     private Manager manager;
+    private Calendar managerBeginDate;
     private List<SocialLink> linkList;
     private List<Campaign> campaignList;
 
@@ -25,6 +27,14 @@ public class Influencer extends User {
 
     public void setManager(Manager manager) {
         this.manager = manager;
+    }
+
+    public Calendar getManagerBeginDate() {
+        return managerBeginDate;
+    }
+
+    public void setManagerBeginDate(Calendar managerBeginDate) {
+        this.managerBeginDate = managerBeginDate;
     }
 
     public List<SocialLink> getLinkList() {
@@ -48,8 +58,9 @@ public class Influencer extends User {
         return "Influencer{" +
                 "userInfo=" + userInfo +
                 ", manager=" + manager +
+                ", managerBeginDate=" + managerBeginDate +
                 ", linkList=" + linkList +
                 ", campaignList=" + campaignList +
-                "} " + super.toString();
+                '}';
     }
 }

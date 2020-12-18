@@ -4,17 +4,16 @@ import by.moseichuk.final_task_JWD.bean.RegistrationApplication;
 import by.moseichuk.final_task_JWD.dao.RegistrationApplicationDao;
 import by.moseichuk.final_task_JWD.dao.exception.DaoException;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class RegistrationApplicationDaoImpl extends BaseDao implements RegistrationApplicationDao {
-    private static final String CREATE = "INSERT INTO `registration_application` (`comment`) VALUES(?)";
-    private static final String READ   = "SELECT `comment` FROM `registration_application` WHERE `id` = ?";
-    private static final String UPDATE = "UPDATE `registration_application` SET `comment` = ? WHERE `id` = ?";
+    private static final String CREATE = "INSERT INTO `registration_application` (`comment`, `date`) VALUES(?, ?)";
+    private static final String READ   = "SELECT `comment`, `date` FROM `registration_application` WHERE `id` = ?";
+    private static final String UPDATE = "UPDATE `registration_application` SET `comment` = ?, `date` = ? WHERE `id` = ?";
     private static final String DELETE = "DELETE FROM `registration_application` WHERE `id` = ?";
     private static final String READ_ALL = "SELECT * FROM `registration_application`";
 
@@ -25,6 +24,7 @@ public class RegistrationApplicationDaoImpl extends BaseDao implements Registrat
         try {
             preparedStatement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, application.getComment());
+            preparedStatement.setDate(2, new Date(application.getDate().getTimeInMillis()));
             preparedStatement.executeUpdate();
 
             resultSet = preparedStatement.getResultSet();
@@ -64,6 +64,7 @@ public class RegistrationApplicationDaoImpl extends BaseDao implements Registrat
             if (resultSet.next()) {
                 application = new RegistrationApplication();
                 application.setComment(resultSet.getString("comment"));
+                application.setDate(parseDate(resultSet.getDate("date")));
             }
             return application;
         } catch (SQLException e) {
@@ -86,6 +87,7 @@ public class RegistrationApplicationDaoImpl extends BaseDao implements Registrat
     public void update(RegistrationApplication application) throws DaoException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)){
             preparedStatement.setString(1, application.getComment());
+            preparedStatement.setDate(2, new Date(application.getDate().getTimeInMillis()));
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -116,6 +118,7 @@ public class RegistrationApplicationDaoImpl extends BaseDao implements Registrat
                 RegistrationApplication application = new RegistrationApplication();
 
                 application.setComment(resultSet.getString("comment"));
+                application.setDate(parseDate(resultSet.getDate("date")));
 
                 applicationList.add(application);
             }
@@ -134,5 +137,11 @@ public class RegistrationApplicationDaoImpl extends BaseDao implements Registrat
                 //TODO
             }
         }
+    }
+
+    private Calendar parseDate(Date date) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        return calendar;
     }
 }

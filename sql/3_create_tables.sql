@@ -80,9 +80,11 @@ CREATE TABLE `social_link`
 
 CREATE TABLE `manager_influencer`
 (
-    `manager_id`    INTEGER NOT NULL ,
-    `influencer_id` INTEGER NOT NULL UNIQUE ,
-    PRIMARY KEY (`manager_id`, `influencer_id`),
+    `manager_id`    INTEGER  NOT NULL ,
+    `influencer_id` INTEGER  NOT NULL UNIQUE ,
+    `begin_date`    DATETIME NOT NULL ,
+    `end_date`      DATETIME ,
+    PRIMARY KEY (`manager_id`, `influencer_id`, `begin_date`),
     FOREIGN KEY (`manager_id`)    REFERENCES `user`(`id`),
     FOREIGN KEY (`influencer_id`) REFERENCES `user`(`id`)
 );
@@ -100,6 +102,7 @@ CREATE TABLE `registration_application`
 (
     `user_id`      INTEGER      NOT NULL UNIQUE ,
     `comment`      VARCHAR(512) NOT NULL ,
+    `date`         DATETIME     NOT NULL ,
     PRIMARY KEY (`user_id`) ,
     FOREIGN KEY (`user_id`) REFERENCES `user`(`id`)
 );
