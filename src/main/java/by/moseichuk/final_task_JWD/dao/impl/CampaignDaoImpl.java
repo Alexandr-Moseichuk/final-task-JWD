@@ -147,7 +147,9 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
                 campaign.setDescription(resultSet.getString("description"));
                 campaign.setRequirement(resultSet.getString("requirement"));
                 campaign.setBudget(resultSet.getBigDecimal("budget"));
+                campaignList.add(campaign);
             }
+            return campaignList;
         } catch (SQLException e) {
             throw new DaoException(e);
         } finally {
@@ -162,7 +164,6 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
                 //TODO
             }
         }
-        return null;
     }
 
 
