@@ -1,6 +1,7 @@
 package by.moseichuk.final_task_JWD.controller;
 
 import by.moseichuk.final_task_JWD.bean.Campaign;
+import by.moseichuk.final_task_JWD.bean.User;
 import by.moseichuk.final_task_JWD.dao.Transaction;
 import by.moseichuk.final_task_JWD.dao.TransactionFactory;
 import by.moseichuk.final_task_JWD.dao.exception.ConnectionPoolException;
@@ -11,6 +12,7 @@ import by.moseichuk.final_task_JWD.dao.pool.ConnectionPool;
 import by.moseichuk.final_task_JWD.dao.transaction.TransactionFactoryImpl;
 import by.moseichuk.final_task_JWD.service.CampaignService;
 import by.moseichuk.final_task_JWD.service.CampaignServiceImpl;
+import by.moseichuk.final_task_JWD.service.UserServiceImpl;
 import by.moseichuk.final_task_JWD.service.exception.ServiceException;
 
 import java.util.List;
@@ -46,17 +48,22 @@ public class Main {
             Transaction transaction = transactionFactory.createTransaction();
             CampaignServiceImpl service = new CampaignServiceImpl();
             service.setTransaction(transaction);
-            try {
-                List<Campaign> campaignList = service.readAll();
-                for (Campaign c : campaignList) {
-                    System.out.println(c);
-                }
-            } catch (ServiceException e) {
-                e.printStackTrace();
+
+            List<Campaign> campaignList = service.readAll();
+            for (Campaign c : campaignList) {
+                System.out.println(c);
             }
+
+            UserServiceImpl userService = new UserServiceImpl();
+            userService.setTransaction(transaction);
+            User user = userService.login("adminnnn@mail.ru", "admin");
+
+            System.out.println(user);
         } catch (TransactionException e) {
             e.printStackTrace();
         } catch (ConnectionPoolException e) {
+            e.printStackTrace();
+        } catch (ServiceException e) {
             e.printStackTrace();
         }
 

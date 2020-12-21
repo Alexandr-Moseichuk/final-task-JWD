@@ -21,6 +21,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     private static final String READ_ALL = "SELECT * FROM `user`";
 
     private static final String READ_CAMPAIGN_IDS = "SELECT `campaign_id` FROM `user_campaign` WHERE `user_id` = ?";
+    private static final String LOGIN = "SELECT `id`, `role`, `registration_date`, `status` FROM `user` WHERE `mail` = ? AND `password` = ?";
 
     @Override
     public Integer create(User user) throws DaoException {
@@ -192,9 +193,31 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         }
     }
 
-    private Calendar parseDate(Date date) {
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        return calendar;
+    @Override
+    public User login(String mail, String password) throws DaoException {
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            preparedStatement = connection.prepareStatement(LOGIN);
+            preparedStatement.setString(1, mail);
+            preparedStatement.setString(2, password);
+
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                User user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setMail(mail);
+                user.setPassword(password);
+                user.setRole(UserRole.values()[resultSet.getInt("role")]);
+                user.setRegistrationDate(parseDate(resultSet.getDate("registration_date")));
+                user.setStatus(UserStatus.values()[resultSet.getInt("status")]);
+                return user;
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Can't LOGIN user", e);
+        }
     }
+
 }
