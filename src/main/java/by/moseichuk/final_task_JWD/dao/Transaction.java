@@ -6,7 +6,7 @@ import by.moseichuk.final_task_JWD.dao.impl.BaseDao;
 
 public interface Transaction {
 
-    <Type extends BaseDao> Type getDao(String daoInterface) throws TransactionException;
+    <Type extends BaseDao> Type getDao(String daoInterface);
 
     void commit() throws TransactionException;
 

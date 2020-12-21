@@ -30,7 +30,7 @@ public class TransactionImpl implements Transaction {
     }
 
     @Override
-    public <Type extends BaseDao> Type getDao(String daoInterface) throws TransactionException {
+    public <Type extends BaseDao> Type getDao(String daoInterface) {
         Type dao = (Type) daoMap.get(daoInterface);
         dao.setConnection(connection);
         return dao;
