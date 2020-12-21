@@ -11,15 +11,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TransactionImpl implements Transaction {
-    private static Map<Class<? extends Dao<?>>, Class<? extends BaseDao>> daoMap = new HashMap<>();
+
+    private static Map<String, ? super Dao<?>> daoMap = new HashMap<>();
     static {
-        daoMap.put(CampaignDao.class, CampaignDaoImpl.class);
-        daoMap.put(ManagerInfluencerDao.class, ManagerInfluencerDaoImpl.class);
-        daoMap.put(RegistrationApplicationDao.class, RegistrationApplicationDaoImpl.class);
-        daoMap.put(SocialLinkDao.class, SocialLinkDaoImpl.class);
-        daoMap.put(UserDao.class, UserDaoImpl.class);
-        daoMap.put(UserFileDao.class, UserFileDaoImpl.class);
-        daoMap.put(UserInfoDao.class, UserInfoDaoImpl.class);
+        daoMap.put("CampaignDao", new CampaignDaoImpl());
+        daoMap.put("ManagerInfluencerDao", new ManagerInfluencerDaoImpl());
+        daoMap.put("RegistrationApplicationDao", new RegistrationApplicationDaoImpl());
+        daoMap.put("SocialLinkDao", new SocialLinkDaoImpl());
+        daoMap.put("UserDao", new UserDaoImpl());
+        daoMap.put("UserFileDao", new UserFileDaoImpl());
+        daoMap.put("UserInfoDao", new UserInfoDaoImpl());
     }
 
     private Connection connection;
@@ -29,19 +30,10 @@ public class TransactionImpl implements Transaction {
     }
 
     @Override
-    public <Type extends Dao<?>> Type getDao(Class<Type> daoInterface) throws TransactionException {
-        Class<? extends BaseDao> daoClass = daoMap.get(daoInterface);
-        if (daoClass != null) {
-            try {
-                BaseDao baseDao = daoClass.newInstance();
-                baseDao.setConnection(connection);
-                return (Type) baseDao;
-            } catch (InstantiationException | IllegalAccessException e) {
-                throw new TransactionException("Can't create DAO object");
-            }
-        } else {
-            throw new TransactionException("No such DAO interface");
-        }
+    public <Type extends BaseDao> Type getDao(String daoInterface) throws TransactionException {
+        Type dao = (Type) daoMap.get(daoInterface);
+        dao.setConnection(connection);
+        return dao;
     }
 
     @Override
