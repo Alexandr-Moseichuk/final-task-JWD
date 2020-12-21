@@ -139,9 +139,4 @@ public class RegistrationApplicationDaoImpl extends BaseDao implements Registrat
         }
     }
 
-    private Calendar parseDate(Date date) {
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        return calendar;
-    }
 }

@@ -229,10 +229,4 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
             }
         }
     }
-
-    private Calendar parseDate(Date date) {
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        return calendar;
-    }
 }
