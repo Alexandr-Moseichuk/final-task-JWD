@@ -1,9 +1,12 @@
-package by.moseichuk.final_task_JWD.service;
+package by.moseichuk.final_task_JWD.service.impl;
 
 import by.moseichuk.final_task_JWD.bean.Campaign;
 import by.moseichuk.final_task_JWD.dao.CampaignDao;
+import by.moseichuk.final_task_JWD.dao.DaoEnum;
 import by.moseichuk.final_task_JWD.dao.exception.DaoException;
 import by.moseichuk.final_task_JWD.dao.exception.TransactionException;
+import by.moseichuk.final_task_JWD.service.BaseService;
+import by.moseichuk.final_task_JWD.service.CampaignService;
 import by.moseichuk.final_task_JWD.service.exception.ServiceException;
 
 import java.util.List;
@@ -12,9 +15,9 @@ public class CampaignServiceImpl extends BaseService implements CampaignService 
     @Override
     public List<Campaign> readAll() throws ServiceException {
         try {
-            CampaignDao campaignDao = transaction.getDao("CampaignDao");
+            CampaignDao campaignDao = transaction.getDao(DaoEnum.CAMPAIGN);
             return campaignDao.readAll();
-        } catch (TransactionException | DaoException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
