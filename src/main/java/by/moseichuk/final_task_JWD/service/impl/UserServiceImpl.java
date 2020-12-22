@@ -1,9 +1,11 @@
-package by.moseichuk.final_task_JWD.service;
+package by.moseichuk.final_task_JWD.service.impl;
 
 import by.moseichuk.final_task_JWD.bean.User;
+import by.moseichuk.final_task_JWD.dao.DaoEnum;
 import by.moseichuk.final_task_JWD.dao.UserDao;
 import by.moseichuk.final_task_JWD.dao.exception.DaoException;
-import by.moseichuk.final_task_JWD.dao.exception.TransactionException;
+import by.moseichuk.final_task_JWD.service.BaseService;
+import by.moseichuk.final_task_JWD.service.UserService;
 import by.moseichuk.final_task_JWD.service.exception.ServiceException;
 
 import java.security.MessageDigest;
@@ -14,14 +16,11 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public User login(String mail, String password) throws ServiceException {
         try {
-            UserDao userDao = transaction.getDao("UserDao");
+            UserDao userDao = transaction.getDao(DaoEnum.USER);
             return userDao.login(mail, md5(password));
-        } catch (TransactionException e) {
-            throw new ServiceException(e);
         } catch (DaoException e) {
-            e.printStackTrace();
+            throw new ServiceException(e);
         }
-        return null;
     }
 
     private String md5(String password) {
