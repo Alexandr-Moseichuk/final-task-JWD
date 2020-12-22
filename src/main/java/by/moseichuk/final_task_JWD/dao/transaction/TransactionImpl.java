@@ -12,15 +12,15 @@ import java.util.Map;
 
 public class TransactionImpl implements Transaction {
 
-    private static Map<String, ? super Dao<?>> daoMap = new HashMap<>();
+    private static Map<DaoEnum, ? super Dao<?>> daoMap = new HashMap<>();
     static {
-        daoMap.put("CampaignDao", new CampaignDaoImpl());
-        daoMap.put("ManagerInfluencerDao", new ManagerInfluencerDaoImpl());
-        daoMap.put("RegistrationApplicationDao", new RegistrationApplicationDaoImpl());
-        daoMap.put("SocialLinkDao", new SocialLinkDaoImpl());
-        daoMap.put("UserDao", new UserDaoImpl());
-        daoMap.put("UserFileDao", new UserFileDaoImpl());
-        daoMap.put("UserInfoDao", new UserInfoDaoImpl());
+        daoMap.put(DaoEnum.CAMPAIGN, new CampaignDaoImpl());
+        daoMap.put(DaoEnum.MANAGER_INFLUENCER, new ManagerInfluencerDaoImpl());
+        daoMap.put(DaoEnum.REGISTRATION_APPLICATION, new RegistrationApplicationDaoImpl());
+        daoMap.put(DaoEnum.SOCIAL_LINK, new SocialLinkDaoImpl());
+        daoMap.put(DaoEnum.USER, new UserDaoImpl());
+        daoMap.put(DaoEnum.FILE, new UserFileDaoImpl());
+        daoMap.put(DaoEnum.USER_INFO, new UserInfoDaoImpl());
     }
 
     private Connection connection;
@@ -30,8 +30,8 @@ public class TransactionImpl implements Transaction {
     }
 
     @Override
-    public <Type extends BaseDao> Type getDao(String daoInterface) {
-        Type dao = (Type) daoMap.get(daoInterface);
+    public <Type extends BaseDao> Type getDao(DaoEnum daoType) {
+        Type dao = (Type) daoMap.get(daoType);
         dao.setConnection(connection);
         return dao;
     }
