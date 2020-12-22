@@ -1,5 +1,7 @@
 package by.moseichuk.final_task_JWD.service;
 
-public class ServiceFactory {
+import by.moseichuk.final_task_JWD.service.exception.ServiceException;
 
+public interface ServiceFactory {
+    <Type extends BaseService> Type getService() throws ServiceException;
 }
