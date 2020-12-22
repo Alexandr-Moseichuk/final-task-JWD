@@ -24,7 +24,7 @@ public class TransactionFactoryImpl implements TransactionFactory {
 
     }
     @Override
-    public Transaction createTransaction() throws TransactionException {
+    public Transaction createTransaction() {
         return new TransactionImpl(connection);
     }
 
