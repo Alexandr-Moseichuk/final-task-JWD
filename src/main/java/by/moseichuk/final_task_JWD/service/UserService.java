@@ -5,4 +5,6 @@ import by.moseichuk.final_task_JWD.service.exception.ServiceException;
 
 public interface UserService {
     User login(String mail, String password) throws ServiceException;
+
+    void create(User user) throws ServiceException;
 }

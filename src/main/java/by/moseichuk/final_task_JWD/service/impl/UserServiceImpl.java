@@ -23,6 +23,16 @@ public class UserServiceImpl extends BaseService implements UserService {
         }
     }
 
+    @Override
+    public void create(User user) throws ServiceException {
+        try {
+            UserDao userDao = transaction.getDao(DaoEnum.USER);
+            userDao.create(user);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
     private String md5(String password) {
         MessageDigest digest;
         try {

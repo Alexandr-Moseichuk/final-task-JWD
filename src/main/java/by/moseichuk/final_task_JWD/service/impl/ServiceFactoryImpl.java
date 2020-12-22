@@ -22,7 +22,7 @@ public class ServiceFactoryImpl implements ServiceFactory {
     }
 
     @Override
-    public <Type extends BaseService> Type getService(ServiceEnum serviceType) throws ServiceException {
+    public <Type extends BaseService> Type getService(ServiceEnum serviceType) {
         Type service = (Type) serviceMap.get(serviceType);
         service.setTransaction(transactionFactory.createTransaction());
         return service;

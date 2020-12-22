@@ -5,14 +5,11 @@ import by.moseichuk.final_task_JWD.bean.User;
 import by.moseichuk.final_task_JWD.dao.Transaction;
 import by.moseichuk.final_task_JWD.dao.TransactionFactory;
 import by.moseichuk.final_task_JWD.dao.exception.ConnectionPoolException;
-import by.moseichuk.final_task_JWD.dao.exception.DaoException;
 import by.moseichuk.final_task_JWD.dao.exception.TransactionException;
-import by.moseichuk.final_task_JWD.dao.impl.CampaignDaoImpl;
 import by.moseichuk.final_task_JWD.dao.pool.ConnectionPool;
 import by.moseichuk.final_task_JWD.dao.transaction.TransactionFactoryImpl;
-import by.moseichuk.final_task_JWD.service.CampaignService;
-import by.moseichuk.final_task_JWD.service.CampaignServiceImpl;
-import by.moseichuk.final_task_JWD.service.UserServiceImpl;
+import by.moseichuk.final_task_JWD.service.impl.CampaignServiceImpl;
+import by.moseichuk.final_task_JWD.service.impl.UserServiceImpl;
 import by.moseichuk.final_task_JWD.service.exception.ServiceException;
 
 import java.util.List;

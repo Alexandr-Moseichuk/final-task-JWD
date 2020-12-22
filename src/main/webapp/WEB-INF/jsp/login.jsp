@@ -12,9 +12,9 @@
 </head>
 <body>
 <FORM action="${loginUrl}" method="post">
-    <LABEL for="login">Имя пользователя:</LABEL>
+    <LABEL for="mail">Имя пользователя:</LABEL>
     <br/>
-    <INPUT type="text" id="login" name="login" value="${param.login}">
+    <INPUT type="text" id="mail" name="mail" value="${param.login}">
     <br/>
     <LABEL for="password">Пароль:</LABEL>
     <br/>

@@ -1,5 +1,6 @@
 package by.moseichuk.final_task_JWD.controller;
 
+import by.moseichuk.final_task_JWD.controller.command.Login;
 import by.moseichuk.final_task_JWD.dao.exception.ConnectionPoolException;
 import by.moseichuk.final_task_JWD.dao.pool.ConnectionPool;
 
@@ -8,7 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet(name = "helloServlet", value = "/login")
+@WebServlet(name = "helloServlet", value = "/")
 public class HelloServlet extends HttpServlet {
     private static final String DB_DRIVER_CLASS = "org.mariadb.jdbc.Driver";
     private static final String DB_URL = "jdbc:mariadb://localhost:3306/adlinker_db";
@@ -33,14 +34,33 @@ public class HelloServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request,response);
+            System.out.println("dopost");
+            HttpSession session = request.getSession(false);
+            Forward forward = new Forward("jsp/login.jsp");
+            if (session != null) {
+                forward = new Forward("jsp/campaign.jsp");
+            }
+            getServletContext().getRequestDispatcher(forward.getPagePath()).forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         }
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        //TODO
+        try {
+            System.out.println("doPost");
+            Forward forward = new Forward("jsp/login.jsp");
+            Login login = new Login();
+            forward = login.execute(request, response);
+
+            if (forward.isRedirect()) {
+                response.sendRedirect(forward.getPagePath());
+            } else {
+                getServletContext().getRequestDispatcher(forward.getPagePath()).forward(request, response);
+            }
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
     }
 
     public void destroy() {
