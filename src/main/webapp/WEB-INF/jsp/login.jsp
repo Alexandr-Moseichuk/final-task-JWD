@@ -11,10 +11,10 @@
     <title>Title</title>
 </head>
 <body>
-<FORM action="${loginUrl}" method="post">
+<FORM action="login" method="post">
     <LABEL for="mail">Имя пользователя:</LABEL>
     <br/>
-    <INPUT type="text" id="mail" name="mail" value="${param.login}">
+    <INPUT type="text" id="mail" name="mail">
     <br/>
     <LABEL for="password">Пароль:</LABEL>
     <br/>

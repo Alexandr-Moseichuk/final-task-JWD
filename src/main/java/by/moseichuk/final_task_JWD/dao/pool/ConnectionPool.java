@@ -32,7 +32,7 @@ public class ConnectionPool {
 
     public synchronized Connection getConnection() throws ConnectionPoolException {
         PooledConnection connection = null;
-        while(connection == null) {
+       // while(connection == null) {
             try {
                 if(!freeConnections.isEmpty()) {
                     connection = freeConnections.take();
@@ -50,7 +50,7 @@ public class ConnectionPool {
             } catch(InterruptedException | SQLException e) {
                 throw new ConnectionPoolException(e);
             }
-        }
+        //}
         usedConnections.add(connection);
         return connection;
     }

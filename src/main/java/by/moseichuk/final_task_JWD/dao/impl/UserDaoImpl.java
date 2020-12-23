@@ -211,8 +211,10 @@ public class UserDaoImpl extends BaseDao implements UserDao {
                 user.setRole(UserRole.values()[resultSet.getInt("role")]);
                 user.setRegistrationDate(parseDate(resultSet.getDate("registration_date")));
                 user.setStatus(UserStatus.values()[resultSet.getInt("status")]);
+                System.out.println("DAO SUCCESS");
                 return user;
             } else {
+                System.out.println("DAOFAIl");
                 return null;
             }
         } catch (SQLException e) {

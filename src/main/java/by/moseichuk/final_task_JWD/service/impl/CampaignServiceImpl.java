@@ -15,7 +15,7 @@ public class CampaignServiceImpl extends BaseService implements CampaignService 
     @Override
     public List<Campaign> readAll() throws ServiceException {
         try {
-            CampaignDao campaignDao = transaction.getDao(DaoEnum.CAMPAIGN);
+            CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
             return campaignDao.readAll();
         } catch (DaoException e) {
             throw new ServiceException(e);

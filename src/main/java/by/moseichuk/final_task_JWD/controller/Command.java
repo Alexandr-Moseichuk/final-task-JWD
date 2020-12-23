@@ -11,6 +11,7 @@ import java.util.Set;
 public abstract class Command {
     private Set<UserRole> permissionSet = new HashSet<>();
     protected ServiceFactory serviceFactory;
+    private String name;
 
     public Set<UserRole> getPermissionSet() {
         return permissionSet;
@@ -18,6 +19,14 @@ public abstract class Command {
 
     public void setServiceFactory(ServiceFactory serviceFactory) {
         this.serviceFactory = serviceFactory;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public abstract Forward execute(HttpServletRequest request, HttpServletResponse response);

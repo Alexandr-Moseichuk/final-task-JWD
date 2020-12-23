@@ -22,9 +22,9 @@ public class ServiceFactoryImpl implements ServiceFactory {
     }
 
     @Override
-    public <Type extends BaseService> Type getService(ServiceEnum serviceType) {
-        Type service = (Type) serviceMap.get(serviceType);
-        service.setTransaction(transactionFactory.createTransaction());
-        return service;
+    public BaseService getService(ServiceEnum serviceType) {
+        BaseService baseService = serviceMap.get(serviceType);
+        baseService.setTransaction(transactionFactory.createTransaction());
+        return baseService;
     }
 }

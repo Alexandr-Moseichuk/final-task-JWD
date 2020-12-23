@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class TransactionImpl implements Transaction {
 
-    private static Map<DaoEnum, ? super Dao<?>> daoMap = new HashMap<>();
+    private static Map<DaoEnum, BaseDao> daoMap = new HashMap<>();
     static {
         daoMap.put(DaoEnum.CAMPAIGN, new CampaignDaoImpl());
         daoMap.put(DaoEnum.MANAGER_INFLUENCER, new ManagerInfluencerDaoImpl());
@@ -30,10 +30,10 @@ public class TransactionImpl implements Transaction {
     }
 
     @Override
-    public <Type extends BaseDao> Type getDao(DaoEnum daoType) {
-        Type dao = (Type) daoMap.get(daoType);
-        dao.setConnection(connection);
-        return dao;
+    public BaseDao getDao(DaoEnum daoType) {
+        BaseDao baseDao= daoMap.get(daoType);
+        baseDao.setConnection(connection);
+        return baseDao;
     }
 
     @Override
