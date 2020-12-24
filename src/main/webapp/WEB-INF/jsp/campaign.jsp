@@ -12,8 +12,8 @@
 </head>
 <body>
  Стисок рекламных кампаний
- <FORM action="login" method="post">
-     <BUTTON type="logout">Logout</BUTTON>
- </FORM>
+ <form action="login" method="post">
+     <button type="logout">Logout</button>
+ </form>
 </body>
 </html>

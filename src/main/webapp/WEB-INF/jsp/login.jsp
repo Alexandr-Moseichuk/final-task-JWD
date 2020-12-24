@@ -11,16 +11,16 @@
     <title>Title</title>
 </head>
 <body>
-<FORM action="login" method="post">
-    <LABEL for="mail">Имя пользователя:</LABEL>
+<form action="login" method="post">
+    <label for="mail">Имя пользователя:</label>
     <br/>
-    <INPUT type="text" id="mail" name="mail">
+    <input type="text" id="mail" name="mail">
     <br/>
-    <LABEL for="password">Пароль:</LABEL>
+    <label for="password">Пароль:</label>
     <br/>
-    <INPUT type="password" id="password" name="password">
+    <input type="password" id="password" name="password">
     <br/>
-    <BUTTON type="submit">Войти</BUTTON>
-</FORM>
+    <button type="submit">Войти</button>
+</form>
 </body>
 </html>

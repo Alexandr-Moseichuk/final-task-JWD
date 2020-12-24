@@ -16,9 +16,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public User login(String mail, String password) throws ServiceException {
         try {
-            System.out.println("in try login user");
             UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
-            System.out.println("after creating user dao");
             return userDao.login(mail, md5(password));
         } catch (DaoException e) {
             throw new ServiceException(e);
