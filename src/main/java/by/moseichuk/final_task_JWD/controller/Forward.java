@@ -9,16 +9,20 @@ public class Forward {
     private Map<String, Object> attributes = new HashMap<>();
 
     public Forward(String pagePath, boolean redirect) {
-        this.pagePath = "/WEB-INF/" + pagePath;
+        this.pagePath = pagePath;
         this.redirect = redirect;
     }
 
     public Forward(String pagePath) {
-        this(pagePath, true);
+        this(pagePath, false);
     }
 
     public String getPagePath() {
-        return pagePath;
+        if (redirect) {
+            return pagePath;
+        } else {
+            return "/WEB-INF/" + pagePath;
+        }
     }
 
     public void setPagePath(String pagePath) {
