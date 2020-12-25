@@ -14,8 +14,8 @@ import java.util.List;
 public class CampaignServiceImpl extends BaseService implements CampaignService {
     @Override
     public List<Campaign> readAll() throws ServiceException {
+        CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
         try {
-            CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
             return campaignDao.readAll();
         } catch (DaoException e) {
             throw new ServiceException(e);
@@ -24,16 +24,31 @@ public class CampaignServiceImpl extends BaseService implements CampaignService 
 
     @Override
     public void add(Campaign campaign) throws ServiceException {
-
+        CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
+        try {
+            campaignDao.create(campaign);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
     }
 
     @Override
     public void remove(Campaign campaign) throws ServiceException {
-
+        CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
+        try {
+            campaignDao.delete(campaign.getId());
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
     }
 
     @Override
     public void update(Campaign campaign) throws ServiceException {
-
+        CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
+        try {
+            campaignDao.update(campaign);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
     }
 }
