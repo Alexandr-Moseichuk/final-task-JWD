@@ -12,17 +12,17 @@
     <jsp:useBean id="campaignList" scope="request" type="java.util.List"/>
     <c:forEach var="campaign" items="${campaignList}">
         <fmt:setLocale value="ru-RU"/>
-        <h5><c:out value="${campaign.title}"/></h5>
-        Дата создания: <c:out value="${campaign.createDate}"/>
+        <h4><c:out value="${campaign.title}"/></h4>
+        Дата создания: <c:out value="${campaign.createDate.time}"/>
         <br>
-        Дата начала:     <c:out value="${campaign.beginDate}"/>
-        Дата завершения: <c:out value="${campaign.endDate}"/>
+        Дата начала:     <c:out value="${campaign.beginDate.time}"/>
+        Дата завершения: <c:out value="${campaign.endDate.time}"/>
         <br>
-        <h3>Описание:</h3>
+        <h5>Описание:</h5>
         <c:out value="${campaign.description}"/>
-        <h3>Требования:</h3>
+        <h5>Требования:</h5>
         <c:out value="${campaign.requirement}"/>
-        <h3>Бюджет:</h3> <c:out value="${campaign.budget}"/>
+        <h5>Бюджет:</h5> <c:out value="${campaign.budget}"/>
     </c:forEach>
 
 </body>
