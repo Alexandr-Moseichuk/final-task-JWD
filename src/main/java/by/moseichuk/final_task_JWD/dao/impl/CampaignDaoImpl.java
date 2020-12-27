@@ -24,10 +24,7 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
 
     @Override
     public Integer create(Campaign campaign) throws DaoException {
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        try {
-            statement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS);
+        try (PreparedStatement statement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, campaign.getTitle());
             statement.setDate(2, new Date(campaign.getCreateDate().getTimeInMillis()), campaign.getCreateDate());
             statement.setDate(3, new Date(campaign.getBeginDate().getTimeInMillis()), campaign.getBeginDate());
@@ -36,7 +33,7 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
             statement.setString(6, campaign.getRequirement());
             statement.setBigDecimal(7, campaign.getBudget());
             statement.executeUpdate();
-            resultSet = statement.getResultSet();
+            ResultSet resultSet = statement.getResultSet();
             if (resultSet.next()) {
                 return resultSet.getInt(1);
             } else {
@@ -44,30 +41,15 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
             }
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                statement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
         }
-
     }
 
     @Override
     public Campaign read(Integer id) throws DaoException {
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        try {
-            statement = connection.prepareStatement(READ, Statement.RETURN_GENERATED_KEYS);
+        try (PreparedStatement statement = connection.prepareStatement(READ, Statement.RETURN_GENERATED_KEYS)) {
             statement.setInt(1, id);
             statement.executeQuery();
-            resultSet = statement.getResultSet();
+            ResultSet resultSet = statement.getResultSet();
             Campaign campaign = null;
             if (resultSet.next()) {
                 campaign = new Campaign();
@@ -79,22 +61,10 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
                 campaign.setDescription(resultSet.getString("description"));
                 campaign.setRequirement(resultSet.getString("requirement"));
                 campaign.setBudget(resultSet.getBigDecimal("budget"));
-
             }
             return campaign;
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                statement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
         }
     }
 
@@ -129,12 +99,9 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
 
     @Override
     public List<Campaign> readAll() throws DaoException {
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        try {
-            statement = connection.prepareStatement(READ_ALL);
+        try (PreparedStatement statement = connection.prepareStatement(READ_ALL)) {
             statement.executeQuery();
-            resultSet = statement.getResultSet();
+            ResultSet resultSet = statement.getResultSet();
 
             List<Campaign> campaignList = new ArrayList<>();
             while (resultSet.next()) {
@@ -152,81 +119,40 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
             return campaignList;
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                statement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
         }
     }
 
 
     public List<Integer> readCampaignFileIds(Integer id) throws DaoException {
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        try {
-            statement = connection.prepareStatement(READ_FILES_ID);
+        try (PreparedStatement statement = connection.prepareStatement(READ_FILES_ID)) {
             statement.setInt(1, id);
             statement.executeQuery();
-            resultSet = statement.getResultSet();
+            ResultSet resultSet = statement.getResultSet();
 
             List<Integer> idList = new ArrayList<>();
             while (resultSet.next()) {
                 idList.add(resultSet.getInt("file_id"));
             }
-
             return idList;
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                statement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
         }
     }
 
     @Override
     public List<Integer> readUserIds(Integer id) throws DaoException {
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        try {
-            statement = connection.prepareStatement(READ_USERS_ID);
+        try (PreparedStatement statement = connection.prepareStatement(READ_USERS_ID)) {
             statement.setInt(1, id);
             statement.executeQuery();
-            resultSet = statement.getResultSet();
+            ResultSet resultSet = statement.getResultSet();
 
             List<Integer> idList = new ArrayList<>();
             while (resultSet.next()) {
                 idList.add(resultSet.getInt("user_id"));
             }
-
             return idList;
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                statement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
         }
     }
 }

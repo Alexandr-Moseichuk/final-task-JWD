@@ -66,14 +66,11 @@ public class ManagerInfluencerDaoImpl extends BaseDao implements ManagerInfluenc
 
     @Override
     public List<Influencer> readManagerInfluencers(Integer managerId) throws DaoException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            preparedStatement = connection.prepareStatement(READ_INFLUENCER_IDS);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(READ_INFLUENCER_IDS)) {
             preparedStatement.setInt(1, managerId);
 
             preparedStatement.executeQuery();
-            resultSet = preparedStatement.getResultSet();
+            ResultSet resultSet = preparedStatement.getResultSet();
 
             List<Influencer> userList = new ArrayList<>();
             while (resultSet.next()) {
@@ -84,30 +81,16 @@ public class ManagerInfluencerDaoImpl extends BaseDao implements ManagerInfluenc
             return userList;
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
         }
     }
 
     @Override
     public User readManagerId(Integer influencerId) throws DaoException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            preparedStatement = connection.prepareStatement(READ_MANAGER_ID);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(READ_MANAGER_ID)) {
             preparedStatement.setInt(1, influencerId);
 
             preparedStatement.executeQuery();
-            resultSet = preparedStatement.getResultSet();
+            ResultSet resultSet = preparedStatement.getResultSet();
 
             if (resultSet.next()) {
                 User user = new User();
@@ -118,17 +101,6 @@ public class ManagerInfluencerDaoImpl extends BaseDao implements ManagerInfluenc
             }
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
         }
     }
 }

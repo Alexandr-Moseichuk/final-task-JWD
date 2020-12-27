@@ -20,77 +20,49 @@ public class SocialLinkDaoImpl extends BaseDao implements SocialLinkDao {
 
     @Override
     public Integer create(SocialLink socialLink) throws DaoException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            preparedStatement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setInt(1, socialLink.getUserId());
             preparedStatement.setString(2, socialLink.getTitle());
             preparedStatement.setString(3, socialLink.getLink());
             preparedStatement.setInt(4, socialLink.getViews());
-
             preparedStatement.executeUpdate();
-            resultSet = preparedStatement.getResultSet();
 
+            ResultSet resultSet = preparedStatement.getResultSet();
             if (resultSet.next()) {
                 return resultSet.getInt(1);
             } else {
                 throw new DaoException("Can't get new social link id");
             }
         } catch (SQLException e) {
-            throw new DaoException("Error while CREATE social link" ,e);
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
+            throw new DaoException("Error while CREATE social link", e);
         }
     }
 
     @Override
     public SocialLink read(Integer id) throws DaoException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-           preparedStatement = connection.prepareStatement(READ);
-           preparedStatement.setInt(1, id);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(READ)) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeQuery();
 
-           preparedStatement.executeQuery();
-           resultSet = preparedStatement.getResultSet();
-
-           SocialLink socialLink = new SocialLink();
-           socialLink.setId(id);
-           socialLink.setTitle(resultSet.getString("title"));
-           socialLink.setLink(resultSet.getString("link"));
-           socialLink.setViews(resultSet.getInt("views"));
-           return socialLink;
+            ResultSet resultSet = preparedStatement.getResultSet();
+            if (resultSet.next()) {
+                SocialLink socialLink = new SocialLink();
+                socialLink.setId(id);
+                socialLink.setTitle(resultSet.getString("title"));
+                socialLink.setLink(resultSet.getString("link"));
+                socialLink.setViews(resultSet.getInt("views"));
+                return socialLink;
+            } else {
+                throw new DaoException("Can't read social link. ID = " + id);
+            }
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
         }
     }
 
     @Override
     public void update(SocialLink socialLink) throws DaoException {
-        PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement = connection.prepareStatement(UPDATE);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)) {
             preparedStatement.setInt(1, socialLink.getUserId());
             preparedStatement.setString(2, socialLink.getTitle());
             preparedStatement.setString(3, socialLink.getLink());
@@ -100,42 +72,26 @@ public class SocialLinkDaoImpl extends BaseDao implements SocialLinkDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
         }
     }
 
     @Override
     public void delete(Integer id) throws DaoException {
-        PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement = connection.prepareStatement(DELETE);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE)) {
             preparedStatement.setInt(1, id);
+
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
         }
     }
 
     @Override
     public List<SocialLink> readAll() throws DaoException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            preparedStatement = connection.prepareStatement(READ_ALL);
-
+        try (PreparedStatement preparedStatement = connection.prepareStatement(READ_ALL)) {
             preparedStatement.executeQuery();
-            resultSet = preparedStatement.getResultSet();
 
+            ResultSet resultSet = preparedStatement.getResultSet();
             List<SocialLink> links = new ArrayList<>();
             while (resultSet.next()) {
                 SocialLink socialLink = new SocialLink();
@@ -149,17 +105,6 @@ public class SocialLinkDaoImpl extends BaseDao implements SocialLinkDao {
             return links;
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
         }
     }
 }

@@ -38,14 +38,10 @@ public class UserInfoDaoImpl extends BaseDao implements UserInfoDao {
 
     @Override
     public UserInfo read(Integer id) throws DaoException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            preparedStatement = connection.prepareStatement(READ);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(READ)) {
             preparedStatement.setInt(1, id);
 
-            resultSet = preparedStatement.executeQuery();
-
+            ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 UserInfo userInfo = new UserInfo();
                 userInfo.setUserId(id);
@@ -63,17 +59,6 @@ public class UserInfoDaoImpl extends BaseDao implements UserInfoDao {
             }
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
         }
     }
 
@@ -96,9 +81,9 @@ public class UserInfoDaoImpl extends BaseDao implements UserInfoDao {
 
     @Override
     public void delete(Integer id) throws DaoException {
-
         try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE)) {
             preparedStatement.setInt(1, id);
+
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -107,11 +92,8 @@ public class UserInfoDaoImpl extends BaseDao implements UserInfoDao {
 
     @Override
     public List<UserInfo> readAll() throws DaoException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            preparedStatement = connection.prepareStatement(READ_ALL);
-            resultSet = preparedStatement.executeQuery();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(READ_ALL)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             List<UserInfo> userInfoList = new ArrayList<>();
             while (resultSet.next()) {
@@ -130,17 +112,6 @@ public class UserInfoDaoImpl extends BaseDao implements UserInfoDao {
             return userInfoList;
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
         }
     }
 }

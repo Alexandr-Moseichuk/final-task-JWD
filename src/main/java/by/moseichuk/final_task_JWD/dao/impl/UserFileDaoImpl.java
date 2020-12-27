@@ -18,65 +18,38 @@ public class UserFileDaoImpl extends BaseDao implements UserFileDao {
 
     @Override
     public Integer create(UserFile userFile) throws DaoException {
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        try {
-            statement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS);
+        try (PreparedStatement statement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, userFile.getPath());
-
             statement.executeUpdate();
-            resultSet = statement.getResultSet();
+
+            ResultSet resultSet = statement.getResultSet();
             if (resultSet.next()) {
                 return resultSet.getInt(1);
             } else {
-                throw new DaoException();
+                throw new DaoException("Can't create new UserFile");
             }
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                statement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
         }
-
     }
 
     @Override
     public UserFile read(Integer id) throws DaoException {
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        try {
-            statement = connection.prepareStatement(READ, Statement.RETURN_GENERATED_KEYS);
+        try (PreparedStatement statement = connection.prepareStatement(READ, Statement.RETURN_GENERATED_KEYS)) {
             statement.setInt(1, id);
             statement.executeQuery();
-            resultSet = statement.getResultSet();
-            UserFile userFile = null;
+
+            ResultSet resultSet = statement.getResultSet();
             if (resultSet.next()) {
-                userFile = new UserFile();
+                UserFile userFile = new UserFile();
                 userFile.setId(id);
                 userFile.setPath(resultSet.getString("path"));
+                return userFile;
+            } else {
+                throw new DaoException("Can't read UserFile. ID = " + id);
             }
-            return userFile;
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                statement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
         }
     }
 
@@ -85,8 +58,8 @@ public class UserFileDaoImpl extends BaseDao implements UserFileDao {
     public void update(UserFile userFile) throws DaoException {
         try (PreparedStatement statement = connection.prepareStatement(UPDATE)) {
             statement.setString(1, userFile.getPath());
-
             statement.setInt(4, userFile.getId());
+
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -106,14 +79,10 @@ public class UserFileDaoImpl extends BaseDao implements UserFileDao {
 
     @Override
     public List<UserFile> readAll() throws DaoException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            preparedStatement = connection.prepareStatement(READ_ALL);
-
+        try (PreparedStatement preparedStatement = connection.prepareStatement(READ_ALL)) {
             preparedStatement.executeQuery();
-            resultSet = preparedStatement.getResultSet();
 
+            ResultSet resultSet = preparedStatement.getResultSet();
             List<UserFile> userFileList = new ArrayList<>();
             while (resultSet.next()) {
                 UserFile userFile = new UserFile();
@@ -124,17 +93,6 @@ public class UserFileDaoImpl extends BaseDao implements UserFileDao {
             return userFileList;
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
         }
     }
 

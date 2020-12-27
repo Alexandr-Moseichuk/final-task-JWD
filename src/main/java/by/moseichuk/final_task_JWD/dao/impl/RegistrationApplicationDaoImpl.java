@@ -19,16 +19,12 @@ public class RegistrationApplicationDaoImpl extends BaseDao implements Registrat
 
     @Override
     public Integer create(RegistrationApplication application) throws DaoException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            preparedStatement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, application.getComment());
             preparedStatement.setDate(2, new Date(application.getDate().getTimeInMillis()));
             preparedStatement.executeUpdate();
 
-            resultSet = preparedStatement.getResultSet();
-
+            ResultSet resultSet = preparedStatement.getResultSet();
             if (resultSet.next()) {
                 return resultSet.getInt(1);
             } else {
@@ -36,29 +32,15 @@ public class RegistrationApplicationDaoImpl extends BaseDao implements Registrat
             }
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (SQLException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException e) {
-                //TODO
-            }
         }
     }
 
     @Override
     public RegistrationApplication read(Integer id) throws DaoException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            preparedStatement = connection.prepareStatement(READ);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(READ)) {
             preparedStatement.setInt(1, id);
             preparedStatement.executeQuery();
-            resultSet = preparedStatement.getResultSet();
+            ResultSet resultSet = preparedStatement.getResultSet();
 
             RegistrationApplication application = null;
             if (resultSet.next()) {
@@ -69,17 +51,6 @@ public class RegistrationApplicationDaoImpl extends BaseDao implements Registrat
             return application;
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (SQLException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException e) {
-                //TODO
-            }
         }
     }
 
@@ -106,12 +77,9 @@ public class RegistrationApplicationDaoImpl extends BaseDao implements Registrat
 
     @Override
     public List<RegistrationApplication> readAll() throws DaoException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            preparedStatement = connection.prepareStatement(READ_ALL);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(READ_ALL)) {
             preparedStatement.executeQuery();
-            resultSet = preparedStatement.getResultSet();
+            ResultSet resultSet = preparedStatement.getResultSet();
 
             List<RegistrationApplication> applicationList = new ArrayList<>();
             while (resultSet.next()) {
@@ -125,17 +93,6 @@ public class RegistrationApplicationDaoImpl extends BaseDao implements Registrat
             return applicationList;
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (SQLException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException e) {
-                //TODO
-            }
         }
     }
 

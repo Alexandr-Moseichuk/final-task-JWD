@@ -25,19 +25,15 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
     @Override
     public Integer create(User user) throws DaoException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            preparedStatement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, user.getMail());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setInt(3, user.getRole().ordinal());
             preparedStatement.setDate(4, new Date(user.getRegistrationDate().getTimeInMillis()));
             preparedStatement.setInt(5, user.getStatus().ordinal());
-
             preparedStatement.executeUpdate();
-            resultSet = preparedStatement.getResultSet();
 
+            ResultSet resultSet = preparedStatement.getResultSet();
             if (resultSet.next()) {
                 return resultSet.getInt(1);
             } else {
@@ -45,31 +41,16 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             }
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
         }
     }
 
     @Override
     public User read(Integer id) throws DaoException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            preparedStatement = connection.prepareStatement(READ);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(READ)) {
             preparedStatement.setInt(1, id);
-
             preparedStatement.executeQuery();
-            resultSet = preparedStatement.getResultSet();
 
+            ResultSet resultSet = preparedStatement.getResultSet();
             if (resultSet.next()) {
                 User user = new User();
                 user.setId(id);
@@ -84,17 +65,6 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             }
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
         }
     }
 
@@ -127,12 +97,9 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
     @Override
     public List<User> readAll() throws DaoException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            preparedStatement = connection.prepareStatement(READ_ALL);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(READ_ALL)) {
             preparedStatement.executeQuery();
-            resultSet = preparedStatement.getResultSet();
+            ResultSet resultSet = preparedStatement.getResultSet();
 
             List<User> users = new ArrayList<>();
             while (resultSet.next()) {
@@ -147,31 +114,16 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             return users;
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
         }
     }
 
     @Override
     public List<Integer> readCampaignIds(Integer userId) throws DaoException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            preparedStatement = connection.prepareStatement(READ_CAMPAIGN_IDS);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(READ_CAMPAIGN_IDS)) {
             preparedStatement.setInt(1, userId);
-
             preparedStatement.executeQuery();
-            resultSet = preparedStatement.getResultSet();
 
+            ResultSet resultSet = preparedStatement.getResultSet();
             List<Integer> integerList = new ArrayList<>();
             while (resultSet.next()) {
                 integerList.add(resultSet.getInt("campaign_id"));
@@ -179,30 +131,16 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             return integerList;
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
-            try {
-                resultSet.close();
-            } catch (SQLException | NullPointerException e) {
-                //TODO
-            }
         }
     }
 
     @Override
     public User login(String mail, String password) throws DaoException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            preparedStatement = connection.prepareStatement(LOGIN);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(LOGIN)) {
             preparedStatement.setString(1, mail);
             preparedStatement.setString(2, password);
 
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getInt("id"));
@@ -211,10 +149,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
                 user.setRole(UserRole.values()[resultSet.getInt("role")]);
                 user.setRegistrationDate(parseDate(resultSet.getDate("registration_date")));
                 user.setStatus(UserStatus.values()[resultSet.getInt("status")]);
-                System.out.println("DAO SUCCESS");
                 return user;
             } else {
-                System.out.println("DAOFAIl");
                 return null;
             }
         } catch (SQLException e) {
