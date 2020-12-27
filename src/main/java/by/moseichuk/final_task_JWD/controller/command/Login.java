@@ -15,29 +15,22 @@ public class Login extends Command {
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
         String mail = request.getParameter("mail");
         String password = request.getParameter("password");
-        System.out.println("Login " + mail + password);
         if (mail != null && password != null) {
-            System.out.println("Mailand password isn't null");
             UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
-            System.out.println("after service");
             try {
-                System.out.println("in try");
                 User user = userService.login(mail, password);
-                System.out.println("User: " + user);
                 if (user != null) {
                     request.getSession().setAttribute("authorizedUser", user);
-                    System.out.println("Создана сессия и успешный логин");
-                    return new Forward("jsp/campaign.jsp", true);
+                    return new Forward("/campaign/list", true);
                 } else {
-                    return new Forward("jsp/login.jsp", true);
+                    return new Forward("jsp/login.jsp");
                 }
             } catch (ServiceException e) {
                 //TODO logger
-                System.out.println("Catch");
-                request.getSession().setAttribute("message", "Ошибка авторизации! Свяжитесь с администратором.");
-                return new Forward("jsp/error.jsp", true);
+                request.getSession().setAttribute("errorMessage", "Ошибка авторизации! Свяжитесь с администратором.");
+                return new Forward("jsp/error.jsp");
             }
         }
-        return new Forward("jsp/login.jsp", true);
+        return new Forward("jsp/login.jsp");
     }
 }

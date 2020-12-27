@@ -18,7 +18,7 @@ public class TransactionFactoryImpl implements TransactionFactory {
             //TODO
             //connection.setAutoCommit(false);
         } catch (ConnectionPoolException e) {
-            throw new TransactionException("Can't get connection from connection pool", e);
+            throw new TransactionException(e);
         }
 //        catch (SQLException e) {
 //            throw new TransactionException("Can't disable autocommit", e);

@@ -1,6 +1,8 @@
 package by.moseichuk.final_task_JWD.dao.pool;
 
 import by.moseichuk.final_task_JWD.dao.exception.ConnectionPoolException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,6 +13,7 @@ import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class ConnectionPool {
+    private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
     private static final ConnectionPool instance = new ConnectionPool();
 
     private String url;
@@ -45,13 +48,15 @@ public class ConnectionPool {
                 } else if(usedConnections.size() < poolSize) {
                     connection = createConnection();
                 } else {
-                    throw new ConnectionPoolException();
+                    throw new ConnectionPoolException("The limit of number of database connections is exceeded");
                 }
             } catch(InterruptedException | SQLException e) {
-                throw new ConnectionPoolException(e);
+                throw new ConnectionPoolException("Impossible to connect to a database",e);
             }
         //}
         usedConnections.add(connection);
+        LOGGER.debug(String.format("Connection was created. Pool state: %s taken connections; %s free connections", usedConnections.size(), freeConnections.size()));
+
         return connection;
     }
 
@@ -62,6 +67,7 @@ public class ConnectionPool {
                 connection.setAutoCommit(true);
                 usedConnections.remove(connection);
                 freeConnections.put(connection);
+                LOGGER.debug(String.format("Connection was returned into pool. Pool state: %s taken connections; %s free connections", usedConnections.size(), freeConnections.size()));
             }
         } catch(SQLException | InterruptedException e1) {
             try {
@@ -83,6 +89,8 @@ public class ConnectionPool {
             for(int counter = 0; counter < startSize; counter++) {
                 freeConnections.put(createConnection());
             }
+            LOGGER.debug(String.format("Connection pool was created. Driver: %s. URL: %s. Start size: %d. Pool size: %d. Connection timeout: %d.",
+                    driverClass, url, startSize, poolSize, connectionTimeout));
         } catch(ClassNotFoundException | SQLException | InterruptedException e) {
             throw new ConnectionPoolException(e);
         }

@@ -1,10 +1,13 @@
 package by.moseichuk.final_task_JWD.controller;
 
+import by.moseichuk.final_task_JWD.controller.command.CampaignListCommand;
 import by.moseichuk.final_task_JWD.controller.command.Login;
 import by.moseichuk.final_task_JWD.dao.TransactionFactory;
 import by.moseichuk.final_task_JWD.dao.exception.TransactionException;
 import by.moseichuk.final_task_JWD.dao.transaction.TransactionFactoryImpl;
+import by.moseichuk.final_task_JWD.service.ServiceFactory;
 import by.moseichuk.final_task_JWD.service.UserService;
+import by.moseichuk.final_task_JWD.service.impl.ServiceFactoryImpl;
 import by.moseichuk.final_task_JWD.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,6 +24,7 @@ public class CommandFilter implements Filter {
 
     static {
         commandMap.put("/login", new Login());
+        commandMap.put("/campaign/list", new CampaignListCommand());
     }
 
     @Override
@@ -34,9 +38,10 @@ public class CommandFilter implements Filter {
             HttpServletRequest request = (HttpServletRequest) servletRequest;
 
             int begin = request.getContextPath().length();
+            //int end = request.getRequestURI().lastIndexOf('.');
             String commandName = request.getRequestURI().substring(begin);
+            System.out.println("Command name " + commandName);
             Command command = commandMap.get(commandName);
-
             if (command != null) {
                 command.setName(commandName);
                 request.setAttribute("command", command);

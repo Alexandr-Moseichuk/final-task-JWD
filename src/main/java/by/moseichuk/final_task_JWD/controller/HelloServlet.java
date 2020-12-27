@@ -1,5 +1,6 @@
 package by.moseichuk.final_task_JWD.controller;
 
+import by.moseichuk.final_task_JWD.bean.User;
 import by.moseichuk.final_task_JWD.controller.command.Login;
 import by.moseichuk.final_task_JWD.dao.TransactionFactory;
 import by.moseichuk.final_task_JWD.dao.exception.ConnectionPoolException;
@@ -9,13 +10,16 @@ import by.moseichuk.final_task_JWD.dao.transaction.TransactionFactoryImpl;
 import by.moseichuk.final_task_JWD.service.ServiceFactory;
 import by.moseichuk.final_task_JWD.service.impl.ServiceFactoryImpl;
 import by.moseichuk.final_task_JWD.service.impl.UserServiceImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
-import javax.servlet.annotation.*;
 
 public class HelloServlet extends HttpServlet {
+    private static final Logger LOGGER = LogManager.getLogger(HelloServlet.class);
+
     private static final String DB_DRIVER_CLASS = "org.mariadb.jdbc.Driver";
     private static final String DB_URL = "jdbc:mariadb://localhost:3306/adlinker_db";
     private static final String DB_USERNAME = "root";
@@ -39,55 +43,58 @@ public class HelloServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            System.out.println("doget");
-            HttpSession session = request.getSession(false);
+            LOGGER.debug("GET request. URI: " + request.getRequestURI());
             Command command = (Command) request.getAttribute("command");
-            String jspPagePath = "jsp/";
-            if (session != null) {
-                jspPagePath += command.getName() + ".jsp";
-            } else {
-                jspPagePath += "login.jsp";
-            }
-            Forward forward = new Forward(jspPagePath);
+            CommandManger commandManger = CommandManagerFactory.getInstance().getManager();
+            Forward forward = commandManger.execute(command, request, response);
+            commandManger.close();
             System.out.println("GET forward path " + forward.getPagePath());
             getServletContext().getRequestDispatcher(forward.getPagePath()).forward(request, response);
         } catch (ServletException e) {
             //TODO logger
             request.setAttribute("errorMessage", String.format("Ошибка сервера по адресу %s, описание ошибки %s", request.getRequestURI(), e.getMessage()));
             try {
-                request.getRequestDispatcher("/WEB-INF/jsp/error.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/WEB-INF/jsp/error.jsp").forward(request, response);
             } catch (ServletException servletException) {
                 servletException.printStackTrace();
             }
 
+        } catch (TransactionException e) {
+            e.printStackTrace();
         }
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            System.out.println("dopost");
+            LOGGER.debug("POST request. URI: " + request.getRequestURI());
             HttpSession session = request.getSession(false);
             Command command = (Command) request.getAttribute("command");
-            TransactionFactory transactionFactory = new TransactionFactoryImpl();
-            ServiceFactory serviceFactory = new ServiceFactoryImpl(transactionFactory);
-            command.setServiceFactory(serviceFactory);
+
             Forward forward;
             if (session != null) {
-                forward = command.execute(request, response);
+                CommandManger commandManger = CommandManagerFactory.getInstance().getManager();
+                forward = commandManger.execute(command, request, response);
+                commandManger.close();
             } else {
                 forward = new Forward("jsp/login.jsp");
             }
             System.out.println("POST forward path " + forward.getPagePath());
-            getServletContext().getRequestDispatcher(forward.getPagePath()).forward(request, response);
-        } catch (ServletException | TransactionException e) {
+            if (forward.isRedirect()) {
+                response.sendRedirect(request.getContextPath() + forward.getPagePath());
+            } else {
+                getServletContext().getRequestDispatcher(forward.getPagePath()).forward(request, response);
+            }
+        } catch (ServletException e) {
             //TODO logger
             request.setAttribute("errorMessage", String.format("Ошибка сервера по адресу %s, описание ошибки %s", request.getRequestURI(), e.getMessage()));
             try {
                 request.getRequestDispatcher("/WEB-INF/jsp/error.jsp").forward(request, response);
             } catch (ServletException servletException) {
-                servletException.printStackTrace();
+                //TODO logger
             }
 
+        } catch (TransactionException e) {
+            e.printStackTrace();
         }
     }
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="patternFull">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{5} - %msg%n</Property>
+        <Property name="patternShort">%d{HH:mm:ss.SSS} [%t] %-5level %logger{3} - %msg%n</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${patternShort}" />
+        </Console>
+        <File name="Application" fileName="logs/application.log" bufferedIO="true">
+            <PatternLayout pattern="${patternFull}" />
+        </File>
+        <File name="ConnectionPool" fileName="logs/connection_pool.log" bufferedIO="true">
+            <PatternLayout pattern="${patternFull}" />
+        </File>
+    </Appenders>
+    <Loggers>
+        <Logger name="by.moseichuk.final_task_JWD.dao.pool.ConnectionPool" level="all" additivity="false">
+            <AppenderRef ref="ConnectionPool" level="DEBUG"/>
+        </Logger>
+        <Root level="all">
+            <AppenderRef ref="Console"/>
+        </Root>
+
+    </Loggers>
+</Configuration>

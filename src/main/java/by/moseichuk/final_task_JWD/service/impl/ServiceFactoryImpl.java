@@ -27,4 +27,10 @@ public class ServiceFactoryImpl implements ServiceFactory {
         baseService.setTransaction(transactionFactory.createTransaction());
         return baseService;
     }
+
+    @Override
+    public void close() {
+        transactionFactory.close();
+    }
+
 }
