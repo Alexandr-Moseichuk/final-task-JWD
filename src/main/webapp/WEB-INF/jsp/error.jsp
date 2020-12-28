@@ -3,11 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>404 Страница не найдена!</title>
+    <title>Ошибка!</title>
 </head>
 <body>
-404 Страница не найдена!
+<c:import url="menu.jsp"/>
 <jsp:useBean id="errorMessage" scope="request" type="java.lang.String"/>
-Сообщение: ${errorMessage}
+<div>
+    <h4>Сообщение:</h4>
+    <p>${errorMessage}</p>
+</div>
 </body>
 </html>
