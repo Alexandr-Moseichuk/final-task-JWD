@@ -13,8 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 public class Login extends Command {
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
-        String mail = request.getParameter("mail");
+        String mail = request.getParameter("email");
         String password = request.getParameter("password");
+        System.out.println(mail + " " + password);
         if (mail != null && password != null) {
             UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
             try {
