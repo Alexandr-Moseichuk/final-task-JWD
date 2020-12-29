@@ -2,6 +2,7 @@ package by.moseichuk.final_task_JWD.controller;
 
 import by.moseichuk.final_task_JWD.controller.command.CampaignListCommand;
 import by.moseichuk.final_task_JWD.controller.command.Login;
+import by.moseichuk.final_task_JWD.controller.command.Registration;
 import by.moseichuk.final_task_JWD.dao.TransactionFactory;
 import by.moseichuk.final_task_JWD.dao.exception.TransactionException;
 import by.moseichuk.final_task_JWD.dao.transaction.TransactionFactoryImpl;
@@ -25,6 +26,7 @@ public class CommandFilter implements Filter {
     static {
         commandMap.put("/login", new Login());
         commandMap.put("/campaign/list", new CampaignListCommand());
+        commandMap.put("/registration", new Registration());
     }
 
     @Override
