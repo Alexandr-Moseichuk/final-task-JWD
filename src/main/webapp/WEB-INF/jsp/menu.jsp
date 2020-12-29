@@ -14,12 +14,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container">
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link " href="<c:url value="/"/>">ADLinker</a>
-            </li>
+        <a class="nav-link " href="<c:url value="/"/>">ADLinker</a>
+    </div>
+    <div class="container">
+        <ul class="navbar-nav">
+<%--            <li class="nav-item"></li>--%>
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value="/campaign/list"/>">Рекламные кампании</a>
             </li>
