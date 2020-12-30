@@ -1,8 +1,10 @@
 package by.moseichuk.final_task_JWD.service.impl;
 
 import by.moseichuk.final_task_JWD.bean.User;
+import by.moseichuk.final_task_JWD.bean.UserInfo;
 import by.moseichuk.final_task_JWD.dao.DaoEnum;
 import by.moseichuk.final_task_JWD.dao.UserDao;
+import by.moseichuk.final_task_JWD.dao.UserInfoDao;
 import by.moseichuk.final_task_JWD.dao.exception.DaoException;
 import by.moseichuk.final_task_JWD.service.BaseService;
 import by.moseichuk.final_task_JWD.service.UserService;
@@ -24,10 +26,20 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
-    public void create(User user) throws ServiceException {
+    public Integer create(User user) throws ServiceException {
         try {
             UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
-            userDao.create(user);
+            return userDao.create(user);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void createUserInfo(UserInfo userInfo) throws ServiceException {
+        UserInfoDao userInfoDao = (UserInfoDao) transaction.getDao(DaoEnum.USER_INFO);
+        try {
+            userInfoDao.create(userInfo);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

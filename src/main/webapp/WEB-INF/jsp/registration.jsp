@@ -12,19 +12,56 @@
 </head>
 <body>
 Регистрация происходит тут
-    <form action="/registration" class="was-validated">
+    <form action="registration" class="was-validated" method="post">
         <div class="form-group">
-            <label for="uname">Username:</label>
-            <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
+            <label for="email">Email:</label>
+            <input type="text" class="form-control" id="email" placeholder="Enter email" name="email" required>
             <div class="valid-feedback">Valid.</div>
             <div class="invalid-feedback">Please fill out this field.</div>
         </div>
         <div class="form-group">
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
             <div class="valid-feedback">Valid.</div>
             <div class="invalid-feedback">Please fill out this field.</div>
         </div>
+        <div class="form-group">
+            <label for="passwordCheck">Password check:</label>
+            <input type="password" class="form-control" id="passwordCheck" placeholder="Enter password check" name="passwordCheck" required>
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last name:</label>
+            <input type="password" class="form-control" id="lastName" placeholder="Enter last name" name="lastName" required>
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="form-group">
+            <label for="firstName">First name:</label>
+            <input type="text" class="form-control" id="firstName" placeholder="Enter first name" name="firstName" required>
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="form-group">
+            <label for="secondName">Second name:</label>
+            <input type="text" class="form-control" id="secondName" placeholder="Enter second name" name="secondName" required>
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <input type="text" class="form-control" id="description" placeholder="Enter description" name="description" required>
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="form-group">
+            <label for="phoneNumber">Phone number:</label>
+            <input type="text" class="form-control" id="phoneNumber" placeholder="Enter phone number" name="phoneNumber" required>
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+
         <div class="form-group form-check">
             <label class="form-check-label">
                 <input class="form-check-input" type="checkbox" name="remember" required> I agree on blabla.
@@ -32,7 +69,7 @@
                 <div class="invalid-feedback">Check this checkbox to continue.</div>
             </label>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Registration</button>
     </form>
 </body>
 </html>
