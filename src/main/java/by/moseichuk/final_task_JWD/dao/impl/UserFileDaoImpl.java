@@ -22,7 +22,7 @@ public class UserFileDaoImpl extends BaseDao implements UserFileDao {
             statement.setString(1, userFile.getPath());
             statement.executeUpdate();
 
-            ResultSet resultSet = statement.getResultSet();
+            ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
                 return resultSet.getInt(1);
             } else {

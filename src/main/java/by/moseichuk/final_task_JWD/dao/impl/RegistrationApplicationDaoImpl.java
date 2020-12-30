@@ -24,7 +24,7 @@ public class RegistrationApplicationDaoImpl extends BaseDao implements Registrat
             preparedStatement.setDate(2, new Date(application.getDate().getTimeInMillis()));
             preparedStatement.executeUpdate();
 
-            ResultSet resultSet = preparedStatement.getResultSet();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
                 return resultSet.getInt(1);
             } else {

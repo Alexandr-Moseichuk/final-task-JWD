@@ -33,7 +33,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             preparedStatement.setInt(5, user.getStatus().ordinal());
             preparedStatement.executeUpdate();
 
-            ResultSet resultSet = preparedStatement.getResultSet();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
                 return resultSet.getInt(1);
             } else {

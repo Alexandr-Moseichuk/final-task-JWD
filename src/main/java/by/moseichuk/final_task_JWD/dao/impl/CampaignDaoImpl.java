@@ -33,7 +33,7 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
             statement.setString(6, campaign.getRequirement());
             statement.setBigDecimal(7, campaign.getBudget());
             statement.executeUpdate();
-            ResultSet resultSet = statement.getResultSet();
+            ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
                 return resultSet.getInt(1);
             } else {
@@ -46,7 +46,7 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
 
     @Override
     public Campaign read(Integer id) throws DaoException {
-        try (PreparedStatement statement = connection.prepareStatement(READ, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement statement = connection.prepareStatement(READ)) {
             statement.setInt(1, id);
             statement.executeQuery();
             ResultSet resultSet = statement.getResultSet();

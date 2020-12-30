@@ -27,7 +27,7 @@ public class SocialLinkDaoImpl extends BaseDao implements SocialLinkDao {
             preparedStatement.setInt(4, socialLink.getViews());
             preparedStatement.executeUpdate();
 
-            ResultSet resultSet = preparedStatement.getResultSet();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
                 return resultSet.getInt(1);
             } else {
