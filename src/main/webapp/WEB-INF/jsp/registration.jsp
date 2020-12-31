@@ -6,12 +6,16 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Registration</title>
+    <c:import url="style.jsp"/>
 </head>
 <body>
 Регистрация происходит тут
+<div class="container pt-3 my-3 border col-sm-4">
+
     <form action="registration" class="was-validated" method="post">
         <div class="form-group">
             <label for="email">Email:</label>
@@ -33,7 +37,7 @@
         </div>
         <div class="form-group">
             <label for="lastName">Last name:</label>
-            <input type="password" class="form-control" id="lastName" placeholder="Enter last name" name="lastName" required>
+            <input type="text" class="form-control" id="lastName" placeholder="Enter last name" name="lastName" required>
             <div class="valid-feedback">Valid.</div>
             <div class="invalid-feedback">Please fill out this field.</div>
         </div>
@@ -51,9 +55,7 @@
         </div>
         <div class="form-group">
             <label for="description">Description:</label>
-            <input type="text" class="form-control" id="description" placeholder="Enter description" name="description" required>
-            <div class="valid-feedback">Valid.</div>
-            <div class="invalid-feedback">Please fill out this field.</div>
+            <textarea class="form-control" rows="5" id="description" name="description"></textarea>
         </div>
         <div class="form-group">
             <label for="phoneNumber">Phone number:</label>
@@ -61,7 +63,6 @@
             <div class="valid-feedback">Valid.</div>
             <div class="invalid-feedback">Please fill out this field.</div>
         </div>
-
         <div class="form-group form-check">
             <label class="form-check-label">
                 <input class="form-check-input" type="checkbox" name="remember" required> I agree on blabla.
@@ -71,5 +72,6 @@
         </div>
         <button type="submit" class="btn btn-primary">Registration</button>
     </form>
+</div>
 </body>
 </html>

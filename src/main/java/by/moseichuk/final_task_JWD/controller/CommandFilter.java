@@ -3,6 +3,7 @@ package by.moseichuk.final_task_JWD.controller;
 import by.moseichuk.final_task_JWD.controller.command.Login;
 import by.moseichuk.final_task_JWD.controller.command.Registration;
 import by.moseichuk.final_task_JWD.controller.command.show.CampaignListVisual;
+import by.moseichuk.final_task_JWD.controller.command.show.IndexVisual;
 import by.moseichuk.final_task_JWD.controller.command.show.LoginVisual;
 import by.moseichuk.final_task_JWD.controller.command.show.RegistrationVisual;
 import org.apache.logging.log4j.LogManager;
@@ -21,6 +22,7 @@ public class CommandFilter implements Filter {
     //TODO
 
     static {
+        commandGet.put("/", new IndexVisual());
         commandGet.put("/login", new LoginVisual());
         commandGet.put("/campaign/list", new CampaignListVisual());
         commandGet.put("/registration", new RegistrationVisual());
