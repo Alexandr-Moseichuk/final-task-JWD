@@ -42,59 +42,35 @@ public class HelloServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        executeRequest(request, response);
+    }
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        executeRequest(request, response);
+    }
+
+    private void executeRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            LOGGER.debug("GET request. URI: " + request.getRequestURI());
+            LOGGER.debug("Method: " + request.getMethod() + " Request URI: " + request.getRequestURI());
             Command command = (Command) request.getAttribute("command");
             CommandManger commandManger = CommandManagerFactory.getInstance().getManager();
             Forward forward = commandManger.execute(command, request, response);
             commandManger.close();
-            System.out.println("GET forward path " + forward.getPagePath());
-            getServletContext().getRequestDispatcher(forward.getPagePath()).forward(request, response);
-        } catch (ServletException e) {
-            //TODO logger
-            request.setAttribute("errorMessage", String.format("Ошибка сервера по адресу %s, описание ошибки %s", request.getRequestURI(), e.getMessage()));
-            try {
-                getServletContext().getRequestDispatcher("/WEB-INF/jsp/error.jsp").forward(request, response);
-            } catch (ServletException servletException) {
-                servletException.printStackTrace();
-            }
-
-        } catch (TransactionException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        try {
-            LOGGER.debug("POST request. URI: " + request.getRequestURI());
-            HttpSession session = request.getSession(false);
-            Command command = (Command) request.getAttribute("command");
-
-            Forward forward;
-            if (session != null) {
-                CommandManger commandManger = CommandManagerFactory.getInstance().getManager();
-                forward = commandManger.execute(command, request, response);
-                commandManger.close();
-            } else {
-                forward = new Forward("jsp/login.jsp");
-            }
-            System.out.println("POST forward path " + forward.getPagePath());
             if (forward.isRedirect()) {
                 response.sendRedirect(request.getContextPath() + forward.getPagePath());
             } else {
                 getServletContext().getRequestDispatcher(forward.getPagePath()).forward(request, response);
             }
         } catch (ServletException e) {
-            //TODO logger
+            LOGGER.error(e);
             request.setAttribute("errorMessage", String.format("Ошибка сервера по адресу %s, описание ошибки %s", request.getRequestURI(), e.getMessage()));
             try {
-                request.getRequestDispatcher("/WEB-INF/jsp/error.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/WEB-INF/jsp/error.jsp").forward(request, response);
             } catch (ServletException servletException) {
-                //TODO logger
+                LOGGER.error(e);
             }
-
         } catch (TransactionException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         }
     }
 

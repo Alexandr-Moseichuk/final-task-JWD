@@ -1,15 +1,10 @@
 package by.moseichuk.final_task_JWD.controller;
 
-import by.moseichuk.final_task_JWD.controller.command.CampaignListCommand;
 import by.moseichuk.final_task_JWD.controller.command.Login;
 import by.moseichuk.final_task_JWD.controller.command.Registration;
-import by.moseichuk.final_task_JWD.dao.TransactionFactory;
-import by.moseichuk.final_task_JWD.dao.exception.TransactionException;
-import by.moseichuk.final_task_JWD.dao.transaction.TransactionFactoryImpl;
-import by.moseichuk.final_task_JWD.service.ServiceFactory;
-import by.moseichuk.final_task_JWD.service.UserService;
-import by.moseichuk.final_task_JWD.service.impl.ServiceFactoryImpl;
-import by.moseichuk.final_task_JWD.service.impl.UserServiceImpl;
+import by.moseichuk.final_task_JWD.controller.command.show.CampaignListVisual;
+import by.moseichuk.final_task_JWD.controller.command.show.LoginVisual;
+import by.moseichuk.final_task_JWD.controller.command.show.RegistrationVisual;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,12 +16,17 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class CommandFilter implements Filter {
     private static final Logger LOGGER = LogManager.getLogger(CommandFilter.class);
-    private static Map<String, Command> commandMap = new ConcurrentHashMap<>();
+    private static Map<String, Command> commandGet = new ConcurrentHashMap<>();
+    private static Map<String, Command> commandPost = new ConcurrentHashMap<>();
+    //TODO
 
     static {
-        commandMap.put("/login", new Login());
-        commandMap.put("/campaign/list", new CampaignListCommand());
-        commandMap.put("/registration", new Registration());
+        commandGet.put("/login", new LoginVisual());
+        commandGet.put("/campaign/list", new CampaignListVisual());
+        commandGet.put("/registration", new RegistrationVisual());
+
+        commandPost.put("/login", new Login());
+        commandPost.put("/registration", new Registration());
     }
 
     @Override
@@ -42,8 +42,7 @@ public class CommandFilter implements Filter {
             int begin = request.getContextPath().length();
             //int end = request.getRequestURI().lastIndexOf('.');
             String commandName = request.getRequestURI().substring(begin);
-            System.out.println("Command name " + commandName);
-            Command command = commandMap.get(commandName);
+            Command command = detectCommand(request, commandName);
             if (command != null) {
                 command.setName(commandName);
                 request.setAttribute("command", command);
@@ -57,6 +56,17 @@ public class CommandFilter implements Filter {
                                        servletRequest.getRemoteAddr(),
                                        servletRequest.getRemoteHost(),
                                        servletRequest.getRemotePort()));
+        }
+    }
+
+    private Command detectCommand(HttpServletRequest request, String commandName) {
+        switch (request.getMethod().toUpperCase()) {
+            case "GET":
+                return commandGet.get(commandName);
+            case "POST":
+                return commandPost.get(commandName);
+            default:
+                return null;
         }
     }
 

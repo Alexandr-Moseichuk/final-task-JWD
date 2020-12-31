@@ -16,9 +16,6 @@ import java.util.GregorianCalendar;
 public class Registration extends Command {
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
-        if (request.getMethod().equalsIgnoreCase("get")) {
-            return new Forward("jsp/registration.jsp");
-        }
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String passwordCheck = request.getParameter("passwordCheck");

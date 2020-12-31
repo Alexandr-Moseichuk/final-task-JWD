@@ -1,4 +1,4 @@
-package by.moseichuk.final_task_JWD.controller.command;
+package by.moseichuk.final_task_JWD.controller.command.show;
 
 import by.moseichuk.final_task_JWD.bean.Campaign;
 import by.moseichuk.final_task_JWD.controller.Command;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class CampaignListCommand extends Command {
+public class CampaignListVisual extends Command {
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
         CampaignService campaignService = (CampaignService) serviceFactory.getService(ServiceEnum.CAMPAIGN);
