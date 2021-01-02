@@ -3,18 +3,18 @@ package by.moseichuk.final_task_JWD.bean;
 import java.util.Calendar;
 
 public  class User extends Entity {
-    private String mail;
+    private String email;
     private String password;
     private UserRole role;
     private Calendar registrationDate;
     private UserStatus status;
 
-    public String getMail() {
-        return mail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -52,7 +52,7 @@ public  class User extends Entity {
     @Override
     public String toString() {
         return "User{" +
-                "mail='" + mail + '\'' +
+                "mail='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
                 ", registrationDate=" + registrationDate +

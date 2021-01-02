@@ -4,6 +4,8 @@ import by.moseichuk.final_task_JWD.bean.User;
 import by.moseichuk.final_task_JWD.bean.UserInfo;
 import by.moseichuk.final_task_JWD.service.exception.ServiceException;
 
+import java.util.List;
+
 public interface UserService {
     User login(String mail, String password) throws ServiceException;
 
@@ -11,5 +13,5 @@ public interface UserService {
 
     void createUserInfo(UserInfo userInfo) throws ServiceException;
 
-
+    List<User> readAll() throws ServiceException;
 }

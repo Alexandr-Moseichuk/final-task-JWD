@@ -9,7 +9,6 @@ import by.moseichuk.final_task_JWD.service.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -29,7 +28,7 @@ public class Registration extends Command {
         }
 
         User user = new User();
-        user.setMail(email);
+        user.setEmail(email);
         user.setPassword(password);
         Calendar currentTime = new GregorianCalendar();
         currentTime.setTimeInMillis(System.currentTimeMillis());

@@ -1,6 +1,5 @@
 package by.moseichuk.final_task_JWD.dao.impl;
 
-import by.moseichuk.final_task_JWD.bean.Influencer;
 import by.moseichuk.final_task_JWD.bean.User;
 import by.moseichuk.final_task_JWD.bean.UserRole;
 import by.moseichuk.final_task_JWD.bean.UserStatus;
@@ -9,8 +8,6 @@ import by.moseichuk.final_task_JWD.dao.exception.DaoException;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 public class UserDaoImpl extends BaseDao implements UserDao {
@@ -26,7 +23,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     @Override
     public Integer create(User user) throws DaoException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setString(1, user.getMail());
+            preparedStatement.setString(1, user.getEmail());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setInt(3, user.getRole().ordinal());
             preparedStatement.setDate(4, new Date(user.getRegistrationDate().getTimeInMillis()));
@@ -54,7 +51,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             if (resultSet.next()) {
                 User user = new User();
                 user.setId(id);
-                user.setMail(resultSet.getString("mail"));
+                user.setEmail(resultSet.getString("mail"));
                 user.setPassword(resultSet.getString("password"));
                 user.setRole(UserRole.values()[resultSet.getInt("role")]);
                 user.setRegistrationDate(parseDate(resultSet.getDate("registration_date")));
@@ -71,7 +68,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     @Override
     public void update(User user) throws DaoException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)) {
-            preparedStatement.setString(1, user.getMail());
+            preparedStatement.setString(1, user.getEmail());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setInt(3, user.getRole().ordinal());
             preparedStatement.setDate(4, new Date(user.getRegistrationDate().getTimeInMillis()));
@@ -105,11 +102,12 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             while (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getInt("id"));
-                user.setMail(resultSet.getString("mail"));
+                user.setEmail(resultSet.getString("mail"));
                 user.setPassword(resultSet.getString("password"));
                 user.setRole(UserRole.values()[resultSet.getInt("role")]);
                 user.setRegistrationDate(parseDate(resultSet.getDate("registration_date")));
                 user.setStatus(UserStatus.values()[resultSet.getInt("status")]);
+                users.add(user);
             }
             return users;
         } catch (SQLException e) {
@@ -144,7 +142,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             if (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getInt("id"));
-                user.setMail(mail);
+                user.setEmail(mail);
                 user.setPassword(password);
                 user.setRole(UserRole.values()[resultSet.getInt("role")]);
                 user.setRegistrationDate(parseDate(resultSet.getDate("registration_date")));

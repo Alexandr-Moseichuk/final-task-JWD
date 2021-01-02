@@ -2,10 +2,7 @@ package by.moseichuk.final_task_JWD.controller;
 
 import by.moseichuk.final_task_JWD.controller.command.Login;
 import by.moseichuk.final_task_JWD.controller.command.Registration;
-import by.moseichuk.final_task_JWD.controller.command.show.CampaignListVisual;
-import by.moseichuk.final_task_JWD.controller.command.show.IndexVisual;
-import by.moseichuk.final_task_JWD.controller.command.show.LoginVisual;
-import by.moseichuk.final_task_JWD.controller.command.show.RegistrationVisual;
+import by.moseichuk.final_task_JWD.controller.command.show.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,6 +23,7 @@ public class CommandFilter implements Filter {
         commandGet.put("/login", new LoginVisual());
         commandGet.put("/campaign/list", new CampaignListVisual());
         commandGet.put("/registration", new RegistrationVisual());
+        commandGet.put("/user/list", new UserVisual());
 
         commandPost.put("/login", new Login());
         commandPost.put("/registration", new Registration());

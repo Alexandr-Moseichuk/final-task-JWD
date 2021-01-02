@@ -13,6 +13,7 @@ import by.moseichuk.final_task_JWD.service.exception.ServiceException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Formatter;
+import java.util.List;
 
 public class UserServiceImpl extends BaseService implements UserService {
     @Override
@@ -40,6 +41,17 @@ public class UserServiceImpl extends BaseService implements UserService {
         UserInfoDao userInfoDao = (UserInfoDao) transaction.getDao(DaoEnum.USER_INFO);
         try {
             userInfoDao.create(userInfo);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<User> readAll() throws ServiceException {
+        UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
+        try {
+            List<User> userList = userDao.readAll();
+            return userList;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
