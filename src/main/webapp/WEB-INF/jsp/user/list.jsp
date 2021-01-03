@@ -18,6 +18,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th></th>
                     <th>ID</th>
                     <th>Mail</th>
                     <th>Role</th>
@@ -29,6 +30,11 @@
                 <jsp:useBean id="userList" scope="request" type="java.util.List"/>
                 <c:forEach var="user" items="${userList}">
                     <tr>
+                        <td><div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" value="">
+                            </label>
+                        </div></td>
                         <td><c:out value="${user.id}"/></td>
                         <td><c:out value="${user.email}"/></td>
                         <td><c:out value="${user.role}"/></td>
