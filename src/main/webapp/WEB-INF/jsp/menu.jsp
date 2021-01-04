@@ -14,36 +14,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <div class="container">
-        <a class="nav-link " href="<c:url value="/"/>">ADLinker</a>
-    </div>
-    <div class="container">
-        <ul class="navbar-nav">
-<%--            <li class="nav-item"></li>--%>
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/campaign/list"/>">Рекламные кампании</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/influencer/list"/>">Инфлюенсеры</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/manager/list"/>">Менеджеры</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/advertiser/list"/>">Рекламодатели</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/login"/>">Вход</a>
-            </li>
-        </ul>
-        <form class="form-inline" action="/action_page.php">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-success" type="submit">Search</button>
-        </form>
-
-    </div>
-
-</nav>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container col-sm-2">
+        </div>
+        <div class="container col-sm-2">
+            <a class="nav-link " href="<c:url value="/"/>">ADLinker</a>
+        </div>
+        <div class="container col-sm-6">
+            <ul class="navbar-nav">
+                <%--            <li class="nav-item"></li>--%>
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/campaign/list"/>">Рекламные кампании</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/influencer/list"/>">Инфлюенсеры</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/manager/list"/>">Менеджеры</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/advertiser/list"/>">Рекламодатели</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/login"/>">Вход</a>
+                </li>
+            </ul>
+        </div>
+        <div class="container col-sm-2">
+            <form class="form-inline" action="/action_page.php">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-success" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="container col-sm-2">
+        </div>
+    </nav>
 </body>
 </html>

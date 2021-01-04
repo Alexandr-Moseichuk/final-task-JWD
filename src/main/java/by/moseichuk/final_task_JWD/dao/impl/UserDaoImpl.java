@@ -19,6 +19,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
     private static final String READ_CAMPAIGN_IDS = "SELECT `campaign_id` FROM `user_campaign` WHERE `user_id` = ?";
     private static final String LOGIN = "SELECT `id`, `role`, `registration_date`, `status` FROM `user` WHERE `mail` = ? AND `password` = ?";
+    private static final String READ_USERS_BY_ROLE = "SELECT `id`, `mail`, `registration_date`, `status` FROM `user` WHERE `role` = ?";
 
     @Override
     public Integer create(User user) throws DaoException {
@@ -153,6 +154,28 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             }
         } catch (SQLException e) {
             throw new DaoException("Can't LOGIN user", e);
+        }
+    }
+
+    @Override
+    public List<User> readUsersByRole(UserRole userRole) throws DaoException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(READ_USERS_BY_ROLE)) {
+            preparedStatement.setInt(1, userRole.ordinal());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<User> userList = new ArrayList<>();
+            while (resultSet.next()) {
+                User user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setEmail(resultSet.getString("mail"));
+                user.setRegistrationDate(parseDate(resultSet.getDate("registration_date")));
+                user.setStatus(UserStatus.values()[resultSet.getInt("status")]);
+                user.setRole(userRole);
+                userList.add(user);
+            }
+            return userList;
+        } catch (SQLException e) {
+            throw new DaoException("Can't READ users by role", e);
         }
     }
 

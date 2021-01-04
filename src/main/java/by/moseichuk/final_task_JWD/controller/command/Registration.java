@@ -33,7 +33,7 @@ public class Registration extends Command {
         Calendar currentTime = new GregorianCalendar();
         currentTime.setTimeInMillis(System.currentTimeMillis());
         user.setRegistrationDate(currentTime);
-        user.setRole(UserRole.ADMINISTRATOR);
+        user.setRole(UserRole.INFLUENCER);
         user.setStatus(UserStatus.VERIFIED);
         UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
         try {

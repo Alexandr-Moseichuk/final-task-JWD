@@ -24,6 +24,7 @@ public class CommandFilter implements Filter {
         commandGet.put("/campaign/list", new CampaignListVisual());
         commandGet.put("/registration", new RegistrationVisual());
         commandGet.put("/user/list", new UserVisual());
+        commandGet.put("/influencer/list", new InfluencerVisual());
 
         commandPost.put("/login", new Login());
         commandPost.put("/registration", new Registration());
