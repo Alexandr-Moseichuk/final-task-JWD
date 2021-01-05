@@ -61,16 +61,14 @@ public class HelloServlet extends HttpServlet {
             } else {
                 getServletContext().getRequestDispatcher(forward.getPagePath()).forward(request, response);
             }
-        } catch (ServletException e) {
+        } catch (ServletException | TransactionException e) {
             LOGGER.error(e);
             request.setAttribute("errorMessage", String.format("Ошибка сервера по адресу %s, описание ошибки %s", request.getRequestURI(), e.getMessage()));
             try {
                 getServletContext().getRequestDispatcher("/WEB-INF/jsp/error.jsp").forward(request, response);
-            } catch (ServletException servletException) {
-                LOGGER.error(e);
+            } catch (ServletException e1) {
+                LOGGER.error(e1);
             }
-        } catch (TransactionException e) {
-            LOGGER.error(e);
         }
     }
 
