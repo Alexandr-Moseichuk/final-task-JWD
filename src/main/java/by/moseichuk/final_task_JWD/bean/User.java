@@ -8,6 +8,7 @@ public  class User extends Entity {
     private UserRole role;
     private Calendar registrationDate;
     private UserStatus status;
+    private UserInfo userInfo;
 
     public String getEmail() {
         return email;
@@ -49,14 +50,23 @@ public  class User extends Entity {
         this.status = status;
     }
 
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "mail='" + email + '\'' +
+                "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
                 ", registrationDate=" + registrationDate +
                 ", status=" + status +
+                ", userInfo=" + userInfo +
                 '}';
     }
 }

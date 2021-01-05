@@ -62,25 +62,17 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
-    public List<Influencer> readInfluencerList() throws ServiceException {
+    public List<User> readUsersByRole(UserRole userRole) throws ServiceException {
         UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
         UserInfoDao userInfoDao = (UserInfoDao) transaction.getDao(DaoEnum.USER_INFO);
         try {
-            List<User> userList = userDao.readUsersByRole(UserRole.INFLUENCER);
-            List<Influencer> influencerList = new ArrayList<>();
-            for (User user : userList) {
-                Influencer influencer = new Influencer();
-                UserInfo userInfo = userInfoDao.read(user.getId());
-                influencer.setId(user.getId());
-                influencer.setEmail(user.getEmail());
-                influencer.setRole(user.getRole());
-                influencer.setStatus(user.getStatus());
-                influencer.setRegistrationDate(user.getRegistrationDate());
-                influencer.setUserInfo(userInfo);
+            List<User> userList = userDao.readUsersByRole(userRole);
 
-                influencerList.add(influencer);
+            for (User user : userList) {
+                UserInfo userInfo = userInfoDao.read(user.getId());
+                user.setUserInfo(userInfo);
             }
-            return influencerList;
+            return userList;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

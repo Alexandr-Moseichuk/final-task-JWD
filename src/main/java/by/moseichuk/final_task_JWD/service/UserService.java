@@ -1,8 +1,8 @@
 package by.moseichuk.final_task_JWD.service;
 
-import by.moseichuk.final_task_JWD.bean.Influencer;
 import by.moseichuk.final_task_JWD.bean.User;
 import by.moseichuk.final_task_JWD.bean.UserInfo;
+import by.moseichuk.final_task_JWD.bean.UserRole;
 import by.moseichuk.final_task_JWD.service.exception.ServiceException;
 
 import java.util.List;
@@ -16,5 +16,5 @@ public interface UserService {
 
     List<User> readAll() throws ServiceException;
     
-    List<Influencer> readInfluencerList() throws ServiceException;
+    List<User> readUsersByRole(UserRole userRole) throws ServiceException;
 }

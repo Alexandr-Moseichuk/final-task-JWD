@@ -1,6 +1,8 @@
 package by.moseichuk.final_task_JWD.controller.command.show;
 
 import by.moseichuk.final_task_JWD.bean.Influencer;
+import by.moseichuk.final_task_JWD.bean.User;
+import by.moseichuk.final_task_JWD.bean.UserRole;
 import by.moseichuk.final_task_JWD.controller.Command;
 import by.moseichuk.final_task_JWD.controller.Forward;
 import by.moseichuk.final_task_JWD.service.ServiceEnum;
@@ -20,7 +22,7 @@ public class InfluencerVisual extends Command {
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
         UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
         try {
-            List<Influencer> influencerList = userService.readInfluencerList();
+            List<User> influencerList = userService.readUsersByRole(UserRole.INFLUENCER);
             LOGGER.debug(influencerList);
             LOGGER.debug(influencerList.size());
             request.setAttribute("influencerList", influencerList);
