@@ -55,7 +55,7 @@ public class UserInfoDaoImpl extends BaseDao implements UserInfoDao {
                 userInfo.setUserFile(userFile);
                 return userInfo;
             } else {
-                throw new DaoException("Can't get user info from DB, ID = " + id);
+                return null;
             }
         } catch (SQLException e) {
             throw new DaoException(e);
