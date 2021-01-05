@@ -16,7 +16,7 @@ public class CommandFilter implements Filter {
     private static final Logger LOGGER = LogManager.getLogger(CommandFilter.class);
     private static Map<String, Command> commandGet = new ConcurrentHashMap<>();
     private static Map<String, Command> commandPost = new ConcurrentHashMap<>();
-    //TODO
+    //TODO PUT, DELETE... maps
 
     static {
         commandGet.put("/", new IndexVisual());
@@ -25,6 +25,7 @@ public class CommandFilter implements Filter {
         commandGet.put("/registration", new RegistrationVisual());
         commandGet.put("/user/list", new UserVisual());
         commandGet.put("/influencer/list", new InfluencerVisual());
+        commandGet.put("/advertiser/list", new AdvertiserVisual());
 
         commandPost.put("/login", new Login());
         commandPost.put("/registration", new Registration());
