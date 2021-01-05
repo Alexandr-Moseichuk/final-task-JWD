@@ -23,13 +23,11 @@ public class InfluencerVisual extends Command {
         UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
         try {
             List<User> influencerList = userService.readUsersByRole(UserRole.INFLUENCER);
-            LOGGER.debug(influencerList);
-            LOGGER.debug(influencerList.size());
             request.setAttribute("influencerList", influencerList);
             return new Forward("jsp/influencer/list.jsp");
         } catch (ServiceException e) {
             LOGGER.error(e);
-            request.setAttribute("errorMessage", e.getMessage());
+            request.setAttribute("errorMessage", "Ошибка получения списка инфлюенсеров");
             return new Forward("jsp/error.jsp");
         }
     }

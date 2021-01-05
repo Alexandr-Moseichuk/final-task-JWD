@@ -6,16 +6,19 @@ import by.moseichuk.final_task_JWD.controller.Forward;
 import by.moseichuk.final_task_JWD.service.ServiceEnum;
 import by.moseichuk.final_task_JWD.service.UserService;
 import by.moseichuk.final_task_JWD.service.exception.ServiceException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class Login extends Command {
+    private static final Logger LOGGER = LogManager.getLogger(Login.class);
+
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
         String mail = request.getParameter("email");
         String password = request.getParameter("password");
-        System.out.println(mail + " " + password);
         if (mail != null && password != null) {
             UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
             try {
@@ -27,7 +30,7 @@ public class Login extends Command {
                     return new Forward("jsp/login.jsp");
                 }
             } catch (ServiceException e) {
-                //TODO logger
+                LOGGER.error(e);
                 request.getSession().setAttribute("errorMessage", "Ошибка авторизации! Свяжитесь с администратором.");
                 return new Forward("jsp/error.jsp");
             }

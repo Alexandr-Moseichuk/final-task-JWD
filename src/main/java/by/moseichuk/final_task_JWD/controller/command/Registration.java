@@ -6,6 +6,8 @@ import by.moseichuk.final_task_JWD.controller.Forward;
 import by.moseichuk.final_task_JWD.service.ServiceEnum;
 import by.moseichuk.final_task_JWD.service.UserService;
 import by.moseichuk.final_task_JWD.service.exception.ServiceException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +15,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Registration extends Command {
+    private static final Logger LOGGER = LogManager.getLogger();
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
         String email = request.getParameter("email");
@@ -53,7 +56,8 @@ public class Registration extends Command {
 
             return new Forward("/campaign/list", true);
         } catch (ServiceException e) {
-            request.setAttribute("errorMessage", e.getMessage());
+            LOGGER.error(e);
+            request.setAttribute("errorMessage", "Ошибка регистрации пользователя");
             return new Forward("jsp/error.jsp");
         }
 

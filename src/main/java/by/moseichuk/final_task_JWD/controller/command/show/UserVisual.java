@@ -24,7 +24,7 @@ public class UserVisual extends Command {
             request.setAttribute("userList", userList);
             return new Forward("jsp/user/list.jsp");
         } catch (ServiceException e) {
-            LOGGER.error("Can't read all users: " + e.getMessage());
+            LOGGER.error(e);
             request.setAttribute("jsp/error.jsp", "Ошибка при чтении всех пользователей из БД");
             return new Forward("jsp/error.jsp");
         }
