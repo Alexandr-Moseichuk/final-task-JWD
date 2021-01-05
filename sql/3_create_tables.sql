@@ -95,7 +95,7 @@ CREATE TABLE `campaign_file`
     `file_id`     INTEGER NOT NULL UNIQUE ,
     PRIMARY KEY (`campaign_id`, `file_id`) ,
     FOREIGN KEY (`campaign_id`) REFERENCES `campaign`(`id`) ,
-    FOREIGN KEY (file_id)       REFERENCES `file`(`id`)
+    FOREIGN KEY (`file_id`)       REFERENCES `file`(`id`)
 );
 
 CREATE TABLE `registration_application`
