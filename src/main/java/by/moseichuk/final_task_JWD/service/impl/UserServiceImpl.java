@@ -24,7 +24,12 @@ public class UserServiceImpl extends BaseService implements UserService {
     public User login(String mail, String password) throws ServiceException {
         try {
             UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
-            return userDao.login(mail, md5(password));
+            UserInfoDao userInfoDao = (UserInfoDao) transaction.getDao(DaoEnum.USER_INFO);
+            User user = userDao.login(mail, md5(password));
+            if (user != null) {
+                user.setUserInfo(userInfoDao.read(user.getId()));
+            }
+            return user;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
