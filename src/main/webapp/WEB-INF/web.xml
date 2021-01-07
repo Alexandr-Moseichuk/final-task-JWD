@@ -18,7 +18,7 @@
     </servlet-mapping>
     <filter>
         <filter-name>CommandFilter</filter-name>
-        <filter-class>by.moseichuk.final_task_JWD.controller.CommandFilter</filter-class>
+        <filter-class>by.moseichuk.final_task_JWD.controller.filter.CommandFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>CommandFilter</filter-name>

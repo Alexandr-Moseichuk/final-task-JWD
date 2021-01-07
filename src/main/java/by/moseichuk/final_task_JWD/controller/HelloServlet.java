@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
+import java.util.Arrays;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
@@ -52,6 +53,9 @@ public class HelloServlet extends HttpServlet {
     private void executeRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             LOGGER.debug("Method: " + request.getMethod() + " Request URI: " + request.getRequestURI());
+            Cookie cookie = new Cookie("language", "en_US");
+            cookie.setMaxAge(3600);
+            response.addCookie(cookie);
             Command command = (Command) request.getAttribute("command");
             CommandManger commandManger = CommandManagerFactory.getInstance().getManager();
             Forward forward = commandManger.execute(command, request, response);

@@ -1,5 +1,6 @@
-package by.moseichuk.final_task_JWD.controller;
+package by.moseichuk.final_task_JWD.controller.filter;
 
+import by.moseichuk.final_task_JWD.controller.Command;
 import by.moseichuk.final_task_JWD.controller.command.Login;
 import by.moseichuk.final_task_JWD.controller.command.Registration;
 import by.moseichuk.final_task_JWD.controller.command.show.*;
