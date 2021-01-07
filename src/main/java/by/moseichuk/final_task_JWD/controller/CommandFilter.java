@@ -9,13 +9,13 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class CommandFilter implements Filter {
     private static final Logger LOGGER = LogManager.getLogger(CommandFilter.class);
-    private static Map<String, Command> commandGet = new ConcurrentHashMap<>();
-    private static Map<String, Command> commandPost = new ConcurrentHashMap<>();
+    private static Map<String, Command> commandGet = new HashMap<>();
+    private static Map<String, Command> commandPost = new HashMap<>();
     //TODO PUT, DELETE... maps
 
     static {
