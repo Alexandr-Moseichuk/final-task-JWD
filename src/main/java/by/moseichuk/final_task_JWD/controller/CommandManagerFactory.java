@@ -15,6 +15,7 @@ public class CommandManagerFactory {
         return instance;
     }
 
+    //TODO перепрыгиваем сорвисы и обращаемся к DAO, исправить
     public CommandManger getManager() throws TransactionException {
         TransactionFactory transactionFactory = new TransactionFactoryImpl();
         ServiceFactory serviceFactory = new ServiceFactoryImpl(transactionFactory);

@@ -11,10 +11,12 @@ import java.util.Map;
 
 public class ServiceFactoryImpl implements ServiceFactory {
     private static Map<ServiceEnum, BaseService> serviceMap = new EnumMap<>(ServiceEnum.class);
+
     static {
         serviceMap.put(ServiceEnum.USER, new UserServiceImpl());
         serviceMap.put(ServiceEnum.CAMPAIGN, new CampaignServiceImpl());
     }
+
     private TransactionFactory transactionFactory;
 
     public ServiceFactoryImpl(TransactionFactory transactionFactory) {

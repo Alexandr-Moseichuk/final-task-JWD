@@ -11,8 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TransactionImpl implements Transaction {
-
     private static Map<DaoEnum, BaseDao> daoMap = new HashMap<>();
+
     static {
         daoMap.put(DaoEnum.CAMPAIGN, new CampaignDaoImpl());
         daoMap.put(DaoEnum.MANAGER_INFLUENCER, new ManagerInfluencerDaoImpl());
@@ -31,7 +31,7 @@ public class TransactionImpl implements Transaction {
 
     @Override
     public BaseDao getDao(DaoEnum daoType) {
-        BaseDao baseDao= daoMap.get(daoType);
+        BaseDao baseDao = daoMap.get(daoType);
         baseDao.setConnection(connection);
         return baseDao;
     }
