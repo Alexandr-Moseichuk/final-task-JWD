@@ -19,7 +19,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-        <fmt:setLocale value="en_US" scope="session"/>
+        <fmt:setLocale value="${ cookie.language.value }" scope="session"/>
         <fmt:setBundle basename="localization.pagecontent" var="rb" />
         <nav class="navbar sticky-top navbar-expand-lg bg-dark navbar-dark">
             <div class="container justify-content-center">

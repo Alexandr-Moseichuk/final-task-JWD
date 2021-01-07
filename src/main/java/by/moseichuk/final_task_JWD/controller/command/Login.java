@@ -13,33 +13,11 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Login extends Command {
     private static final Logger LOGGER = LogManager.getLogger(Login.class);
-
-    private static final Map<UserRole, List<MenuItem>> menuMap = new ConcurrentHashMap<>();
-
-    static {
-        menuMap.put(UserRole.ADMINISTRATOR, Arrays.asList(
-                new MenuItem("Заявки","/registration_application/list"),
-                new MenuItem("Пользователи", "/user/list")
-        ));
-        menuMap.put(UserRole.ADVERTISER, Arrays.asList(
-                new MenuItem("Мои кампании", "/advertiser/campaign/list")
-        ));
-        menuMap.put(UserRole.INFLUENCER, Arrays.asList(
-                new MenuItem("Рекламные кампании", "/influencer/campaign/list"),
-                new MenuItem("Менеджер", "influencer/manager")
-        ));
-        menuMap.put(UserRole.MANAGER, Arrays.asList(
-                new MenuItem("Рекламные кампании", "/manager/campaign/list"),
-                new MenuItem("Инфлюенсеры", "/manager/influencer/list")
-        ));
-    }
 
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
@@ -51,7 +29,7 @@ public class Login extends Command {
                 User user = userService.login(mail, password);
                 if (user != null) {
                     request.getSession().setAttribute("authorizedUser", user);
-                    request.getSession().setAttribute("menuList", menuMap.get(user.getRole()));
+                    request.getSession().setAttribute("menuList", buildMenu(user.getRole()));
                     return new Forward("/campaign/list", true);
                 } else {
                     return new Forward("jsp/login.jsp");
@@ -63,5 +41,30 @@ public class Login extends Command {
             }
         }
         return new Forward("jsp/login.jsp");
+    }
+
+    private List<MenuItem> buildMenu(UserRole userRole) {
+        List<MenuItem> menuItemList = new ArrayList<>();
+        ResourceBundle rb = ResourceBundle.getBundle("localization.pagecontent");
+
+        switch (userRole) {
+            case ADMINISTRATOR:
+                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.reg_applications"),"/registration_application/list"));
+                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.users"), "/user/list"));
+                return menuItemList;
+            case ADVERTISER:
+                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.campaigns"), "/advertiser/campaign/list"));
+                return menuItemList;
+            case INFLUENCER:
+                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.campaigns"), "/influencer/campaign/list"));
+                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.manager"), "influencer/manager"));
+                return menuItemList;
+            case MANAGER:
+                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.campaigns"), "/manager/campaign/list"));
+                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.influencers"), "/manager/influencer/list"));
+                return menuItemList;
+            default:
+                return menuItemList;
+        }
     }
 }
