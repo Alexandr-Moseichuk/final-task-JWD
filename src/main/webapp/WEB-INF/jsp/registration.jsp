@@ -7,15 +7,18 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>Registration</title>
+    <fmt:setLocale value="${ cookie.language.value }" scope="session"/>
+    <fmt:setBundle basename="localization.pagecontent" var="rb" />
+    <title><fmt:message key="registation.title" bundle="${rb}" /></title>
     <c:import url="style.jsp"/>
 </head>
 <body class="bg-light">
 <%--<div class="container pt-3 my-3 border col-4">--%>
     <div class="container p-3 my-3 border bg-white shadow-sm">
-        <h4 class="text-center">РЕГИСТРАЦИЯ</h4>
+        <h4 class="text-center"><fmt:message key="registation.title" bundle="${rb}" /></h4>
         <form action="registration" class="row g-2 needs-validation" novalidate method="post">
             <div class="col-md-12 position-relative">
                 <label for="email">Email:</label>

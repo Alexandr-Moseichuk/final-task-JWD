@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: digge
@@ -9,21 +10,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>User list</title>
+    <fmt:setLocale value="${ cookie.language.value }" scope="session"/>
+    <fmt:setBundle basename="localization.pagecontent" var="rb" />
+    <title><fmt:message key="user.list.title" bundle="${rb}" /></title>
 </head>
 <body>
     <c:import url="/WEB-INF/jsp/menu.jsp"/>
-    <h3>Список пользователей</h3>
+    <h3><fmt:message key="user.list.label.title" bundle="${rb}" /></h3>
     <div class="container">
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th></th>
-                    <th>ID</th>
-                    <th>Mail</th>
-                    <th>Role</th>
-                    <th>Registration date</th>
-                    <th>Status</th>
+                    <th><fmt:message key="user.list.table.header.id" bundle="${rb}" /></th>
+                    <th><fmt:message key="user.list.table.header.email" bundle="${rb}" /></th>
+                    <th><fmt:message key="user.list.table.header.role" bundle="${rb}" /></th>
+                    <th><fmt:message key="user.list.table.header.registration_date" bundle="${rb}" /></th>
+                    <th><fmt:message key="user.list.table.header.status" bundle="${rb}" /></th>
                 </tr>
             </thead>
             <tbody>

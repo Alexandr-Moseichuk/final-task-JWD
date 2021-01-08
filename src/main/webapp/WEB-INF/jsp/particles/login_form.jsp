@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: digge
@@ -9,7 +10,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Login form</title>
+    <fmt:setLocale value="${ cookie.language.value }" scope="session"/>
+    <fmt:setBundle basename="localization.pagecontent" var="rb" />
+    <title><fmt:message key="login_form.title" bundle="${rb}" /></title>
 </head>
 <body>
 <form action="login" method="post">
@@ -21,13 +24,15 @@
         <%--            <label for="password">Password:</label>--%>
         <input type="password" class="form-control" placeholder="Password" id="password" name="password">
     </div>
-    <div class="form-group form-check col-sm-3">
-        <label class="form-check-label">
-            <input class="form-check-input" type="checkbox"> Remember
+    <div class="form-group form-check">
+        <label class="form-check-label line">
+            <input class="form-check-input" type="checkbox"> <fmt:message key="login_form.label.remember" bundle="${rb}" />
         </label>
     </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-    <a href=<c:url value="/registration"/>>Registration</a>
+    <button type="submit" class="btn btn-primary"><fmt:message key="login_form.button.login" bundle="${rb}" /></button>
+    <a href=<c:url value="/registration"/>>
+        <fmt:message key="login_form.label.registration" bundle="${rb}" />
+    </a>
 </form>
 </body>
 </html>

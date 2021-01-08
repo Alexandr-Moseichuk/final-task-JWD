@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: digge
@@ -9,7 +10,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>ADLinker</title>
+    <fmt:setLocale value="${ cookie.language.value }" scope="session"/>
+    <fmt:setBundle basename="localization.pagecontent" var="rb" />
+    <title><fmt:message key="index.title" bundle="${rb}" /></title>
     <c:import url="style.jsp"/>
 </head>
 <body>
