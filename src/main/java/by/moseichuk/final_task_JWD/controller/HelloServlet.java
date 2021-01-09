@@ -60,6 +60,9 @@ public class HelloServlet extends HttpServlet {
             CommandManger commandManger = CommandManagerFactory.getInstance().getManager();
             Forward forward = commandManger.execute(command, request, response);
             commandManger.close();
+            if (forward == null) {
+                return;
+            }
             if (forward.isRedirect()) {
                 response.sendRedirect(request.getContextPath() + forward.getPagePath());
             } else {

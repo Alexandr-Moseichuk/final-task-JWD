@@ -3,6 +3,7 @@ package by.moseichuk.final_task_JWD.controller.filter;
 import by.moseichuk.final_task_JWD.controller.Command;
 import by.moseichuk.final_task_JWD.controller.command.Login;
 import by.moseichuk.final_task_JWD.controller.command.Registration;
+import by.moseichuk.final_task_JWD.controller.command.SendJpeg;
 import by.moseichuk.final_task_JWD.controller.command.show.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,6 +29,7 @@ public class CommandFilter implements Filter {
         commandGet.put("/influencer/list", new InfluencerVisual());
         commandGet.put("/advertiser/list", new AdvertiserVisual());
         commandGet.put("/manager/list", new ManagerVisual());
+        commandGet.put(".jpeg", new SendJpeg());
 
         commandPost.put("/login", new Login());
         commandPost.put("/registration", new Registration());
@@ -42,10 +44,15 @@ public class CommandFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         if (servletRequest instanceof HttpServletRequest) {
             HttpServletRequest request = (HttpServletRequest) servletRequest;
-
             int begin = request.getContextPath().length();
             //int end = request.getRequestURI().lastIndexOf('.');
             String commandName = request.getRequestURI().substring(begin);
+            LOGGER.debug("Method: " + request.getMethod() + " Command name: " + commandName + " Request URI: " + request.getRequestURI());
+            if (commandName.endsWith(".jpeg")) {
+                request.setAttribute("imgURI", commandName);
+
+                commandName = ".jpeg";
+            }
             Command command = detectCommand(request, commandName);
             if (command != null) {
                 command.setName(commandName);
