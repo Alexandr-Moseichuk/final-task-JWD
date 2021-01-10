@@ -2,6 +2,7 @@ package by.moseichuk.final_task_JWD.controller.filter;
 
 import by.moseichuk.final_task_JWD.controller.Command;
 import by.moseichuk.final_task_JWD.controller.command.Login;
+import by.moseichuk.final_task_JWD.controller.command.Logout;
 import by.moseichuk.final_task_JWD.controller.command.Registration;
 import by.moseichuk.final_task_JWD.controller.command.SendJpeg;
 import by.moseichuk.final_task_JWD.controller.command.show.*;
@@ -23,6 +24,7 @@ public class CommandFilter implements Filter {
     static {
         commandGet.put("/", new IndexVisual());
         commandGet.put("/login", new LoginVisual());
+        commandGet.put("/logout", new Logout());
         commandGet.put("/campaign/list", new CampaignListVisual());
         commandGet.put("/registration", new RegistrationVisual());
         commandGet.put("/user/list", new UserVisual());

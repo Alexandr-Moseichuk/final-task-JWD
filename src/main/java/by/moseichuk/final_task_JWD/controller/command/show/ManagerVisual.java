@@ -12,10 +12,15 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 import java.util.List;
 
 public class ManagerVisual extends Command {
     private static final Logger LOGGER = LogManager.getLogger(ManagerVisual.class);
+
+    {
+        getPermissionSet().addAll(Arrays.asList(UserRole.values()));
+    }
 
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {

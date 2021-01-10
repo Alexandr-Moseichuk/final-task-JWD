@@ -68,7 +68,7 @@
                                     <c:out value="${menuItem.name}"/>
                                 </a>
                             </c:forEach>
-                            <a class="dropdown-item" href="<c:url value="/exit"/>">
+                            <a class="dropdown-item" href="<c:url value="/logout"/>">
                                 <fmt:message key="menu.dropdown.exit" bundle="${ rb }" />
                             </a>
                         </div>

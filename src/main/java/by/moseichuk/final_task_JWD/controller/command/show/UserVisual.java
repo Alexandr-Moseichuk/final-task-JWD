@@ -1,6 +1,7 @@
 package by.moseichuk.final_task_JWD.controller.command.show;
 
 import by.moseichuk.final_task_JWD.bean.User;
+import by.moseichuk.final_task_JWD.bean.UserRole;
 import by.moseichuk.final_task_JWD.controller.Command;
 import by.moseichuk.final_task_JWD.controller.Forward;
 import by.moseichuk.final_task_JWD.service.ServiceEnum;
@@ -15,6 +16,10 @@ import java.util.List;
 
 public class UserVisual extends Command {
     private static final Logger LOGGER = LogManager.getLogger(UserVisual.class);
+
+    {
+        getPermissionSet().add(UserRole.ADMINISTRATOR);
+    }
 
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
