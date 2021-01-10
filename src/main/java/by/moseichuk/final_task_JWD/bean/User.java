@@ -64,7 +64,7 @@ public  class User extends Entity {
                 "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
-                ", registrationDate=" + registrationDate +
+                ", registrationDate=" + registrationDate.getTime() +
                 ", status=" + status +
                 ", userInfo=" + userInfo +
                 '}';

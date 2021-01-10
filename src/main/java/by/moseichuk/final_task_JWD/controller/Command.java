@@ -30,4 +30,12 @@ public abstract class Command {
     }
 
     public abstract Forward execute(HttpServletRequest request, HttpServletResponse response);
+
+    @Override
+    public String toString() {
+        return "Command{" +
+                "permissionSet=" + permissionSet +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
