@@ -10,13 +10,6 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class ServiceFactoryImpl implements ServiceFactory {
-    private static Map<ServiceEnum, BaseService> serviceMap = new EnumMap<>(ServiceEnum.class);
-
-    static {
-        serviceMap.put(ServiceEnum.USER, new UserServiceImpl());
-        serviceMap.put(ServiceEnum.CAMPAIGN, new CampaignServiceImpl());
-    }
-
     private TransactionFactory transactionFactory;
 
     public ServiceFactoryImpl(TransactionFactory transactionFactory) {
@@ -25,9 +18,17 @@ public class ServiceFactoryImpl implements ServiceFactory {
 
     @Override
     public BaseService getService(ServiceEnum serviceType) {
-        BaseService baseService = serviceMap.get(serviceType);
-        baseService.setTransaction(transactionFactory.createTransaction());
-        return baseService;
+        BaseService service = null;
+        switch (serviceType) {
+            case CAMPAIGN:
+                service = new CampaignServiceImpl();
+                break;
+            case USER:
+                service = new UserServiceImpl();
+                break;
+        }
+        service.setTransaction(transactionFactory.createTransaction());
+        return service;
     }
 
     @Override
