@@ -24,6 +24,7 @@ public class Registration extends Command {
         String lastName = request.getParameter("lastName");
         String firstName = request.getParameter("firstName");
         String secondName = request.getParameter("secondName");
+        int role = Integer.parseInt(request.getParameter("userRole"));
         String description = request.getParameter("description");
         String phoneNumber = request.getParameter("phoneNumber");
         if (email.isEmpty() || password.isEmpty() || passwordCheck.isEmpty() || !password.equals(passwordCheck)) {
@@ -36,8 +37,8 @@ public class Registration extends Command {
         Calendar currentTime = new GregorianCalendar();
         currentTime.setTimeInMillis(System.currentTimeMillis());
         user.setRegistrationDate(currentTime);
-        user.setRole(UserRole.INFLUENCER);
-        user.setStatus(UserStatus.VERIFIED);
+        user.setRole(UserRole.values()[role]);
+        user.setStatus(UserStatus.UNVERIFIED);
         UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
         try {
             Integer userId = userService.create(user);

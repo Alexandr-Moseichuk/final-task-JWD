@@ -8,6 +8,7 @@ import by.moseichuk.final_task_JWD.controller.command.Registration;
 import by.moseichuk.final_task_JWD.controller.command.SendJpeg;
 import by.moseichuk.final_task_JWD.controller.command.show.IndexVisual;
 import by.moseichuk.final_task_JWD.controller.command.show.LoginVisual;
+import by.moseichuk.final_task_JWD.controller.command.show.RegistrationVisual;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,6 +32,7 @@ public class SecurityFilter implements Filter {
         publicCommands.add(Logout.class);
         publicCommands.add(LoginVisual.class);
         publicCommands.add(Registration.class);
+        publicCommands.add(RegistrationVisual.class);
         publicCommands.add(SendJpeg.class);
         publicCommands.add(IndexVisual.class);
     }
@@ -48,19 +50,22 @@ public class SecurityFilter implements Filter {
                 user = (User) session.getAttribute("authorizedUser");
             }
 
-            LOGGER.debug("Command: " + command);
+            LOGGER.debug("Command: " + command.getClass());
             LOGGER.debug("User: " + user);
 
             if (user == null) {
                 if (publicCommands.contains(command.getClass())) {
+                    LOGGER.debug("Public command...");
                     filterChain.doFilter(servletRequest, servletResponse);
                 } else {
+                    LOGGER.debug("User null. Permission denied...");
                     response.sendRedirect(request.getContextPath() + "/login");
                 }
             } else if (command.getPermissionSet().contains(user.getRole())) {
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
                 //TODO user rb
+                LOGGER.debug("У пользователя нет прав");
                 request.setAttribute("errorMessage", "Доступ запрещен");
                 //response.sendRedirect(servletRequest.getServletContext() + "/login");
             }
