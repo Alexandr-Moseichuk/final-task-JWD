@@ -59,7 +59,7 @@
             </div>
             <div class="col-md-12 position-relative">
                 <label for="userRole">Выберите роль:</label>
-                <select id="userRole" class="form-select" aria-label="Default select example">
+                <select id="userRole" name="userRole" class="form-select" aria-label="Default select example">
                     <option selected>Выберите роль</option>
                     <option value="1">Рекламодатель</option>
                     <option value="2">Инфлюенсер</option>
