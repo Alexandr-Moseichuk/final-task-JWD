@@ -1,6 +1,5 @@
 package by.moseichuk.final_task_JWD.controller.command.show;
 
-import by.moseichuk.final_task_JWD.bean.Influencer;
 import by.moseichuk.final_task_JWD.bean.User;
 import by.moseichuk.final_task_JWD.bean.UserRole;
 import by.moseichuk.final_task_JWD.controller.Command;
