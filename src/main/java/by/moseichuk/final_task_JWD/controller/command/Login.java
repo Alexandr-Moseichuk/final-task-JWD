@@ -30,8 +30,10 @@ public class Login extends Command {
                 if (user != null) {
                     request.getSession().setAttribute("authorizedUser", user);
                     request.getSession().setAttribute("menuList", buildMenu(user.getRole()));
+                    LOGGER.debug("Authorization success...");
                     return new Forward("/campaign/list", true);
                 } else {
+                    LOGGER.debug("Authorization failed...");
                     return new Forward("jsp/login.jsp");
                 }
             } catch (ServiceException e) {

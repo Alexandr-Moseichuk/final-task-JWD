@@ -64,10 +64,8 @@ public class SecurityFilter implements Filter {
             } else if (command.getPermissionSet().contains(user.getRole())) {
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
-                //TODO user rb
-                LOGGER.debug("У пользователя нет прав");
-                request.setAttribute("errorMessage", "Доступ запрещен");
-                //response.sendRedirect(servletRequest.getServletContext() + "/login");
+                LOGGER.debug("Permission denied...");
+                request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/permission_denied.jsp").forward(servletRequest, servletResponse);
             }
         }
     }
