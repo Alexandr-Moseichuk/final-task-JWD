@@ -11,7 +11,7 @@ INSERT INTO `user` (
 (
     2,
     'user2@mail.ru',
-	'EE11CBB19052E40B07AAC0CA060C23EE', /* MD5 хэш пароля "user" */
+	'$2a$10$Pcd8gRBzuTBwqMUVGbU.1.OSdF55WLZ41QnomOtHr2V7RSNaOuBmG', /* MD5 хэш пароля "user" */
 	1,
     '2020-12-07 12:00:00',
 	2
@@ -19,35 +19,35 @@ INSERT INTO `user` (
 (
     3,
     'user3@mail.ru',
-    'EE11CBB19052E40B07AAC0CA060C23EE', /* MD5 хэш пароля "user" */
+    '$2a$10$Pcd8gRBzuTBwqMUVGbU.1.OSdF55WLZ41QnomOtHr2V7RSNaOuBmG', /* хэш пароля "user" */
     1,
     '2020-12-07 12:00:00',
     2
 ),
 (4,
     'user4@mail.ru',
-    'EE11CBB19052E40B07AAC0CA060C23EE', /* MD5 хэш пароля "user" */
+    '$2a$10$Pcd8gRBzuTBwqMUVGbU.1.OSdF55WLZ41QnomOtHr2V7RSNaOuBmG', /* хэш пароля "user" */
     1,
     '2020-12-07 12:00:00',
     2
 ),
 (5,
     'user5@mail.ru',
-    'EE11CBB19052E40B07AAC0CA060C23EE', /* MD5 хэш пароля "user" */
+    '$2a$10$Pcd8gRBzuTBwqMUVGbU.1.OSdF55WLZ41QnomOtHr2V7RSNaOuBmG', /* хэш пароля "user" */
     1,
     '2020-12-07 12:00:00',
     2
 ),
 (6,
     'user6@mail.ru',
-    'EE11CBB19052E40B07AAC0CA060C23EE', /* MD5 хэш пароля "user" */
+    '$2a$10$Pcd8gRBzuTBwqMUVGbU.1.OSdF55WLZ41QnomOtHr2V7RSNaOuBmG', /* хэш пароля "user" */
     1,
     '2020-12-07 12:00:00',
     2
 ),
 (7,
     'user7@mail.ru',
-    'EE11CBB19052E40B07AAC0CA060C23EE', /* MD5 хэш пароля "user" */
+    '$2a$10$Pcd8gRBzuTBwqMUVGbU.1.OSdF55WLZ41QnomOtHr2V7RSNaOuBmG', /* хэш пароля "user" */
     1,
     '2020-12-07 12:00:00',
     2
