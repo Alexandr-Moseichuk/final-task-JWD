@@ -31,5 +31,6 @@
 
     </c:forEach>
 
+    <c:import url="/WEB-INF/jsp/footer.jsp"/>
 </body>
 </html>
