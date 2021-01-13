@@ -53,9 +53,6 @@ public class HelloServlet extends HttpServlet {
     private void executeRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             LOGGER.debug("Method: " + request.getMethod() + " Request URI: " + request.getRequestURI());
-            Cookie cookie = new Cookie("language", "en_US");
-            cookie.setMaxAge(3600);
-            response.addCookie(cookie);
             Command command = (Command) request.getAttribute("command");
             CommandManger commandManger = CommandManagerFactory.getInstance().getManager();
             Forward forward = commandManger.execute(command, request, response);

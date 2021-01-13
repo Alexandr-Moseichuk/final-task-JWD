@@ -1,10 +1,8 @@
 package by.moseichuk.final_task_JWD.controller.filter;
 
 import by.moseichuk.final_task_JWD.controller.Command;
-import by.moseichuk.final_task_JWD.controller.command.Login;
-import by.moseichuk.final_task_JWD.controller.command.Logout;
+import by.moseichuk.final_task_JWD.controller.command.*;
 import by.moseichuk.final_task_JWD.controller.command.Registration;
-import by.moseichuk.final_task_JWD.controller.command.SendJpeg;
 import by.moseichuk.final_task_JWD.controller.command.show.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,6 +30,7 @@ public class CommandFilter implements Filter {
         commandGet.put("/advertiser/list", new AdvertiserVisual());
         commandGet.put("/manager/list", new ManagerVisual());
         commandGet.put(".jpeg", new SendJpeg());
+        commandGet.put("/lang", new Lang());
 
         commandPost.put("/login", new Login());
         commandPost.put("/registration", new Registration());
