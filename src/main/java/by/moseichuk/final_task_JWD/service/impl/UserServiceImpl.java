@@ -12,24 +12,28 @@ import by.moseichuk.final_task_JWD.dao.exception.DaoException;
 import by.moseichuk.final_task_JWD.service.BaseService;
 import by.moseichuk.final_task_JWD.service.UserService;
 import by.moseichuk.final_task_JWD.service.exception.ServiceException;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.List;
 
 public class UserServiceImpl extends BaseService implements UserService {
+
     @Override
     public User login(String mail, String password) throws ServiceException {
         try {
             UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
             UserInfoDao userInfoDao = (UserInfoDao) transaction.getDao(DaoEnum.USER_INFO);
-            User user = userDao.login(mail, md5(password));
-            if (user != null) {
+            User user = userDao.readByEmail(mail);
+            if (user != null && BCrypt.checkpw(password, user.getPassword())) {
                 user.setUserInfo(userInfoDao.read(user.getId()));
+                return user;
+            } else {
+                return null;
             }
-            return user;
+
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -80,25 +84,6 @@ public class UserServiceImpl extends BaseService implements UserService {
             return userList;
         } catch (DaoException e) {
             throw new ServiceException(e);
-        }
-    }
-
-    private String md5(String password) {
-        MessageDigest digest;
-        try {
-            digest = MessageDigest.getInstance("md5");
-            digest.reset();
-            digest.update(password.getBytes());
-            byte hash[] = digest.digest();
-            Formatter formatter = new Formatter();
-            for(int i = 0; i < hash.length; i++) {
-                formatter.format("%02X", hash[i]);
-            }
-            String md5summ = formatter.toString();
-            formatter.close();
-            return md5summ;
-        } catch(NoSuchAlgorithmException e) {
-            return null;
         }
     }
 }

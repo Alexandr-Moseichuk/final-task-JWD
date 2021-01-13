@@ -8,7 +8,7 @@ INSERT INTO `user` (`id`,
                     `status`)
 VALUES (1,
         'admin@mail.ru',
-        '21232F297A57A5A743894A0E4A801FC3', /* MD5 хэш пароля "admin" */
+        '$2a$10$3MjeX6zc3P1oDZj7fXS/eeLZXFW9gbtuCjg0QH0E13l6i7x3Xd5C6', /*хэш пароля "admin" */
         0,
         '2020-12-07 12:00:00' ,
         1);

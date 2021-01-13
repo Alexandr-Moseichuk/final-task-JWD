@@ -18,7 +18,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     private static final String READ_ALL = "SELECT * FROM `user`";
 
     private static final String READ_CAMPAIGN_IDS = "SELECT `campaign_id` FROM `user_campaign` WHERE `user_id` = ?";
-    private static final String LOGIN = "SELECT `id`, `role`, `registration_date`, `status` FROM `user` WHERE `mail` = ? AND `password` = ?";
+    private static final String LOGIN = "SELECT `id`, `password`, `role`, `registration_date`, `status` FROM `user` WHERE `mail` = ?";
     private static final String READ_USERS_BY_ROLE = "SELECT `id`, `mail`, `registration_date`, `status` FROM `user` WHERE `role` = ?";
 
     @Override
@@ -134,17 +134,16 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     }
 
     @Override
-    public User login(String mail, String password) throws DaoException {
+    public User readByEmail(String mail) throws DaoException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(LOGIN)) {
             preparedStatement.setString(1, mail);
-            preparedStatement.setString(2, password);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getInt("id"));
                 user.setEmail(mail);
-                user.setPassword(password);
+                user.setPassword(resultSet.getString("password"));
                 user.setRole(UserRole.values()[resultSet.getInt("role")]);
                 user.setRegistrationDate(parseDate(resultSet.getDate("registration_date")));
                 user.setStatus(UserStatus.values()[resultSet.getInt("status")]);

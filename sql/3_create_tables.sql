@@ -4,7 +4,7 @@ CREATE TABLE `user`
 (
     `id`       INTEGER      NOT NULL AUTO_INCREMENT,
     `mail`     varchar(255) NOT NULL UNIQUE,
-    `password` CHAR(32)     NOT NULL,
+    `password` CHAR(60)     NOT NULL,
     /*
      * 0 - администратор (Role.ADMINISTRATOR)
      * 1 - рекламодатель (Role.ADVERTISER)

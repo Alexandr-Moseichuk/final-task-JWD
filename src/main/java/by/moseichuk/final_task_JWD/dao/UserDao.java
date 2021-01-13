@@ -10,7 +10,7 @@ public interface UserDao extends Dao<User> {
     
     List<Integer> readCampaignIds(Integer userId) throws DaoException;
 
-    User login(String mail, String password) throws DaoException;
+    User readByEmail(String email) throws DaoException;
 
     List<User> readUsersByRole(UserRole userRole) throws DaoException;
 

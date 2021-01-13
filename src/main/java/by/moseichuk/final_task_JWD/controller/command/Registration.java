@@ -8,6 +8,7 @@ import by.moseichuk.final_task_JWD.service.UserService;
 import by.moseichuk.final_task_JWD.service.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,7 +38,7 @@ public class Registration extends Command {
 
         User user = new User();
         user.setEmail(email);
-        user.setPassword(md5(password));
+        user.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
         Calendar currentTime = new GregorianCalendar();
         currentTime.setTimeInMillis(System.currentTimeMillis());
         user.setRegistrationDate(currentTime);
@@ -67,24 +68,5 @@ public class Registration extends Command {
             return new Forward("jsp/error.jsp");
         }
 
-    }
-
-    private String md5(String password) {
-        MessageDigest digest;
-        try {
-            digest = MessageDigest.getInstance("md5");
-            digest.reset();
-            digest.update(password.getBytes());
-            byte hash[] = digest.digest();
-            Formatter formatter = new Formatter();
-            for(int i = 0; i < hash.length; i++) {
-                formatter.format("%02X", hash[i]);
-            }
-            String md5summ = formatter.toString();
-            formatter.close();
-            return md5summ;
-        } catch(NoSuchAlgorithmException e) {
-            return null;
-        }
     }
 }
