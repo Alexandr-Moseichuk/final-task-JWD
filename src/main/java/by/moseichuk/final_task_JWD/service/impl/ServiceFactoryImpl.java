@@ -26,6 +26,9 @@ public class ServiceFactoryImpl implements ServiceFactory {
             case USER:
                 service = new UserServiceImpl();
                 break;
+            case REGISTRATION_APPLICATION:
+                service = new RegistrationApplicationServiceImpl();
+                break;
         }
         service.setTransaction(transactionFactory.createTransaction());
         return service;

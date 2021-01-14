@@ -2,11 +2,29 @@ package by.moseichuk.final_task_JWD.bean;
 
 import java.util.Calendar;
 
-public class RegistrationApplication extends User {
+public class RegistrationApplication {
+    private Integer userId;
+    private User user;
     private String comment;
     private Calendar date;
 
     public RegistrationApplication() {
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getComment() {
@@ -28,7 +46,9 @@ public class RegistrationApplication extends User {
     @Override
     public String toString() {
         return "RegistrationApplication{" +
-                "comment='" + comment + '\'' +
+                "userId=" + userId +
+                ", user=" + user +
+                ", comment='" + comment + '\'' +
                 ", date=" + date +
                 '}';
     }

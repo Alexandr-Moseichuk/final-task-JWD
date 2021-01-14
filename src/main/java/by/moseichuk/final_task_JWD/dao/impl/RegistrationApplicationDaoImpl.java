@@ -85,6 +85,7 @@ public class RegistrationApplicationDaoImpl extends BaseDao implements Registrat
             while (resultSet.next()) {
                 RegistrationApplication application = new RegistrationApplication();
 
+                application.setUserId(resultSet.getInt("user_id"));
                 application.setComment(resultSet.getString("comment"));
                 application.setDate(parseDate(resultSet.getDate("date")));
 
