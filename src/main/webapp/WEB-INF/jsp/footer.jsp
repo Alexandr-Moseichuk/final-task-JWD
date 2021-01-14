@@ -13,17 +13,16 @@
 </head>
 <body>
 <c:set var="previousPage" value="${pageContext.request.requestURI}" scope="session"/>
-<c:out value="${pageContext.request.requestURI}"/>
-<div class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
-        <div class="collapse navbar-collapse" id="footerNavbar">
+<div class="container-fluid bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light rounded">
+        <div class="container" id="footerNavbar">
             <ul class="navbar-nav mr-auto">
-                <li>
+                <li class="nav-item">
                     <a href="<c:url value='/lang?loc=en_US'/>">
                         <span class="flag-icon flag-icon-us"></span>
                     </a>
                 </li>
-                <li>
+                <li class="nav-item">
                     <a href="<c:url value='/lang?loc=ru_RU'/>">
                         <span class="flag-icon flag-icon-ru"></span>
                     </a>
