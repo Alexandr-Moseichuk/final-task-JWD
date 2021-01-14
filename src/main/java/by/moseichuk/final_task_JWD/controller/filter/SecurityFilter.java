@@ -1,6 +1,7 @@
 package by.moseichuk.final_task_JWD.controller.filter;
 
 import by.moseichuk.final_task_JWD.bean.User;
+import by.moseichuk.final_task_JWD.bean.UserStatus;
 import by.moseichuk.final_task_JWD.controller.Command;
 import by.moseichuk.final_task_JWD.controller.command.Login;
 import by.moseichuk.final_task_JWD.controller.command.Logout;
@@ -53,14 +54,15 @@ public class SecurityFilter implements Filter {
             LOGGER.debug("Command: " + command.getClass());
             LOGGER.debug("User: " + user);
 
-            if (user == null) {
-                if (publicCommands.contains(command.getClass())) {
-                    LOGGER.debug("Public command...");
-                    filterChain.doFilter(servletRequest, servletResponse);
-                } else {
-                    LOGGER.debug("User null. Permission denied...");
-                    response.sendRedirect(request.getContextPath() + "/login");
-                }
+            if (publicCommands.contains(command.getClass())) {
+                LOGGER.debug("Public command...");
+                filterChain.doFilter(servletRequest, servletResponse);
+            } else if (user == null) {
+                LOGGER.debug("User null. Permission denied...");
+                response.sendRedirect(request.getContextPath() + "/login");
+            } else if (user.getStatus() != UserStatus.VERIFIED) {
+                LOGGER.debug("User not verified...");
+                request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/permission_denied.jsp").forward(servletRequest, servletResponse);
             } else if (command.getPermissionSet().contains(user.getRole())) {
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
