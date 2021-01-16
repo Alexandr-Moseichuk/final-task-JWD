@@ -36,7 +36,7 @@ public class CommandFilter implements Filter {
 
         commandPost.put("/login", new Login());
         commandPost.put("/registration", new Registration());
-        commandPost.put("registration_application/action", new RegistrationApplicationListAction());
+        commandPost.put("/registration_application/action", new RegistrationApplicationListAction());
     }
 
     @Override

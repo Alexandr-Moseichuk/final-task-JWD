@@ -11,37 +11,45 @@
 <c:import url="/WEB-INF/jsp/menu.jsp"/>
 <h3><fmt:message key="application.list.label.title" bundle="${rb}" /></h3>
 <div class="container">
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th></th>
-            <th><fmt:message key="application.list.table.header.id" bundle="${rb}" /></th>
-            <th><fmt:message key="application.list.table.header.email" bundle="${rb}" /></th>
-            <th><fmt:message key="application.list.table.header.role" bundle="${rb}" /></th>
-            <th><fmt:message key="application.list.table.header.comment" bundle="${rb}" /></th>
-            <th><fmt:message key="application.list.table.header.date" bundle="${rb}" /></th>
-            <th><fmt:message key="application.list.table.header.user_info" bundle="${rb}" /></th>
-        </tr>
-        </thead>
-        <tbody>
-        <jsp:useBean id="applicationList" scope="request" type="java.util.List"/>
-        <c:forEach var="application" items="${applicationList}">
+    <form action="action.html" method="post">
+        <button type="submit" name="action" value="approve" class="btn btn-outline-success">
+            <fmt:message key="application.list.table.button.approve" bundle="${rb}" />
+        </button>
+        <button type="submit" name="action" value="reject" class="btn btn-outline-danger">
+            <fmt:message key="application.list.table.button.reject" bundle="${rb}" />
+        </button>
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <td><div class="form-check">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" value="">
-                    </label>
-                </div></td>
-                <td><c:out value="${application.userId}"/></td>
-                <td><c:out value="${application.user.email}"/></td>
-                <td><c:out value="${application.user.role}"/></td>
-                <td><c:out value="${application.comment}"/></td>
-                <td><c:out value="${application.date.time}"/></td>
-                <td><c:out value="Тут должна быть ссылка на профиль"/></td>
+                <th></th>
+                <th><fmt:message key="application.list.table.header.id" bundle="${rb}" /></th>
+                <th><fmt:message key="application.list.table.header.email" bundle="${rb}" /></th>
+                <th><fmt:message key="application.list.table.header.role" bundle="${rb}" /></th>
+                <th><fmt:message key="application.list.table.header.comment" bundle="${rb}" /></th>
+                <th><fmt:message key="application.list.table.header.date" bundle="${rb}" /></th>
+                <th><fmt:message key="application.list.table.header.user_info" bundle="${rb}" /></th>
             </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            <jsp:useBean id="applicationList" scope="request" type="java.util.List"/>
+            <c:forEach var="application" items="${applicationList}">
+                <tr>
+                    <td><div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="selected" value="${application.user.id}">
+                        </label>
+                    </div></td>
+                    <td><c:out value="${application.userId}"/></td>
+                    <td><c:out value="${application.user.email}"/></td>
+                    <td><c:out value="${application.user.role}"/></td>
+                    <td><c:out value="${application.comment}"/></td>
+                    <td><c:out value="${application.date.time}"/></td>
+                    <td><c:out value="Тут должна быть ссылка на профиль"/></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </form>
 </div>
 </body>
 </html>

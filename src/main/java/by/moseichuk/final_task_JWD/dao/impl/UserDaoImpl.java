@@ -20,6 +20,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     private static final String READ_CAMPAIGN_IDS = "SELECT `campaign_id` FROM `user_campaign` WHERE `user_id` = ?";
     private static final String LOGIN = "SELECT `id`, `password`, `role`, `registration_date`, `status` FROM `user` WHERE `mail` = ?";
     private static final String READ_USERS_BY_ROLE = "SELECT `id`, `mail`, `registration_date`, `status` FROM `user` WHERE `role` = ?";
+    private static final String UPDATE_STATUS = "UPDATE `user` SET `status` = ? WHERE `id` = ?";
 
     @Override
     public Integer create(User user) throws DaoException {
@@ -175,6 +176,20 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             return userList;
         } catch (SQLException e) {
             throw new DaoException("Can't READ users by role", e);
+        }
+    }
+
+    @Override
+    public void updateStatus(List<Integer> idList, UserStatus userStatus) throws DaoException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_STATUS)) {
+            for (Integer id : idList) {
+                preparedStatement.setInt(1, userStatus.ordinal());
+                preparedStatement.setInt(2, id);
+                preparedStatement.addBatch();
+            }
+            preparedStatement.executeBatch();
+        } catch (SQLException e) {
+            throw new DaoException("Can't UPDATE user status", e);
         }
     }
 

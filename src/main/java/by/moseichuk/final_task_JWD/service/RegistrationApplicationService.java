@@ -8,4 +8,8 @@ import java.util.List;
 public interface RegistrationApplicationService {
 
     List<RegistrationApplication> readAll() throws ServiceException;
+
+    void approveByIds(List<Integer> idList) throws ServiceException;
+
+    void rejectByIds(List<Integer> idList) throws ServiceException;
 }

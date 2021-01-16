@@ -22,6 +22,8 @@ public class Login extends Command {
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
         String mail = request.getParameter("email");
         String password = request.getParameter("password");
+        LOGGER.debug(mail);
+        LOGGER.debug(password);
         if (mail != null && password != null) {
             UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
             try {

@@ -1,6 +1,7 @@
 package by.moseichuk.final_task_JWD.service.impl;
 
 import by.moseichuk.final_task_JWD.bean.RegistrationApplication;
+import by.moseichuk.final_task_JWD.bean.UserStatus;
 import by.moseichuk.final_task_JWD.dao.DaoEnum;
 import by.moseichuk.final_task_JWD.dao.RegistrationApplicationDao;
 import by.moseichuk.final_task_JWD.dao.UserDao;
@@ -22,6 +23,28 @@ public class RegistrationApplicationServiceImpl extends BaseService implements R
                 application.setUser(userDao.read(application.getUserId()));
             }
             return applicationList;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void approveByIds(List<Integer> idList) throws ServiceException {
+        UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
+
+        try {
+            userDao.updateStatus(idList, UserStatus.VERIFIED);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void rejectByIds(List<Integer> idList) throws ServiceException {
+        UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
+
+        try {
+            userDao.updateStatus(idList, UserStatus.ARCHIVE);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
