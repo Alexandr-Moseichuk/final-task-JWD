@@ -4,6 +4,7 @@ import by.moseichuk.final_task_JWD.controller.Command;
 import by.moseichuk.final_task_JWD.controller.command.*;
 import by.moseichuk.final_task_JWD.controller.command.Registration;
 import by.moseichuk.final_task_JWD.controller.command.admin.RegistrationApplicationList;
+import by.moseichuk.final_task_JWD.controller.command.admin.RegistrationApplicationListAction;
 import by.moseichuk.final_task_JWD.controller.command.show.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,6 +36,7 @@ public class CommandFilter implements Filter {
 
         commandPost.put("/login", new Login());
         commandPost.put("/registration", new Registration());
+        commandPost.put("registration_application/action", new RegistrationApplicationListAction());
     }
 
     @Override
@@ -48,7 +50,12 @@ public class CommandFilter implements Filter {
             HttpServletRequest request = (HttpServletRequest) servletRequest;
             int begin = request.getContextPath().length();
             int end = request.getRequestURI().lastIndexOf('.');
-            String commandName = request.getRequestURI().substring(begin, end);
+            String commandName;
+            if (end > begin) {
+                commandName = request.getRequestURI().substring(begin, end);
+            } else {
+                commandName = request.getRequestURI().substring(begin);
+            }
             LOGGER.debug("Method: " + request.getMethod() + " Command name: " + commandName + " Request URI: " + request.getRequestURI());
             Command command = detectCommand(request, commandName);
             if (command != null) {
