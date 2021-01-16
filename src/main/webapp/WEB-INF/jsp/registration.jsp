@@ -19,7 +19,7 @@
 <%--<div class="container pt-3 my-3 border col-4">--%>
     <div class="container p-3 my-3 border bg-white shadow-sm">
         <h4 class="text-center"><fmt:message key="registation.title" bundle="${rb}" /></h4>
-        <form action="registration" class="row g-2 needs-validation" novalidate method="post">
+        <form action="registration.html" class="row g-2 needs-validation" novalidate method="post">
             <div class="col-md-12 position-relative">
                 <label for="email">Email:</label>
                 <input type="text" class="form-control" id="email" placeholder="Enter email" name="email" required>

@@ -14,7 +14,6 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class Login extends Command {
     private static final Logger LOGGER = LogManager.getLogger(Login.class);
@@ -51,19 +50,19 @@ public class Login extends Command {
 
         switch (userRole) {
             case ADMINISTRATOR:
-                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.reg_applications"),"/registration_application/list"));
-                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.users"), "/user/list"));
+                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.reg_applications"),"/registration_application/list.html"));
+                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.users"), "/user/list.html"));
                 return menuItemList;
             case ADVERTISER:
-                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.campaigns"), "/advertiser/campaign/list"));
+                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.campaigns"), "/advertiser/campaign/list.html"));
                 return menuItemList;
             case INFLUENCER:
-                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.campaigns"), "/influencer/campaign/list"));
-                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.manager"), "influencer/manager"));
+                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.campaigns"), "/influencer/campaign/list.html"));
+                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.manager"), "influencer/manager.html"));
                 return menuItemList;
             case MANAGER:
-                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.campaigns"), "/manager/campaign/list"));
-                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.influencers"), "/manager/influencer/list"));
+                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.campaigns"), "/manager/campaign/list.html"));
+                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.influencers"), "/manager/influencer/list.html"));
                 return menuItemList;
             default:
                 return menuItemList;

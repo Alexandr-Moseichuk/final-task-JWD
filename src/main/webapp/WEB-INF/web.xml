@@ -15,7 +15,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>DispatcherServlet</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>*.html</url-pattern>
     </servlet-mapping>
     <filter>
         <filter-name>EncodingFilter</filter-name>
@@ -23,7 +23,7 @@
     </filter>
     <filter-mapping>
         <filter-name>EncodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>*.html</url-pattern>
     </filter-mapping>
     <filter>
         <filter-name>CommandFilter</filter-name>
@@ -31,7 +31,7 @@
     </filter>
     <filter-mapping>
         <filter-name>CommandFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>*.html</url-pattern>
     </filter-mapping>
     <filter>
         <filter-name>SecurityFilter</filter-name>
@@ -39,7 +39,7 @@
     </filter>
     <filter-mapping>
         <filter-name>SecurityFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>*.html</url-pattern>
     </filter-mapping>
     <error-page>
         <location>/WEB-INF/jsp/error.jsp</location>

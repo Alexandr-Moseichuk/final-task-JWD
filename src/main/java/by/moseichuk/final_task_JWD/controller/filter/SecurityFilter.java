@@ -6,7 +6,6 @@ import by.moseichuk.final_task_JWD.controller.Command;
 import by.moseichuk.final_task_JWD.controller.command.Login;
 import by.moseichuk.final_task_JWD.controller.command.Logout;
 import by.moseichuk.final_task_JWD.controller.command.Registration;
-import by.moseichuk.final_task_JWD.controller.command.SendJpeg;
 import by.moseichuk.final_task_JWD.controller.command.show.IndexVisual;
 import by.moseichuk.final_task_JWD.controller.command.show.LoginVisual;
 import by.moseichuk.final_task_JWD.controller.command.show.RegistrationVisual;
@@ -20,7 +19,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class SecurityFilter implements Filter {
     private static final Logger LOGGER = LogManager.getLogger(SecurityFilter.class);
@@ -34,7 +32,6 @@ public class SecurityFilter implements Filter {
         publicCommands.add(LoginVisual.class);
         publicCommands.add(Registration.class);
         publicCommands.add(RegistrationVisual.class);
-        publicCommands.add(SendJpeg.class);
         publicCommands.add(IndexVisual.class);
     }
 
@@ -59,7 +56,7 @@ public class SecurityFilter implements Filter {
                 filterChain.doFilter(servletRequest, servletResponse);
             } else if (user == null) {
                 LOGGER.debug("User null. Permission denied...");
-                response.sendRedirect(request.getContextPath() + "/login");
+                response.sendRedirect(request.getContextPath() + "/login.html");
             } else if (user.getStatus() != UserStatus.VERIFIED) {
                 LOGGER.debug("User not verified...");
                 request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/permission_denied.jsp").forward(servletRequest, servletResponse);

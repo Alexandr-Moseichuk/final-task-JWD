@@ -30,22 +30,22 @@
             <div class="container justify-content-center">
                 <ul class="navbar-nav text-nowrap">
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/campaign/list"/>">
+                        <a class="nav-link" href="<c:url value="/campaign/list.html"/>">
                             <fmt:message key="menu.campaings" bundle="${ rb }" />
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/influencer/list"/>">
+                        <a class="nav-link" href="<c:url value="/influencer/list.html"/>">
                             <fmt:message key="menu.influencers" bundle="${ rb }" />
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/manager/list"/>">
+                        <a class="nav-link" href="<c:url value="/manager/list.html"/>">
                             <fmt:message key="menu.managers" bundle="${ rb }" />
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/advertiser/list"/>">
+                        <a class="nav-link" href="<c:url value="/advertiser/list.html"/>">
                             <fmt:message key="menu.advertisers" bundle="${ rb }" />
                         </a>
                     </li>
@@ -60,7 +60,7 @@
                             <c:out value="${authorizedUser.userInfo.lastName} ${authorizedUser.userInfo.firstName}"/>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="<c:url value="/user/profile"/>">
+                            <a class="dropdown-item" href="<c:url value="/user/profile.html"/>">
                                 <fmt:message key="menu.dropdown.profile" bundle="${ rb }" />
                             </a>
                             <c:forEach var="menuItem" items="${menuList}">
@@ -68,7 +68,7 @@
                                     <c:out value="${menuItem.name}"/>
                                 </a>
                             </c:forEach>
-                            <a class="dropdown-item" href="<c:url value="/logout"/>">
+                            <a class="dropdown-item" href="<c:url value="/logout.html"/>">
                                 <fmt:message key="menu.dropdown.exit" bundle="${ rb }" />
                             </a>
                         </div>

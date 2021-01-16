@@ -30,7 +30,6 @@ public class CommandFilter implements Filter {
         commandGet.put("/influencer/list", new InfluencerVisual());
         commandGet.put("/advertiser/list", new AdvertiserVisual());
         commandGet.put("/manager/list", new ManagerVisual());
-        commandGet.put(".jpeg", new SendJpeg());
         commandGet.put("/lang", new Lang());
         commandGet.put("/registration_application/list", new RegistrationApplicationList());
 
@@ -48,14 +47,9 @@ public class CommandFilter implements Filter {
         if (servletRequest instanceof HttpServletRequest) {
             HttpServletRequest request = (HttpServletRequest) servletRequest;
             int begin = request.getContextPath().length();
-            //int end = request.getRequestURI().lastIndexOf('.');
-            String commandName = request.getRequestURI().substring(begin);
+            int end = request.getRequestURI().lastIndexOf('.');
+            String commandName = request.getRequestURI().substring(begin, end);
             LOGGER.debug("Method: " + request.getMethod() + " Command name: " + commandName + " Request URI: " + request.getRequestURI());
-            if (commandName.endsWith(".jpeg")) {
-                request.setAttribute("imgURI", commandName);
-
-                commandName = ".jpeg";
-            }
             Command command = detectCommand(request, commandName);
             if (command != null) {
                 command.setName(commandName);

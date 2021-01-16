@@ -15,7 +15,7 @@
     <title><fmt:message key="login_form.title" bundle="${rb}" /></title>
 </head>
 <body>
-<form action="login" method="post">
+<form action="login.html" method="post">
     <div class="form-group">
         <%--            <label for="email">Email:</label>--%>
         <input type="email" class="form-control" placeholder="Email" id="email" name="email">
@@ -30,7 +30,7 @@
         </label>
     </div>
     <button type="submit" class="btn btn-primary"><fmt:message key="login_form.button.login" bundle="${rb}" /></button>
-    <a href=<c:url value="/registration"/>>
+    <a href="<c:url value='/registration.html'/>">
         <fmt:message key="login_form.label.registration" bundle="${rb}" />
     </a>
 </form>
