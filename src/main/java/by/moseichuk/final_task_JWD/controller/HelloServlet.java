@@ -52,7 +52,6 @@ public class HelloServlet extends HttpServlet {
 
     private void executeRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            LOGGER.debug("Method: " + request.getMethod() + " Request URI: " + request.getRequestURI());
             Command command = (Command) request.getAttribute("command");
             CommandManger commandManger = CommandManagerFactory.getInstance().getManager();
             Forward forward = commandManger.execute(command, request, response);
