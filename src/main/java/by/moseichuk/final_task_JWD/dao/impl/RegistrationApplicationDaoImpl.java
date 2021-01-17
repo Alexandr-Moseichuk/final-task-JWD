@@ -11,7 +11,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class RegistrationApplicationDaoImpl extends BaseDao implements RegistrationApplicationDao {
-    private static final String CREATE = "INSERT INTO `registration_application` (`comment`, `date`) VALUES(?, ?)";
+    private static final String CREATE = "INSERT INTO `registration_application` (`user_id`, `comment`, `date`) VALUES(?, ?, ?)";
     private static final String READ   = "SELECT `comment`, `date` FROM `registration_application` WHERE `id` = ?";
     private static final String UPDATE = "UPDATE `registration_application` SET `comment` = ?, `date` = ? WHERE `id` = ?";
     private static final String DELETE = "DELETE FROM `registration_application` WHERE `id` = ?";
@@ -20,16 +20,12 @@ public class RegistrationApplicationDaoImpl extends BaseDao implements Registrat
     @Override
     public Integer create(RegistrationApplication application) throws DaoException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setString(1, application.getComment());
-            preparedStatement.setDate(2, new Date(application.getDate().getTimeInMillis()));
+            preparedStatement.setInt(1, application.getUserId());
+            preparedStatement.setString(2, application.getComment());
+            preparedStatement.setDate(3, new Date(application.getDate().getTimeInMillis()));
             preparedStatement.executeUpdate();
 
-            ResultSet resultSet = preparedStatement.getGeneratedKeys();
-            if (resultSet.next()) {
-                return resultSet.getInt(1);
-            } else {
-                throw new DaoException("Can't get application ID");
-            }
+           return application.getUserId();
         } catch (SQLException e) {
             throw new DaoException(e);
         }

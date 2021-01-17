@@ -13,6 +13,17 @@ import by.moseichuk.final_task_JWD.service.exception.ServiceException;
 import java.util.List;
 
 public class RegistrationApplicationServiceImpl extends BaseService implements RegistrationApplicationService {
+
+    @Override
+    public void add(RegistrationApplication registrationApplication) throws ServiceException {
+        RegistrationApplicationDao applicationDao = (RegistrationApplicationDao) transaction.getDao(DaoEnum.REGISTRATION_APPLICATION);
+        try {
+            applicationDao.create(registrationApplication);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
     @Override
     public List<RegistrationApplication> readAll() throws ServiceException {
         RegistrationApplicationDao regDao = (RegistrationApplicationDao) transaction.getDao(DaoEnum.REGISTRATION_APPLICATION);

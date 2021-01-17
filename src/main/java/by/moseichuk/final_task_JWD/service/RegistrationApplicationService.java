@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface RegistrationApplicationService {
 
+    void add(RegistrationApplication registrationApplication) throws ServiceException;
+
     List<RegistrationApplication> readAll() throws ServiceException;
 
     void approveByIds(List<Integer> idList) throws ServiceException;
