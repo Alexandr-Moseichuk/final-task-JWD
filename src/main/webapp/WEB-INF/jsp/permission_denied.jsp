@@ -14,5 +14,7 @@
 <body>
 Доступ запрещен
 <a href="<c:url value='/' />">На главную</a>
+<a href="<c:url value='/logout.html'/>" >Выйти</a>
+
 </body>
 </html>
