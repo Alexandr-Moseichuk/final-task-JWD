@@ -25,6 +25,9 @@
                 <input type="text" class="form-control" id="email" placeholder="Enter email" name="email" required>
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Please fill out this field.</div>
+                <div class="container">
+                    <p class="text-danger"><c:out value="${emailError}"/></p>
+                </div>
             </div>
 
             <div class="col-md-6 position-relative">
@@ -32,12 +35,18 @@
                 <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Please fill out this field.</div>
+                <div class="container">
+                    <p class="text-danger"><c:out value="${passwordError}"/></p>
+                </div>
             </div>
             <div class="col-md-6 position-relative">
                 <label for="passwordCheck">Password check:</label>
                 <input type="password" class="form-control" id="passwordCheck" placeholder="Enter password check" name="passwordCheck" required>
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Please fill out this field.</div>
+                <div class="container">
+                    <p class="text-danger"><c:out value="${passwordCheckError}"/></p>
+                </div>
             </div>
             <div class="col-md-12 position-relative">
                 <label for="lastName">Last name:</label>
@@ -60,8 +69,7 @@
             <div class="col-md-12 position-relative">
                 <label for="userRole">Выберите роль:</label>
                 <select id="userRole" name="userRole" class="form-select" aria-label="Default select example">
-                    <option selected>Выберите роль</option>
-                    <option value="1">Рекламодатель</option>
+                    <option selected value="1">Рекламодатель</option>
                     <option value="2">Инфлюенсер</option>
                     <option value="3">Менеджер</option>
                 </select>
