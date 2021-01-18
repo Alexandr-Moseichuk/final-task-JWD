@@ -21,6 +21,6 @@ public class Logout extends Command {
         if (session != null) {
             session.invalidate();
         }
-        return new Forward("/login", true);
+        return new Forward("/", true);
     }
 }

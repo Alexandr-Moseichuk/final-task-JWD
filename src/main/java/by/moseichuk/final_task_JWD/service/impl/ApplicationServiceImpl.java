@@ -1,36 +1,36 @@
 package by.moseichuk.final_task_JWD.service.impl;
 
-import by.moseichuk.final_task_JWD.bean.RegistrationApplication;
+import by.moseichuk.final_task_JWD.bean.Application;
 import by.moseichuk.final_task_JWD.bean.UserStatus;
 import by.moseichuk.final_task_JWD.dao.DaoEnum;
-import by.moseichuk.final_task_JWD.dao.RegistrationApplicationDao;
+import by.moseichuk.final_task_JWD.dao.ApplicationDao;
 import by.moseichuk.final_task_JWD.dao.UserDao;
 import by.moseichuk.final_task_JWD.dao.exception.DaoException;
 import by.moseichuk.final_task_JWD.service.BaseService;
-import by.moseichuk.final_task_JWD.service.RegistrationApplicationService;
+import by.moseichuk.final_task_JWD.service.ApplicationService;
 import by.moseichuk.final_task_JWD.service.exception.ServiceException;
 
 import java.util.List;
 
-public class RegistrationApplicationServiceImpl extends BaseService implements RegistrationApplicationService {
+public class ApplicationServiceImpl extends BaseService implements ApplicationService {
 
     @Override
-    public void add(RegistrationApplication registrationApplication) throws ServiceException {
-        RegistrationApplicationDao applicationDao = (RegistrationApplicationDao) transaction.getDao(DaoEnum.REGISTRATION_APPLICATION);
+    public void add(Application application) throws ServiceException {
+        ApplicationDao applicationDao = (ApplicationDao) transaction.getDao(DaoEnum.REGISTRATION_APPLICATION);
         try {
-            applicationDao.create(registrationApplication);
+            applicationDao.create(application);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
 
     @Override
-    public List<RegistrationApplication> readAll() throws ServiceException {
-        RegistrationApplicationDao regDao = (RegistrationApplicationDao) transaction.getDao(DaoEnum.REGISTRATION_APPLICATION);
+    public List<Application> readAll() throws ServiceException {
+        ApplicationDao regDao = (ApplicationDao) transaction.getDao(DaoEnum.REGISTRATION_APPLICATION);
         UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
         try {
-            List<RegistrationApplication> applicationList = regDao.readAll();
-            for (RegistrationApplication application : applicationList) {
+            List<Application> applicationList = regDao.readAll();
+            for (Application application : applicationList) {
                 application.setUser(userDao.read(application.getUserId()));
             }
             return applicationList;

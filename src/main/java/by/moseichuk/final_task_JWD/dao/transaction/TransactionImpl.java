@@ -1,7 +1,6 @@
 package by.moseichuk.final_task_JWD.dao.transaction;
 
 import by.moseichuk.final_task_JWD.dao.*;
-import by.moseichuk.final_task_JWD.dao.exception.DaoException;
 import by.moseichuk.final_task_JWD.dao.exception.TransactionException;
 import by.moseichuk.final_task_JWD.dao.impl.*;
 
@@ -16,7 +15,7 @@ public class TransactionImpl implements Transaction {
     static {
         daoMap.put(DaoEnum.CAMPAIGN, new CampaignDaoImpl());
         daoMap.put(DaoEnum.MANAGER_INFLUENCER, new ManagerInfluencerDaoImpl());
-        daoMap.put(DaoEnum.REGISTRATION_APPLICATION, new RegistrationApplicationDaoImpl());
+        daoMap.put(DaoEnum.REGISTRATION_APPLICATION, new ApplicationDaoImpl());
         daoMap.put(DaoEnum.SOCIAL_LINK, new SocialLinkDaoImpl());
         daoMap.put(DaoEnum.USER, new UserDaoImpl());
         daoMap.put(DaoEnum.FILE, new UserFileDaoImpl());

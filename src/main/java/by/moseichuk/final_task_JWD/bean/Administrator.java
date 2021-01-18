@@ -3,23 +3,23 @@ package by.moseichuk.final_task_JWD.bean;
 import java.util.List;
 
 public class Administrator extends User {
-    private List<RegistrationApplication> registrationApplicationList;
+    private List<Application> applicationList;
 
     public Administrator() {
     }
 
-    public List<RegistrationApplication> getRegistrationApplicationList() {
-        return registrationApplicationList;
+    public List<Application> getRegistrationApplicationList() {
+        return applicationList;
     }
 
-    public void setRegistrationApplicationList(List<RegistrationApplication> registrationApplicationList) {
-        this.registrationApplicationList = registrationApplicationList;
+    public void setRegistrationApplicationList(List<Application> applicationList) {
+        this.applicationList = applicationList;
     }
 
     @Override
     public String toString() {
         return "Administrator{" +
-                "registrationApplicationList=" + registrationApplicationList +
+                "registrationApplicationList=" + applicationList +
                 "} " + super.toString();
     }
 }

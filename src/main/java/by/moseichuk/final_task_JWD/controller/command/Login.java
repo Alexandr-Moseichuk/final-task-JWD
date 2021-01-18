@@ -52,7 +52,7 @@ public class Login extends Command {
 
         switch (userRole) {
             case ADMINISTRATOR:
-                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.reg_applications"),"/registration_application/list.html"));
+                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.reg_applications"),"/application/list.html"));
                 menuItemList.add(new MenuItem(rb.getString("menu.dropdown.users"), "/user/list.html"));
                 return menuItemList;
             case ADVERTISER:
@@ -60,7 +60,7 @@ public class Login extends Command {
                 return menuItemList;
             case INFLUENCER:
                 menuItemList.add(new MenuItem(rb.getString("menu.dropdown.campaigns"), "/influencer/campaign/list.html"));
-                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.manager"), "influencer/manager.html"));
+                menuItemList.add(new MenuItem(rb.getString("menu.dropdown.manager"), "/influencer/manager.html"));
                 return menuItemList;
             case MANAGER:
                 menuItemList.add(new MenuItem(rb.getString("menu.dropdown.campaigns"), "/manager/campaign/list.html"));

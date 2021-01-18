@@ -3,8 +3,8 @@ package by.moseichuk.final_task_JWD.controller.filter;
 import by.moseichuk.final_task_JWD.controller.Command;
 import by.moseichuk.final_task_JWD.controller.command.*;
 import by.moseichuk.final_task_JWD.controller.command.Registration;
-import by.moseichuk.final_task_JWD.controller.command.admin.RegistrationApplicationList;
-import by.moseichuk.final_task_JWD.controller.command.admin.RegistrationApplicationListAction;
+import by.moseichuk.final_task_JWD.controller.command.admin.ApplicationList;
+import by.moseichuk.final_task_JWD.controller.command.admin.ApplicationListAction;
 import by.moseichuk.final_task_JWD.controller.command.show.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,11 +32,11 @@ public class CommandFilter implements Filter {
         commandGet.put("/advertiser/list", new AdvertiserVisual());
         commandGet.put("/manager/list", new ManagerVisual());
         commandGet.put("/lang", new Lang());
-        commandGet.put("/registration_application/list", new RegistrationApplicationList());
+        commandGet.put("/application/list", new ApplicationList());
 
         commandPost.put("/login", new Login());
         commandPost.put("/registration", new Registration());
-        commandPost.put("/registration_application/action", new RegistrationApplicationListAction());
+        commandPost.put("/application/action", new ApplicationListAction());
     }
 
     @Override

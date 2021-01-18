@@ -4,10 +4,6 @@ import by.moseichuk.final_task_JWD.dao.TransactionFactory;
 import by.moseichuk.final_task_JWD.service.BaseService;
 import by.moseichuk.final_task_JWD.service.ServiceEnum;
 import by.moseichuk.final_task_JWD.service.ServiceFactory;
-import by.moseichuk.final_task_JWD.service.exception.ServiceException;
-
-import java.util.EnumMap;
-import java.util.Map;
 
 public class ServiceFactoryImpl implements ServiceFactory {
     private TransactionFactory transactionFactory;
@@ -27,7 +23,7 @@ public class ServiceFactoryImpl implements ServiceFactory {
                 service = new UserServiceImpl();
                 break;
             case REGISTRATION_APPLICATION:
-                service = new RegistrationApplicationServiceImpl();
+                service = new ApplicationServiceImpl();
                 break;
         }
         service.setTransaction(transactionFactory.createTransaction());

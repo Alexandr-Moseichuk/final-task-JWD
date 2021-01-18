@@ -3,7 +3,7 @@ package by.moseichuk.final_task_JWD.controller.command.admin;
 import by.moseichuk.final_task_JWD.bean.UserRole;
 import by.moseichuk.final_task_JWD.controller.Command;
 import by.moseichuk.final_task_JWD.controller.Forward;
-import by.moseichuk.final_task_JWD.service.RegistrationApplicationService;
+import by.moseichuk.final_task_JWD.service.ApplicationService;
 import by.moseichuk.final_task_JWD.service.ServiceEnum;
 import by.moseichuk.final_task_JWD.service.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegistrationApplicationListAction extends Command {
-    private static final Logger LOGGER = LogManager.getLogger(RegistrationApplicationListAction.class);
+public class ApplicationListAction extends Command {
+    private static final Logger LOGGER = LogManager.getLogger(ApplicationListAction.class);
 
-    public RegistrationApplicationListAction() {
+    public ApplicationListAction() {
         getPermissionSet().add(UserRole.ADMINISTRATOR);
     }
 
@@ -32,8 +32,8 @@ public class RegistrationApplicationListAction extends Command {
             return forward;
         }
 
-        RegistrationApplicationService service =
-                (RegistrationApplicationService) serviceFactory.getService(ServiceEnum.REGISTRATION_APPLICATION);
+        ApplicationService service =
+                (ApplicationService) serviceFactory.getService(ServiceEnum.REGISTRATION_APPLICATION);
 
         try {
             if (action.equals("approve")) {

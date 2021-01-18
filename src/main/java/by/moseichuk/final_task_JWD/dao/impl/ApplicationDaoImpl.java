@@ -1,16 +1,14 @@
 package by.moseichuk.final_task_JWD.dao.impl;
 
-import by.moseichuk.final_task_JWD.bean.RegistrationApplication;
-import by.moseichuk.final_task_JWD.dao.RegistrationApplicationDao;
+import by.moseichuk.final_task_JWD.bean.Application;
+import by.moseichuk.final_task_JWD.dao.ApplicationDao;
 import by.moseichuk.final_task_JWD.dao.exception.DaoException;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
-public class RegistrationApplicationDaoImpl extends BaseDao implements RegistrationApplicationDao {
+public class ApplicationDaoImpl extends BaseDao implements ApplicationDao {
     private static final String CREATE = "INSERT INTO `registration_application` (`user_id`, `comment`, `date`) VALUES(?, ?, ?)";
     private static final String READ   = "SELECT `comment`, `date` FROM `registration_application` WHERE `id` = ?";
     private static final String UPDATE = "UPDATE `registration_application` SET `comment` = ?, `date` = ? WHERE `id` = ?";
@@ -18,7 +16,7 @@ public class RegistrationApplicationDaoImpl extends BaseDao implements Registrat
     private static final String READ_ALL = "SELECT * FROM `registration_application`";
 
     @Override
-    public Integer create(RegistrationApplication application) throws DaoException {
+    public Integer create(Application application) throws DaoException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setInt(1, application.getUserId());
             preparedStatement.setString(2, application.getComment());
@@ -32,15 +30,15 @@ public class RegistrationApplicationDaoImpl extends BaseDao implements Registrat
     }
 
     @Override
-    public RegistrationApplication read(Integer id) throws DaoException {
+    public Application read(Integer id) throws DaoException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(READ)) {
             preparedStatement.setInt(1, id);
             preparedStatement.executeQuery();
             ResultSet resultSet = preparedStatement.getResultSet();
 
-            RegistrationApplication application = null;
+            Application application = null;
             if (resultSet.next()) {
-                application = new RegistrationApplication();
+                application = new Application();
                 application.setComment(resultSet.getString("comment"));
                 application.setDate(parseDate(resultSet.getDate("date")));
             }
@@ -51,7 +49,7 @@ public class RegistrationApplicationDaoImpl extends BaseDao implements Registrat
     }
 
     @Override
-    public void update(RegistrationApplication application) throws DaoException {
+    public void update(Application application) throws DaoException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)){
             preparedStatement.setString(1, application.getComment());
             preparedStatement.setDate(2, new Date(application.getDate().getTimeInMillis()));
@@ -72,14 +70,14 @@ public class RegistrationApplicationDaoImpl extends BaseDao implements Registrat
     }
 
     @Override
-    public List<RegistrationApplication> readAll() throws DaoException {
+    public List<Application> readAll() throws DaoException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(READ_ALL)) {
             preparedStatement.executeQuery();
             ResultSet resultSet = preparedStatement.getResultSet();
 
-            List<RegistrationApplication> applicationList = new ArrayList<>();
+            List<Application> applicationList = new ArrayList<>();
             while (resultSet.next()) {
-                RegistrationApplication application = new RegistrationApplication();
+                Application application = new Application();
 
                 application.setUserId(resultSet.getInt("user_id"));
                 application.setComment(resultSet.getString("comment"));

@@ -5,19 +5,13 @@ import by.moseichuk.final_task_JWD.controller.Command;
 import by.moseichuk.final_task_JWD.controller.Forward;
 import by.moseichuk.final_task_JWD.service.*;
 import by.moseichuk.final_task_JWD.service.exception.ServiceException;
-import by.moseichuk.final_task_JWD.service.exception.ValidationException;
-import by.moseichuk.final_task_JWD.service.validator.UserValidator;
 import by.moseichuk.final_task_JWD.service.validator.ValidatorEnum;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
-import java.util.Formatter;
 import java.util.GregorianCalendar;
 import java.util.Map;
 
@@ -45,8 +39,8 @@ public class Registration extends Command {
             return new Forward("jsp/registration.jsp");
         }
 
-        RegistrationApplication application = buildApplication(request, user.getRegistrationDate());
-        Validator<RegistrationApplication> applicationValidator = ValidatorFactory.getValidator(ValidatorEnum.APPLICATION);
+        Application application = buildApplication(request, user.getRegistrationDate());
+        Validator<Application> applicationValidator = ValidatorFactory.getValidator(ValidatorEnum.APPLICATION);
         Map<String, String> applicationErrorMap = applicationValidator.validate(application);
         if (!userErrorMap.isEmpty()) {
             for (Map.Entry<String, String> entry : applicationErrorMap.entrySet()) {
@@ -56,7 +50,7 @@ public class Registration extends Command {
         }
 
         UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
-        RegistrationApplicationService applicationService = (RegistrationApplicationService) serviceFactory.getService(ServiceEnum.REGISTRATION_APPLICATION);
+        ApplicationService applicationService = (ApplicationService) serviceFactory.getService(ServiceEnum.REGISTRATION_APPLICATION);
         try {
             Integer userId = userService.create(user);
             userInfo.setUserId(userId);
@@ -102,8 +96,8 @@ public class Registration extends Command {
         return userInfo;
     }
 
-    private RegistrationApplication buildApplication(HttpServletRequest request, Calendar currentTime) {
-        RegistrationApplication application = new RegistrationApplication();
+    private Application buildApplication(HttpServletRequest request, Calendar currentTime) {
+        Application application = new Application();
         application.setComment(request.getParameter("comment"));
         application.setDate(currentTime);
         return application;
