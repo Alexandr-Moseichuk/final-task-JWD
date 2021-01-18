@@ -65,7 +65,7 @@ public class Registration extends Command {
         User user = new User();
 
         user.setEmail(request.getParameter("email"));
-        user.setPassword(BCrypt.hashpw(request.getParameter("password"), BCrypt.gensalt()));
+        user.setPassword(request.getParameter("password"));
         Calendar currentTime = new GregorianCalendar();
         currentTime.setTimeInMillis(System.currentTimeMillis());
         user.setRegistrationDate(currentTime);

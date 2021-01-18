@@ -5,6 +5,7 @@ import by.moseichuk.final_task_JWD.bean.UserRole;
 import by.moseichuk.final_task_JWD.bean.UserStatus;
 import by.moseichuk.final_task_JWD.dao.UserDao;
 import by.moseichuk.final_task_JWD.dao.exception.DaoException;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -26,12 +27,11 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     public Integer create(User user) throws DaoException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, user.getEmail());
-            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(2, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
             preparedStatement.setInt(3, user.getRole().ordinal());
             preparedStatement.setDate(4, new Date(user.getRegistrationDate().getTimeInMillis()));
             preparedStatement.setInt(5, user.getStatus().ordinal());
             preparedStatement.executeUpdate();
-
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
                 return resultSet.getInt(1);
