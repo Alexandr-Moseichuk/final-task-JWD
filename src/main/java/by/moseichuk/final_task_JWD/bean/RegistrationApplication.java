@@ -2,7 +2,7 @@ package by.moseichuk.final_task_JWD.bean;
 
 import java.util.Calendar;
 
-public class RegistrationApplication {
+public class RegistrationApplication extends Entity {
     private Integer userId;
     private User user;
     private String comment;

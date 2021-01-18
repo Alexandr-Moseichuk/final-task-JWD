@@ -27,11 +27,13 @@ public class Registration extends Command {
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
         User user = buildUser(request);
+        UserInfo userInfo = buildUserInfo(request);
+        user.setUserInfo(userInfo);
+
         Validator<User> userValidator = ValidatorFactory.getValidator(ValidatorEnum.USER);
-        
-        Map<String, String> errorMap = userValidator.validate(user);
-        if (!errorMap.isEmpty()) {
-            for (Map.Entry<String, String> entry : errorMap.entrySet()) {
+        Map<String, String> userErrorMap = userValidator.validate(user);
+        if (!userErrorMap.isEmpty()) {
+            for (Map.Entry<String, String> entry : userErrorMap.entrySet()) {
                 request.setAttribute(entry.getKey(), entry.getValue());
             }
             return new Forward("jsp/registration.jsp");
@@ -43,14 +45,23 @@ public class Registration extends Command {
             return new Forward("jsp/registration.jsp");
         }
 
+        RegistrationApplication application = buildApplication(request, user.getRegistrationDate());
+        Validator<RegistrationApplication> applicationValidator = ValidatorFactory.getValidator(ValidatorEnum.APPLICATION);
+        Map<String, String> applicationErrorMap = applicationValidator.validate(application);
+        if (!userErrorMap.isEmpty()) {
+            for (Map.Entry<String, String> entry : applicationErrorMap.entrySet()) {
+                request.setAttribute(entry.getKey(), entry.getValue());
+            }
+            return new Forward("jsp/registration.jsp");
+        }
+
         UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
         RegistrationApplicationService applicationService = (RegistrationApplicationService) serviceFactory.getService(ServiceEnum.REGISTRATION_APPLICATION);
         try {
             Integer userId = userService.create(user);
-            UserInfo userInfo = buildUserInfo(request, userId);
+            userInfo.setUserId(userId);
             userService.createUserInfo(userInfo);
-
-            RegistrationApplication application = buildApplication(request, userId, user.getRegistrationDate());
+            application.setUserId(userId);
             applicationService.add(application);
             return new Forward("/campaign/list", true);
         } catch (ServiceException e) {
@@ -75,16 +86,14 @@ public class Registration extends Command {
         return user;
     }
 
-    private UserInfo buildUserInfo(HttpServletRequest request, Integer userId) {
+    private UserInfo buildUserInfo(HttpServletRequest request) {
         UserInfo userInfo = new UserInfo();
-
-        userInfo.setUserId(userId);
+        
         userInfo.setLastName(request.getParameter("lastName"));
         userInfo.setFirstName(request.getParameter("firstName"));
         userInfo.setSecondName(request.getParameter("secondName"));
         userInfo.setDescription(request.getParameter("description"));
         userInfo.setPhoneNumber(request.getParameter("phoneNumber"));
-
         UserFile userFile = new UserFile();
         userFile.setId(1);
         userFile.setPath("somePath");
@@ -93,9 +102,8 @@ public class Registration extends Command {
         return userInfo;
     }
 
-    private RegistrationApplication buildApplication(HttpServletRequest request, Integer userId, Calendar currentTime) {
+    private RegistrationApplication buildApplication(HttpServletRequest request, Calendar currentTime) {
         RegistrationApplication application = new RegistrationApplication();
-        application.setUserId(userId);
         application.setComment(request.getParameter("comment"));
         application.setDate(currentTime);
         return application;

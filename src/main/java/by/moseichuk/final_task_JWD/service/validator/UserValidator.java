@@ -1,8 +1,8 @@
 package by.moseichuk.final_task_JWD.service.validator;
 
 import by.moseichuk.final_task_JWD.bean.User;
+import by.moseichuk.final_task_JWD.bean.UserInfo;
 import by.moseichuk.final_task_JWD.service.Validator;
-import by.moseichuk.final_task_JWD.service.exception.ValidationException;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -21,13 +21,17 @@ public class UserValidator implements Validator<User> {
      * Password must contain at least one special character like ! @ # & ( ).
      * Password must contain a length of at least 8 characters and a maximum of 20 characters.
      * */
-    private static final String PASSWORD_PATTERN =
+    private static final String PASSWORD_REGEX =
             "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
-    private static final Pattern passwordPattern = Pattern.compile(PASSWORD_PATTERN);
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile(PASSWORD_REGEX);
+    private static final String PHONE_REGEX =
+            "^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$"
+                    + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?){2}\\d{3}$"
+                    + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?)(\\d{2}[ ]?){2}\\d{2}$";
+    private static final Pattern PHONE_PATTERN = Pattern.compile(PHONE_REGEX);
 
     @Override
     public Map<String, String> validate(User user) {
-        Map<String, String> errorMap = new HashMap<>();
         String email = user.getEmail();
         if (email == null || email.isEmpty() || !isValidEmail(email)) {
             errorMap.put("emailError", "emailError");
@@ -36,7 +40,30 @@ public class UserValidator implements Validator<User> {
         if (!isValidPassword(password)) {
             errorMap.put("passwordError", "passwordError");
         }
+
+        UserInfo userInfo = user.getUserInfo();
+        String lastName = userInfo.getLastName();
+        if (lastName == null || lastName.isEmpty() || lastName.length() < 2) {
+            errorMap.put("lastNameError", "lastNameError");
+        }
+        String firstName = userInfo.getFirstName();
+        if (firstName == null || firstName.isEmpty() || firstName.length() < 2) {
+            errorMap.put("firstNameError", "firstNameError");
+        }
+        String description = userInfo.getDescription();
+        if (description == null || description.isEmpty() || description.length() < 50) {
+            errorMap.put("descriptionError", "descriptionError");
+        }
+        String phoneNumber = userInfo.getPhoneNumber();
+        if (!isValidPhoneNumber(phoneNumber)) {
+            errorMap.put("phoneNumberError", "descriptionError");
+        }
         return errorMap;
+    }
+
+    private boolean isValidPhoneNumber(String phoneNumber) {
+        Matcher matcher = PHONE_PATTERN.matcher(phoneNumber);
+        return matcher.matches();
     }
 
     private boolean isValidEmail(String email) {
@@ -50,7 +77,7 @@ public class UserValidator implements Validator<User> {
     }
 
     private boolean isValidPassword(String password) {
-        Matcher matcher = passwordPattern.matcher(password);
+        Matcher matcher = PASSWORD_PATTERN.matcher(password);
         return matcher.matches();
     }
 }

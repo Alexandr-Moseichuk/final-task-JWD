@@ -1,6 +1,6 @@
 package by.moseichuk.final_task_JWD.bean;
 
-public class UserInfo {
+public class UserInfo extends Entity {
     private Integer userId;
     private String lastName;
     private String firstName;
