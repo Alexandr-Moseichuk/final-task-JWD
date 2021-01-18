@@ -101,7 +101,7 @@ CREATE TABLE `campaign_file`
 CREATE TABLE `registration_application`
 (
     `user_id`      INTEGER      NOT NULL UNIQUE ,
-    `comment`      VARCHAR(512) NOT NULL ,
+    `comment`      VARCHAR(5096) NOT NULL ,
     `date`         DATETIME     NOT NULL ,
     PRIMARY KEY (`user_id`) ,
     FOREIGN KEY (`user_id`) REFERENCES `user`(`id`)
