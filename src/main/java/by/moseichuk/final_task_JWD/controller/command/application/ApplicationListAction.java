@@ -1,4 +1,4 @@
-package by.moseichuk.final_task_JWD.controller.command.admin;
+package by.moseichuk.final_task_JWD.controller.command.application;
 
 import by.moseichuk.final_task_JWD.bean.UserRole;
 import by.moseichuk.final_task_JWD.controller.Command;
