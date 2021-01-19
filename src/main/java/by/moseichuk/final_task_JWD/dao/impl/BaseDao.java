@@ -1,7 +1,8 @@
 package by.moseichuk.final_task_JWD.dao.impl;
 
 import java.sql.Connection;
-import java.sql.Date;
+
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -12,9 +13,9 @@ public abstract class BaseDao {
         this.connection = connection;
     }
 
-    protected Calendar parseDate(Date date) {
+    protected Calendar parseDate(Timestamp timestamp) {
         Calendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
+        calendar.setTimeInMillis(timestamp.getTime());
         return calendar;
     }
 }

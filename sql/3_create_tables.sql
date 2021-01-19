@@ -26,9 +26,9 @@ CREATE TABLE `campaign`
 (
     `id`          INTEGER       NOT NULL AUTO_INCREMENT,
     `title`       VARCHAR(32)   NOT NULL,
-    `create_date` DATETIME      NOT NULL,
-    `begin_date`  DATETIME      NOT NULL,
-    `end_date`    DATETIME      NOT NULL,
+    `create_date` TIMESTAMP      NOT NULL,
+    `begin_date`  TIMESTAMP      NOT NULL,
+    `end_date`    TIMESTAMP      NOT NULL,
     `description` VARCHAR(1024) NOT NULL,
     `requirement` VARCHAR(1024) NOT NULL,
     `budget`      INTEGER       NOT NULL,
@@ -82,8 +82,8 @@ CREATE TABLE `manager_influencer`
 (
     `manager_id`    INTEGER  NOT NULL ,
     `influencer_id` INTEGER  NOT NULL UNIQUE ,
-    `begin_date`    DATETIME NOT NULL ,
-    `end_date`      DATETIME ,
+    `begin_date`    TIMESTAMP NOT NULL ,
+    `end_date`      TIMESTAMP ,
     PRIMARY KEY (`manager_id`, `influencer_id`, `begin_date`),
     FOREIGN KEY (`manager_id`)    REFERENCES `user`(`id`),
     FOREIGN KEY (`influencer_id`) REFERENCES `user`(`id`)
@@ -102,7 +102,7 @@ CREATE TABLE `registration_application`
 (
     `user_id`      INTEGER      NOT NULL UNIQUE ,
     `comment`      VARCHAR(5096) NOT NULL ,
-    `date`         DATETIME     NOT NULL ,
+    `date`         TIMESTAMP     NOT NULL ,
     PRIMARY KEY (`user_id`) ,
     FOREIGN KEY (`user_id`) REFERENCES `user`(`id`)
 );

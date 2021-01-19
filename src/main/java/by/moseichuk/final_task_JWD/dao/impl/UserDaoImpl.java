@@ -56,7 +56,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
                 user.setEmail(resultSet.getString("mail"));
                 user.setPassword(resultSet.getString("password"));
                 user.setRole(UserRole.values()[resultSet.getInt("role")]);
-                user.setRegistrationDate(parseDate(resultSet.getDate("registration_date")));
+                user.setRegistrationDate(parseDate(resultSet.getTimestamp("registration_date")));
                 user.setStatus(UserStatus.values()[resultSet.getInt("status")]);
                 return user;
             } else {
@@ -107,7 +107,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
                 user.setEmail(resultSet.getString("mail"));
                 user.setPassword(resultSet.getString("password"));
                 user.setRole(UserRole.values()[resultSet.getInt("role")]);
-                user.setRegistrationDate(parseDate(resultSet.getDate("registration_date")));
+                user.setRegistrationDate(parseDate(resultSet.getTimestamp("registration_date")));
                 user.setStatus(UserStatus.values()[resultSet.getInt("status")]);
                 users.add(user);
             }
@@ -146,7 +146,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
                 user.setEmail(mail);
                 user.setPassword(resultSet.getString("password"));
                 user.setRole(UserRole.values()[resultSet.getInt("role")]);
-                user.setRegistrationDate(parseDate(resultSet.getDate("registration_date")));
+                user.setRegistrationDate(parseDate(resultSet.getTimestamp("registration_date")));
                 user.setStatus(UserStatus.values()[resultSet.getInt("status")]);
                 return user;
             } else {
@@ -168,7 +168,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
                 User user = new User();
                 user.setId(resultSet.getInt("id"));
                 user.setEmail(resultSet.getString("mail"));
-                user.setRegistrationDate(parseDate(resultSet.getDate("registration_date")));
+                user.setRegistrationDate(parseDate(resultSet.getTimestamp("registration_date")));
                 user.setStatus(UserStatus.values()[resultSet.getInt("status")]);
                 user.setRole(userRole);
                 userList.add(user);

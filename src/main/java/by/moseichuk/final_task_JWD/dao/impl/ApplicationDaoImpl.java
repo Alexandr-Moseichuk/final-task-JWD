@@ -40,7 +40,8 @@ public class ApplicationDaoImpl extends BaseDao implements ApplicationDao {
             if (resultSet.next()) {
                 application = new Application();
                 application.setComment(resultSet.getString("comment"));
-                application.setDate(parseDate(resultSet.getDate("date")));
+                application.setDate(parseDate(resultSet.getTimestamp("date")));
+
             }
             return application;
         } catch (SQLException e) {
@@ -82,7 +83,7 @@ public class ApplicationDaoImpl extends BaseDao implements ApplicationDao {
 
                 application.setUserId(resultSet.getInt("user_id"));
                 application.setComment(resultSet.getString("comment"));
-                application.setDate(parseDate(resultSet.getDate("date")));
+                application.setDate(parseDate(resultSet.getTimestamp("date")));
 
                 applicationList.add(application);
             }

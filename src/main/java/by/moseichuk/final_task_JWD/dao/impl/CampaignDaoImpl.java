@@ -55,9 +55,9 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
                 campaign = new Campaign();
                 campaign.setId(id);
                 campaign.setTitle(resultSet.getString("title"));
-                campaign.setCreateDate(parseDate(resultSet.getDate("create_date")));
-                campaign.setBeginDate(parseDate(resultSet.getDate("begin_date")));
-                campaign.setEndDate(parseDate(resultSet.getDate("end_date")));
+                campaign.setCreateDate(parseDate(resultSet.getTimestamp("create_date")));
+                campaign.setBeginDate(parseDate(resultSet.getTimestamp("begin_date")));
+                campaign.setEndDate(parseDate(resultSet.getTimestamp("end_date")));
                 campaign.setDescription(resultSet.getString("description"));
                 campaign.setRequirement(resultSet.getString("requirement"));
                 campaign.setBudget(resultSet.getBigDecimal("budget"));
@@ -108,9 +108,9 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
                 Campaign campaign = new Campaign();
                 campaign.setId(resultSet.getInt("id"));
                 campaign.setTitle(resultSet.getString("title"));
-                campaign.setCreateDate(parseDate(resultSet.getDate("create_date")));
-                campaign.setBeginDate(parseDate(resultSet.getDate("begin_date")));
-                campaign.setEndDate(parseDate(resultSet.getDate("end_date")));
+                campaign.setCreateDate(parseDate(resultSet.getTimestamp("create_date")));
+                campaign.setBeginDate(parseDate(resultSet.getTimestamp("begin_date")));
+                campaign.setEndDate(parseDate(resultSet.getTimestamp("end_date")));
                 campaign.setDescription(resultSet.getString("description"));
                 campaign.setRequirement(resultSet.getString("requirement"));
                 campaign.setBudget(resultSet.getBigDecimal("budget"));

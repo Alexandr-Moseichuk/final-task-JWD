@@ -43,7 +43,7 @@
                     <td><c:out value="${application.user.email}"/></td>
                     <td><c:out value="${application.user.role}"/></td>
                     <td><c:out value="${application.comment}"/></td>
-                    <td><c:out value="${application.date.time}"/></td>
+                    <td><fmt:formatDate type="both" value="${application.date.time}" dateStyle="medium" timeStyle="medium"/></td>
                     <td><c:out value="Тут должна быть ссылка на профиль"/></td>
                 </tr>
             </c:forEach>

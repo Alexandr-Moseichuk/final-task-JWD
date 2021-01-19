@@ -18,12 +18,12 @@
         <div class="container" id="footerNavbar">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a href="<c:url value='/lang?loc=en_US'/>">
+                    <a href="<c:url value='/lang.html?loc=en_US'/>">
                         <span class="flag-icon flag-icon-us"></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<c:url value='/lang?loc=ru_RU'/>">
+                    <a href="<c:url value='/lang.html?loc=ru_RU'/>">
                         <span class="flag-icon flag-icon-ru"></span>
                     </a>
                 </li>

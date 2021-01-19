@@ -41,7 +41,7 @@
                         <td><c:out value="${user.id}"/></td>
                         <td><c:out value="${user.email}"/></td>
                         <td><c:out value="${user.role}"/></td>
-                        <td><c:out value="${user.registrationDate.time}"/></td>
+                        <td><fmt:formatDate type="both" value="${user.registrationDate.time}" dateStyle="medium" timeStyle="medium"/></td>
                         <td><c:out value="${user.status}"/></td>
                     </tr>
                 </c:forEach>

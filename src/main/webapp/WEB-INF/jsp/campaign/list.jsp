@@ -15,11 +15,11 @@
 <%--        <ctg:welcome-message campaign="${campaign}"/>--%>
         <div class="container-sm p-3 my-3 border">
             <h5><c:out value="${campaign.title}"/></h5>
-            <p>Дата создания: <fmt:formatDate value="${campaign.createDate.time}" type="both"/></p>
+            <p>Дата создания: <fmt:formatDate value="${campaign.createDate.time}" type="both" dateStyle="medium" timeStyle="medium"/></p>
             <p>
-                Дата начала:     <fmt:formatDate value="${campaign.beginDate.time}" type="both"/>
+                Дата начала:     <fmt:formatDate value="${campaign.beginDate.time}" type="both" dateStyle="medium" timeStyle="medium"/>
                 <br>
-                Дата завершения: <fmt:formatDate value="${campaign.endDate.time}" type="both"/>
+                Дата завершения: <fmt:formatDate value="${campaign.endDate.time}" type="both" dateStyle="medium" timeStyle="medium"/>
             </p>
             <h5>Описание:</h5>
             <p><c:out value="${campaign.description}"/></p>
