@@ -22,7 +22,7 @@ public class ServiceFactoryImpl implements ServiceFactory {
             case USER:
                 service = new UserServiceImpl();
                 break;
-            case REGISTRATION_APPLICATION:
+            case APPLICATION:
                 service = new ApplicationServiceImpl();
                 break;
         }

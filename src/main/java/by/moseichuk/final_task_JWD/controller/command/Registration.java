@@ -50,7 +50,7 @@ public class Registration extends Command {
         }
 
         UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
-        ApplicationService applicationService = (ApplicationService) serviceFactory.getService(ServiceEnum.REGISTRATION_APPLICATION);
+        ApplicationService applicationService = (ApplicationService) serviceFactory.getService(ServiceEnum.APPLICATION);
         try {
             Integer userId = userService.create(user);
             userInfo.setUserId(userId);

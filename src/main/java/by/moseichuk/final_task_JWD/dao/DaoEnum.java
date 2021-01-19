@@ -4,7 +4,7 @@ public enum  DaoEnum {
     USER,
     USER_INFO,
     SOCIAL_LINK,
-    REGISTRATION_APPLICATION,
+    APPLICATION,
     CAMPAIGN,
     FILE,
     MANAGER_INFLUENCER

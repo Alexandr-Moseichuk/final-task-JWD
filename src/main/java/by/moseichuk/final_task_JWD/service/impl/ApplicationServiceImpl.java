@@ -16,7 +16,7 @@ public class ApplicationServiceImpl extends BaseService implements ApplicationSe
 
     @Override
     public void add(Application application) throws ServiceException {
-        ApplicationDao applicationDao = (ApplicationDao) transaction.getDao(DaoEnum.REGISTRATION_APPLICATION);
+        ApplicationDao applicationDao = (ApplicationDao) transaction.getDao(DaoEnum.APPLICATION);
         try {
             applicationDao.create(application);
         } catch (DaoException e) {
@@ -25,8 +25,18 @@ public class ApplicationServiceImpl extends BaseService implements ApplicationSe
     }
 
     @Override
+    public void update(Application application) throws ServiceException {
+        ApplicationDao applicationDao = (ApplicationDao) transaction.getDao(DaoEnum.APPLICATION);
+        try {
+            applicationDao.update(application);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public List<Application> readAll() throws ServiceException {
-        ApplicationDao regDao = (ApplicationDao) transaction.getDao(DaoEnum.REGISTRATION_APPLICATION);
+        ApplicationDao regDao = (ApplicationDao) transaction.getDao(DaoEnum.APPLICATION);
         UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
         try {
             List<Application> applicationList = regDao.readAll();

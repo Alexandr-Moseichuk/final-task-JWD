@@ -33,7 +33,7 @@ public class ApplicationListAction extends Command {
         }
 
         ApplicationService service =
-                (ApplicationService) serviceFactory.getService(ServiceEnum.REGISTRATION_APPLICATION);
+                (ApplicationService) serviceFactory.getService(ServiceEnum.APPLICATION);
 
         try {
             if (action.equals("approve")) {

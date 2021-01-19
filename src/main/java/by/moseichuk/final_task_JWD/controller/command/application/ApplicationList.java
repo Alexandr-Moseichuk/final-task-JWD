@@ -24,7 +24,7 @@ public class ApplicationList extends Command {
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
         ApplicationService applicationService =
-                (ApplicationService) serviceFactory.getService(ServiceEnum.REGISTRATION_APPLICATION);
+                (ApplicationService) serviceFactory.getService(ServiceEnum.APPLICATION);
         try {
             List<Application> applicationList = applicationService.readAll();
             request.setAttribute("applicationList", applicationList);
