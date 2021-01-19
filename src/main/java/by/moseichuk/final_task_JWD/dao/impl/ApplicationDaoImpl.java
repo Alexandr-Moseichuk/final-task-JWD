@@ -10,9 +10,9 @@ import java.util.List;
 
 public class ApplicationDaoImpl extends BaseDao implements ApplicationDao {
     private static final String CREATE = "INSERT INTO `registration_application` (`user_id`, `comment`, `date`) VALUES(?, ?, ?)";
-    private static final String READ   = "SELECT `comment`, `date` FROM `registration_application` WHERE `id` = ?";
-    private static final String UPDATE = "UPDATE `registration_application` SET `comment` = ?, `date` = ? WHERE `id` = ?";
-    private static final String DELETE = "DELETE FROM `registration_application` WHERE `id` = ?";
+    private static final String READ   = "SELECT `comment`, `date` FROM `registration_application` WHERE `user_id` = ?";
+    private static final String UPDATE = "UPDATE `registration_application` SET `comment` = ?, `date` = ? WHERE `user_id` = ?";
+    private static final String DELETE = "DELETE FROM `registration_application` WHERE `user_id` = ?";
     private static final String READ_ALL = "SELECT * FROM `registration_application`";
 
     @Override
@@ -53,6 +53,7 @@ public class ApplicationDaoImpl extends BaseDao implements ApplicationDao {
         try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)){
             preparedStatement.setString(1, application.getComment());
             preparedStatement.setDate(2, new Date(application.getDate().getTimeInMillis()));
+            preparedStatement.setInt(3, application.getUserId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);

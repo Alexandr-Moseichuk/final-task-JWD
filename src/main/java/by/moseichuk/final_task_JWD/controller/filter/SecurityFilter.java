@@ -6,6 +6,7 @@ import by.moseichuk.final_task_JWD.controller.Command;
 import by.moseichuk.final_task_JWD.controller.command.Login;
 import by.moseichuk.final_task_JWD.controller.command.Logout;
 import by.moseichuk.final_task_JWD.controller.command.Registration;
+import by.moseichuk.final_task_JWD.controller.command.application.ApplicationUpdate;
 import by.moseichuk.final_task_JWD.controller.command.show.IndexVisual;
 import by.moseichuk.final_task_JWD.controller.command.show.LoginVisual;
 import by.moseichuk.final_task_JWD.controller.command.show.RegistrationVisual;
@@ -33,6 +34,7 @@ public class SecurityFilter implements Filter {
         publicCommands.add(Registration.class);
         publicCommands.add(RegistrationVisual.class);
         publicCommands.add(IndexVisual.class);
+        publicCommands.add(ApplicationUpdate.class);
     }
 
     @Override
@@ -59,7 +61,7 @@ public class SecurityFilter implements Filter {
                 response.sendRedirect(request.getContextPath() + "/login.html");
             } else if (user.getStatus() != UserStatus.VERIFIED) {
                 LOGGER.debug("User not verified...");
-                request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/permission_denied.jsp").forward(servletRequest, servletResponse);
+                request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/application/not_approved.jsp").forward(servletRequest, servletResponse);
             } else if (command.getPermissionSet().contains(user.getRole())) {
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {

@@ -5,6 +5,7 @@ import by.moseichuk.final_task_JWD.controller.command.*;
 import by.moseichuk.final_task_JWD.controller.command.Registration;
 import by.moseichuk.final_task_JWD.controller.command.application.ApplicationList;
 import by.moseichuk.final_task_JWD.controller.command.application.ApplicationListAction;
+import by.moseichuk.final_task_JWD.controller.command.application.ApplicationUpdate;
 import by.moseichuk.final_task_JWD.controller.command.show.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,6 +34,7 @@ public class CommandFilter implements Filter {
         commandGet.put("/manager/list", new ManagerVisual());
         commandGet.put("/lang", new Lang());
         commandGet.put("/application/list", new ApplicationList());
+        commandGet.put("/application/update", new ApplicationUpdateVisual());
 
         commandPost.put("/login", new Login());
         commandPost.put("/registration", new Registration());
