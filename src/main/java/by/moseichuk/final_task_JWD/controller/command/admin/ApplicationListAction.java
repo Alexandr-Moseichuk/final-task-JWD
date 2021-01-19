@@ -25,7 +25,7 @@ public class ApplicationListAction extends Command {
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
         String action = request.getParameter("action");
         String[] userIdArray = request.getParameterValues("selected");
-        Forward forward = new Forward("/registration_application/list", true);
+        Forward forward = new Forward("/application/list", true);
 
         if (action == null || userIdArray == null) {
             //TODO add message

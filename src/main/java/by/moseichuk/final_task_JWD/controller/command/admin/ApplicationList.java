@@ -28,7 +28,7 @@ public class ApplicationList extends Command {
         try {
             List<Application> applicationList = applicationService.readAll();
             request.setAttribute("applicationList", applicationList);
-            return new Forward("jsp/registration_application/list.jsp");
+            return new Forward("jsp/application/list.jsp");
         } catch (ServiceException e) {
             LOGGER.error(e);
             request.getSession().setAttribute("errorMessage", "Ошибка получения заявок");
