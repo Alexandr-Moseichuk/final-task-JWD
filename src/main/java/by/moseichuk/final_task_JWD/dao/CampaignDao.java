@@ -9,4 +9,8 @@ public interface CampaignDao extends Dao<Campaign> {
     List<Integer> readCampaignFileIds(Integer id) throws DaoException;
 
     List<Integer> readUserIds(Integer id) throws DaoException;
+
+    List<Campaign> readSublist(int limit, int offset) throws DaoException;
+
+    int readRowCount() throws DaoException;
 }

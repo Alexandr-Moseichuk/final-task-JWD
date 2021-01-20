@@ -13,13 +13,16 @@ import java.util.List;
 
 public class CampaignDaoImpl extends BaseDao implements CampaignDao {
     private static final String CREATE = "INSERT INTO `campaign` (`title`, `create_date`, `begin_date`, `end_date`, `description`, `requirement`, `budget`) VALUES(?, ?, ?, ?, ?, ?, ?)";
-    private static final String READ   = "SELECT `title`, `create_date`, `begin_date`, `end_date`, `description`, `requirement`, `budget` FROM `campaign` WHERE `id` = ?";
+    private static final String READ   = "SELECT `id`, `title`, `create_date`, `begin_date`, `end_date`, `description`, `requirement`, `budget` FROM `campaign` WHERE `id` = ?";
     private static final String UPDATE = "UPDATE `campaign` SET `title` = ?, `create_date` = ?, `begin_date` = ?, `end_date` = ?, `description` = ?, `requirement` = ?, `budget` = ? WHERE `id` = ?";
     private static final String DELETE = "DELETE FROM `campaign` WHERE `id` = ?";
     private static final String READ_ALL = "SELECT * FROM `campaign`";
 
     private static final String READ_FILES_ID = "SELECT `file_id` FROM `campaign_file` WHERE `campaign_id` = ?";
     private static final String READ_USERS_ID = "SELECT `user_id` FROM `user_campaign` WHERE `campaign_id` = ?";
+    private static final String READ_SUBLIST = "SELECT `id`, `title`, `create_date`, `begin_date`, `end_date`, `description`, `requirement`, `budget` FROM" +
+            " `campaign` ORDER BY `id` LIMIT ? OFFSET ?";
+    private static final String READ_ROW_COUNT = "SELECT COUNT(*) FROM `campaign`";
 
 
     @Override
@@ -52,15 +55,7 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
             ResultSet resultSet = statement.getResultSet();
             Campaign campaign = null;
             if (resultSet.next()) {
-                campaign = new Campaign();
-                campaign.setId(id);
-                campaign.setTitle(resultSet.getString("title"));
-                campaign.setCreateDate(parseDate(resultSet.getTimestamp("create_date")));
-                campaign.setBeginDate(parseDate(resultSet.getTimestamp("begin_date")));
-                campaign.setEndDate(parseDate(resultSet.getTimestamp("end_date")));
-                campaign.setDescription(resultSet.getString("description"));
-                campaign.setRequirement(resultSet.getString("requirement"));
-                campaign.setBudget(resultSet.getBigDecimal("budget"));
+                campaign = buildCampaign(resultSet);
             }
             return campaign;
         } catch (SQLException e) {
@@ -105,16 +100,7 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
 
             List<Campaign> campaignList = new ArrayList<>();
             while (resultSet.next()) {
-                Campaign campaign = new Campaign();
-                campaign.setId(resultSet.getInt("id"));
-                campaign.setTitle(resultSet.getString("title"));
-                campaign.setCreateDate(parseDate(resultSet.getTimestamp("create_date")));
-                campaign.setBeginDate(parseDate(resultSet.getTimestamp("begin_date")));
-                campaign.setEndDate(parseDate(resultSet.getTimestamp("end_date")));
-                campaign.setDescription(resultSet.getString("description"));
-                campaign.setRequirement(resultSet.getString("requirement"));
-                campaign.setBudget(resultSet.getBigDecimal("budget"));
-                campaignList.add(campaign);
+                campaignList.add(buildCampaign(resultSet));
             }
             return campaignList;
         } catch (SQLException e) {
@@ -154,5 +140,49 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         }
+    }
+
+    @Override
+    public List<Campaign> readSublist(int limit, int offset) throws DaoException {
+        try (PreparedStatement statement = connection.prepareStatement(READ_SUBLIST)) {
+            statement.setInt(1, limit);
+            statement.setInt(2, offset);
+            ResultSet resultSet = statement.executeQuery();
+
+            List<Campaign> campaignList = new ArrayList<>();
+            while (resultSet.next()) {
+                campaignList.add(buildCampaign(resultSet));
+            }
+            return campaignList;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public int readRowCount() throws DaoException {
+        try (PreparedStatement statement = connection.prepareStatement(READ_ROW_COUNT)) {
+            ResultSet resultSet = statement.executeQuery();
+            int count = 0;
+            if (resultSet.next()) {
+                count = resultSet.getInt(1);
+            }
+            return count;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    private Campaign buildCampaign(ResultSet resultSet) throws SQLException {
+        Campaign campaign = new Campaign();
+        campaign.setId(resultSet.getInt("id"));
+        campaign.setTitle(resultSet.getString("title"));
+        campaign.setCreateDate(parseDate(resultSet.getTimestamp("create_date")));
+        campaign.setBeginDate(parseDate(resultSet.getTimestamp("begin_date")));
+        campaign.setEndDate(parseDate(resultSet.getTimestamp("end_date")));
+        campaign.setDescription(resultSet.getString("description"));
+        campaign.setRequirement(resultSet.getString("requirement"));
+        campaign.setBudget(resultSet.getBigDecimal("budget"));
+        return campaign;
     }
 }

@@ -52,6 +52,7 @@ public class HelloServlet extends HttpServlet {
 
     private void executeRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
+            request.setAttribute("pageURL", request.getRequestURL());
             Command command = (Command) request.getAttribute("command");
             CommandManger commandManger = CommandManagerFactory.getInstance().getManager();
             Forward forward = commandManger.execute(command, request, response);

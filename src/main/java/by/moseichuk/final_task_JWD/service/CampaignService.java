@@ -13,4 +13,8 @@ public interface CampaignService {
     void remove(Campaign campaign) throws ServiceException;
 
     void update(Campaign campaign) throws ServiceException;
+
+    List<Campaign> readSublist(int count, int offset) throws ServiceException;
+
+    int readRowCount() throws ServiceException;
 }

@@ -51,4 +51,24 @@ public class CampaignServiceImpl extends BaseService implements CampaignService 
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public List<Campaign> readSublist(int count, int offset) throws ServiceException {
+        CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
+        try {
+            return campaignDao.readSublist(count, offset);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public int readRowCount() throws ServiceException {
+        CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
+        try {
+            return campaignDao.readRowCount();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }
