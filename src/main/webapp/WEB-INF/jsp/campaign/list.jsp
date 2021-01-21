@@ -18,7 +18,7 @@
     <fmt:setLocale value="ru-RU"/>
     <c:forEach var="campaign" items="${campaignSubList}">
 <%--        <ctg:welcome-message campaign="${campaign}"/>--%>
-        <div class="container-sm p-3 my-3 border">
+        <div class="container-sm p-3 my-3 col-6 border">
             <h5><c:out value="${campaign.title}"/></h5>
             <p>Дата создания: <fmt:formatDate value="${campaign.createDate.time}" type="both" dateStyle="medium" timeStyle="medium"/></p>
             <p>
@@ -36,49 +36,7 @@
     </c:forEach>
 
     <div class="container">
-        <c:set var="url" value="${url}"/>
-        <ul class="pagination">
-            <li><a href="${url}?currentPage=${currentPage-1 > 0 ? currentPage - 1 : 1}" class="prev">&lt; Prev</a></li>
-            <%-- show left pages --%>
-            <c:choose>
-                <c:when test="${showAllPrev}">
-                    <c:if test="${currentPage > 0}">
-                        <c:forEach begin="1" end="${currentPage - 1}" var="p">
-                            <li><a href="${url}?currentPage=${p}">${p}</a></li>
-                        </c:forEach>
-                    </c:if>
-                </c:when>
-                <c:otherwise>
-                    <c:forEach begin="1" end="${N_PAGES_FIRST}" var="p">
-                        <li><a href="${url}?currentPage=${p}">${p}</a></li>
-                    </c:forEach>
-                    <li><span>...</span></li>
-                    <c:forEach begin="${currentPage + 1 - N_PAGES_PREV}" end="${currentPage - 1}" var="p">
-                        <li><a href="${url}?currentPage=${p}">${p}</a></li>
-                    </c:forEach>
-                </c:otherwise>
-            </c:choose>
-            <%-- show current page --%>
-                <li class="active"><a href="${url}?currentPage=${currentPage}">${currentPage}</a></li>
-            <%-- show right pages --%>
-            <c:choose>
-                <c:when test="${showAllNext}">
-                    <c:forEach begin="${currentPage + 1}" end="${lastPage}" var="p">
-                        <li><a href="${url}?currentPage=${p}">${p}</a></li>
-                    </c:forEach>
-                </c:when>
-                <c:otherwise>
-                    <c:forEach begin="${currentPage + 1}" end="${currentPage + (N_PAGES_NEXT - 1)}" var="p">
-                        <li><a href="${url}?currentPage=${p}">${p}</a></li>
-                    </c:forEach>
-                    <li><span>...</span></li>
-                    <c:forEach begin="${lastPage - (N_PAGES_LAST - 1)}" end="${lastPage}" var="p">
-                        <li><a href="${url}?currentPage=${p}">${p}</a><li>
-                    </c:forEach>
-                </c:otherwise>
-            </c:choose>
-            <li><a href="${url}?currentPage=${currentPage + 1 > lastPage ? lastPage : currentPage + 1}">Next &gt;</a><li>
-        </ul>
+        <ctg:pagination currentPage="${currentPage}" lastPage="${lastPage}" url="${url}"/>
     </div>
     <c:import url="/WEB-INF/jsp/footer.jsp"/>
 </body>

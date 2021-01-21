@@ -17,14 +17,7 @@ import java.util.List;
 
 public class CampaignListVisual extends Command {
     private static final Logger LOGGER = LogManager.getLogger(CampaignListVisual.class);
-    // сколько ссылок отображается начиная с самой первой (не может быть установлено в 0)
-    final int N_PAGES_FIRST = 1;
-    // сколько ссылок отображается слева от текущей (может быть установлено в 0)
-    final int N_PAGES_PREV = 1;
-    // сколько ссылок отображается справа от текущей (может быть установлено в 0)
-    final int N_PAGES_NEXT = 1;
-    // сколько ссылок отображается в конце списка страниц (не может быть установлено в 0)
-    final int N_PAGES_LAST = 1;
+
 
     public CampaignListVisual() {
         getPermissionSet().addAll(Arrays.asList(UserRole.values()));
@@ -35,39 +28,27 @@ public class CampaignListVisual extends Command {
         CampaignService campaignService = (CampaignService) serviceFactory.getService(ServiceEnum.CAMPAIGN);
 
         String currentPageParameter =  request.getParameter("currentPage");
-        LOGGER.debug("Current page: " + currentPageParameter);
-        //Integer pageSize = (Integer) request.getAttribute("pageSize");
-        int pageSize = 1;
+        Integer pageSize = (Integer) request.getAttribute("pageSize");
+
         int currentPage = 1;
         if (currentPageParameter != null) {
             currentPage = Integer.parseInt(currentPageParameter);
-
+        }
+        if (pageSize == null) {
+            pageSize = 2;
         }
 
         try {
-            int totalRecords = campaignService.readRowCount();
-            LOGGER.debug("Total records: " + totalRecords);
             int offset = pageSize * (currentPage - 1);
             List<Campaign> pageCampaignList = campaignService.readSublist(pageSize, offset);
-            LOGGER.debug("List: " + pageCampaignList.size());
-            request.setAttribute("campaignSubList", pageCampaignList);
+            int totalRecords = campaignService.readRowCount();
             int pages = totalRecords / pageSize;
             int lastPage = pages * pageSize < totalRecords ? pages + 1 : pages;
-            request.setAttribute("lastPage", lastPage);
-            LOGGER.debug("last page: " + lastPage);
-            // показывать ли полностью все ссылки на страницы слева от текущей, или вставить многоточие
-            boolean showAllPrev;
-            // показывать ли полностью все ссылки на страницы справа от текущей, или вставить многоточие
-            boolean showAllNext;
-            showAllPrev = N_PAGES_FIRST >= (currentPage - N_PAGES_PREV);
-            showAllNext = currentPage + N_PAGES_NEXT >= lastPage - N_PAGES_LAST;
+
+            request.setAttribute("campaignSubList", pageCampaignList);
+            request.setAttribute("pageSize", pageSize);
             request.setAttribute("currentPage", currentPage);
-            request.setAttribute("N_PAGES_FIRST", N_PAGES_FIRST );
-            request.setAttribute("N_PAGES_PREV", N_PAGES_PREV );
-            request.setAttribute("N_PAGES_NEXT", N_PAGES_NEXT );
-            request.setAttribute("N_PAGES_LAST", N_PAGES_LAST );
-            request.setAttribute("showAllPrev", showAllPrev );
-            request.setAttribute("showAllNext", showAllNext );
+            request.setAttribute("lastPage", lastPage);
             return new Forward("jsp/campaign/list.jsp");
         } catch (ServiceException e) {
             LOGGER.error(e);
