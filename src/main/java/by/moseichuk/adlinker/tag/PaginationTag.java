@@ -7,17 +7,19 @@ import java.io.IOException;
 
 public class PaginationTag extends TagSupport {
     // сколько ссылок отображается начиная с самой первой (не может быть установлено в 0)
-    private final int N_PAGES_FIRST = 2;
+    private final int N_PAGES_FIRST = 1;
     // сколько ссылок отображается слева от текущей (может быть установлено в 0)
-    private final int N_PAGES_PREV = 1;
+    private final int N_PAGES_PREV = 2;
     // сколько ссылок отображается справа от текущей (может быть установлено в 0)
-    private final int N_PAGES_NEXT = 1;
+    private final int N_PAGES_NEXT = 2;
     // сколько ссылок отображается в конце списка страниц (не может быть установлено в 0)
-    private final int N_PAGES_LAST = 2;
+    private final int N_PAGES_LAST = 1;
     // показывать ли полностью все ссылки на страницы слева от текущей, или вставить многоточие
     private boolean showAllPrev;
     // показывать ли полностью все ссылки на страницы справа от текущей, или вставить многоточие
     private boolean showAllNext;
+    //многоточие
+    private static final String DISABLED_LINK = "<li><a class=\"page-link disabled\">...</a></li>";
 
     private Integer currentPage;
     private Integer lastPage;
@@ -37,7 +39,7 @@ public class PaginationTag extends TagSupport {
 
     @Override
     public int doStartTag() throws JspException {
-        showAllPrev = N_PAGES_FIRST >= (currentPage - N_PAGES_PREV);
+        showAllPrev = (N_PAGES_FIRST + N_PAGES_PREV + 1) >= currentPage;
         showAllNext = currentPage + N_PAGES_NEXT >= lastPage - N_PAGES_LAST;
 
         printPagination();
@@ -54,18 +56,17 @@ public class PaginationTag extends TagSupport {
             writer.write(getLinkElement(prevPage, "&lt; Prev"));
             //show left pages
             if (showAllPrev) {
-                if (currentPage > 0) {
-                    for (int i = 1; i < currentPage - 1; i++) {
-                        writer.write(getLinkElement(i, String.valueOf(i)));
-                    }
-                } else {
-                    for (int i = 1; i < N_PAGES_FIRST; i++) {
-                        writer.write(getLinkElement(i, String.valueOf(i)));
-                    }
-                    writer.write("<li><span>...</span></li>");
-                    for (int i = currentPage + 1 + N_PAGES_PREV; i < currentPage - 1; i++) {
-                        writer.write(getLinkElement(i, String.valueOf(i)));
-                    }
+                for (int i = 1; i <= currentPage - 1; i++) {
+                    writer.write(getLinkElement(i, String.valueOf(i)));
+                }
+
+            } else {
+                for (int i = 1; i <= N_PAGES_FIRST; i++) {
+                    writer.write(getLinkElement(i, String.valueOf(i)));
+                }
+                writer.write(DISABLED_LINK);
+                for (int i = currentPage - N_PAGES_PREV; i <= currentPage - 1; i++) {
+                    writer.write(getLinkElement(i, String.valueOf(i)));
                 }
             }
             //show current pageclass="page-item"
@@ -73,18 +74,16 @@ public class PaginationTag extends TagSupport {
                     url, currentPage, currentPage));
             //show last pages
             if (showAllNext) {
-                if (currentPage > 0) {
-                    for (int i = currentPage + 1; i < lastPage; i++) {
-                        writer.write(getLinkElement(i, String.valueOf(i)));
-                    }
-                } else {
-                    for (int i = currentPage + 1; i < currentPage + N_PAGES_NEXT - 1; i++) {
-                        writer.write(getLinkElement(i, String.valueOf(i)));
-                    }
-                    writer.write("<li><span>...</span></li>");
-                    for (int i = lastPage - N_PAGES_LAST - 1; i < lastPage; i++) {
-                        writer.write(getLinkElement(i, String.valueOf(i)));
-                    }
+                for (int i = currentPage + 1; i <= lastPage; i++) {
+                    writer.write(getLinkElement(i, String.valueOf(i)));
+                }
+            } else {
+                for (int i = currentPage + 1; i <= currentPage + N_PAGES_NEXT; i++) {
+                    writer.write(getLinkElement(i, String.valueOf(i)));
+                }
+                writer.write(DISABLED_LINK);
+                for (int i = lastPage - N_PAGES_LAST + 1; i <= lastPage; i++) {
+                    writer.write(getLinkElement(i, String.valueOf(i)));
                 }
             }
             int nextPage = Math.min(currentPage + 1, lastPage);
