@@ -18,12 +18,10 @@ public class TransactionFactoryImpl implements TransactionFactory {
     public TransactionFactoryImpl() throws TransactionException {
         try {
             connection = ConnectionPool.getInstance().getConnection();
-
             connection.setAutoCommit(false);
         } catch (ConnectionPoolException e) {
             throw new TransactionException("Can't get connection from pool", e);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new TransactionException("Can't disable autocommit", e);
         }
 
