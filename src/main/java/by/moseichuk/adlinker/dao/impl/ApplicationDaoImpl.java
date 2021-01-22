@@ -20,7 +20,7 @@ public class ApplicationDaoImpl extends BaseDao implements ApplicationDao {
         try (PreparedStatement preparedStatement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setInt(1, application.getUserId());
             preparedStatement.setString(2, application.getComment());
-            preparedStatement.setDate(3, new Date(application.getDate().getTimeInMillis()));
+            preparedStatement.setTimestamp(3, new Timestamp(application.getDate().getTimeInMillis()));
             preparedStatement.executeUpdate();
 
            return application.getUserId();
@@ -53,7 +53,7 @@ public class ApplicationDaoImpl extends BaseDao implements ApplicationDao {
     public void update(Application application) throws DaoException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)){
             preparedStatement.setString(1, application.getComment());
-            preparedStatement.setDate(2, new Date(application.getDate().getTimeInMillis()));
+            preparedStatement.setTimestamp(2, new Timestamp(application.getDate().getTimeInMillis()));
             preparedStatement.setInt(3, application.getUserId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
