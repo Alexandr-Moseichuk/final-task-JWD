@@ -1,6 +1,8 @@
 package by.moseichuk.adlinker.service.impl;
 
 import by.moseichuk.adlinker.dao.TransactionFactory;
+import by.moseichuk.adlinker.dao.exception.TransactionException;
+import by.moseichuk.adlinker.dao.transaction.TransactionFactoryImpl;
 import by.moseichuk.adlinker.service.BaseService;
 import by.moseichuk.adlinker.service.ServiceEnum;
 import by.moseichuk.adlinker.service.ServiceFactory;
@@ -8,8 +10,8 @@ import by.moseichuk.adlinker.service.ServiceFactory;
 public class ServiceFactoryImpl implements ServiceFactory {
     private TransactionFactory transactionFactory;
 
-    public ServiceFactoryImpl(TransactionFactory transactionFactory) {
-        this.transactionFactory = transactionFactory;
+    public ServiceFactoryImpl() throws TransactionException {
+        transactionFactory = new TransactionFactoryImpl();
     }
 
     @Override
