@@ -5,11 +5,14 @@ import by.moseichuk.adlinker.dao.TransactionFactory;
 import by.moseichuk.adlinker.dao.exception.ConnectionPoolException;
 import by.moseichuk.adlinker.dao.exception.TransactionException;
 import by.moseichuk.adlinker.dao.pool.ConnectionPool;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public class TransactionFactoryImpl implements TransactionFactory {
+    private static final Logger LOGGER = LogManager.getLogger(TransactionFactoryImpl.class);
     private final Connection connection;
 
     public TransactionFactoryImpl() throws TransactionException {
@@ -18,7 +21,7 @@ public class TransactionFactoryImpl implements TransactionFactory {
 
             connection.setAutoCommit(false);
         } catch (ConnectionPoolException e) {
-            throw new TransactionException(e);
+            throw new TransactionException("Can't get connection from pool", e);
         }
         catch (SQLException e) {
             throw new TransactionException("Can't disable autocommit", e);
@@ -35,7 +38,7 @@ public class TransactionFactoryImpl implements TransactionFactory {
         try {
             connection.close();
         } catch (SQLException e) {
-            //TODO logger
+            LOGGER.error(e);
         }
     }
 }
