@@ -11,7 +11,7 @@
 
     <servlet>
         <servlet-name>DispatcherServlet</servlet-name>
-        <servlet-class>by.moseichuk.final_task_JWD.controller.HelloServlet</servlet-class>
+        <servlet-class>by.moseichuk.adlinker.controller.HelloServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DispatcherServlet</servlet-name>
@@ -19,7 +19,7 @@
     </servlet-mapping>
     <filter>
         <filter-name>EncodingFilter</filter-name>
-        <filter-class>by.moseichuk.final_task_JWD.controller.filter.EncodingFilter</filter-class>
+        <filter-class>by.moseichuk.adlinker.controller.filter.EncodingFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>EncodingFilter</filter-name>
@@ -27,7 +27,7 @@
     </filter-mapping>
     <filter>
         <filter-name>CommandFilter</filter-name>
-        <filter-class>by.moseichuk.final_task_JWD.controller.filter.CommandFilter</filter-class>
+        <filter-class>by.moseichuk.adlinker.controller.filter.CommandFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>CommandFilter</filter-name>
@@ -35,7 +35,7 @@
     </filter-mapping>
     <filter>
         <filter-name>SecurityFilter</filter-name>
-        <filter-class>by.moseichuk.final_task_JWD.controller.filter.SecurityFilter</filter-class>
+        <filter-class>by.moseichuk.adlinker.controller.filter.SecurityFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>SecurityFilter</filter-name>

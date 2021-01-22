@@ -8,7 +8,7 @@
     <uri>customtags</uri>
     <tag>
         <name>pagination</name>
-        <tag-class>by.moseichuk.final_task_JWD.tag.PaginationTag</tag-class>
+        <tag-class>by.moseichuk.adlinker.tag.PaginationTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>currentPage</name>

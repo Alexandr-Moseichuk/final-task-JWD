@@ -16,7 +16,7 @@
         </File>
     </Appenders>
     <Loggers>
-        <Logger name="by.moseichuk.final_task_JWD.dao.pool.ConnectionPool" level="all" additivity="false">
+        <Logger name="by.moseichuk.adlinker.dao.pool.ConnectionPool" level="all" additivity="false">
             <AppenderRef ref="ConnectionPool" level="DEBUG"/>
         </Logger>
         <Root level="all">
