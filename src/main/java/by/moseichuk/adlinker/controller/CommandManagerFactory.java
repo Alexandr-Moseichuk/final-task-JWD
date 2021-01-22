@@ -1,7 +1,6 @@
 package by.moseichuk.adlinker.controller;
 
 import by.moseichuk.adlinker.dao.exception.TransactionException;
-import by.moseichuk.adlinker.service.ServiceFactory;
 import by.moseichuk.adlinker.service.impl.ServiceFactoryImpl;
 
 public class CommandManagerFactory {
@@ -14,8 +13,7 @@ public class CommandManagerFactory {
     }
 
     public CommandManger getManager() throws TransactionException {
-        ServiceFactory serviceFactory = new ServiceFactoryImpl();
-        return new CommandManagerImpl(serviceFactory);
+        return new CommandManagerImpl(new ServiceFactoryImpl());
     }
 
 }
