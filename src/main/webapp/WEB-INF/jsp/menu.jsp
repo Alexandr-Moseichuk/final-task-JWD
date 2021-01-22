@@ -54,7 +54,7 @@
             <div class="container justify-content-center">
                 <ul class="navbar-nav text-nowrap">
                     <li class="nav-item dropdown">
-                        <jsp:useBean id="authorizedUser" scope="session" type="by.moseichuk.final_task_JWD.bean.User"/>
+                        <jsp:useBean id="authorizedUser" scope="session" type="by.moseichuk.adlinker.bean.User"/>
                         <jsp:useBean id="menuList" scope="session" type="java.util.List"/>
                         <a class="nav-link dropdown-toggle" href="#"  data-toggle="dropdown">
                             <c:out value="${authorizedUser.userInfo.lastName} ${authorizedUser.userInfo.firstName}"/>

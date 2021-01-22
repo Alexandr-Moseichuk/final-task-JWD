@@ -18,7 +18,7 @@
     <fmt:setLocale value="ru-RU"/>
     <c:forEach var="campaign" items="${campaignSubList}">
 <%--        <ctg:welcome-message campaign="${campaign}"/>--%>
-        <div class="container-sm p-3 my-3 col-6 border">
+        <div class="container col-6 border">
             <h5><c:out value="${campaign.title}"/></h5>
             <p>Дата создания: <fmt:formatDate value="${campaign.createDate.time}" type="both" dateStyle="medium" timeStyle="medium"/></p>
             <p>
