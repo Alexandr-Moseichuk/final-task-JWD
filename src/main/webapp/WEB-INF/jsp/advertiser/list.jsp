@@ -10,9 +10,10 @@
 <html>
 <head>
     <title>Список рекламодателей</title>
+    <c:import url="/WEB-INF/jsp/style.jsp"/>
 </head>
 <body>
-    <c:import url="/WEB-INF/jsp/menu.jsp"/>
+    <c:import url="/WEB-INF/jsp/particles/menu.jsp"/>
     <h3>Список рекламных кампаний</h3>
     <jsp:useBean id="advertiserList" scope="request" type="java.util.List"/>
     <c:forEach var="advertiser" items="${advertiserList}">

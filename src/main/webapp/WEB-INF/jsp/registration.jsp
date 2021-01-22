@@ -13,7 +13,7 @@
     <fmt:setLocale value="${ cookie.language.value }" scope="session"/>
     <fmt:setBundle basename="localization.pagecontent" var="rb" />
     <title><fmt:message key="registation.title" bundle="${rb}" /></title>
-    <c:import url="style.jsp"/>
+    <c:import url="/WEB-INF/jsp/style.jsp"/>
 </head>
 <body class="bg-light">
 <%--<div class="container pt-3 my-3 border col-4">--%>

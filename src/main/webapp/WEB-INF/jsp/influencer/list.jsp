@@ -12,7 +12,7 @@
     <c:import url="/WEB-INF/jsp/style.jsp"/>
 </head>
 <body>
-    <c:import url="/WEB-INF/jsp/menu.jsp"/>
+    <c:import url="/WEB-INF/jsp/particles/menu.jsp"/>
     <h3>Список инфлюенсеров</h3>
     <div class="row">
     <div class="col-3"></div>

@@ -9,9 +9,9 @@ public class PaginationTag extends TagSupport {
     // сколько ссылок отображается начиная с самой первой (не может быть установлено в 0)
     private final int N_PAGES_FIRST = 2;
     // сколько ссылок отображается слева от текущей (может быть установлено в 0)
-    private final int N_PAGES_PREV = 2;
+    private final int N_PAGES_PREV = 1;
     // сколько ссылок отображается справа от текущей (может быть установлено в 0)
-    private final int N_PAGES_NEXT = 2;
+    private final int N_PAGES_NEXT = 1;
     // сколько ссылок отображается в конце списка страниц (не может быть установлено в 0)
     private final int N_PAGES_LAST = 2;
     // показывать ли полностью все ссылки на страницы слева от текущей, или вставить многоточие
@@ -68,9 +68,9 @@ public class PaginationTag extends TagSupport {
                     }
                 }
             }
-            //show current page
-            writer.write(String.format("<li class=\"active\"><a href=\"${url}?currentPage=%d\">%d</a></li>",
-                    currentPage, currentPage));
+            //show current pageclass="page-item"
+            writer.write(String.format("<li class=\"active page-item\"><a class=\"page-link\" href=\"%s?currentPage=%d\">%d</a></li>",
+                    url, currentPage, currentPage));
             //show last pages
             if (showAllNext) {
                 if (currentPage > 0) {
@@ -96,7 +96,7 @@ public class PaginationTag extends TagSupport {
     }
 
     private String getLinkElement(int i, String text) {
-        return String.format("<li><a href=\"%s?currentPage=%d\">%s</a></li>",url, i, text);
+        return String.format("<li class=\"page-item\"><a class=\"page-link\" href=\"%s?currentPage=%d\">%s</a></li>",url, i, text);
     }
     /**
      * <c:set var="url" value="${url}"/>

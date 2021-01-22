@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Title</title>
+    <c:import url="/WEB-INF/jsp/style.jsp"/>
 </head>
 <body>
 Доступ запрещен

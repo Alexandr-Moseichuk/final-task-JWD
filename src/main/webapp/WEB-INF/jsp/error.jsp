@@ -9,9 +9,10 @@
     </c:if>
     <fmt:setBundle basename="localization.pagecontent" var="rb" />
     <title><fmt:message key="error.title" bundle="${rb}" /></title>
+    <c:import url="/WEB-INF/jsp/style.jsp"/>
 </head>
 <body>
-<c:import url="menu.jsp"/>
+<c:import url="particles/menu.jsp"/>
 <jsp:useBean id="errorMessage" scope="request" type="java.lang.String"/>
 <div>
     <h4><fmt:message key="error.label.message" bundle="${rb}" /></h4>
