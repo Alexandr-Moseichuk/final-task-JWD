@@ -10,19 +10,19 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class TransactionFactoryImpl implements TransactionFactory {
-    private Connection connection;
+    private final Connection connection;
 
     public TransactionFactoryImpl() throws TransactionException {
         try {
             connection = ConnectionPool.getInstance().getConnection();
-            //TODO
-            //connection.setAutoCommit(false);
+
+            connection.setAutoCommit(false);
         } catch (ConnectionPoolException e) {
             throw new TransactionException(e);
         }
-//        catch (SQLException e) {
-//            throw new TransactionException("Can't disable autocommit", e);
-//        }
+        catch (SQLException e) {
+            throw new TransactionException("Can't disable autocommit", e);
+        }
 
     }
     @Override
