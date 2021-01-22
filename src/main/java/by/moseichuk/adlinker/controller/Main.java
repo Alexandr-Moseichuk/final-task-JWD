@@ -36,33 +36,33 @@ public class Main {
 //        } catch (ConnectionPoolException e) {
 //            e.printStackTrace();
 //        }
-
-        try {
-            ConnectionPool.getInstance().init("org.mariadb.jdbc.Driver",
-                    "jdbc:mariadb://localhost:3306/adlinker_db", "root", "root",
-                    3, 5, 2);
-
-
-            TransactionFactory transactionFactory = new TransactionFactoryImpl();
-            ServiceFactory serviceFactory = new ServiceFactoryImpl(transactionFactory);
-            CampaignServiceImpl service = (CampaignServiceImpl) serviceFactory.getService(ServiceEnum.CAMPAIGN);
-            List<Campaign> campaignList = service.readAll();
-            for (Campaign c : campaignList) {
-                System.out.println(c);
-            }
+//
+//        try {
+//            ConnectionPool.getInstance().init("org.mariadb.jdbc.Driver",
+//                    "jdbc:mariadb://localhost:3306/adlinker_db", "root", "root",
+//                    3, 5, 2);
+//
+//
+//            TransactionFactory transactionFactory = new TransactionFactoryImpl();
+//            ServiceFactory serviceFactory = new ServiceFactoryImpl(transactionFactory);
+//            CampaignServiceImpl service = (CampaignServiceImpl) serviceFactory.getService(ServiceEnum.CAMPAIGN);
+//            List<Campaign> campaignList = service.readAll();
+//            for (Campaign c : campaignList) {
+//                System.out.println(c);
+//            }
 //
 //            UserServiceImpl userService = new UserServiceImpl();
 //            userService.setTransaction(transaction);
 //            User user = userService.login("adminnnn@mail.ru", "admin");
 //
 //            System.out.println(user);
-        } catch (TransactionException e) {
-            e.printStackTrace();
-        } catch (ConnectionPoolException e) {
-            e.printStackTrace();
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
+//        } catch (TransactionException e) {
+//            e.printStackTrace();
+//        } catch (ConnectionPoolException e) {
+//            e.printStackTrace();
+//        } catch (ServiceException e) {
+//            e.printStackTrace();
+//        }
 
 
     }
