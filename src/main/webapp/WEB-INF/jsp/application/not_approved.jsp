@@ -18,8 +18,10 @@
         <%--            <label for="email">Email:</label>--%>
         <textarea class="form-control" placeholder="Comment" id="comment" name="comment"></textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Обновить</button>
     <p class="text-danger"><c:out value="${updateFeedback}"/></p>
+    <button type="submit" class="btn btn-primary">Обновить</button>
+    <a href="<c:url value='/logout.html'/>">Выход</a>
+
 </form>
 </body>
 </html>

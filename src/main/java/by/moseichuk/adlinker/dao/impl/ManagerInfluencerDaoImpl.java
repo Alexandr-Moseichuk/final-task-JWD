@@ -5,11 +5,9 @@ import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.dao.ManagerInfluencerDao;
 import by.moseichuk.adlinker.dao.exception.DaoException;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ManagerInfluencerDaoImpl extends BaseDao implements ManagerInfluencerDao {
@@ -25,13 +23,13 @@ public class ManagerInfluencerDaoImpl extends BaseDao implements ManagerInfluenc
         try (PreparedStatement preparedStatement = connection.prepareStatement(CREATE)) {
             preparedStatement.setInt(1, influencer.getManager().getId());
             preparedStatement.setInt(2, influencer.getId());
-            preparedStatement.setDate(3, new Date(System.currentTimeMillis()));
+            preparedStatement.setTimestamp(3, new Timestamp(new GregorianCalendar().getTimeInMillis()));
 
             preparedStatement.executeUpdate();
 
             return influencer.getId();
         } catch (SQLException e) {
-            throw new DaoException("Can't create manager-influencer link", e);
+            throw new DaoException("Can't create manager-influencer link " + e.getMessage(), e);
         }
     }
 

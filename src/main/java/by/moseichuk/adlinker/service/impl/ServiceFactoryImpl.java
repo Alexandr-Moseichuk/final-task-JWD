@@ -56,6 +56,9 @@ public class ServiceFactoryImpl implements ServiceFactory {
             case APPLICATION:
                 service = new ApplicationServiceImpl();
                 break;
+            case MANAGER_INFLUENCER:
+                service = new ManagerInfluencerServiceImpl();
+                break;
         }
         service.setTransaction(transactionFactory.createTransaction());
         return service;

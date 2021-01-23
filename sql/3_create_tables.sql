@@ -81,7 +81,7 @@ CREATE TABLE `social_link`
 CREATE TABLE `manager_influencer`
 (
     `manager_id`    INTEGER  NOT NULL ,
-    `influencer_id` INTEGER  NOT NULL UNIQUE ,
+    `influencer_id` INTEGER  NOT NULL ,
     `begin_date`    TIMESTAMP NOT NULL ,
     `end_date`      TIMESTAMP ,
     PRIMARY KEY (`manager_id`, `influencer_id`, `begin_date`),

@@ -6,6 +6,7 @@ import by.moseichuk.adlinker.controller.command.Registration;
 import by.moseichuk.adlinker.controller.command.application.ApplicationList;
 import by.moseichuk.adlinker.controller.command.application.ApplicationListAction;
 import by.moseichuk.adlinker.controller.command.application.ApplicationUpdate;
+import by.moseichuk.adlinker.controller.command.manager.ManagerSubscribe;
 import by.moseichuk.adlinker.controller.command.show.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -40,6 +41,7 @@ public class CommandFilter implements Filter {
         commandPost.put("/registration", new Registration());
         commandPost.put("/application/action", new ApplicationListAction());
         commandPost.put("/application/update", new ApplicationUpdate());
+        commandPost.put("/manager/subscribe", new ManagerSubscribe());
     }
 
     @Override

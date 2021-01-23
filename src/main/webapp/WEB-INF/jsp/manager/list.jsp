@@ -42,6 +42,15 @@
                     <span>
                     На сайте с <c:out value="${manager.registrationDate.time}"/>
                 </span>
+                    <c:if test="${sessionScope.authorizedUser.role eq 'INFLUENCER'}">
+                        <form action="subscribe.html?managerId=${manager.id}" method="post">
+                            <button type="submit">
+                                Подписаться
+                            </button>
+                        </form>
+
+
+                    </c:if>
                 </div>
             </c:forEach>
         </div>
