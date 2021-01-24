@@ -11,12 +11,12 @@
 </head>
 <body>
     <c:import url="../particles/menu.jsp"/>
-    <div class="container my-3">
-        <div class="row">
-            <div class="col-2">
+    <div class="container col-12 col-sm-6 mt-3">
+        <div class="row  justify-content-center">
+            <div class="col-4">
                 <img class="img-thumbnail img-fluid" src="../img/icon-user.svg" alt="User photo">
             </div>
-            <div class="col-10">
+            <div class="col-8">
                 <h3>${user.userInfo.lastName} <ctg:userRoleBadge userRole="${user.role}"/></h3>
                 <h4>${user.userInfo.firstName} ${user.userInfo.secondName}</h4>
                 <h4>${user.email}</h4>
