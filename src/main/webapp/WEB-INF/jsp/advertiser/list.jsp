@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -9,8 +10,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Список рекламодателей</title>
-    <c:import url="/WEB-INF/jsp/style.jsp"/>
+    <fmt:setBundle basename="localization.pagecontent" var="rb" />
+    <title><fmt:message key="advertiser.list.title" bundle="${rb}" /></title>
+    <c:import url="../style.jsp"/>
 </head>
 <body>
     <c:import url="/WEB-INF/jsp/particles/menu.jsp"/>

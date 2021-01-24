@@ -16,13 +16,14 @@
 </head>
 <body>
 <form action="login.html" method="post">
+    <h5 class="text-center"><fmt:message key="login_form.label.sign_in" bundle="${rb}"/></h5>
     <div class="form-group">
         <%--            <label for="email">Email:</label>--%>
-        <input type="email" class="form-control" placeholder="Email" id="email" name="email">
+        <input type="email" class="form-control" placeholder="<fmt:message key="login_form.form.email" bundle="${rb}"/>" id="email" name="email">
     </div>
     <div class="form-group">
         <%--            <label for="password">Password:</label>--%>
-        <input type="password" class="form-control" placeholder="Password" id="password" name="password">
+        <input type="password" class="form-control" placeholder="<fmt:message key="login_form.form.password" bundle="${rb}"/>" id="password" name="password">
     </div>
     <div class="form-group form-check">
         <label class="form-check-label line">

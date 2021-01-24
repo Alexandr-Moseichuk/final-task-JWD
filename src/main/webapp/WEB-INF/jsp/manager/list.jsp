@@ -1,16 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Admin
-  Date: 05.01.2021
-  Time: 11:59
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Список менеджеров</title>
-    <c:import url="/WEB-INF/jsp/style.jsp"/>
+    <fmt:setBundle basename="localization.pagecontent" var="rb" />
+    <title><fmt:message key="manager.list.title" bundle="${rb}" /></title>
+    <c:import url="../style.jsp"/>
 </head>
 <body>
 <c:import url="/WEB-INF/jsp/particles/menu.jsp"/>

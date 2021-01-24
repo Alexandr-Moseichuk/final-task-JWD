@@ -24,7 +24,7 @@
                 <ul class="navbar-nav text-nowrap">
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value="/campaign/list.html"/>">
-                            <fmt:message key="menu.campaings" bundle="${ rb }" />
+                            <fmt:message key="menu.campaigns" bundle="${ rb }" />
                         </a>
                     </li>
                     <li class="nav-item">

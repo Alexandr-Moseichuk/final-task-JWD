@@ -1,14 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Admin
-  Date: 04.01.2021
-  Time: 12:00
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <fmt:setBundle basename="localization.pagecontent" var="rb" />
+    <title><fmt:message key="influencer.list.title" bundle="${rb}" /></title>
     <c:import url="/WEB-INF/jsp/style.jsp"/>
 </head>
 <body>

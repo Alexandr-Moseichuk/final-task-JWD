@@ -4,7 +4,8 @@
 <%@ taglib prefix="ctg" uri="/WEB-INF/tld/custom.tld" %>
 <html>
 <head>
-    <title>Список кампаний</title>
+    <fmt:setBundle basename="localization.pagecontent" var="rb" />
+    <title><fmt:message key="campaign.list.title" bundle="${rb}" /></title>
     <c:import url="../style.jsp"/>
 </head>
 <body>
