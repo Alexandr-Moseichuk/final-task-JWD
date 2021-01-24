@@ -12,6 +12,8 @@ public interface UserService {
 
     Integer create(User user) throws ServiceException;
 
+    User read(Integer userId) throws ServiceException;
+
     void createUserInfo(UserInfo userInfo) throws ServiceException;
 
     List<User> readAll() throws ServiceException;

@@ -19,7 +19,7 @@
     <div class="container pt-3 my-3">
         <div class="row">
             <div class="col-md-8">
-                <img class="img-fluid" src="img/welcome_image.jpeg" class="rounded" alt="Welcome image">
+                <img class="img-fluid rounded" src="img/welcome_image.jpeg" alt="Welcome image">
             </div>
             <div class="col-md-4">
                 <div class="container pt-3 my-3 border">

@@ -53,7 +53,7 @@
                             <c:out value="${authorizedUser.userInfo.lastName} ${authorizedUser.userInfo.firstName}"/>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="<c:url value="/user/profile.html"/>">
+                            <a class="dropdown-item" href="<c:url value="/user/profile.html?userId=${authorizedUser.id}"/>">
                                 <fmt:message key="menu.dropdown.profile" bundle="${ rb }" />
                             </a>
                             <c:forEach var="menuItem" items="${menuList}">

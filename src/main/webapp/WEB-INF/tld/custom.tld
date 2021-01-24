@@ -29,4 +29,15 @@
             <type>java.lang.String</type>
         </attribute>
     </tag>
+    <tag>
+        <name>userRoleBadge</name>
+        <tag-class>by.moseichuk.adlinker.tag.UserRoleBadgeTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>userRole</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>by.moseichuk.adlinker.bean.UserRole</type>
+        </attribute>
+    </tag>
 </taglib>

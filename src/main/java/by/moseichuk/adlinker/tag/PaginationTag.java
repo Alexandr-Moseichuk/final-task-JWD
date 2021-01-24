@@ -1,11 +1,15 @@
 package by.moseichuk.adlinker.tag;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
 public class PaginationTag extends TagSupport {
+    private static final Logger LOGGER = LogManager.getLogger(PaginationTag.class);
     // сколько ссылок отображается начиная с самой первой (не может быть установлено в 0)
     private final int N_PAGES_FIRST = 1;
     // сколько ссылок отображается слева от текущей (может быть установлено в 0)
@@ -90,7 +94,7 @@ public class PaginationTag extends TagSupport {
             writer.write(getLinkElement(nextPage, "Next &gt;"));
             writer.write("</ul>");
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         }
     }
 

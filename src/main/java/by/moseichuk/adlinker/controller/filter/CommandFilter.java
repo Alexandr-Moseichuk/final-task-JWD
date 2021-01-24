@@ -8,6 +8,7 @@ import by.moseichuk.adlinker.controller.command.application.ApplicationListActio
 import by.moseichuk.adlinker.controller.command.application.ApplicationUpdate;
 import by.moseichuk.adlinker.controller.command.manager.ManagerSubscribe;
 import by.moseichuk.adlinker.controller.command.show.*;
+import by.moseichuk.adlinker.controller.command.user.UserProfile;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -36,6 +37,7 @@ public class CommandFilter implements Filter {
         commandGet.put("/lang", new Lang());
         commandGet.put("/application/list", new ApplicationList());
         commandGet.put("/application/update", new ApplicationUpdateVisual());
+        commandGet.put("/user/profile", new UserProfile());
 
         commandPost.put("/login", new Login());
         commandPost.put("/registration", new Registration());
