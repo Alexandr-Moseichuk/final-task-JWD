@@ -14,34 +14,26 @@
 </head>
 <body>
     <c:import url="/WEB-INF/jsp/particles/menu.jsp"/>
-    <h3>Список рекламных кампаний</h3>
-    <jsp:useBean id="advertiserList" scope="request" type="java.util.List"/>
-    <c:forEach var="advertiser" items="${advertiserList}">
-        <div class="container-sm p-3 my-3 border">
-            <div class="row">
-                <div class="col-sm-2">
-                    PHOTO
+    <h3 class="text-center">Список рекламодателей</h3>
+    <div class="container">
+        <div class="row justify-content-center">
+            <jsp:useBean id="advertiserList" scope="request" type="java.util.List"/>
+            <c:forEach var="advertiser" items="${advertiserList}">
+                <div class="card ml-2 mr-2 mt-2 mb-2" style="width:300px">
+                    <img class="card-img-top" src="../img/icon-user.svg" alt="Card image" style="width:100%">
+                    <div class="card-body">
+                        <h4><c:out value="${advertiser.userInfo.lastName}"/></h4>
+                        <h5><c:out value="${advertiser.userInfo.firstName} ${advertiser.userInfo.secondName}"/></h5>
+                        <p class="card-text"><c:out value="${advertiser.userInfo.description}"/></p>
+                        <a href="#" class="btn btn-primary stretched-link">See Profile</a>
+                    </div>
+                    <div class="card-footer">
+                        <h6><c:out value="${advertiser.userInfo.phoneNumber}"/></h6>
+                        <h6><c:out value="${advertiser.registrationDate.time}"/></h6>
+                    </div>
                 </div>
-                <div class="col-sm-4">
-                    <h6><c:out value="${advertiser.userInfo.lastName}"/></h6>
-                    <h6><c:out value="${advertiser.userInfo.firstName}"/></h6>
-                    <h6><c:out value="${advertiser.userInfo.secondName}"/></h6>
-                </div>
-            </div>
-            <span>
-                <p>
-                    <c:out value="${advertiser.userInfo.description}"/>
-                </p>
-                <p>
-                    Phone: <c:out value="${advertiser.userInfo.phoneNumber}"/>
-                </p>
-            </span>
-            <span>
-                На сайте с <c:out value="${advertiser.registrationDate.time}"/>
-            </span>
+            </c:forEach>
         </div>
-
-
-    </c:forEach>
+    </div>
 </body>
 </html>
