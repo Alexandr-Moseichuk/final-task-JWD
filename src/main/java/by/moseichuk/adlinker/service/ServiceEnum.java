@@ -6,5 +6,6 @@ public enum  ServiceEnum {
     APPLICATION,
     MANAGER_INFLUENCER,
     USER_INFO,
-    MANAGER
+    MANAGER,
+    INFLUENCER
 }

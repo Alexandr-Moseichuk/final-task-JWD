@@ -1,15 +1,9 @@
 package by.moseichuk.adlinker.controller.command.user;
 
-import by.moseichuk.adlinker.bean.Manager;
-import by.moseichuk.adlinker.bean.User;
-import by.moseichuk.adlinker.bean.UserInfo;
-import by.moseichuk.adlinker.bean.UserRole;
+import by.moseichuk.adlinker.bean.*;
 import by.moseichuk.adlinker.controller.Command;
 import by.moseichuk.adlinker.controller.Forward;
-import by.moseichuk.adlinker.service.ManagerService;
-import by.moseichuk.adlinker.service.ServiceEnum;
-import by.moseichuk.adlinker.service.UserInfoService;
-import by.moseichuk.adlinker.service.UserService;
+import by.moseichuk.adlinker.service.*;
 import by.moseichuk.adlinker.service.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
+import java.util.List;
 
 public class UserProfile extends Command {
     private static final Logger LOGGER = LogManager.getLogger(UserProfile.class);
@@ -44,11 +39,13 @@ public class UserProfile extends Command {
                 case INFLUENCER:
                     ManagerService managerService = (ManagerService) serviceFactory.getService(ServiceEnum.MANAGER);
                     Manager manager = managerService.readByInfluencerId(user.getId());
-                    LOGGER.debug("inf-man : " + manager);
                     request.setAttribute("manager", manager);
                     break;
                 case MANAGER:
-                    //TODO
+                    InfluencerService influencerService = (InfluencerService) serviceFactory.getService(ServiceEnum.INFLUENCER);
+                    List<Influencer> influencerList = influencerService.readByManagerId(user.getId());
+                    LOGGER.debug(influencerList);
+                    request.setAttribute("influencerList", influencerList);
                     break;
             }
             return new Forward("jsp/user/profile.jsp");

@@ -46,8 +46,17 @@
                         </a>
                     </dd>
                 </c:when>
-                <c:when test="${user.role eq MANAGER}">
-
+                <c:when test="${user.role eq 'MANAGER'}">
+                    <dt class="col-2">
+                        Influencers
+                    </dt>
+                    <dd class="col-10">
+                        <c:forEach var="influencer" items="${influencerList}">
+                            <a href="<c:url value="/user/profile.html?userId=${influencer.id}"/>">
+                                    ${influencer.userInfo.lastName} ${influencer.userInfo.firstName}
+                            </a>
+                        </c:forEach>
+                    </dd>
                 </c:when>
             </c:choose>
 
