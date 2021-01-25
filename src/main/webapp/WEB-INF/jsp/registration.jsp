@@ -98,5 +98,6 @@
             <button type="submit" class="btn btn-primary">Registration</button>
         </form>
     </div>
+    <c:import url="/WEB-INF/jsp/particles/footer.jsp"/>
 </body>
 </html>

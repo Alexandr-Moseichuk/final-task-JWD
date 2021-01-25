@@ -13,9 +13,9 @@
     <c:import url="/WEB-INF/jsp/style.jsp"/>
 </head>
 <body>
-Доступ запрещен
-<a href="<c:url value='/' />">На главную</a>
-<a href="<c:url value='/logout.html'/>" >Выйти</a>
-
+    Доступ запрещен
+    <a href="<c:url value='/' />">На главную</a>
+    <a href="<c:url value='/logout.html'/>" >Выйти</a>
+    <c:import url="/WEB-INF/jsp/particles/footer.jsp"/>
 </body>
 </html>

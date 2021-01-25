@@ -13,16 +13,17 @@
     <title>Not approved</title>
 </head>
 <body>
-<form action="../application/update.html" method="post">
-    <div class="form-group">
-        <%--            <label for="email">Email:</label>--%>
-        <textarea class="form-control" placeholder="Comment" id="comment" name="comment"></textarea>
-    </div>
-    <p class="text-danger"><c:out value="${updateFeedback}"/></p>
-    <button type="submit" class="btn btn-primary">Обновить</button>
-    <a href="<c:url value='/logout.html'/>">Выход</a>
+    <form action="../application/update.html" method="post">
+        <div class="form-group">
+            <%--            <label for="email">Email:</label>--%>
+            <textarea class="form-control" placeholder="Comment" id="comment" name="comment"></textarea>
+        </div>
+        <p class="text-danger"><c:out value="${updateFeedback}"/></p>
+        <button type="submit" class="btn btn-primary">Обновить</button>
+        <a href="<c:url value='/logout.html'/>">Выход</a>
 
-</form>
+    </form>
+    <c:import url="/WEB-INF/jsp/particles/footer.jsp"/>
 </body>
 </html>
 

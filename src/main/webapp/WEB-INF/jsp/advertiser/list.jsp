@@ -37,5 +37,6 @@
             </c:forEach>
         </div>
     </div>
+    <c:import url="/WEB-INF/jsp/particles/footer.jsp"/>
 </body>
 </html>

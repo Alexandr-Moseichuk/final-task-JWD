@@ -12,11 +12,12 @@
     <c:import url="/WEB-INF/jsp/style.jsp"/>
 </head>
 <body>
-<c:import url="particles/menu.jsp"/>
-<jsp:useBean id="errorMessage" scope="request" type="java.lang.String"/>
-<div>
-    <h4><fmt:message key="error.label.message" bundle="${rb}" /></h4>
-    <p>${errorMessage}</p>
-</div>
+    <c:import url="particles/menu.jsp"/>
+    <jsp:useBean id="errorMessage" scope="request" type="java.lang.String"/>
+    <div>
+        <h4><fmt:message key="error.label.message" bundle="${rb}" /></h4>
+        <p>${errorMessage}</p>
+    </div>
+    <c:import url="/WEB-INF/jsp/particles/footer.jsp"/>
 </body>
 </html>

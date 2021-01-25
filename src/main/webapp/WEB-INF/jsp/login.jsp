@@ -19,8 +19,9 @@
 
 </head>
 <body>
-<div class="container pt-3 my-3 border col-sm-4">
-    <c:import url="particles/login_form.jsp"/>
-</div>
+    <div class="container pt-3 my-3 border col-sm-4">
+        <c:import url="particles/login_form.jsp"/>
+    </div>
+    <c:import url="/WEB-INF/jsp/particles/footer.jsp"/>
 </body>
 </html>
