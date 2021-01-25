@@ -12,15 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl extends BaseDao implements UserDao {
-    private static final String CREATE = "INSERT INTO `user` (`mail`, `password`, `role`, `registration_date`, `status`) VALUES(?, ?, ?, ?, ?)";
-    private static final String READ   = "SELECT `mail`, `password`, `role`, `registration_date`, `status` FROM `user` WHERE `id` = ?";
-    private static final String UPDATE = "UPDATE `user` SET `mail` = ?, `password` = ?, `role` = ?, `registration_date` = ?, `status` = ? WHERE `id` = ?";
+    private static final String CREATE = "INSERT INTO `user` (`email`, `password`, `role`, `registration_date`, `status`) VALUES(?, ?, ?, ?, ?)";
+    private static final String READ   = "SELECT `email`, `password`, `role`, `registration_date`, `status` FROM `user` WHERE `id` = ?";
+    private static final String UPDATE = "UPDATE `user` SET `email` = ?, `password` = ?, `role` = ?, `registration_date` = ?, `status` = ? WHERE `id` = ?";
     private static final String DELETE = "DELETE FROM `user` WHERE `id` = ?";
     private static final String READ_ALL = "SELECT * FROM `user`";
 
     private static final String READ_CAMPAIGN_IDS = "SELECT `campaign_id` FROM `user_campaign` WHERE `user_id` = ?";
-    private static final String LOGIN = "SELECT `id`, `password`, `role`, `registration_date`, `status` FROM `user` WHERE `mail` = ?";
-    private static final String READ_USERS_BY_ROLE = "SELECT `id`, `mail`, `registration_date`, `status` FROM `user` WHERE `role` = ?";
+    private static final String LOGIN = "SELECT `id`, `password`, `role`, `registration_date`, `status` FROM `user` WHERE `email` = ?";
+    private static final String READ_USERS_BY_ROLE = "SELECT `id`, `email`, `registration_date`, `status` FROM `user` WHERE `role` = ?";
     private static final String UPDATE_STATUS = "UPDATE `user` SET `status` = ? WHERE `id` = ?";
 
     @Override
@@ -53,7 +53,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             if (resultSet.next()) {
                 User user = new User();
                 user.setId(id);
-                user.setEmail(resultSet.getString("mail"));
+                user.setEmail(resultSet.getString("email"));
                 user.setPassword(resultSet.getString("password"));
                 user.setRole(UserRole.values()[resultSet.getInt("role")]);
                 user.setRegistrationDate(parseDate(resultSet.getTimestamp("registration_date")));
@@ -104,7 +104,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             while (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getInt("id"));
-                user.setEmail(resultSet.getString("mail"));
+                user.setEmail(resultSet.getString("email"));
                 user.setPassword(resultSet.getString("password"));
                 user.setRole(UserRole.values()[resultSet.getInt("role")]);
                 user.setRegistrationDate(parseDate(resultSet.getTimestamp("registration_date")));
@@ -167,7 +167,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             while (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getInt("id"));
-                user.setEmail(resultSet.getString("mail"));
+                user.setEmail(resultSet.getString("email"));
                 user.setRegistrationDate(parseDate(resultSet.getTimestamp("registration_date")));
                 user.setStatus(UserStatus.values()[resultSet.getInt("status")]);
                 user.setRole(userRole);

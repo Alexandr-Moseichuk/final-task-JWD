@@ -35,7 +35,21 @@
             <dd class="col-10">
                 <h5>${user.userInfo.phoneNumber}</h5>
             </dd>
+            <c:choose>
+                <c:when test="${user.role eq 'INFLUENCER'}">
+                    <dt class="col-2">
+                        Manager
+                    </dt>
+                    <dd class="col-10">
+                        <a href="<c:url value="/user/profile.html?userId=${manager.id}"/>">
+                                ${manager.userInfo.lastName} ${manager.userInfo.firstName}
+                        </a>
+                    </dd>
+                </c:when>
+                <c:when test="${user.role eq MANAGER}">
 
+                </c:when>
+            </c:choose>
 
         </dl>
     </div>

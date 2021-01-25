@@ -4,5 +4,7 @@ public enum  ServiceEnum {
     USER,
     CAMPAIGN,
     APPLICATION,
-    MANAGER_INFLUENCER
+    MANAGER_INFLUENCER,
+    USER_INFO,
+    MANAGER
 }

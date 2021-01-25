@@ -2,55 +2,32 @@ USE `adlinker_db`;
 
 INSERT INTO `user` (
     `id`,
-    `mail`,
+    `email`,
     `password`,
     `role`,
     `registration_date` ,
     `status`
 ) VALUES
-(
+(   5,
+    'influencer2@mail.ru',
+	'$2y$12$zxhbiFdWbJNiVi2ij4kXuuv2iSb2iZteG4QcSqMiPCjFZPaQd264O', /* MD5 хэш пароля "influencer" */
+	2,
+    '2021-01-01 00:01:15',
+	1
+),
+(   6,
+    'influencer3@mail.ru',
+    '$2y$12$zxhbiFdWbJNiVi2ij4kXuuv2iSb2iZteG4QcSqMiPCjFZPaQd264O', /* MD5 хэш пароля "influencer" */
     2,
-    'user2@mail.ru',
-	'$2a$10$Pcd8gRBzuTBwqMUVGbU.1.OSdF55WLZ41QnomOtHr2V7RSNaOuBmG', /* MD5 хэш пароля "user" */
-	1,
-    '2020-12-07 12:00:00',
-	2
+    '2021-01-01 12:01:15',
+    0
 ),
-(
-    3,
-    'user3@mail.ru',
-    '$2a$10$Pcd8gRBzuTBwqMUVGbU.1.OSdF55WLZ41QnomOtHr2V7RSNaOuBmG', /* хэш пароля "user" */
-    1,
-    '2020-12-07 12:00:00',
-    2
-),
-(4,
-    'user4@mail.ru',
-    '$2a$10$Pcd8gRBzuTBwqMUVGbU.1.OSdF55WLZ41QnomOtHr2V7RSNaOuBmG', /* хэш пароля "user" */
-    1,
-    '2020-12-07 12:00:00',
-    2
-),
-(5,
-    'user5@mail.ru',
-    '$2a$10$Pcd8gRBzuTBwqMUVGbU.1.OSdF55WLZ41QnomOtHr2V7RSNaOuBmG', /* хэш пароля "user" */
-    1,
-    '2020-12-07 12:00:00',
-    2
-),
-(6,
-    'user6@mail.ru',
-    '$2a$10$Pcd8gRBzuTBwqMUVGbU.1.OSdF55WLZ41QnomOtHr2V7RSNaOuBmG', /* хэш пароля "user" */
-    1,
-    '2020-12-07 12:00:00',
-    2
-),
-(7,
-    'user7@mail.ru',
-    '$2a$10$Pcd8gRBzuTBwqMUVGbU.1.OSdF55WLZ41QnomOtHr2V7RSNaOuBmG', /* хэш пароля "user" */
-    1,
-    '2020-12-07 12:00:00',
-    2
+(   7,
+    'influencer4@mail.ru',
+    '$2y$12$zxhbiFdWbJNiVi2ij4kXuuv2iSb2iZteG4QcSqMiPCjFZPaQd264O', /* MD5 хэш пароля "influencer" */
+    2,
+    '2021-01-01 12:01:15',
+    0
 );
 
 INSERT INTO `campaign`
@@ -110,15 +87,23 @@ INSERT INTO `user_info`
  (1,         'Петров',    'Пётр',      'Петрович',
  'Главный администратор',
  375444568714,
- 5),
-(2,         'Петров',    'Пётр',      'Петрович',
- 'Стример на платформе Twitch',
+ 1),
+(2,         'Алексеев ',    'Май',      'Валерьянович',
+ 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet nibh consequat, facilisis metus eu, consectetur risus. Cras ut arcu a elit dapibus ultrices. Suspendisse scelerisque fringilla arcu eget efficitur. Pellentesque malesuada et arcu at congue. Nam consequat risus vitae aliquam aliquam.',
  375444568714,
- 5),
-(3,         'Иванов',     'Иван',      'Иванович',
- 'Блоггер на платформе YouTube',
+ 1),
+(3,         'Копылов',     'Родион',      'Созонович',
+ 'Nulla porttitor quis nunc sit amet sollicitudin. Proin vitae neque posuere dui bibendum cursus. Praesent vitae elit porta, blandit lectus vel, dignissim lacus. Sed faucibus egestas mauris vel faucibus. Maecenas vitae est vitae leo gravida lacinia porttitor at neque.',
  375897584425,
- 6);
+ 1),
+ (4,         'Овчинников',     'Клемент',      'Денисович',
+  'Nunc aliquet at odio vitae consequat. Etiam eu elit felis. In ultricies tortor vel semper scelerisque. Curabitur interdum lectus enim, sed accumsan diam accumsan quis.',
+  375897584425,
+  1),
+ (5,         'Белозёров',     'Станислав',      'Федотович',
+  'Nulla pulvinar lectus a ex semper, sed mollis justo vestibulum. Ut nec metus vitae ligula rhoncus sagittis. Quisque porta tincidunt libero, ut faucibus lacus ullamcorper in.',
+  375897584425,
+  1);
 
 INSERT INTO `social_link`
 (`id`, `user_id` , `title`, `link`, `views`)
@@ -130,10 +115,9 @@ VALUES
 (5,    2, 'Instagram', 'instagram.com/user2', 135000);
 
 INSERT INTO `manager_influencer`
-(`manager_id`, `influencer_id`, `begin_date`)
+(`manager_id`, `influencer_id`, `begin_date`, `end_date`)
 VALUES
-(5, 2, '2020-12-11 13:11:11'),
-(5, 3, '2020-12-20 13:32:45');
+(4, 3, '2020-12-11 13:11:11', NULL);
 
 INSERT INTO `campaign_file`
 (`campaign_id`, `file_id`)

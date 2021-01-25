@@ -1,7 +1,6 @@
 package by.moseichuk.adlinker.dao.impl;
 
-import by.moseichuk.adlinker.bean.Influencer;
-import by.moseichuk.adlinker.bean.User;
+import by.moseichuk.adlinker.bean.*;
 import by.moseichuk.adlinker.dao.ManagerInfluencerDao;
 import by.moseichuk.adlinker.dao.exception.DaoException;
 
@@ -12,10 +11,12 @@ import java.util.List;
 
 public class ManagerInfluencerDaoImpl extends BaseDao implements ManagerInfluencerDao {
     private static final String CREATE = "INSERT INTO `manager_influencer` (`manager_id`, `influencer_id`, `begin_date`) VALUES(?, ?, ?)";
-    private static final String UPDATE = "UPDATE `manager_influencer` SET `end_date` = ? WHERE `manager_id` = ?, `influencer_id` = ?, `begin_date` = ?";
+    private static final String UPDATE = "UPDATE `manager_influencer` SET `end_date` = ? WHERE `manager_id` = ? AND `influencer_id` = ? AND `begin_date` = ?";
 
     private static final String READ_INFLUENCER_IDS = "SELECT `influencer_id` FROM `manager_influencer` WHERE `manager_id` = ?";
-    private static final String READ_MANAGER_ID = "SELECT `manager_id` FROM `manager_influencer` WHERE `influencer_id` = ?";
+    //private static final String READ   = "SELECT `mail`, `password`, `role`, `registration_date`, `status` FROM `user` WHERE `id` = ?";
+
+    private static final String READ_MANAGER = "SELECT id, email, password, role, registration_date, status FROM manager_influencer JOIN user ON manager_influencer.manager_id = user.id WHERE influencer_id = ? AND NOT end_date = 0";
 
 
     @Override
@@ -82,18 +83,22 @@ public class ManagerInfluencerDaoImpl extends BaseDao implements ManagerInfluenc
         }
     }
 
+    //`id`, `mail`, `password`, `role`, `registration_date`, `status`
     @Override
-    public User readManagerId(Integer influencerId) throws DaoException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(READ_MANAGER_ID)) {
+    public Manager readManager(Integer influencerId) throws DaoException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(READ_MANAGER)) {
             preparedStatement.setInt(1, influencerId);
 
-            preparedStatement.executeQuery();
-            ResultSet resultSet = preparedStatement.getResultSet();
-
+            ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                User user = new User();
-                user.setId(resultSet.getInt("influencer_id"));
-                return user;
+                Manager manager = new Manager();
+                manager.setId(resultSet.getInt("id"));
+                manager.setEmail(resultSet.getString("email"));
+                manager.setPassword(resultSet.getString("password"));
+                manager.setRole(UserRole.values()[resultSet.getInt("role")]);
+                manager.setRegistrationDate(parseDate(resultSet.getTimestamp("registration_date")));
+                manager.setStatus(UserStatus.values()[resultSet.getInt("status")]);
+                return manager;
             } else {
                 return null;
             }

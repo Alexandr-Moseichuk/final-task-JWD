@@ -3,7 +3,7 @@ USE `adlinker_db`;
 CREATE TABLE `user`
 (
     `id`       INTEGER      NOT NULL AUTO_INCREMENT,
-    `mail`     varchar(255) NOT NULL UNIQUE,
+    `email`     varchar(255) NOT NULL UNIQUE,
     `password` CHAR(60)     NOT NULL,
     /*
      * 0 - администратор (Role.ADMINISTRATOR)
@@ -83,7 +83,7 @@ CREATE TABLE `manager_influencer`
     `manager_id`    INTEGER  NOT NULL ,
     `influencer_id` INTEGER  NOT NULL ,
     `begin_date`    TIMESTAMP NOT NULL ,
-    `end_date`      TIMESTAMP ,
+    `end_date`      TIMESTAMP DEFAULT 0,
     PRIMARY KEY (`manager_id`, `influencer_id`, `begin_date`),
     FOREIGN KEY (`manager_id`)    REFERENCES `user`(`id`),
     FOREIGN KEY (`influencer_id`) REFERENCES `user`(`id`)

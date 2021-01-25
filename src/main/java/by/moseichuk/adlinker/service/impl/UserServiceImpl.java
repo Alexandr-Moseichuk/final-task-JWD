@@ -46,23 +46,13 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Override
     public User read(Integer userId) throws ServiceException {
+        UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
+        UserInfoDao userInfoDao = (UserInfoDao) transaction.getDao(DaoEnum.USER_INFO);
         try {
-            UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
-            UserInfoDao userInfoDao = (UserInfoDao) transaction.getDao(DaoEnum.USER_INFO);
             User user = userDao.read(userId);
             UserInfo userInfo = userInfoDao.read(userId);
             user.setUserInfo(userInfo);
             return user;
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
-    public void createUserInfo(UserInfo userInfo) throws ServiceException {
-        UserInfoDao userInfoDao = (UserInfoDao) transaction.getDao(DaoEnum.USER_INFO);
-        try {
-            userInfoDao.create(userInfo);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

@@ -50,11 +50,12 @@ public class Registration extends Command {
         }
 
         UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
+        UserInfoService userInfoService = (UserInfoService) serviceFactory.getService(ServiceEnum.USER_INFO);
         ApplicationService applicationService = (ApplicationService) serviceFactory.getService(ServiceEnum.APPLICATION);
         try {
             Integer userId = userService.create(user);
             userInfo.setUserId(userId);
-            userService.createUserInfo(userInfo);
+            userInfoService.create(userInfo);
             application.setUserId(userId);
             applicationService.add(application);
             return new Forward("/campaign/list", true);
