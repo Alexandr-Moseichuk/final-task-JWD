@@ -16,9 +16,13 @@
             <jsp:useBean id="influencerList" scope="request" type="java.util.List"/>
             <c:forEach var="influencer" items="${influencerList}">
                 <ctg:userCard photoSrc="../img/icon-user.svg" user="${influencer}">
-                    <a href="<c:url value="/manager/subscribe.html?userId=${influencer.id}"/>" class="btn btn-primary stretched-link">
-                        Subscribe
-                    </a>
+                    <c:if test="${sessionScope.authorizedUser.role eq 'MANAGER'}">
+                        <form action="subscribe.html?influencerId=${influencer.id}" method="post">
+                            <button type="submit">
+                                Подписаться
+                            </button>
+                        </form>
+                    </c:if>
                 </ctg:userCard>
             </c:forEach>
         </div>

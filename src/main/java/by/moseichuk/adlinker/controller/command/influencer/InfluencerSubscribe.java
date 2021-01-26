@@ -1,4 +1,4 @@
-package by.moseichuk.adlinker.controller.command.manager;
+package by.moseichuk.adlinker.controller.command.influencer;
 
 import by.moseichuk.adlinker.bean.Influencer;
 import by.moseichuk.adlinker.bean.Manager;
@@ -16,11 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class ManagerSubscribe extends Command {
-    private static final Logger LOGGER = LogManager.getLogger(ManagerSubscribe.class);
+public class InfluencerSubscribe extends Command {
+    private static final Logger LOGGER = LogManager.getLogger(InfluencerSubscribe.class);
 
-    public ManagerSubscribe() {
-        getPermissionSet().add(UserRole.INFLUENCER);
+    public InfluencerSubscribe() {
+        getPermissionSet().add(UserRole.MANAGER);
     }
 
     @Override
@@ -28,21 +28,21 @@ public class ManagerSubscribe extends Command {
         HttpSession session = request.getSession(false);
         if (session != null) {
             User authorizedUser = (User) session.getAttribute("authorizedUser");
-            if (authorizedUser.getRole() != UserRole.INFLUENCER) {
+            if (authorizedUser.getRole() != UserRole.MANAGER) {
                 return new Forward("jsp/permission_denied.jsp");
             }
-            Integer managerId;
+            Integer influencerId;
             ManagerInfluencerService service =
                     (ManagerInfluencerService) serviceFactory.getService(ServiceEnum.MANAGER_INFLUENCER);
             try {
-                managerId = Integer.parseInt(request.getParameter("managerId"));
+                influencerId = Integer.parseInt(request.getParameter("influencerId"));
                 Influencer influencer = new Influencer();
-                influencer.setId(authorizedUser.getId());
+                influencer.setId(influencerId);
                 Manager manager = new Manager();
-                manager.setId(managerId);
+                manager.setId(authorizedUser.getId());
                 influencer.setManager(manager);
                 service.create(influencer);
-                return new Forward("/manager/list", true);
+                return new Forward("/influencer/list", true);
             } catch (NumberFormatException | ServiceException e) {
                 LOGGER.error(e);
                 request.setAttribute("errorMessage", e.getMessage());
