@@ -20,14 +20,14 @@ INSERT INTO `user` (
     '$2y$12$zxhbiFdWbJNiVi2ij4kXuuv2iSb2iZteG4QcSqMiPCjFZPaQd264O', /* MD5 хэш пароля "influencer" */
     2,
     '2021-01-01 12:01:15',
-    0
+    1
 ),
 (   7,
     'influencer4@mail.ru',
     '$2y$12$zxhbiFdWbJNiVi2ij4kXuuv2iSb2iZteG4QcSqMiPCjFZPaQd264O', /* MD5 хэш пароля "influencer" */
     2,
     '2021-01-01 12:01:15',
-    0
+    1
 );
 
 INSERT INTO `campaign`
@@ -103,6 +103,14 @@ INSERT INTO `user_info`
  (5,         'Белозёров',     'Станислав',      'Федотович',
   'Nulla pulvinar lectus a ex semper, sed mollis justo vestibulum. Ut nec metus vitae ligula rhoncus sagittis. Quisque porta tincidunt libero, ut faucibus lacus ullamcorper in.',
   375897584425,
+  1),
+ (6,         'Белозёров',     'Станислав',      'Федотович',
+  'Nulla pulvinar lectus a ex semper, sed mollis justo vestibulum. Ut nec metus vitae ligula rhoncus sagittis. Quisque porta tincidunt libero, ut faucibus lacus ullamcorper in.',
+  375897584425,
+  1),
+ (7,         'Белозёров',     'Станислав',      'Федотович',
+  'Nulla pulvinar lectus a ex semper, sed mollis justo vestibulum. Ut nec metus vitae ligula rhoncus sagittis. Quisque porta tincidunt libero, ut faucibus lacus ullamcorper in.',
+  375897584425,
   1);
 
 INSERT INTO `social_link`
@@ -117,7 +125,7 @@ VALUES
 INSERT INTO `manager_influencer`
 (`manager_id`, `influencer_id`, `begin_date`, `end_date`)
 VALUES
-(4, 3, '2020-12-11 13:11:11', NULL);
+(4, 3, '2020-12-11 13:11:11', 0);
 
 INSERT INTO `campaign_file`
 (`campaign_id`, `file_id`)

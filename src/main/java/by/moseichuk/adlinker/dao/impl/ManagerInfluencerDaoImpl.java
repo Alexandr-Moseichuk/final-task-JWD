@@ -13,8 +13,8 @@ public class ManagerInfluencerDaoImpl extends BaseDao implements ManagerInfluenc
     private static final String CREATE = "INSERT INTO `manager_influencer` (`manager_id`, `influencer_id`, `begin_date`) VALUES(?, ?, ?)";
     private static final String UPDATE = "UPDATE `manager_influencer` SET `end_date` = ? WHERE `manager_id` = ? AND `influencer_id` = ? AND `begin_date` = ?";
 
-    private static final String READ_INFLUENCER_IDS = "SELECT id, email, password, role, registration_date, status FROM manager_influencer JOIN user ON manager_influencer.influencer_id = user.id WHERE manager_id = ? AND NOT end_date = 0";
-    private static final String READ_MANAGER = "SELECT id, email, password, role, registration_date, status FROM manager_influencer JOIN user ON manager_influencer.manager_id = user.id WHERE influencer_id = ? AND NOT end_date = 0";
+    private static final String READ_INFLUENCER_IDS = "SELECT id, email, password, role, registration_date, status FROM manager_influencer JOIN user ON manager_influencer.influencer_id = user.id WHERE manager_id = ? AND end_date = 0";
+    private static final String READ_MANAGER = "SELECT id, email, password, role, registration_date, status FROM manager_influencer JOIN user ON manager_influencer.manager_id = user.id WHERE influencer_id = ? AND end_date = 0";
 
 
     @Override
