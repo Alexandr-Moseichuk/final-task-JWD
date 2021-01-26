@@ -47,11 +47,13 @@ public class HelloServlet extends HttpServlet {
             }
         } catch (ServletException | TransactionException e) {
             LOGGER.error(e);
+            e.printStackTrace();
             request.setAttribute("errorMessage", String.format("Ошибка сервера по адресу %s, описание ошибки %s", request.getRequestURI(), e.getMessage()));
             try {
                 getServletContext().getRequestDispatcher("/WEB-INF/jsp/error.jsp").forward(request, response);
             } catch (ServletException e1) {
                 LOGGER.error(e1);
+                e1.printStackTrace();
             }
         }
     }
