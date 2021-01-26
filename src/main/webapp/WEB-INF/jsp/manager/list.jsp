@@ -23,6 +23,7 @@
                             </button>
                         </form>
                     </c:if>
+                    <a href="<c:url value="/user/profile.html?userId=${manager.id}"/>" class="btn btn-primary stretched-link">See Profile</a>
                 </ctg:userCard>
             </c:forEach>
         </div>
