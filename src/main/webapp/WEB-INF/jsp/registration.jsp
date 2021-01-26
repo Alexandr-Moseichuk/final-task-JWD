@@ -88,14 +88,16 @@
                 <label for="comment">Comment for administrator:</label>
                 <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
             </div>
-            <div class="col-md-12 position-relative">
+            <div class="col-md-12 ml-4 mt-2 mb-2 form-check-inline">
                 <label class="form-check-label">
                     <input class="form-check-input" type="checkbox" name="remember" required> I agree on blabla.
                     <div class="valid-feedback">Valid.</div>
                     <div class="invalid-feedback">Check this checkbox to continue.</div>
                 </label>
             </div>
-            <button type="submit" class="btn btn-primary">Registration</button>
+            <div class="container">
+                <button type="submit" class="btn btn-primary btn-block">Registration</button>
+            </div>
         </form>
     </div>
     <c:import url="/WEB-INF/jsp/particles/footer.jsp"/>
