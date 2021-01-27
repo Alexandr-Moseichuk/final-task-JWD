@@ -57,6 +57,7 @@ public class Login extends Command {
                 return menuItemList;
             case ADVERTISER:
                 menuItemList.add(new MenuItem(rb.getString("menu.dropdown.campaigns"), "/advertiser/campaign/list.html"));
+                menuItemList.add(new MenuItem("Добавить кампанию", "/campaign/create.html"));
                 return menuItemList;
             case INFLUENCER:
                 menuItemList.add(new MenuItem(rb.getString("menu.dropdown.campaigns"), "/influencer/campaign/list.html"));
