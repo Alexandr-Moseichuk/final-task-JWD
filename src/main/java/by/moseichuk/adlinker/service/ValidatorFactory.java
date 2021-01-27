@@ -2,6 +2,7 @@ package by.moseichuk.adlinker.service;
 
 import by.moseichuk.adlinker.bean.Entity;
 import by.moseichuk.adlinker.service.validator.ApplicationValidator;
+import by.moseichuk.adlinker.service.validator.CampaignValidator;
 import by.moseichuk.adlinker.service.validator.UserValidator;
 import by.moseichuk.adlinker.service.validator.ValidatorEnum;
 
@@ -13,6 +14,8 @@ public class ValidatorFactory {
                 return (Validator<Type>) new UserValidator();
             case APPLICATION:
                 return (Validator<Type>) new ApplicationValidator();
+            case CAMPAIGN:
+                return (Validator<Type>) new CampaignValidator();
         }
         return null;
     }
