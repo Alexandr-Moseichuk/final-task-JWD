@@ -37,6 +37,7 @@ public class CreateCampaign extends Command {
             for (Map.Entry<String, String> entry : errorMap.entrySet()) {
                 request.setAttribute(entry.getKey(), entry.getValue());
             }
+            LOGGER.debug(errorMap);
             return new Forward("jsp/campaign/create.jsp");
         }
 
@@ -71,6 +72,6 @@ public class CreateCampaign extends Command {
         }
         Calendar calendar = new GregorianCalendar();
         calendar.set(Integer.parseInt(splitDate[2]), Integer.parseInt(splitDate[1]), Integer.parseInt(splitDate[0]));
-        return new GregorianCalendar();
+        return calendar;
     }
 }

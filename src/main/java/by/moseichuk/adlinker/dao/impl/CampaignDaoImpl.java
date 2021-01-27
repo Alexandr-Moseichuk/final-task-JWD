@@ -26,9 +26,9 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
     public Integer create(Campaign campaign) throws DaoException {
         try (PreparedStatement statement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, campaign.getTitle());
-            statement.setDate(2, new Date(campaign.getCreateDate().getTimeInMillis()), campaign.getCreateDate());
-            statement.setDate(3, new Date(campaign.getBeginDate().getTimeInMillis()), campaign.getBeginDate());
-            statement.setDate(4, new Date(campaign.getEndDate().getTimeInMillis()), campaign.getEndDate());
+            statement.setTimestamp(2, new Timestamp(campaign.getCreateDate().getTimeInMillis()));
+            statement.setTimestamp(3, new Timestamp(campaign.getBeginDate().getTimeInMillis()));
+            statement.setTimestamp(4, new Timestamp(campaign.getEndDate().getTimeInMillis()));
             statement.setString(5, campaign.getDescription());
             statement.setString(6, campaign.getRequirement());
             statement.setBigDecimal(7, campaign.getBudget());
@@ -64,9 +64,9 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
     public void update(Campaign campaign) throws DaoException {
         try (PreparedStatement statement = connection.prepareStatement(UPDATE)) {
             statement.setString(1, campaign.getTitle());
-            statement.setDate(2, new Date(campaign.getCreateDate().getTimeInMillis()));
-            statement.setDate(3, new Date(campaign.getBeginDate().getTimeInMillis()));
-            statement.setDate(4, new Date(campaign.getEndDate().getTimeInMillis()));
+            statement.setTimestamp(2, new Timestamp(campaign.getCreateDate().getTimeInMillis()));
+            statement.setTimestamp(3, new Timestamp(campaign.getBeginDate().getTimeInMillis()));
+            statement.setTimestamp(4, new Timestamp(campaign.getEndDate().getTimeInMillis()));
             statement.setString(5, campaign.getDescription());
             statement.setString(6, campaign.getRequirement());
             statement.setBigDecimal(7, campaign.getBudget());

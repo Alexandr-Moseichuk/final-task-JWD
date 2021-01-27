@@ -40,10 +40,10 @@ public class ManagerInfluencerDaoImpl extends BaseDao implements ManagerInfluenc
     @Override
     public void update(Influencer influencer) throws DaoException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)) {
-            preparedStatement.setDate(1, new Date(System.currentTimeMillis()));
+            preparedStatement.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
             preparedStatement.setInt(2, influencer.getManager().getId());
             preparedStatement.setInt(3, influencer.getId());
-            preparedStatement.setDate(4, new Date(influencer.getManagerBeginDate().getTimeInMillis()));
+            preparedStatement.setTimestamp(4, new Timestamp(influencer.getManagerBeginDate().getTimeInMillis()));
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

@@ -29,7 +29,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             preparedStatement.setString(1, user.getEmail());
             preparedStatement.setString(2, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
             preparedStatement.setInt(3, user.getRole().ordinal());
-            preparedStatement.setDate(4, new Date(user.getRegistrationDate().getTimeInMillis()));
+            preparedStatement.setTimestamp(4, new Timestamp(user.getRegistrationDate().getTimeInMillis()));
             preparedStatement.setInt(5, user.getStatus().ordinal());
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -73,7 +73,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             preparedStatement.setString(1, user.getEmail());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setInt(3, user.getRole().ordinal());
-            preparedStatement.setDate(4, new Date(user.getRegistrationDate().getTimeInMillis()));
+            preparedStatement.setTimestamp(4, new Timestamp(user.getRegistrationDate().getTimeInMillis()));
             preparedStatement.setInt(5, user.getStatus().ordinal());
             preparedStatement.setInt(6, user.getId());
 

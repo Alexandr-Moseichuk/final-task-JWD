@@ -3,7 +3,7 @@ USE `adlinker_db`;
 CREATE TABLE `user`
 (
     `id`       INTEGER      NOT NULL AUTO_INCREMENT,
-    `email`     varchar(255) NOT NULL UNIQUE,
+    `email`    VARCHAR(255) NOT NULL UNIQUE,
     `password` CHAR(60)     NOT NULL,
     /*
      * 0 - администратор (Role.ADMINISTRATOR)
@@ -12,7 +12,7 @@ CREATE TABLE `user`
      * 3 - менеджер (Role.MANAGER)
      */
     `role`     TINYINT      NOT NULL CHECK (`role` IN (0, 1, 2, 3)),
-    `registration_date`     DATETIME     NOT NULL ,
+    `registration_date`     TIMESTAMP     NOT NULL ,
     /*
      * 0 - на рассмотрении
      * 1 - одобрен
