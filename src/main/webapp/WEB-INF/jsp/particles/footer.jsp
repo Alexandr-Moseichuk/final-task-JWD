@@ -12,12 +12,12 @@
 </head>
 <body>
 <c:set var="previousPage" value="${pageContext.request.requestURI}" scope="session"/>
-<footer class="footer ">
+<footer class="footer">
     <div class="col">
-        <div class="row  justify-content-center">
+        <div class="container d-flex justify-content-center">
             <p class="mb-1 text-center">© 2020 ADLinker</p>
         </div>
-        <div class="row justify-content-center">
+        <div class="container d-flex justify-content-center">
             <ul class="list-inline">
                 <li class="list-inline-item">
                     <a href="<c:url value='/lang.html?loc=en_US'/>">
