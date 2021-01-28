@@ -29,10 +29,16 @@
             <div class="form-group col-md-12 position-relative">
                 <label for="description">Description:</label>
                 <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+                <div class="container">
+                    <p class="text-danger"><c:out value="${descriptionError}"/></p>
+                </div>
             </div>
             <div class="form-group col-md-12 position-relative">
                 <label for="requirement">Requirement:</label>
                 <textarea class="form-control" rows="5" id="requirement" name="requirement"></textarea>
+                <div class="container">
+                    <p class="text-danger"><c:out value="${requirementError}"/></p>
+                </div>
             </div>
             <div class="form-group d-flex justify-content-center col-md-6">
                 <label for="beginDate">Begin date:</label>
@@ -42,11 +48,17 @@
                 <label for="endDate">End date:</label>
                 <input id="endDate" name="endDate" width="200" readonly>
             </div>
+            <div class="container">
+                <p class="text-danger"><c:out value="${dateError}"/></p>
+            </div>
             <div class="form-group col-md-12">
                 <label for="budget">Budget:</label>
                 <input type="text" class="form-control" id="budget" placeholder="Enter budget" name="budget" required>
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Please fill out this field.</div>
+                <div class="container">
+                    <p class="text-danger"><c:out value="${budgetError}"/></p>
+                </div>
             </div>
             <div class="form-group col-md-12 d-flex justify-content-start">
                 <input type = "file" name = "uploadFile" size = "100"/>
