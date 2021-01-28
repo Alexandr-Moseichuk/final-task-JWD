@@ -9,5 +9,5 @@ public interface Transaction {
 
     void commit() throws TransactionException;
 
-    void rollback() throws TransactionException;
+    void rollback();
 }

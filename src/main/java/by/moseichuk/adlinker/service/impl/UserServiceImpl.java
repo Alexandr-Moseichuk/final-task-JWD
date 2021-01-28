@@ -7,6 +7,7 @@ import by.moseichuk.adlinker.dao.DaoEnum;
 import by.moseichuk.adlinker.dao.UserDao;
 import by.moseichuk.adlinker.dao.UserInfoDao;
 import by.moseichuk.adlinker.dao.exception.DaoException;
+import by.moseichuk.adlinker.dao.exception.TransactionException;
 import by.moseichuk.adlinker.service.BaseService;
 import by.moseichuk.adlinker.service.UserService;
 import by.moseichuk.adlinker.service.exception.ServiceException;
@@ -38,8 +39,11 @@ public class UserServiceImpl extends BaseService implements UserService {
     public Integer create(User user) throws ServiceException {
         try {
             UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
-            return userDao.create(user);
-        } catch (DaoException e) {
+            Integer id = userDao.create(user);
+            transaction.commit();
+            return id;
+        } catch (DaoException | TransactionException e) {
+            transaction.rollback();
             throw new ServiceException(e);
         }
     }

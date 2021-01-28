@@ -4,6 +4,7 @@ import by.moseichuk.adlinker.bean.Campaign;
 import by.moseichuk.adlinker.dao.CampaignDao;
 import by.moseichuk.adlinker.dao.DaoEnum;
 import by.moseichuk.adlinker.dao.exception.DaoException;
+import by.moseichuk.adlinker.dao.exception.TransactionException;
 import by.moseichuk.adlinker.service.BaseService;
 import by.moseichuk.adlinker.service.CampaignService;
 import by.moseichuk.adlinker.service.exception.ServiceException;
@@ -26,7 +27,9 @@ public class CampaignServiceImpl extends BaseService implements CampaignService 
         CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
         try {
             campaignDao.create(campaign);
-        } catch (DaoException e) {
+            transaction.commit();
+        } catch (DaoException | TransactionException e) {
+            transaction.rollback();
             throw new ServiceException(e);
         }
     }
@@ -36,7 +39,9 @@ public class CampaignServiceImpl extends BaseService implements CampaignService 
         CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
         try {
             campaignDao.delete(campaign.getId());
-        } catch (DaoException e) {
+            transaction.commit();
+        } catch (DaoException | TransactionException e) {
+            transaction.rollback();
             throw new ServiceException(e);
         }
     }
@@ -46,7 +51,9 @@ public class CampaignServiceImpl extends BaseService implements CampaignService 
         CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
         try {
             campaignDao.update(campaign);
-        } catch (DaoException e) {
+            transaction.commit();
+        } catch (DaoException | TransactionException e) {
+            transaction.rollback();
             throw new ServiceException(e);
         }
     }

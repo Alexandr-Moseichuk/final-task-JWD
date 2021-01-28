@@ -3,6 +3,8 @@ package by.moseichuk.adlinker.dao.transaction;
 import by.moseichuk.adlinker.dao.*;
 import by.moseichuk.adlinker.dao.exception.TransactionException;
 import by.moseichuk.adlinker.dao.impl.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -10,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TransactionImpl implements Transaction {
+    private static final Logger LOGGER = LogManager.getLogger(TransactionImpl.class);
     private static Map<DaoEnum, BaseDao> daoMap = new HashMap<>();
 
     static {
@@ -45,11 +48,11 @@ public class TransactionImpl implements Transaction {
     }
 
     @Override
-    public void rollback() throws TransactionException {
+    public void rollback() {
         try {
             connection.rollback();
         } catch (SQLException e) {
-            throw new TransactionException(e);
+            LOGGER.error(e);
         }
     }
 }

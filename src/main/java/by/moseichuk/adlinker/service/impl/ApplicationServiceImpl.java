@@ -6,6 +6,7 @@ import by.moseichuk.adlinker.dao.DaoEnum;
 import by.moseichuk.adlinker.dao.ApplicationDao;
 import by.moseichuk.adlinker.dao.UserDao;
 import by.moseichuk.adlinker.dao.exception.DaoException;
+import by.moseichuk.adlinker.dao.exception.TransactionException;
 import by.moseichuk.adlinker.service.BaseService;
 import by.moseichuk.adlinker.service.ApplicationService;
 import by.moseichuk.adlinker.service.exception.ServiceException;
@@ -19,7 +20,9 @@ public class ApplicationServiceImpl extends BaseService implements ApplicationSe
         ApplicationDao applicationDao = (ApplicationDao) transaction.getDao(DaoEnum.APPLICATION);
         try {
             applicationDao.create(application);
-        } catch (DaoException e) {
+            transaction.commit();
+        } catch (DaoException | TransactionException e) {
+            transaction.rollback();
             throw new ServiceException(e);
         }
     }
@@ -29,7 +32,9 @@ public class ApplicationServiceImpl extends BaseService implements ApplicationSe
         ApplicationDao applicationDao = (ApplicationDao) transaction.getDao(DaoEnum.APPLICATION);
         try {
             applicationDao.update(application);
-        } catch (DaoException e) {
+            transaction.commit();
+        } catch (DaoException | TransactionException e) {
+            transaction.rollback();
             throw new ServiceException(e);
         }
     }
@@ -52,10 +57,11 @@ public class ApplicationServiceImpl extends BaseService implements ApplicationSe
     @Override
     public void approveByIds(List<Integer> idList) throws ServiceException {
         UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
-
         try {
             userDao.updateStatus(idList, UserStatus.VERIFIED);
-        } catch (DaoException e) {
+            transaction.commit();
+        } catch (DaoException | TransactionException e) {
+            transaction.rollback();
             throw new ServiceException(e);
         }
     }
@@ -63,10 +69,11 @@ public class ApplicationServiceImpl extends BaseService implements ApplicationSe
     @Override
     public void rejectByIds(List<Integer> idList) throws ServiceException {
         UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
-
         try {
             userDao.updateStatus(idList, UserStatus.ARCHIVE);
-        } catch (DaoException e) {
+            transaction.commit();
+        } catch (DaoException | TransactionException e) {
+            transaction.rollback();
             throw new ServiceException(e);
         }
     }
