@@ -1,6 +1,7 @@
 package by.moseichuk.adlinker.service.impl;
 
 import by.moseichuk.adlinker.bean.Campaign;
+import by.moseichuk.adlinker.bean.Influencer;
 import by.moseichuk.adlinker.dao.CampaignDao;
 import by.moseichuk.adlinker.dao.DaoEnum;
 import by.moseichuk.adlinker.dao.exception.DaoException;
@@ -12,6 +13,16 @@ import by.moseichuk.adlinker.service.exception.ServiceException;
 import java.util.List;
 
 public class CampaignServiceImpl extends BaseService implements CampaignService {
+    @Override
+    public void subscribe(Influencer influencer, Campaign campaign) throws ServiceException {
+        CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
+        try {
+            campaignDao.subscribe(influencer, campaign);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
     @Override
     public List<Campaign> readAll() throws ServiceException {
         CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);

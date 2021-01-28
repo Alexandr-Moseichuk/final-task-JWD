@@ -30,6 +30,15 @@
                 <p><c:out value="${campaign.requirement}"/></p>
                 <h5>Бюджет:</h5>
                 <p class="front-weight-bold"><c:out value="${campaign.budget}"/></p>
+                <c:if test="${sessionScope.authorizedUser.role eq 'INFLUENCER'}">
+                    <form action="subscribe.html" method="post">
+                        <input type="hidden" id="influencerId" name="influencerId" value="${sessionScope.authorizedUser.id}"/>
+                        <input type="hidden" id="campaignId" name="campaignId" value="${campaign.id}"/>
+                        <button type="submit">
+                            Подписаться
+                        </button>
+                    </form>
+                </c:if>
             </div>
         </c:forEach>
     </div>

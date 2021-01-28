@@ -1,6 +1,7 @@
 package by.moseichuk.adlinker.dao.impl;
 
 import by.moseichuk.adlinker.bean.Campaign;
+import by.moseichuk.adlinker.bean.Influencer;
 import by.moseichuk.adlinker.dao.CampaignDao;
 import by.moseichuk.adlinker.dao.exception.DaoException;
 
@@ -20,6 +21,7 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
     private static final String READ_SUBLIST = "SELECT `id`, `title`, `create_date`, `begin_date`, `end_date`, `description`, `requirement`, `budget` FROM" +
             " `campaign` ORDER BY `id` LIMIT ? OFFSET ?";
     private static final String READ_ROW_COUNT = "SELECT COUNT(*) FROM `campaign`";
+    private static final String SUBSCRIBE_INFLUENCER = "INSERT INTO `user_campaign` (`user_id`, `campaign_id`) VALUES (?, ?)";
 
 
     @Override
@@ -105,6 +107,17 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
         }
     }
 
+
+    @Override
+    public void subscribe(Influencer influencer, Campaign campaign) throws DaoException {
+        try (PreparedStatement statement = connection.prepareStatement(SUBSCRIBE_INFLUENCER)) {
+            statement.setInt(1, influencer.getId());
+            statement.setInt(2, campaign.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
 
     public List<Integer> readCampaignFileIds(Integer id) throws DaoException {
         try (PreparedStatement statement = connection.prepareStatement(READ_FILES_ID)) {

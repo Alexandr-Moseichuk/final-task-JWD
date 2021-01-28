@@ -1,11 +1,14 @@
 package by.moseichuk.adlinker.service;
 
 import by.moseichuk.adlinker.bean.Campaign;
+import by.moseichuk.adlinker.bean.Influencer;
 import by.moseichuk.adlinker.service.exception.ServiceException;
 
 import java.util.List;
 
 public interface CampaignService {
+    void subscribe(Influencer influencer, Campaign campaign) throws ServiceException;
+
     List<Campaign> readAll() throws ServiceException;
 
     void add(Campaign campaign) throws ServiceException;

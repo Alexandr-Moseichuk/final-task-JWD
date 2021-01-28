@@ -1,11 +1,14 @@
 package by.moseichuk.adlinker.dao;
 
 import by.moseichuk.adlinker.bean.Campaign;
+import by.moseichuk.adlinker.bean.Influencer;
 import by.moseichuk.adlinker.dao.exception.DaoException;
 
 import java.util.List;
 
 public interface CampaignDao extends Dao<Campaign> {
+    void subscribe(Influencer influencer, Campaign campaign) throws DaoException;
+
     List<Integer> readCampaignFileIds(Integer id) throws DaoException;
 
     List<Integer> readUserIds(Integer id) throws DaoException;
