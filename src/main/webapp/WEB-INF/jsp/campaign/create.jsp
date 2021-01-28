@@ -13,7 +13,7 @@
     <script src="https://unpkg.com/gijgo@1.9.13/js/messages/messages.ru-ru.js" type="text/javascript"></script>
 </head>
 <body class="bg-light">
-<%--<div class="container pt-3 my-3 border col-4">--%>
+    <c:import url="/WEB-INF/jsp/particles/menu.jsp"/>
     <div class="container p-3 my-3 border bg-white shadow-sm">
         <h4 class="text-center"><fmt:message key="registration.title" bundle="${rb}" /></h4>
         <form action="create.html" class="row g-2 needs-validation" id="create-campaign" novalidate method="post">
