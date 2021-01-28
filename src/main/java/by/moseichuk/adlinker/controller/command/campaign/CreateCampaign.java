@@ -60,7 +60,9 @@ public class CreateCampaign extends Command {
         campaign.setBeginDate(parseDate(request.getParameter("beginDate")));
         campaign.setEndDate(parseDate(request.getParameter("endDate")));
         campaign.setCreateDate(new GregorianCalendar());
-        campaign.setBudget(new BigDecimal(request.getParameter("budget")));
+        String budgetParameter = request.getParameter("budget");
+        BigDecimal budget = budgetParameter.length() > 0 ? new BigDecimal(budgetParameter) : null;
+        campaign.setBudget(budget);
         //TODO user files
         return campaign;
     }
