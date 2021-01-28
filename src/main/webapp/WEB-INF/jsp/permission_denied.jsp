@@ -12,7 +12,7 @@
     <title>Title</title>
     <c:import url="/WEB-INF/jsp/style.jsp"/>
 </head>
-<body>
+<body class="bg-light">
     Доступ запрещен
     <a href="<c:url value='/' />">На главную</a>
     <a href="<c:url value='/logout.html'/>" >Выйти</a>

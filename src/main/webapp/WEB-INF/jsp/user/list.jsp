@@ -15,7 +15,7 @@
     <title><fmt:message key="user.list.title" bundle="${rb}" /></title>
     <c:import url="/WEB-INF/jsp/style.jsp"/>
 </head>
-<body>
+<body class="bg-light">
     <c:import url="/WEB-INF/jsp/particles/menu.jsp"/>
     <h3><fmt:message key="user.list.label.title" bundle="${rb}" /></h3>
     <div class="container">

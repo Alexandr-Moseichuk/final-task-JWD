@@ -8,7 +8,7 @@
     <title><fmt:message key="campaign.list.title" bundle="${rb}" /></title>
     <c:import url="../style.jsp"/>
 </head>
-<body>
+<body class="bg-light">
     <c:import url="/WEB-INF/jsp/particles/menu.jsp"/>
     <h3 class="text-center">Список рекламных кампаний</h3>
     <jsp:useBean id="campaignSubList" scope="request" type="java.util.List"/>

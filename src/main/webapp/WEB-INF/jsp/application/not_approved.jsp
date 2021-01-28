@@ -12,7 +12,7 @@
 <head>
     <title>Not approved</title>
 </head>
-<body>
+<body class="bg-light">
     <form action="../application/update.html" method="post">
         <div class="form-group">
             <%--            <label for="email">Email:</label>--%>

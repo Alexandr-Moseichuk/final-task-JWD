@@ -9,7 +9,7 @@
     <title><fmt:message key="user.profile.title" bundle="${rb}" /></title>
     <c:import url="/WEB-INF/jsp/style.jsp"/>
 </head>
-<body>
+<body class="bg-light">
     <c:import url="../particles/menu.jsp"/>
     <div class="container col-12 col-sm-6 mt-3">
         <div class="row  justify-content-center">

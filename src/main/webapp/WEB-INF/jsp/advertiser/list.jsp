@@ -14,7 +14,7 @@
     <title><fmt:message key="advertiser.list.title" bundle="${rb}" /></title>
     <c:import url="../style.jsp"/>
 </head>
-<body>
+<body  class="bg-light">
     <c:import url="/WEB-INF/jsp/particles/menu.jsp"/>
     <h3 class="text-center">Список рекламодателей</h3>
     <div class="container">

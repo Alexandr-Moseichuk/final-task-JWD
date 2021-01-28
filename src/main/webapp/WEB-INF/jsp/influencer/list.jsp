@@ -8,7 +8,7 @@
     <title><fmt:message key="influencer.list.title" bundle="${rb}" /></title>
     <c:import url="/WEB-INF/jsp/style.jsp"/>
 </head>
-<body>
+<body class="bg-light">
     <c:import url="/WEB-INF/jsp/particles/menu.jsp"/>
     <h3 class="text-center">Список инфлюенсеров</h3>
     <div class="container">

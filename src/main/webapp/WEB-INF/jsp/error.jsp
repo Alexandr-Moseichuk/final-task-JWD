@@ -11,7 +11,7 @@
     <title><fmt:message key="error.title" bundle="${rb}" /></title>
     <c:import url="/WEB-INF/jsp/style.jsp"/>
 </head>
-<body>
+<body class="bg-light">
     <c:import url="particles/menu.jsp"/>
     <jsp:useBean id="errorMessage" scope="request" type="java.lang.String"/>
     <div>
