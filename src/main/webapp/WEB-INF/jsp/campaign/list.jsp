@@ -10,7 +10,7 @@
 </head>
 <body class="bg-light">
     <c:import url="/WEB-INF/jsp/particles/menu.jsp"/>
-    <h3 class="text-center">Список рекламных кампаний</h3>
+    <h3 class="text-center"><fmt:message key="campaign.list.label.title" bundle="${rb}"/></h3>
     <jsp:useBean id="campaignSubList" scope="request" type="java.util.List"/>
     <fmt:setLocale value="ru-RU"/>
     <div class="container">
@@ -18,17 +18,17 @@
     <%--        <ctg:welcome-message campaign="${campaign}"/>--%>
             <div class="container my-3 border">
                 <h5><c:out value="${campaign.title}"/></h5>
-                <p>Дата создания: <fmt:formatDate value="${campaign.createDate.time}" type="both" dateStyle="medium" timeStyle="medium"/></p>
+                <p><fmt:message key="campaign.list.label.creation_date" bundle="${rb}"/> <fmt:formatDate value="${campaign.createDate.time}" type="both" dateStyle="medium" timeStyle="medium"/></p>
                 <p>
-                    Дата начала:     <fmt:formatDate value="${campaign.beginDate.time}" type="both" dateStyle="medium" timeStyle="medium"/>
+                    <fmt:message key="campaign.list.label.begin_date" bundle="${rb}"/> <fmt:formatDate value="${campaign.beginDate.time}" type="both" dateStyle="medium" timeStyle="medium"/>
                     <br>
-                    Дата завершения: <fmt:formatDate value="${campaign.endDate.time}" type="both" dateStyle="medium" timeStyle="medium"/>
+                    <fmt:message key="campaign.list.label.end_date" bundle="${rb}"/> <fmt:formatDate value="${campaign.endDate.time}" type="both" dateStyle="medium" timeStyle="medium"/>
                 </p>
-                <h5>Описание:</h5>
+                <h5><fmt:message key="campaign.list.label.description" bundle="${rb}"/></h5>
                 <p><c:out value="${campaign.description}"/></p>
-                <h5>Требования:</h5>
+                <h5><fmt:message key="campaign.list.label.requirement" bundle="${rb}"/></h5>
                 <p><c:out value="${campaign.requirement}"/></p>
-                <h5>Бюджет:</h5>
+                <h5><fmt:message key="campaign.list.label.budget" bundle="${rb}"/></h5>
                 <p class="front-weight-bold"><c:out value="${campaign.budget}"/></p>
                 <ul>
                     <c:forEach var="influencer" items="${campaign.influencerList}">
@@ -42,7 +42,7 @@
                         <input type="hidden" id="influencerId" name="influencerId" value="${sessionScope.authorizedUser.id}"/>
                         <input type="hidden" id="campaignId" name="campaignId" value="${campaign.id}"/>
                         <button type="submit">
-                            Подписаться
+                            <fmt:message key="campaign.list.button.subscribe" bundle="${rb}"/>
                         </button>
                     </form>
                 </c:if>
