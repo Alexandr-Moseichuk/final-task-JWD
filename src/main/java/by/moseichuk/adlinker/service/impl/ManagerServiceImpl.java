@@ -17,7 +17,9 @@ public class ManagerServiceImpl extends BaseService implements ManagerService {
         UserInfoDao userInfoDao = (UserInfoDao) transaction.getDao(DaoEnum.USER_INFO);
         try {
             Manager manager = managerInfluencerDao.readManager(influencerId);
-            manager.setUserInfo(userInfoDao.read(manager.getId()));
+            if (manager != null) {
+                manager.setUserInfo(userInfoDao.read(manager.getId()));
+            }
             return manager;
         } catch (DaoException e) {
             throw new ServiceException(e);
