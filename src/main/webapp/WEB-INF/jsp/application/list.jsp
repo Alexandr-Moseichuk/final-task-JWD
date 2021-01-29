@@ -45,7 +45,11 @@
                         <td><c:out value="${application.user.role}"/></td>
                         <td><c:out value="${application.comment}"/></td>
                         <td><fmt:formatDate type="both" value="${application.date.time}" dateStyle="medium" timeStyle="medium"/></td>
-                        <td><c:out value="Тут должна быть ссылка на профиль"/></td>
+                        <td>
+                            <a href="<c:url value="/user/profile.html?userId=${application.user.id}"/>">
+                                <fmt:message key="application.list.table.profile_link" bundle="${rb}" />
+                            </a>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>
