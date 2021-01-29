@@ -13,6 +13,10 @@ public class Influencer extends User {
     public Influencer() {
     }
 
+    public Influencer(User user) {
+        super(user);
+    }
+
     public UserInfo getUserInfo() {
         return userInfo;
     }

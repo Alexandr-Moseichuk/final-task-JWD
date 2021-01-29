@@ -2,13 +2,27 @@ package by.moseichuk.adlinker.bean;
 
 import java.util.Calendar;
 
-public  class User extends Entity {
+public class User extends Entity {
     private String email;
     private String password;
     private UserRole role;
     private Calendar registrationDate;
     private UserStatus status;
     private UserInfo userInfo;
+
+    public User() {
+
+    }
+
+    public User(User user) {
+        setId(user.getId());
+        email = user.getEmail();
+        password = user.getPassword();
+        role = user.getRole();
+        registrationDate = user.getRegistrationDate();
+        status = user.getStatus();
+        userInfo = user.getUserInfo();
+    }
 
     public String getEmail() {
         return email;
