@@ -30,6 +30,13 @@
                 <p><c:out value="${campaign.requirement}"/></p>
                 <h5>Бюджет:</h5>
                 <p class="front-weight-bold"><c:out value="${campaign.budget}"/></p>
+                <ul>
+                    <c:forEach var="influencer" items="${campaign.influencerList}">
+                        <a href="<c:url value="../user/profile.html?userId=${influencer.id}"/> ">
+                            ${influencer.userInfo.lastName} ${influencer.userInfo.firstName}
+                        </a>
+                    </c:forEach>
+                </ul>
                 <c:if test="${sessionScope.authorizedUser.role eq 'INFLUENCER'}">
                     <form action="subscribe.html" method="post">
                         <input type="hidden" id="influencerId" name="influencerId" value="${sessionScope.authorizedUser.id}"/>

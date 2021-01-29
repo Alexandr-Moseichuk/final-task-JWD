@@ -4,12 +4,15 @@ import by.moseichuk.adlinker.bean.Campaign;
 import by.moseichuk.adlinker.bean.Influencer;
 import by.moseichuk.adlinker.dao.CampaignDao;
 import by.moseichuk.adlinker.dao.DaoEnum;
+import by.moseichuk.adlinker.dao.UserDao;
+import by.moseichuk.adlinker.dao.UserInfoDao;
 import by.moseichuk.adlinker.dao.exception.DaoException;
 import by.moseichuk.adlinker.dao.exception.TransactionException;
 import by.moseichuk.adlinker.service.BaseService;
 import by.moseichuk.adlinker.service.CampaignService;
 import by.moseichuk.adlinker.service.exception.ServiceException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CampaignServiceImpl extends BaseService implements CampaignService {
@@ -72,8 +75,21 @@ public class CampaignServiceImpl extends BaseService implements CampaignService 
     @Override
     public List<Campaign> readSublist(int count, int offset) throws ServiceException {
         CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
+        UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
+        UserInfoDao userInfoDao = (UserInfoDao) transaction.getDao(DaoEnum.USER_INFO);
         try {
-            return campaignDao.readSublist(count, offset);
+            List<Campaign> campaignList = campaignDao.readSublist(count, offset);
+            for (Campaign campaign : campaignList) {
+                List<Integer> influencerIdList = campaignDao.readUserIds(campaign.getId());
+                List<Influencer> influencerList = new ArrayList<>();
+                for (Integer id : influencerIdList) {
+                    Influencer influencer = new Influencer(userDao.read(id));
+                    influencer.setUserInfo(userInfoDao.read(id));
+                    influencerList.add(influencer);
+                }
+                campaign.setInfluencerList(influencerList);
+            }
+            return campaignList;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
