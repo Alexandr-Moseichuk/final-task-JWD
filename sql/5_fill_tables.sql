@@ -74,9 +74,9 @@ VALUES
 INSERT INTO `user_campaign`
 (`user_id`, `campaign_id`)
 VALUES
-(1,         1),
-(1,         2),
-(2,         2);
+(2,         1),
+(2,         2),
+(2,         3);
 
 INSERT INTO `user_info`
 (`user_id`, `last_name`, `first_name`, `second_name`,
