@@ -21,6 +21,8 @@ public interface CampaignService {
 
     List<Campaign> readSublist(int count, int offset) throws ServiceException;
 
+    List<Campaign> readSublistByOwner(Integer ownerId, int limit, int offset) throws ServiceException;
+
     int readRowCount() throws ServiceException;
 
     Integer readOwnerId(Integer campaignId) throws ServiceException;
