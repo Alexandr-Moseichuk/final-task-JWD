@@ -49,6 +49,16 @@ public class CampaignServiceImpl extends BaseService implements CampaignService 
     }
 
     @Override
+    public Campaign read(Integer campaignId) throws ServiceException {
+        CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
+        try {
+            return campaignDao.read(campaignId);
+        } catch (DaoException e) {
+            throw new ServiceException();
+        }
+    }
+
+    @Override
     public void remove(Campaign campaign) throws ServiceException {
         CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
         try {
@@ -100,6 +110,16 @@ public class CampaignServiceImpl extends BaseService implements CampaignService 
         CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
         try {
             return campaignDao.readRowCount();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public Integer readOwnerId(Integer campaignId) throws ServiceException {
+        CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
+        try {
+            return campaignDao.readOwnerId(campaignId);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

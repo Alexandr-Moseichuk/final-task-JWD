@@ -22,6 +22,7 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
             " `campaign` ORDER BY `id` LIMIT ? OFFSET ?";
     private static final String READ_ROW_COUNT = "SELECT COUNT(*) FROM `campaign`";
     private static final String SUBSCRIBE_INFLUENCER = "INSERT INTO `user_campaign` (`user_id`, `campaign_id`) VALUES (?, ?)";
+    private static final String READ_OWNER_ID = "SELECT user_campaign.user_id FROM user_campaign JOIN user ON user_campaign.user_id=user.id WHERE user.role=1 AND user_campaign.campaign_id=?";
 
 
     @Override
@@ -178,6 +179,21 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
                 count = resultSet.getInt(1);
             }
             return count;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public Integer readOwnerId(Integer campaignId) throws DaoException {
+        try (PreparedStatement statement = connection.prepareStatement(READ_OWNER_ID)) {
+            statement.setInt(1, campaignId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("user_id");
+            } else {
+                return null;
+            }
         } catch (SQLException e) {
             throw new DaoException(e);
         }

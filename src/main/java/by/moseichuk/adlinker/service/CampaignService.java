@@ -13,6 +13,8 @@ public interface CampaignService {
 
     void add(Campaign campaign) throws ServiceException;
 
+    Campaign read(Integer campaignId) throws ServiceException;
+
     void remove(Campaign campaign) throws ServiceException;
 
     void update(Campaign campaign) throws ServiceException;
@@ -20,4 +22,6 @@ public interface CampaignService {
     List<Campaign> readSublist(int count, int offset) throws ServiceException;
 
     int readRowCount() throws ServiceException;
+
+    Integer readOwnerId(Integer campaignId) throws ServiceException;
 }
