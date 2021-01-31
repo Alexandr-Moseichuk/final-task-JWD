@@ -1,6 +1,7 @@
 package by.moseichuk.adlinker.bean;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 public class Application extends Entity {
     private Integer userId;
@@ -9,6 +10,13 @@ public class Application extends Entity {
     private Calendar date;
 
     public Application() {
+    }
+
+    public Application(Integer userId, User user, String comment, Calendar date) {
+        this.userId = userId;
+        this.user = user;
+        this.comment = comment;
+        this.date = date;
     }
 
     public Integer getUserId() {
@@ -41,6 +49,20 @@ public class Application extends Entity {
 
     public void setDate(Calendar date) {
         this.date = date;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Application)) return false;
+        if (!super.equals(o)) return false;
+        Application that = (Application) o;
+        return userId.equals(that.userId) && user.equals(that.user) && comment.equals(that.comment) && date.equals(that.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), userId, user, comment, date);
     }
 
     @Override

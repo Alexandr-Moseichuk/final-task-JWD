@@ -1,6 +1,7 @@
 package by.moseichuk.adlinker.bean;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 public class User extends Entity {
     private String email;
@@ -22,6 +23,16 @@ public class User extends Entity {
         registrationDate = user.getRegistrationDate();
         status = user.getStatus();
         userInfo = user.getUserInfo();
+    }
+
+    public User(Integer id, String email, String password, UserRole role, Calendar registrationDate, UserStatus status, UserInfo userInfo) {
+        setId(id);
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.registrationDate = registrationDate;
+        this.status = status;
+        this.userInfo = userInfo;
     }
 
     public String getEmail() {
@@ -73,12 +84,26 @@ public class User extends Entity {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        if (!super.equals(o)) return false;
+        User user = (User) o;
+        return email.equals(user.email) && password.equals(user.password) && role == user.role && registrationDate.equals(user.registrationDate) && status == user.status && Objects.equals(userInfo, user.userInfo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), email, password, role, registrationDate, status, userInfo);
+    }
+
+    @Override
     public String toString() {
         return "User{" +
                 "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
-                ", registrationDate=" + registrationDate.getTime() +
+                ", registrationDate=" + registrationDate +
                 ", status=" + status +
                 ", userInfo=" + userInfo +
                 '}';
