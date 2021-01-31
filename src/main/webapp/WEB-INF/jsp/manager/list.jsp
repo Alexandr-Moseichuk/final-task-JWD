@@ -17,7 +17,7 @@
             <c:forEach var="manager" items="${managerList}">
                 <ctg:userCard photoSrc="../img/icon-user.svg" user="${manager}">
                     <c:if test="${sessionScope.authorizedUser.role eq 'INFLUENCER'}">
-                        <form action="subscribe.html?influencerId=${manager.id}" method="post">
+                        <form action="subscribe.html?managerId=${manager.id}" method="post">
                             <button type="submit">
                                 Подписаться
                             </button>
