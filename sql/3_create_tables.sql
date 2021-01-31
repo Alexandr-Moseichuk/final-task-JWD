@@ -84,7 +84,7 @@ CREATE TABLE `manager_influencer`
     `influencer_id` INTEGER  NOT NULL ,
     `begin_date`    TIMESTAMP NOT NULL ,
     `end_date`      TIMESTAMP DEFAULT 0,
-    PRIMARY KEY (`manager_id`, `influencer_id`, `begin_date`),
+    PRIMARY KEY (`manager_id`, `influencer_id`, `end_date`),
     FOREIGN KEY (`manager_id`)    REFERENCES `user`(`id`),
     FOREIGN KEY (`influencer_id`) REFERENCES `user`(`id`)
 );
