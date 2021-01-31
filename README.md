@@ -1,25 +1,29 @@
 # final-task-JWD
- 
- Платформа для взаимодействия рекламодателей и инфлюенсеров(блоггеров).
 
-Доступные роли(логин/пароль):
-- Администратор(admin@mail.ru/admin)
-- Рекламодатель(advertiser@mail.ru/advertiser)
-- Инфлюенсер(influencer@mail.ru/influencer)
-- Менеджер(manager@mail.ru/manager)
+A platform for interaction between advertisers and influencers.
 
-Рекламодатели добавляют и редактируют рекламные кампании, инфлюенсеры могут 
-просматривать(выбирать) в каких рекламных кампаниях хотят участвовать.  
-Менеджеры могут просматривать рекламные кампании. Менеджеры могут иметь список 
-курируемых инфлюенсеров, которых он подписывает на участие в рекламных кампаниях. 
-Администратор может просматривать и удалять рекламодателей, кампании, медеждеров, инфлюенсеров. 
-Администратор рассматривает заявки на регистрацию рекламодателей, менеджеров, инфлюенсеров.
+Available roles(login/password):
+- Administrator(admin@mail.ru/admin)
+- Advertiser(advertiser@mail.ru/advertiser)
+- Influencer(influencer@mail.ru/influencer)
+- Manager(manager@mail.ru/manager)
 
-Используемые технологии:
-- Java EE
+Advertisers add and edit ad campaigns, influencers can
+choose which advertising campaigns they want to participate in.
+Managers can have a list curated influencers he signs up to participate 
+in advertising campaigns. The administrator can view and delete advertisers, 
+advertising campaigns, media, influencers. The administrator accepts 
+applications for registration of advertisers, managers, influencers.
+
+List of used technologies:
+- JavaEE
 - JSP
 - JSTL
-- Apache Tomcat
-- Maria DB
+- JDBC
+- MariaDB
 - Log4j
 - TestNG
+- Maven
+- Apache Tomcat
+
+Database diagram: ![db_diagram](db_diagram.PNG)
