@@ -1,12 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: digge
-  Date: 12/31/2020
-  Time: 7:35 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -25,6 +18,11 @@
         <%--            <label for="password">Password:</label>--%>
         <input type="password" class="form-control" placeholder="<fmt:message key="login_form.form.password" bundle="${rb}"/>" id="password" name="password">
     </div>
+    <c:if test="${authorizationFailedMessage!=null}">
+        <label class="text-danger">
+            <fmt:message key="${authorizationFailedMessage}" bundle="${rb}"/>
+        </label>
+    </c:if>
     <div class="form-group form-check">
         <label class="form-check-label line">
             <input class="form-check-input" type="checkbox"> <fmt:message key="login_form.label.remember" bundle="${rb}" />
@@ -35,5 +33,11 @@
         <fmt:message key="login_form.label.registration" bundle="${rb}" />
     </a>
 </form>
+<script type="text/javascript">
+    let email = "${email}";
+    if (email.length > 0) {
+        document.getElementById("email").value = email;
+    }
+</script>
 </body>
 </html>

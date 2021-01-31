@@ -20,14 +20,14 @@ public class Login extends Command {
 
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
-        String mail = request.getParameter("email");
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
-        LOGGER.debug(mail);
+        LOGGER.debug(email);
         LOGGER.debug(password);
-        if (mail != null && password != null) {
+        if (email != null && password != null) {
             UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
             try {
-                User user = userService.login(mail, password);
+                User user = userService.login(email, password);
                 if (user != null) {
                     request.getSession().setAttribute("authorizedUser", user);
                     request.getSession().setAttribute("menuList", buildMenu(user.getRole()));
@@ -35,6 +35,8 @@ public class Login extends Command {
                     return new Forward("/campaign/list", true);
                 } else {
                     LOGGER.debug("Authorization failed...");
+                    request.setAttribute("email", email);
+                    request.setAttribute("authorizationFailedMessage", "login.authorization_failed");
                     return new Forward("jsp/login.jsp");
                 }
             } catch (ServiceException e) {
