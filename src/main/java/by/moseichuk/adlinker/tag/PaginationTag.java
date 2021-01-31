@@ -101,53 +101,6 @@ public class PaginationTag extends TagSupport {
     private String getLinkElement(int i, String text) {
         return String.format("<li class=\"page-item\"><a class=\"page-link\" href=\"%s?currentPage=%d\">%s</a></li>",url, i, text);
     }
-    /**
-     * <c:set var="url" value="${url}"/>
-     *         <ul class="pagination">
-     *             <li><a href="${url}?currentPage=${currentPage-1 > 0 ? currentPage - 1 : 1}" class="prev">&lt; Prev</a></li>
-     *             <%-- show left pages --%>
-     *             <c:choose>
-     *                 <c:when test="${showAllPrev}">
-     *                     <c:if test="${currentPage > 0}">
-     *                         <c:forEach begin="1" end="${currentPage - 1}" var="p">
-     *                             <li><a href="${url}?currentPage=${p}">${p}</a></li>
-     *                         </c:forEach>
-     *                     </c:if>
-     *                 </c:when>
-     *                 <c:otherwise>
-     *                     <c:forEach begin="1" end="${N_PAGES_FIRST}" var="p">
-     *                         <li><a href="${url}?currentPage=${p}">${p}</a></li>
-     *                     </c:forEach>
-     *                     <li><span>...</span></li>
-     *                     <c:forEach begin="${currentPage + 1 - N_PAGES_PREV}" end="${currentPage - 1}" var="p">
-     *                         <li><a href="${url}?currentPage=${p}">${p}</a></li>
-     *                     </c:forEach>
-     *                 </c:otherwise>
-     *             </c:choose>
-     *             <%-- show current page --%>
-     *                 <li class="active"><a href="${url}?currentPage=${currentPage}">${currentPage}</a></li>
-     *             <%-- show right pages --%>
-     *             <c:choose>
-     *                 <c:when test="${showAllNext}">
-     *                     <c:forEach begin="${currentPage + 1}" end="${lastPage}" var="p">
-     *                         <li><a href="${url}?currentPage=${p}">${p}</a></li>
-     *                     </c:forEach>
-     *                 </c:when>
-     *                 <c:otherwise>
-     *                     <c:forEach begin="${currentPage + 1}" end="${currentPage + (N_PAGES_NEXT - 1)}" var="p">
-     *                         <li><a href="${url}?currentPage=${p}">${p}</a></li>
-     *                     </c:forEach>
-     *                     <li><span>...</span></li>
-     *                     <c:forEach begin="${lastPage - (N_PAGES_LAST - 1)}" end="${lastPage}" var="p">
-     *                         <li><a href="${url}?currentPage=${p}">${p}</a><li>
-     *                     </c:forEach>
-     *                 </c:otherwise>
-     *             </c:choose>
-     *             <li><a href="${url}?currentPage=${currentPage + 1 > lastPage ? lastPage : currentPage + 1}">Next &gt;</a><li>
-     *         </ul>
-     * @return
-     * @throws JspException
-     */
 
     @Override
     public int doEndTag() throws JspException {

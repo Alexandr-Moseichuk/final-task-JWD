@@ -5,6 +5,7 @@ import by.moseichuk.adlinker.bean.UserRole;
 import by.moseichuk.adlinker.controller.Command;
 import by.moseichuk.adlinker.controller.Forward;
 import by.moseichuk.adlinker.service.CampaignService;
+import by.moseichuk.adlinker.service.PaginationService;
 import by.moseichuk.adlinker.service.ServiceEnum;
 import by.moseichuk.adlinker.service.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
@@ -17,6 +18,7 @@ import java.util.List;
 
 public class CampaignListVisual extends Command {
     private static final Logger LOGGER = LogManager.getLogger(CampaignListVisual.class);
+    private static final int PAGE_SIZE = 3;
 
 
     public CampaignListVisual() {
@@ -26,31 +28,24 @@ public class CampaignListVisual extends Command {
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
         CampaignService campaignService = (CampaignService) serviceFactory.getService(ServiceEnum.CAMPAIGN);
-
-        String currentPageParameter =  request.getParameter("currentPage");
-        Integer pageSize = (Integer) request.getAttribute("pageSize");
-
-        int currentPage = 1;
-        if (currentPageParameter != null) {
-            currentPage = Integer.parseInt(currentPageParameter);
-        }
-        if (pageSize == null) {
-            pageSize = 2;
-        }
-
         try {
-            int offset = pageSize * (currentPage - 1);
-            List<Campaign> pageCampaignList = campaignService.readSublist(pageSize, offset);
-            int totalRecords = campaignService.readRowCount();
-            int pages = totalRecords / pageSize;
-            int lastPage = pages * pageSize < totalRecords ? pages + 1 : pages;
+            String currentPageParameter =  request.getParameter("currentPage");
+            int currentPage = 1;
+            if (currentPageParameter != null) {
+                currentPage = Integer.parseInt(currentPageParameter);
+            }
 
-            request.setAttribute("campaignSubList", pageCampaignList);
-            request.setAttribute("pageSize", pageSize);
+            int offset = PaginationService.offset(PAGE_SIZE, currentPage);
+            List<Campaign> campaignSubList = campaignService.readSublist(PAGE_SIZE, offset);
+            int totalRecords = campaignService.readRowCount();
+            int pages = PaginationService.pages(totalRecords, PAGE_SIZE);
+            int lastPage = PaginationService.lastPage(pages, PAGE_SIZE, totalRecords);
+
+            request.setAttribute("campaignSubList", campaignSubList);
             request.setAttribute("currentPage", currentPage);
             request.setAttribute("lastPage", lastPage);
             return new Forward("jsp/campaign/list.jsp");
-        } catch (ServiceException e) {
+        } catch (ServiceException | NumberFormatException e) {
             LOGGER.error(e);
             request.setAttribute("errorMessage", "Ошибка получения кампаний");
             return new Forward("jsp/error.jsp");
