@@ -13,6 +13,10 @@ public interface ApplicationService {
 
     List<Application> readAll() throws ServiceException;
 
+    List<Application> readSubList(int count, int offset) throws ServiceException;
+
+    int readRowCount() throws ServiceException;
+
     void approveByIds(List<Integer> idList) throws ServiceException;
 
     void rejectByIds(List<Integer> idList) throws ServiceException;

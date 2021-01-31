@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -10,7 +11,7 @@
 </head>
 <body class="bg-light">
     <c:import url="/WEB-INF/jsp/particles/menu.jsp"/>
-    <h3><fmt:message key="application.list.label.title" bundle="${rb}" /></h3>
+    <h3 class="text-center"><fmt:message key="application.list.label.title" bundle="${rb}" /></h3>
     <div class="container">
         <form action="action.html" method="post">
             <button type="submit" name="action" value="approve" class="btn btn-outline-success">
@@ -55,6 +56,9 @@
                 </tbody>
             </table>
         </form>
+        <div class="row justify-content-center">
+            <ctg:pagination currentPage="${currentPage}" lastPage="${lastPage}" url="${url}"/>
+        </div>
     </div>
     <c:import url="/WEB-INF/jsp/particles/footer.jsp"/>
 </body>

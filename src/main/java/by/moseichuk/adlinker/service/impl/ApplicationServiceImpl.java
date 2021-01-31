@@ -55,6 +55,31 @@ public class ApplicationServiceImpl extends BaseService implements ApplicationSe
     }
 
     @Override
+    public List<Application> readSubList(int count, int offset) throws ServiceException {
+        ApplicationDao appDao = (ApplicationDao) transaction.getDao(DaoEnum.APPLICATION);
+        UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
+        try {
+            List<Application> subList = appDao.readSubList(count, offset);
+            for (Application application : subList) {
+                application.setUser(userDao.read(application.getUserId()));
+            }
+            return subList;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public int readRowCount() throws ServiceException {
+        ApplicationDao applicationDao = (ApplicationDao) transaction.getDao(DaoEnum.APPLICATION);
+        try {
+            return applicationDao.readRowCount();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public void approveByIds(List<Integer> idList) throws ServiceException {
         UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
         try {
