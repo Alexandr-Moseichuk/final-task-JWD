@@ -24,7 +24,6 @@ import java.util.List;
 public class SecurityFilter implements Filter {
     private static final Logger LOGGER = LogManager.getLogger(SecurityFilter.class);
     private static final List<Class<? extends Command>> publicCommands = new ArrayList<>();
-//    private static final ResourceBundle rb = ResourceBundle.getBundle("localisation.pagecontent");
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

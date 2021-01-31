@@ -23,11 +23,11 @@ import java.util.Map;
 
 public class CommandFilter implements Filter {
     private static final Logger LOGGER = LogManager.getLogger(CommandFilter.class);
-    private static Map<String, Command> commandGet = new HashMap<>();
-    private static Map<String, Command> commandPost = new HashMap<>();
-    //TODO PUT, DELETE... maps
+    private static final Map<String, Command> commandGet = new HashMap<>();
+    private static final Map<String, Command> commandPost = new HashMap<>();
 
-    static {
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
         commandGet.put("/", new IndexVisual());
         commandGet.put("/login", new LoginVisual());
         commandGet.put("/logout", new Logout());
@@ -54,11 +54,6 @@ public class CommandFilter implements Filter {
         commandPost.put("/campaign/create", new CreateCampaign());
         commandPost.put("/campaign/subscribe", new CampaignSubscribe());
         commandPost.put("/campaign/edit", new EditCampaign());
-    }
-
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
     }
 
     @Override
