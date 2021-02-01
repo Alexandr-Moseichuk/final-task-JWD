@@ -5,6 +5,11 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
+/**
+ * Wrapper for {@code java.sql.Connection}. Overrides {@code close()} method.
+ *
+ * @author Alexandr Moseichuk
+ */
 public class PooledConnection implements Connection, Comparable<PooledConnection> {
 	private Connection connection;
 
@@ -36,8 +41,11 @@ public class PooledConnection implements Connection, Comparable<PooledConnection
 		connection.clearWarnings();
 	}
 
+	/**
+	 * Returns this connection to connection pool.
+	 */
 	@Override
-	public void close() throws SQLException {
+	public void close() {
 		ConnectionPool.getInstance().freeConnection(this);
 	}
 
