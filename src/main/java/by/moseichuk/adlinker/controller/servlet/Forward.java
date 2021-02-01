@@ -1,4 +1,4 @@
-package by.moseichuk.adlinker.controller;
+package by.moseichuk.adlinker.controller.servlet;
 
 import java.util.HashMap;
 import java.util.Map;

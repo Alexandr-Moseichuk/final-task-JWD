@@ -1,6 +1,6 @@
 package by.moseichuk.adlinker.controller.filter;
 
-import by.moseichuk.adlinker.controller.Command;
+import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.command.*;
 import by.moseichuk.adlinker.controller.command.Registration;
 import by.moseichuk.adlinker.controller.command.advertiser.AdvertiserCampaignListVisual;

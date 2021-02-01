@@ -1,5 +1,7 @@
-package by.moseichuk.adlinker.controller;
+package by.moseichuk.adlinker.controller.manager;
 
+import by.moseichuk.adlinker.controller.command.Command;
+import by.moseichuk.adlinker.controller.servlet.Forward;
 import by.moseichuk.adlinker.service.ServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;

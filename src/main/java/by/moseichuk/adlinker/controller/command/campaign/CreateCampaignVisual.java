@@ -1,8 +1,8 @@
 package by.moseichuk.adlinker.controller.command.campaign;
 
 import by.moseichuk.adlinker.bean.UserRole;
-import by.moseichuk.adlinker.controller.Command;
-import by.moseichuk.adlinker.controller.Forward;
+import by.moseichuk.adlinker.controller.command.Command;
+import by.moseichuk.adlinker.controller.servlet.Forward;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -1,8 +1,8 @@
 package by.moseichuk.adlinker.controller.command.user;
 
 import by.moseichuk.adlinker.bean.*;
-import by.moseichuk.adlinker.controller.Command;
-import by.moseichuk.adlinker.controller.Forward;
+import by.moseichuk.adlinker.controller.command.Command;
+import by.moseichuk.adlinker.controller.servlet.Forward;
 import by.moseichuk.adlinker.service.*;
 import by.moseichuk.adlinker.service.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;

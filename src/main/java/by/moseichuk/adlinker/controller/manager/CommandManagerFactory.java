@@ -1,4 +1,4 @@
-package by.moseichuk.adlinker.controller;
+package by.moseichuk.adlinker.controller.manager;
 
 import by.moseichuk.adlinker.dao.exception.TransactionException;
 import by.moseichuk.adlinker.service.impl.ServiceFactoryImpl;
