@@ -19,7 +19,7 @@
 <%--<div class="container pt-3 my-3 border col-4">--%>
     <div class="container p-3 my-3 border bg-white shadow-sm">
         <h4 class="text-center"><fmt:message key="registration.title" bundle="${rb}" /></h4>
-        <form action="registration.html" class="row g-2" method="post">
+        <form action="registration.html" class="row g-2 form" method="post">
             <div class="col-md-12 position-relative">
                 <label for="email">Email:</label>
                 <input type="text" class="form-control" id="email" placeholder="Enter email" name="email" oninput="validateEmail(this)">
@@ -82,7 +82,7 @@
             </div>
             <div class="col-md-12 position-relative">
                 <label for="phoneNumber">Phone number:</label>
-                <input type="text" class="form-control" id="phoneNumber" placeholder="Enter phone number" name="phoneNumber" oninput="validateFullName(this)">
+                <input type="text" class="form-control" id="phoneNumber" placeholder="Enter phone number" name="phoneNumber" oninput="validatePhoneNumber(this)">
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>

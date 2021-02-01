@@ -60,3 +60,19 @@ function setInvalid(input) {
     input.classList.remove("is-valid");
     input.classList.add("is-invalid");
 }
+
+const form = document.querySelector('.form');
+form.addEventListener('submit', function(evt) {
+    evt.preventDefault();
+    let invalidInputs = form.querySelector('.is-invalid');
+    if (invalidInputs != null) {
+        return;
+    }
+    let emptyInputs = form.querySelectorAll('.form-control')
+    for (let i = 0; i < emptyInputs.length; i++) {
+        if (emptyInputs[i].value.length === 0) {
+            return;
+        }
+    }
+    this.submit();
+});
