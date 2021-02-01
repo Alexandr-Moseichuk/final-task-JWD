@@ -12,6 +12,11 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.LinkedBlockingQueue;
 
+/**
+ * A thread-safe pool of database connections.
+ *
+ * @author Alexandr Moseichuk
+ */
 public class ConnectionPool {
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
     private static final ConnectionPool instance = new ConnectionPool();
@@ -28,11 +33,22 @@ public class ConnectionPool {
     private ConnectionPool() {}
 
 
-
+    /**
+     * Returns the instance of class.
+     *
+     * @return the instance of class
+     */
     public static ConnectionPool getInstance() {
         return instance;
     }
 
+    /**
+     * Returns free connection from the pool and puts connection to {@code userdConnections} list.
+     * If there is no any free connection waits {@code connectionTimeout} seconds
+     *
+     * @return free connection from the pool.
+     * @throws ConnectionPoolException if there is no free connections or can't create new one
+     */
     public synchronized Connection getConnection() throws ConnectionPoolException {
         PooledConnection connection = null;
        // while(connection == null) {
@@ -60,6 +76,11 @@ public class ConnectionPool {
         return connection;
     }
 
+    /**
+     * Returns connection to free connection list. And connection can be used again.
+     *
+     * @param connection that will be in list of free connections
+     */
     synchronized void freeConnection(PooledConnection connection) {
         try {
             if(connection.isValid(connectionTimeout)) {
@@ -76,6 +97,18 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     * Configures a pool with params
+     *
+     * @param driverClass       class of database driver
+     * @param url               database url
+     * @param username          username of database user
+     * @param password          password of database user
+     * @param startSize         number of connections at the start of the pool
+     * @param poolSize          max number of connections
+     * @param connectionTimeout number of seconds to timeout connection
+     * @throws ConnectionPoolException if can't create connection
+     */
     public synchronized void init(String driverClass, String url, String username, String password,
                                   int startSize, int poolSize, int connectionTimeout) throws ConnectionPoolException {
         try {
@@ -100,6 +133,9 @@ public class ConnectionPool {
         return new PooledConnection(DriverManager.getConnection(url, username, password));
     }
 
+    /**
+     * Destroys connection pool and close all connections
+     */
     public synchronized void destroy() {
         usedConnections.addAll(freeConnections);
         freeConnections.clear();
