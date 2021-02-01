@@ -27,7 +27,13 @@ public class ConnectionPool {
     private int poolSize;
     private int connectionTimeout;
 
+    /**
+     * Queue of available connections
+     */
     private BlockingQueue<PooledConnection> freeConnections = new LinkedBlockingQueue<>();
+    /**
+     * Set of taken connections
+     */
     private Set<PooledConnection> usedConnections = new ConcurrentSkipListSet<>();
 
     private ConnectionPool() {}
@@ -129,6 +135,12 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     * Creates new {@code PooledConnection} to database
+     *
+     * @return new {@code PoolledConnection}
+     * @throws SQLException if can't create connection
+     */
     private PooledConnection createConnection() throws SQLException {
         return new PooledConnection(DriverManager.getConnection(url, username, password));
     }
