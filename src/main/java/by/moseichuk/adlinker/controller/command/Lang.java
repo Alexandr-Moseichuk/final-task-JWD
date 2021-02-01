@@ -1,8 +1,7 @@
 package by.moseichuk.adlinker.controller.command;
 
 import by.moseichuk.adlinker.bean.UserRole;
-import by.moseichuk.adlinker.controller.Command;
-import by.moseichuk.adlinker.controller.Forward;
+import by.moseichuk.adlinker.controller.servlet.Forward;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

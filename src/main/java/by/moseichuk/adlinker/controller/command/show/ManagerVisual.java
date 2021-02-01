@@ -2,8 +2,8 @@ package by.moseichuk.adlinker.controller.command.show;
 
 import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.bean.UserRole;
-import by.moseichuk.adlinker.controller.Command;
-import by.moseichuk.adlinker.controller.Forward;
+import by.moseichuk.adlinker.controller.command.Command;
+import by.moseichuk.adlinker.controller.servlet.Forward;
 import by.moseichuk.adlinker.service.ServiceEnum;
 import by.moseichuk.adlinker.service.UserService;
 import by.moseichuk.adlinker.service.exception.ServiceException;

@@ -2,8 +2,8 @@ package by.moseichuk.adlinker.controller.command.application;
 
 import by.moseichuk.adlinker.bean.Application;
 import by.moseichuk.adlinker.bean.UserRole;
-import by.moseichuk.adlinker.controller.Command;
-import by.moseichuk.adlinker.controller.Forward;
+import by.moseichuk.adlinker.controller.command.Command;
+import by.moseichuk.adlinker.controller.servlet.Forward;
 import by.moseichuk.adlinker.service.ApplicationService;
 import by.moseichuk.adlinker.service.PaginationService;
 import by.moseichuk.adlinker.service.ServiceEnum;

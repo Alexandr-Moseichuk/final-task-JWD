@@ -2,7 +2,7 @@ package by.moseichuk.adlinker.controller.filter;
 
 import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.bean.UserStatus;
-import by.moseichuk.adlinker.controller.Command;
+import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.command.Login;
 import by.moseichuk.adlinker.controller.command.Logout;
 import by.moseichuk.adlinker.controller.command.Registration;

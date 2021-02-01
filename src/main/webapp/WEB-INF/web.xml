@@ -11,7 +11,7 @@
 
     <servlet>
         <servlet-name>DispatcherServlet</servlet-name>
-        <servlet-class>by.moseichuk.adlinker.controller.HelloServlet</servlet-class>
+        <servlet-class>by.moseichuk.adlinker.controller.servlet.HelloServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DispatcherServlet</servlet-name>
