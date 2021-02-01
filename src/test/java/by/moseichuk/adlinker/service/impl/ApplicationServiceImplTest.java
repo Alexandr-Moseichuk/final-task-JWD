@@ -63,6 +63,11 @@ public class ApplicationServiceImplTest {
         sr.closeConnection();
     }
 
+    @AfterTest
+    public void destroy() {
+        ConnectionPool.getInstance().destroy();
+    }
+
     @Test
     public void testAdd() throws ServiceException, TransactionException {
         ApplicationServiceImpl service = new ApplicationServiceImpl();
