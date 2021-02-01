@@ -49,6 +49,10 @@ public class UserValidator implements Validator<User> {
         if (firstName == null || firstName.isEmpty() || firstName.length() < 2) {
             errorMap.put("firstNameError", "firstNameError");
         }
+        String secondName = userInfo.getSecondName();
+        if (secondName == null || secondName.isEmpty() || secondName.length() < 2) {
+            errorMap.put("secondNameError", "firstNameError");
+        }
         String description = userInfo.getDescription();
         if (description == null || description.isEmpty() || description.length() < 50) {
             errorMap.put("descriptionError", "descriptionError");
