@@ -21,11 +21,28 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The {@code CommandFilter} converts url request into {@code Command} object
+ *
+ * @author Alexandr Moseichuk
+ */
 public class CommandFilter implements Filter {
     private static final Logger LOGGER = LogManager.getLogger(CommandFilter.class);
+    /**
+     * Map of available GET requests
+     */
     private static final Map<String, Command> commandGet = new HashMap<>();
+    /**
+     * Map of available POST requests
+     */
     private static final Map<String, Command> commandPost = new HashMap<>();
 
+    /**
+     * Puts all available GET, POST commands in maps
+     *
+     * @param filterConfig filter configuration
+     * @throws ServletException if can't setup filter
+     */
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         commandGet.put("/", new IndexVisual());
@@ -56,6 +73,15 @@ public class CommandFilter implements Filter {
         commandPost.put("/campaign/edit", new EditCampaign());
     }
 
+    /**
+     *
+     *
+     * @param servletRequest  http request
+     * @param servletResponse http response
+     * @param filterChain     chain of filters
+     * @throws IOException    if can't forward request
+     * @throws ServletException if can't proceed to the next element in the chain
+     */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         if (servletRequest instanceof HttpServletRequest) {
@@ -86,6 +112,13 @@ public class CommandFilter implements Filter {
         }
     }
 
+    /**
+     * Returns command depending on request method, or null if method is not available
+     *
+     * @param request     http request
+     * @param commandName http response
+     * @return            command depending on request method, or null if method is not available
+     */
     private Command detectCommand(HttpServletRequest request, String commandName) {
         switch (request.getMethod().toUpperCase()) {
             case "GET":
