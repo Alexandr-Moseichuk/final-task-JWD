@@ -16,6 +16,15 @@ function validatePassword(input) {
     }
 }
 
+function validateCheckPassword(passwordCheckInput) {
+    let passwordInput = document.getElementById('password');
+    if (passwordInput.value === passwordCheckInput.value) {
+        setValid(passwordCheckInput);
+    } else {
+        setInvalid(passwordCheckInput);
+    }
+}
+
 function validateFullName(input) {
     let length = input.value.length;
     if (length > 1 && length < 32) {
@@ -68,11 +77,30 @@ form.addEventListener('submit', function(evt) {
     if (invalidInputs != null) {
         return;
     }
-    let emptyInputs = form.querySelectorAll('.form-control')
+    let emptyInputs = form.querySelectorAll('.form-control');
+    let isInvalid = false;
     for (let i = 0; i < emptyInputs.length; i++) {
         if (emptyInputs[i].value.length === 0) {
-            return;
+            setInvalid(emptyInputs[i]);
+            isInvalid = true;
         }
     }
+    if (isInvalid) {
+        return;
+    }
+    let checkbox = document.querySelector(".form-check-input");
+    if (!checkbox.checked) {
+        setInvalid(checkbox);
+    }
+
     this.submit();
+});
+
+let checkbox = document.querySelector(".form-check-input");
+checkbox.addEventListener('change', function() {
+    if (this.checked) {
+        setValid(this);
+    } else {
+        setInvalid(this);
+    }
 });
