@@ -16,6 +16,8 @@ import java.util.List;
 
 public class ApplicationListAction extends Command {
     private static final Logger LOGGER = LogManager.getLogger(ApplicationListAction.class);
+    private static final String RESULT_PATH = "/application/list";
+    private static final String ERROR_JSP = "jsp/error.jsp";
 
     public ApplicationListAction() {
         getPermissionSet().add(UserRole.ADMINISTRATOR);
@@ -25,7 +27,7 @@ public class ApplicationListAction extends Command {
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
         String action = request.getParameter("action");
         String[] userIdArray = request.getParameterValues("selected");
-        Forward forward = new Forward("/application/list", true);
+        Forward forward = new Forward(RESULT_PATH, true);
 
         if (action == null || userIdArray == null) {
             //TODO add message
@@ -44,12 +46,12 @@ public class ApplicationListAction extends Command {
                 String errorMessage = "Invalid action";
                 LOGGER.error(errorMessage + " URI: " + request.getRequestURI());
                 request.setAttribute("errorMessage", errorMessage);
-                forward = new Forward("jsp/error.jsp");
+                forward = new Forward(ERROR_JSP);
             }
         } catch (ServiceException e) {
             LOGGER.error(e);
             request.setAttribute("errorMessage", e.getMessage());
-            forward = new Forward("jsp/error.jsp");
+            forward = new Forward(ERROR_JSP);
         }
 
         return forward;

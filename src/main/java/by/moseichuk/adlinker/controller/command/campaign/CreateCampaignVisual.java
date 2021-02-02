@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class CreateCampaignVisual extends Command {
+    private static final String CREATE_JSP = "jsp/campaign/create.jsp";
 
     public CreateCampaignVisual() {
         getPermissionSet().add(UserRole.ADVERTISER);
@@ -15,7 +16,7 @@ public class CreateCampaignVisual extends Command {
 
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
-        return new Forward("jsp/campaign/create.jsp");
+        return new Forward(CREATE_JSP);
     }
 
 }

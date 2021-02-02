@@ -17,6 +17,7 @@ import java.util.GregorianCalendar;
 
 public class ApplicationUpdate extends Command {
     private static final Logger LOGGER = LogManager.getLogger(ApplicationUpdate.class);
+    private static final String RESULT_JSP = "jsp/application/not_approved.jsp";
 
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
@@ -35,6 +36,6 @@ public class ApplicationUpdate extends Command {
             LOGGER.error(e);
             request.setAttribute("updateFeedback", "Произошла ошибка!");
         }
-        return new Forward("jsp/application/not_approved.jsp");
+        return new Forward(RESULT_JSP);
     }
 }

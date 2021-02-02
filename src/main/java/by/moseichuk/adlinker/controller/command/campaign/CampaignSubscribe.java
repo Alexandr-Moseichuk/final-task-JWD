@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class CampaignSubscribe extends Command {
     private static final Logger LOGGER = LogManager.getLogger(CampaignSubscribe.class);
+    private static final String RESULT_PATH = "/campaign/list";
+    private static final String ERROR_JSP = "jsp/error.jsp";
 
     public CampaignSubscribe() {
         getPermissionSet().add(UserRole.INFLUENCER);
@@ -32,11 +34,11 @@ public class CampaignSubscribe extends Command {
             campaign.setId(Integer.parseInt(request.getParameter("campaignId")));
 
             campaignService.subscribe(influencer, campaign);
-            return new Forward("/campaign/list", true);
+            return new Forward(RESULT_PATH, true);
         } catch (ServiceException | NumberFormatException e) {
             LOGGER.error(e);
             request.setAttribute("errorMessage", e.getMessage());
-            return new Forward("jsp/error.jsp");
+            return new Forward(ERROR_JSP);
         }
 
     }

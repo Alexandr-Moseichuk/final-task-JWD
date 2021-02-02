@@ -23,6 +23,9 @@ import java.util.Map;
 
 public class CreateCampaign extends Command {
     private static final Logger LOGGER = LogManager.getLogger(CreateCampaign.class);
+    private static final String RESULT_PATH = "/campaign/list";
+    private static final String ERROR_JSP = "jsp/error.jsp";
+    private static final String CREATE_JSP = "jsp/campaign/create.jsp";
 
     public CreateCampaign() {
         getPermissionSet().add(UserRole.ADVERTISER);
@@ -38,7 +41,7 @@ public class CreateCampaign extends Command {
             for (Map.Entry<String, String> entry : errorMap.entrySet()) {
                 request.setAttribute(entry.getKey(), entry.getValue());
             }
-            return new Forward("jsp/campaign/create.jsp");
+            return new Forward(CREATE_JSP);
         }
 
         CampaignService campaignService = (CampaignService) serviceFactory.getService(ServiceEnum.CAMPAIGN);
@@ -48,11 +51,11 @@ public class CreateCampaign extends Command {
             int campaignId = campaignService.add(campaign);
             campaign.setId(campaignId);
             campaignService.subscribe(advertiser, campaign);
-            return new Forward("/campaign/list", true);
+            return new Forward(RESULT_PATH, true);
         } catch (ServiceException e) {
             LOGGER.error(e);
             request.setAttribute("errorMessage", e.getMessage());
-            return new Forward("jsp/error.jsp");
+            return new Forward(ERROR_JSP);
         }
     }
 
