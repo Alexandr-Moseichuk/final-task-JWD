@@ -53,7 +53,7 @@ public class HelloServlet extends HttpServlet {
             }
         } catch (ServletException | TransactionException e) {
             LOGGER.error(e);
-            request.setAttribute(ERROR_MESSAGE_ATTRIBUTE,e.getMessage());
+            request.setAttribute(ERROR_MESSAGE_ATTRIBUTE, e.getMessage());
             try {
                 getServletContext().getRequestDispatcher(ERROR_JSP).forward(request, response);
             } catch (ServletException e1) {
