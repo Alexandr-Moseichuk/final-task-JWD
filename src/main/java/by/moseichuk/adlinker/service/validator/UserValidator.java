@@ -3,12 +3,10 @@ package by.moseichuk.adlinker.service.validator;
 import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.bean.UserInfo;
 import by.moseichuk.adlinker.service.Validator;
-import sun.jvm.hotspot.ui.action.FindAction;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import java.util.Map;
-import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
