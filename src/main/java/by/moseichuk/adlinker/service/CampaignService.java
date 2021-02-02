@@ -1,17 +1,17 @@
 package by.moseichuk.adlinker.service;
 
 import by.moseichuk.adlinker.bean.Campaign;
-import by.moseichuk.adlinker.bean.Influencer;
+import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.service.exception.ServiceException;
 
 import java.util.List;
 
 public interface CampaignService {
-    void subscribe(Influencer influencer, Campaign campaign) throws ServiceException;
+    void subscribe(User user, Campaign campaign) throws ServiceException;
 
     List<Campaign> readAll() throws ServiceException;
 
-    void add(Campaign campaign) throws ServiceException;
+    Integer add(Campaign campaign) throws ServiceException;
 
     Campaign read(Integer campaignId) throws ServiceException;
 
@@ -24,6 +24,8 @@ public interface CampaignService {
     List<Campaign> readSublistByOwner(Integer ownerId, int limit, int offset) throws ServiceException;
 
     int readRowCount() throws ServiceException;
+
+    int readRowCountByUser(Integer userId) throws ServiceException;
 
     Integer readOwnerId(Integer campaignId) throws ServiceException;
 }

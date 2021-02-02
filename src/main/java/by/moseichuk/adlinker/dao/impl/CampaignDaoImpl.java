@@ -1,7 +1,7 @@
 package by.moseichuk.adlinker.dao.impl;
 
 import by.moseichuk.adlinker.bean.Campaign;
-import by.moseichuk.adlinker.bean.Influencer;
+import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.dao.CampaignDao;
 import by.moseichuk.adlinker.dao.exception.DaoException;
 
@@ -21,6 +21,7 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
     private static final String READ_SUBLIST = "SELECT `id`, `title`, `create_date`, `begin_date`, `end_date`, `description`, `requirement`, `budget` FROM" +
             " `campaign` ORDER BY `id` LIMIT ? OFFSET ?";
     private static final String READ_ROW_COUNT = "SELECT COUNT(*) FROM `campaign`";
+    private static final String READ_ROW_COUNT_BY_USER = "SELECT COUNT(*) FROM campaign JOIN user_campaign ON user_campaign.campaign_id=campaign.id WHERE user_id=?";
     private static final String SUBSCRIBE_INFLUENCER = "INSERT INTO `user_campaign` (`user_id`, `campaign_id`) VALUES (?, ?)";
     private static final String READ_OWNER_ID = "SELECT user_campaign.user_id FROM user_campaign JOIN user ON user_campaign.user_id=user.id WHERE user.role=1 AND user_campaign.campaign_id=?";
     private static final String READ_SUBLIST_BY_OWNER = "SELECT `id`, `title`, `create_date`, `begin_date`, `end_date`, `description`, `requirement`, `budget` FROM" +
@@ -112,9 +113,9 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
 
 
     @Override
-    public void subscribe(Influencer influencer, Campaign campaign) throws DaoException {
+    public void subscribe(User user, Campaign campaign) throws DaoException {
         try (PreparedStatement statement = connection.prepareStatement(SUBSCRIBE_INFLUENCER)) {
-            statement.setInt(1, influencer.getId());
+            statement.setInt(1, user.getId());
             statement.setInt(2, campaign.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -193,6 +194,21 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
     @Override
     public int readRowCount() throws DaoException {
         try (PreparedStatement statement = connection.prepareStatement(READ_ROW_COUNT)) {
+            ResultSet resultSet = statement.executeQuery();
+            int count = 0;
+            if (resultSet.next()) {
+                count = resultSet.getInt(1);
+            }
+            return count;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public int readRowCountByUser(Integer userId) throws DaoException {
+        try (PreparedStatement statement = connection.prepareStatement(READ_ROW_COUNT_BY_USER)) {
+            statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
             int count = 0;
             if (resultSet.next()) {

@@ -64,6 +64,7 @@
                     <input id="file_upload" type="file" name="uploadFile" size="100"/>
                 </form>
             </div>
+            <input form="create-campaign" type="hidden" name="advertiserId" value="${sessionScope.authorizedUser.id}"/>
         </form>
         <div class="container">
             <button type="submit" class="btn btn-primary btn-block" form="create-campaign"><fmt:message key="campaign.create.form.submit_button" bundle="${rb}" /></button>

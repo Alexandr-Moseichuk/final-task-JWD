@@ -2,6 +2,7 @@ package by.moseichuk.adlinker.service.impl;
 
 import by.moseichuk.adlinker.bean.Campaign;
 import by.moseichuk.adlinker.bean.Influencer;
+import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.dao.CampaignDao;
 import by.moseichuk.adlinker.dao.DaoEnum;
 import by.moseichuk.adlinker.dao.UserDao;
@@ -17,10 +18,10 @@ import java.util.List;
 
 public class CampaignServiceImpl extends BaseService implements CampaignService {
     @Override
-    public void subscribe(Influencer influencer, Campaign campaign) throws ServiceException {
+    public void subscribe(User user, Campaign campaign) throws ServiceException {
         CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
         try {
-            campaignDao.subscribe(influencer, campaign);
+            campaignDao.subscribe(user, campaign);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -37,11 +38,12 @@ public class CampaignServiceImpl extends BaseService implements CampaignService 
     }
 
     @Override
-    public void add(Campaign campaign) throws ServiceException {
+    public Integer add(Campaign campaign) throws ServiceException {
         CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
         try {
-            campaignDao.create(campaign);
+            Integer campaignId = campaignDao.create(campaign);
             transaction.commit();
+            return campaignId;
         } catch (DaoException | TransactionException e) {
             transaction.rollback();
             throw new ServiceException(e);
@@ -120,6 +122,16 @@ public class CampaignServiceImpl extends BaseService implements CampaignService 
         CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
         try {
             return campaignDao.readRowCount();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public int readRowCountByUser(Integer userId) throws ServiceException {
+        CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
+        try {
+            return campaignDao.readRowCountByUser(userId);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

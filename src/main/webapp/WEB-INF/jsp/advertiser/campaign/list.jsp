@@ -44,6 +44,9 @@
         </c:forEach>
         </tbody>
     </table>
+    <div class="row justify-content-center">
+        <ctg:pagination currentPage="${currentPage}" lastPage="${lastPage}" url="${url}"/>
+    </div>
 <%--    <ctg:pagination currentPage="${currentPage}" lastPage="${lastPage}" url="${url}"/>--%>
     <c:import url="/WEB-INF/jsp/particles/footer.jsp"/>
 </body>

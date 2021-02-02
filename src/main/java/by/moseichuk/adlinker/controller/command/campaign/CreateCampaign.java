@@ -1,5 +1,6 @@
 package by.moseichuk.adlinker.controller.command.campaign;
 
+import by.moseichuk.adlinker.bean.Advertiser;
 import by.moseichuk.adlinker.bean.Campaign;
 import by.moseichuk.adlinker.bean.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
@@ -37,13 +38,16 @@ public class CreateCampaign extends Command {
             for (Map.Entry<String, String> entry : errorMap.entrySet()) {
                 request.setAttribute(entry.getKey(), entry.getValue());
             }
-            LOGGER.debug(errorMap);
             return new Forward("jsp/campaign/create.jsp");
         }
 
         CampaignService campaignService = (CampaignService) serviceFactory.getService(ServiceEnum.CAMPAIGN);
         try {
-            campaignService.add(campaign);
+            Advertiser advertiser = new Advertiser();
+            advertiser.setId(Integer.parseInt(request.getParameter("advertiserId")));
+            int campaignId = campaignService.add(campaign);
+            campaign.setId(campaignId);
+            campaignService.subscribe(advertiser, campaign);
             return new Forward("/campaign/list", true);
         } catch (ServiceException e) {
             LOGGER.error(e);
