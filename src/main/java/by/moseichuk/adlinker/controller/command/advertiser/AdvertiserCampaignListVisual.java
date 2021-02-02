@@ -6,6 +6,7 @@ import by.moseichuk.adlinker.bean.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.servlet.Forward;
 import by.moseichuk.adlinker.service.CampaignService;
+import by.moseichuk.adlinker.service.PaginationService;
 import by.moseichuk.adlinker.service.ServiceEnum;
 import by.moseichuk.adlinker.service.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
@@ -17,6 +18,9 @@ import java.util.List;
 
 public class AdvertiserCampaignListVisual extends Command {
     private static final Logger LOGGER = LogManager.getLogger(AdvertiserCampaignListVisual.class);
+    private static final String RESULT_JSP = "jsp/advertiser/campaign/list.jsp";
+    private static final String ERROR_JSP = "jsp/error.jsp";
+    private static final int PAGE_SIZE = 3;
 
     public AdvertiserCampaignListVisual() {
         getPermissionSet().add(UserRole.ADVERTISER);
@@ -27,14 +31,26 @@ public class AdvertiserCampaignListVisual extends Command {
         CampaignService campaignService = (CampaignService) serviceFactory.getService(ServiceEnum.CAMPAIGN);
         try {
             User authorizedUser = (User) request.getSession(false).getAttribute("authorizedUser");
-            //TODO
-            List<Campaign> campaignList = campaignService.readSublistByOwner(authorizedUser.getId(), 2, 1);
+
+            String currentPageParameter =  request.getParameter("currentPage");
+            int currentPage = 1;
+            if (currentPageParameter != null) {
+                currentPage = Integer.parseInt(currentPageParameter);
+            }
+
+            int offset = PaginationService.offset(PAGE_SIZE, currentPage);
+            List<Campaign> campaignList = campaignService.readSublistByOwner(authorizedUser.getId(), PAGE_SIZE, offset);
+            int totalRecords = campaignService.readRowCountByUser(authorizedUser.getId());
+            int pages = PaginationService.pages(totalRecords, PAGE_SIZE);
+            int lastPage = PaginationService.lastPage(pages, PAGE_SIZE, totalRecords);
             request.setAttribute("campaignList", campaignList);
-            return new Forward("jsp/advertiser/campaign/list.jsp");
+            request.setAttribute("currentPage", currentPage);
+            request.setAttribute("lastPage", lastPage);
+            return new Forward(RESULT_JSP);
         } catch (ServiceException | NumberFormatException e) {
             LOGGER.error(e);
             request.getSession().setAttribute("errorMessage", "Ошибка получения заявок");
-            return new Forward("jsp/error.jsp");
+            return new Forward(ERROR_JSP);
         }
     }
 }
