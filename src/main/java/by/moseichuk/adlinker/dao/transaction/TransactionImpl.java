@@ -13,19 +13,8 @@ import java.util.Map;
 
 public class TransactionImpl implements Transaction {
     private static final Logger LOGGER = LogManager.getLogger(TransactionImpl.class);
-    private static Map<DaoEnum, BaseDao> daoMap = new HashMap<>();
 
-    static {
-        daoMap.put(DaoEnum.CAMPAIGN, new CampaignDaoImpl());
-        daoMap.put(DaoEnum.MANAGER_INFLUENCER, new ManagerInfluencerDaoImpl());
-        daoMap.put(DaoEnum.APPLICATION, new ApplicationDaoImpl());
-        daoMap.put(DaoEnum.SOCIAL_LINK, new SocialLinkDaoImpl());
-        daoMap.put(DaoEnum.USER, new UserDaoImpl());
-        daoMap.put(DaoEnum.FILE, new UserFileDaoImpl());
-        daoMap.put(DaoEnum.USER_INFO, new UserInfoDaoImpl());
-    }
-
-    private Connection connection;
+    private final Connection connection;
 
     public TransactionImpl(Connection connection) {
         this.connection = connection;
@@ -33,7 +22,32 @@ public class TransactionImpl implements Transaction {
 
     @Override
     public BaseDao getDao(DaoEnum daoType) {
-        BaseDao baseDao = daoMap.get(daoType);
+        BaseDao baseDao = null;
+        switch (daoType) {
+            case CAMPAIGN:
+                baseDao = new CampaignDaoImpl();
+                break;
+            case MANAGER_INFLUENCER:
+                baseDao = new ManagerInfluencerDaoImpl();
+                break;
+            case APPLICATION:
+                baseDao = new ApplicationDaoImpl();
+                break;
+            case SOCIAL_LINK:
+                baseDao = new SocialLinkDaoImpl();
+                break;
+            case USER:
+                baseDao = new UserDaoImpl();
+                break;
+            case FILE:
+                baseDao = new UserFileDaoImpl();
+                break;
+            case USER_INFO:
+                baseDao = new UserInfoDaoImpl();
+                break;
+            default:
+                return null;
+        }
         baseDao.setConnection(connection);
         return baseDao;
     }
