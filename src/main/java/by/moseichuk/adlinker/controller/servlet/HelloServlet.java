@@ -15,6 +15,11 @@ import javax.servlet.http.*;
 public class HelloServlet extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(HelloServlet.class);
 
+    private static final String ERROR_JSP = "/WEB-INF/jsp/error.jsp";
+    private static final String ERROR_MESSAGE_ATTRIBUTE = "errorMessage";
+    private static final String PAGE_URL_ATTRIBUTE = "pageURL";
+    private static final String COMMAND_ATTRIBUTE = "command";
+
     public void init() {
         try {
             ServiceFactoryImpl.init();
@@ -33,8 +38,8 @@ public class HelloServlet extends HttpServlet {
 
     private void executeRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            request.setAttribute("pageURL", request.getRequestURL());
-            Command command = (Command) request.getAttribute("command");
+            request.setAttribute(PAGE_URL_ATTRIBUTE, request.getRequestURL());
+            Command command = (Command) request.getAttribute(COMMAND_ATTRIBUTE);
             CommandManger commandManger = CommandManagerFactory.getInstance().getManager();
             Forward forward = commandManger.execute(command, request, response);
             commandManger.close();
@@ -48,13 +53,11 @@ public class HelloServlet extends HttpServlet {
             }
         } catch (ServletException | TransactionException e) {
             LOGGER.error(e);
-            e.printStackTrace();
-            request.setAttribute("errorMessage", String.format("Ошибка сервера по адресу %s, описание ошибки %s", request.getRequestURI(), e.getMessage()));
+            request.setAttribute(ERROR_MESSAGE_ATTRIBUTE,e.getMessage());
             try {
-                getServletContext().getRequestDispatcher("/WEB-INF/jsp/error.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher(ERROR_JSP).forward(request, response);
             } catch (ServletException e1) {
                 LOGGER.error(e1);
-                e1.printStackTrace();
             }
         }
     }
