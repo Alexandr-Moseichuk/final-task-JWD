@@ -16,6 +16,10 @@ import java.util.*;
 
 public class Login extends Command {
     private static final Logger LOGGER = LogManager.getLogger(Login.class);
+    private static final String SUCCESS_REDIRECT = "/campaign/list";
+    private static final String FAILED_FORWARD = "jsp/login.jsp";
+    private static final String ERROR_JSP = "jsp/error.jsp";
+
 
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
@@ -31,20 +35,20 @@ public class Login extends Command {
                     request.getSession().setAttribute("authorizedUser", user);
                     request.getSession().setAttribute("menuList", buildMenu(user.getRole()));
                     LOGGER.debug("Authorization success...");
-                    return new Forward("/campaign/list", true);
+                    return new Forward(SUCCESS_REDIRECT, true);
                 } else {
                     LOGGER.debug("Authorization failed...");
                     request.setAttribute("email", email);
                     request.setAttribute("authorizationFailedMessage", "login.authorization_failed");
-                    return new Forward("jsp/login.jsp");
+                    return new Forward(FAILED_FORWARD);
                 }
             } catch (ServiceException e) {
                 LOGGER.error(e);
                 request.getSession().setAttribute("errorMessage", "Ошибка авторизации! Свяжитесь с администратором.");
-                return new Forward("jsp/error.jsp");
+                return new Forward(ERROR_JSP);
             }
         }
-        return new Forward("jsp/login.jsp");
+        return new Forward(FAILED_FORWARD);
     }
 
     private List<MenuItem> buildMenu(UserRole userRole) {

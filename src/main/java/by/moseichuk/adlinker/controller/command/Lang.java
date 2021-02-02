@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 
 public class Lang extends Command {
+    private static final String COOKIE_NAME = "language";
+    private static final String LOCALIZATION_PARAM = "loc";
+    private static final String PREVIOUS_PAGE_ATTR = "previousPage";
+    private static final String JSP_PATH = "/WEB-INF/jsp";
+    private static final char DELIMITER = '.';
 
     public Lang() {
         getPermissionSet().addAll(Arrays.asList(UserRole.values()));
@@ -16,20 +21,20 @@ public class Lang extends Command {
 
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
-        Cookie cookie = getCookie(request, "language");
+        Cookie cookie = getCookie(request, COOKIE_NAME);
+        String localization = request.getParameter(LOCALIZATION_PARAM);
 
         if (cookie != null) {
-            cookie.setValue(request.getParameter("loc"));
+            cookie.setValue(localization);
         } else {
-            cookie = new Cookie("language", request.getParameter("loc"));
+            cookie = new Cookie(COOKIE_NAME, localization);
         }
         response.addCookie(cookie);
 
-        //int end = request.getRequestURI().lastIndexOf('.');
-        String previousPage = request.getSession(false).getAttribute("previousPage").toString();
+        String previousPage = request.getSession(false).getAttribute(PREVIOUS_PAGE_ATTR).toString();
         System.out.println(previousPage);
-        int begin = request.getContextPath().length() + "/WEB-INF/jsp".length();
-        int end = previousPage.lastIndexOf('.');
+        int begin = request.getContextPath().length() + JSP_PATH.length();
+        int end = previousPage.lastIndexOf(DELIMITER);
         String redirect = previousPage.substring(begin, end);
         return new Forward(redirect, true);
     }

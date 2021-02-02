@@ -9,8 +9,9 @@ import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 
 public class Logout extends Command {
+    private static final String PAGE_PATH = "/";
 
-    {
+    public Logout() {
         getPermissionSet().addAll(Arrays.asList(UserRole.values()));
     }
 
@@ -20,6 +21,6 @@ public class Logout extends Command {
         if (session != null) {
             session.invalidate();
         }
-        return new Forward("/", true);
+        return new Forward(PAGE_PATH, true);
     }
 }
