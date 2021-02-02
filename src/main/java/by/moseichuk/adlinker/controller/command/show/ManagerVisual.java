@@ -17,8 +17,10 @@ import java.util.List;
 
 public class ManagerVisual extends Command {
     private static final Logger LOGGER = LogManager.getLogger(ManagerVisual.class);
+    private static final String MANAGER_LIST_JSP = "jsp/manager/list.jsp";
+    private static final String ERROR_JSP = "jsp/error.jsp";
 
-    {
+    public ManagerVisual() {
         getPermissionSet().addAll(Arrays.asList(UserRole.values()));
     }
 
@@ -28,11 +30,11 @@ public class ManagerVisual extends Command {
         try {
             List<User> managerList = userService.readUsersByRole(UserRole.MANAGER);
             request.setAttribute("managerList", managerList);
-            return new Forward("jsp/manager/list.jsp");
+            return new Forward(MANAGER_LIST_JSP);
         } catch (ServiceException e) {
             LOGGER.error(e);
             request.setAttribute("errorMessage", "Ошибка получения списка менеджеров");
-            return new Forward("jsp/error.jsp");
+            return new Forward(ERROR_JSP);
         }
     }
 }

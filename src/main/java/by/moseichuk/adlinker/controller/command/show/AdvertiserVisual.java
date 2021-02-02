@@ -17,6 +17,8 @@ import java.util.List;
 
 public class AdvertiserVisual extends Command {
     private static final Logger LOGGER = LogManager.getLogger(AdvertiserVisual.class);
+    private static final String ERROR_JSP = "jsp/error.jsp";
+    private static final String ADVERTISER_LIST_JSP = "jsp/advertiser/list.jsp";
 
     {
         getPermissionSet().addAll(Arrays.asList(UserRole.values()));
@@ -28,11 +30,11 @@ public class AdvertiserVisual extends Command {
         try {
             List<User> advertiserList = userService.readUsersByRole(UserRole.ADVERTISER);
             request.setAttribute("advertiserList" ,advertiserList);
-            return new Forward("jsp/advertiser/list.jsp");
+            return new Forward(ADVERTISER_LIST_JSP);
         } catch (ServiceException e) {
             LOGGER.error(e);
             request.setAttribute("errorMessage", "Ошибка получения списка рекламодателей");
-            return new Forward("jsp/error.jsp");
+            return new Forward(ERROR_JSP);
         }
     }
 }

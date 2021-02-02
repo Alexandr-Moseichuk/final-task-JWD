@@ -18,6 +18,10 @@ import javax.servlet.http.HttpSession;
 
 public class InfluencerSubscribe extends Command {
     private static final Logger LOGGER = LogManager.getLogger(InfluencerSubscribe.class);
+    private static final String PERMISSION_DENIED_JSP = "jsp/permission_denied.jsp";
+    private static final String ERROR_JSP = "jsp/error.jsp";
+    private static final String INFLUENCER_LIST_PATH = "/influencer/list";
+    private static final String LOGIN_PATH = "/login";
 
     public InfluencerSubscribe() {
         getPermissionSet().add(UserRole.MANAGER);
@@ -29,7 +33,7 @@ public class InfluencerSubscribe extends Command {
         if (session != null) {
             User authorizedUser = (User) session.getAttribute("authorizedUser");
             if (authorizedUser.getRole() != UserRole.MANAGER) {
-                return new Forward("jsp/permission_denied.jsp");
+                return new Forward(PERMISSION_DENIED_JSP);
             }
             Integer influencerId;
             ManagerInfluencerService service =
@@ -42,14 +46,14 @@ public class InfluencerSubscribe extends Command {
                 manager.setId(authorizedUser.getId());
                 influencer.setManager(manager);
                 service.create(influencer);
-                return new Forward("/influencer/list", true);
+                return new Forward(INFLUENCER_LIST_PATH, true);
             } catch (NumberFormatException | ServiceException e) {
                 LOGGER.error(e);
                 request.setAttribute("errorMessage", e.getMessage());
-                return new Forward("jsp/error.jsp");
+                return new Forward(ERROR_JSP);
             }
         } else {
-            return new Forward("/login", true);
+            return new Forward(LOGIN_PATH, true);
         }
     }
 }

@@ -18,6 +18,8 @@ import java.util.List;
 
 public class CampaignListVisual extends Command {
     private static final Logger LOGGER = LogManager.getLogger(CampaignListVisual.class);
+    private static final String CAMPAIGN_LIST_JSP = "jsp/campaign/list.jsp";
+    private static final String ERROR_JSP = "jsp/error.jsp";
     private static final int PAGE_SIZE = 3;
 
 
@@ -44,11 +46,11 @@ public class CampaignListVisual extends Command {
             request.setAttribute("campaignSubList", campaignSubList);
             request.setAttribute("currentPage", currentPage);
             request.setAttribute("lastPage", lastPage);
-            return new Forward("jsp/campaign/list.jsp");
+            return new Forward(CAMPAIGN_LIST_JSP);
         } catch (ServiceException | NumberFormatException e) {
             LOGGER.error(e);
             request.setAttribute("errorMessage", "Ошибка получения кампаний");
-            return new Forward("jsp/error.jsp");
+            return new Forward(ERROR_JSP);
         }
     }
 }

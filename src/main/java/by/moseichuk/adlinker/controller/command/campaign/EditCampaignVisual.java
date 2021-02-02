@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 
 public class EditCampaignVisual extends Command {
     private static final Logger LOGGER = LogManager.getLogger(EditCampaignVisual.class);
+    private static final String PERMISSION_DENIED_JSP = "jsp/permission_denied.jsp";
+    private static final String EDIT_JSP = "jsp/campaign/edit.jsp";
+    private static final String ERROR_JSP = "jsp/error.jsp";
 
     public EditCampaignVisual() {
         getPermissionSet().add(UserRole.ADVERTISER);
@@ -29,15 +32,15 @@ public class EditCampaignVisual extends Command {
             Integer ownerId = campaignService.readOwnerId(campaignId);
             User authorizedUser = (User) request.getSession(false).getAttribute("authorizedUser");
             if (!authorizedUser.getId().equals(ownerId)) {
-                return new Forward("jsp/permission_denied.jsp");
+                return new Forward(PERMISSION_DENIED_JSP);
             }
             Campaign campaign = campaignService.read(campaignId);
             request.setAttribute("campaign", campaign);
-            return new Forward("jsp/campaign/edit.jsp");
+            return new Forward(EDIT_JSP);
         } catch (ServiceException | NumberFormatException e) {
             LOGGER.error(e);
             request.setAttribute("errorMessage", e.getMessage());
-            return new Forward("jsp/error.jsp");
+            return new Forward(ERROR_JSP);
         }
     }
 }

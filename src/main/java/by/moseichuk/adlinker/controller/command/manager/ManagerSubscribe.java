@@ -18,6 +18,10 @@ import javax.servlet.http.HttpSession;
 
 public class ManagerSubscribe extends Command {
     private static final Logger LOGGER = LogManager.getLogger(ManagerSubscribe.class);
+    private static final String PERMISSION_DENIED_JSP = "jsp/permission_denied.jsp";
+    private static final String ERROR_JSP = "jsp/error.jsp";
+    private static final String MANAGER_LIST_PATH = "/manager/list";
+    private static final String LOGIN_PATH = "/login";
 
     public ManagerSubscribe() {
         getPermissionSet().add(UserRole.INFLUENCER);
@@ -29,7 +33,7 @@ public class ManagerSubscribe extends Command {
         if (session != null) {
             User authorizedUser = (User) session.getAttribute("authorizedUser");
             if (authorizedUser.getRole() != UserRole.INFLUENCER) {
-                return new Forward("jsp/permission_denied.jsp");
+                return new Forward(PERMISSION_DENIED_JSP);
             }
             Integer managerId;
             ManagerInfluencerService service =
@@ -42,14 +46,14 @@ public class ManagerSubscribe extends Command {
                 manager.setId(managerId);
                 influencer.setManager(manager);
                 service.create(influencer);
-                return new Forward("/manager/list", true);
+                return new Forward(MANAGER_LIST_PATH, true);
             } catch (NumberFormatException | ServiceException e) {
                 LOGGER.error(e);
                 request.setAttribute("errorMessage", e.getMessage());
-                return new Forward("jsp/error.jsp");
+                return new Forward(ERROR_JSP);
             }
         } else {
-            return new Forward("/login", true);
+            return new Forward(LOGIN_PATH, true);
         }
     }
 }

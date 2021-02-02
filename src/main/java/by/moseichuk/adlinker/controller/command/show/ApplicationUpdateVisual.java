@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 
 public class ApplicationUpdateVisual extends Command {
+    private static final String NOT_APPROVED_JSP = "jsp/application/not_approved.jsp";
 
     public ApplicationUpdateVisual(){
         getPermissionSet().addAll(Arrays.asList(UserRole.values()));
@@ -16,6 +17,6 @@ public class ApplicationUpdateVisual extends Command {
 
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
-        return new Forward("jsp/application/update");
+        return new Forward(NOT_APPROVED_JSP);
     }
 }

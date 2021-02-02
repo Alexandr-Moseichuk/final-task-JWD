@@ -17,8 +17,10 @@ import java.util.List;
 
 public class InfluencerVisual extends Command {
     private static final Logger LOGGER = LogManager.getLogger(InfluencerVisual.class);
+    private static final String INFLUENCER_LIST_JSP = "jsp/influencer/list.jsp";
+    private static final String ERROR_JSP = "jsp/error.jsp";
 
-    {
+    public InfluencerVisual() {
         getPermissionSet().addAll(Arrays.asList(UserRole.values()));
     }
 
@@ -28,11 +30,11 @@ public class InfluencerVisual extends Command {
         try {
             List<User> influencerList = userService.readUsersByRole(UserRole.INFLUENCER);
             request.setAttribute("influencerList", influencerList);
-            return new Forward("jsp/influencer/list.jsp");
+            return new Forward(INFLUENCER_LIST_JSP);
         } catch (ServiceException e) {
             LOGGER.error(e);
             request.setAttribute("errorMessage", "Ошибка получения списка инфлюенсеров");
-            return new Forward("jsp/error.jsp");
+            return new Forward(ERROR_JSP);
         }
     }
 }

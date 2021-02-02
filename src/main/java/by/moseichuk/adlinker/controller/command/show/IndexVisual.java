@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 
 public class IndexVisual extends Command {
+    private static final String INDEX_JSP = "jsp/index.jsp";
+    private static final String CAMPAIGN_LIST_PATH = "/campaign/list";
 
     public IndexVisual() {
         getPermissionSet().addAll(Arrays.asList(UserRole.values()));
@@ -20,13 +22,13 @@ public class IndexVisual extends Command {
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
         if (session == null) {
-            return new Forward("jsp/index.jsp");
+            return new Forward(INDEX_JSP);
         } else {
             User authorizedUser = (User) session.getAttribute("authorizedUser");
             if (authorizedUser == null) {
-                return new Forward("jsp/index.jsp");
+                return new Forward(INDEX_JSP);
             } else {
-                return new Forward("/campaign/list", true);
+                return new Forward(CAMPAIGN_LIST_PATH, true);
             }
 
         }

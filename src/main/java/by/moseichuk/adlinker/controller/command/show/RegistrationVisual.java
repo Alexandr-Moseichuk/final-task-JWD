@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class RegistrationVisual extends Command {
+    private static final String REGISTRATION_JSP = "jsp/registration.jsp";
+
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
-        return new Forward("jsp/registration.jsp");
+        return new Forward(REGISTRATION_JSP);
     }
 }

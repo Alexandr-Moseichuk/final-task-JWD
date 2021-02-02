@@ -19,6 +19,9 @@ import java.util.GregorianCalendar;
 
 public class EditCampaign extends Command {
     private static final Logger LOGGER = LogManager.getLogger(EditCampaign.class);
+    private static final String PERMISSION_DENIED_JSP = "jsp/permission_denied.jsp";
+    private static final String EDIT_JSP = "jsp/campaign/edit.jsp";
+    private static final String ERROR_JSP = "jsp/error.jsp";
 
     public EditCampaign() {
         getPermissionSet().add(UserRole.ADVERTISER);
@@ -32,16 +35,16 @@ public class EditCampaign extends Command {
             Integer ownerId = campaignService.readOwnerId(campaignId);
             User authorizedUser = (User) request.getSession(false).getAttribute("authorizedUser");
             if (!authorizedUser.getId().equals(ownerId)) {
-                return new Forward("jsp/permission_denied.jsp");
+                return new Forward(PERMISSION_DENIED_JSP);
             }
             Campaign campaign = buildCampaign(request);
             campaignService.update(campaign);
             request.setAttribute("campaign", campaign);
-            return new Forward("jsp/campaign/edit.jsp");
+            return new Forward(EDIT_JSP);
         } catch (ServiceException | NumberFormatException e) {
             LOGGER.error(e);
             request.setAttribute("errorMessage", e.getMessage());
-            return new Forward("jsp/error.jsp");
+            return new Forward(ERROR_JSP);
         }
     }
 

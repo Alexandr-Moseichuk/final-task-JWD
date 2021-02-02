@@ -16,8 +16,10 @@ import java.util.List;
 
 public class UserVisual extends Command {
     private static final Logger LOGGER = LogManager.getLogger(UserVisual.class);
+    private static final String USER_LIST_JSP = "jsp/user/list.jsp";
+    private static final String ERROR_JSP = "jsp/error.jsp";
 
-    {
+    public UserVisual() {
         getPermissionSet().add(UserRole.ADMINISTRATOR);
     }
 
@@ -27,11 +29,11 @@ public class UserVisual extends Command {
         try {
             List<User> userList = userService.readAll();
             request.setAttribute("userList", userList);
-            return new Forward("jsp/user/list.jsp");
+            return new Forward(USER_LIST_JSP);
         } catch (ServiceException e) {
             LOGGER.error(e);
             request.setAttribute("jsp/error.jsp", "Ошибка при чтении всех пользователей из БД");
-            return new Forward("jsp/error.jsp");
+            return new Forward(ERROR_JSP);
         }
     }
 }

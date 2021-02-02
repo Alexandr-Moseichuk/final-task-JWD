@@ -15,6 +15,8 @@ import java.util.List;
 
 public class UserProfile extends Command {
     private static final Logger LOGGER = LogManager.getLogger(UserProfile.class);
+    private static final String USER_PROFILE_JSP = "jsp/user/profile.jsp";
+    private static final String ERROR_JSP = "jsp/error.jsp";
 
     public UserProfile(){
         getPermissionSet().addAll(Arrays.asList(UserRole.values()));
@@ -28,7 +30,7 @@ public class UserProfile extends Command {
         } catch (NumberFormatException e) {
             LOGGER.error(e);
             request.setAttribute("errorMessage", "User id is not a number");
-            return new Forward("jsp/error.jsp");
+            return new Forward(ERROR_JSP);
         }
 
         UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
@@ -48,11 +50,11 @@ public class UserProfile extends Command {
                     request.setAttribute("influencerList", influencerList);
                     break;
             }
-            return new Forward("jsp/user/profile.jsp");
+            return new Forward(USER_PROFILE_JSP);
         } catch (ServiceException e) {
             LOGGER.error(e);
             request.setAttribute("errorMessage", "Can't read user profile");
-            return new Forward("jsp/error.jsp");
+            return new Forward(ERROR_JSP);
         }
     }
 }
