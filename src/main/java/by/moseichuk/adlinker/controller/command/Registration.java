@@ -17,6 +17,13 @@ import java.util.Map;
 public class Registration extends Command {
     private static final Logger LOGGER = LogManager.getLogger();
 
+    private static final String REGISTRATION_JSP = "jsp/registration.jsp";
+    private static final String ERROR_JSP = "jsp/error.jsp";
+    private static final String REDIRECT_PATH = "/campaign/list";
+    private static final String ERROR_MESSAGE_ATTRIBUTE = "errorMessage";
+    private static final String PASSWORD_CHECK_ATTRIBUTE = "passwordCheckError";
+    private static final String REGISTRATION_ERROR = "registration.feedback.error";
+
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
         User user = buildUser(request);
@@ -29,13 +36,13 @@ public class Registration extends Command {
             for (Map.Entry<String, String> entry : userErrorMap.entrySet()) {
                 request.setAttribute(entry.getKey(), entry.getValue());
             }
-            return new Forward("jsp/registration.jsp");
+            return new Forward(REGISTRATION_JSP);
         }
 
         String passwordCheck = request.getParameter("passwordCheck");
         if (!user.getPassword().equals(passwordCheck)) {
-            request.setAttribute("passwordCheckError", "Пароли не совпадает");
-            return new Forward("jsp/registration.jsp");
+            request.setAttribute(PASSWORD_CHECK_ATTRIBUTE, REGISTRATION_ERROR);
+            return new Forward(REGISTRATION_JSP);
         }
 
         Application application = buildApplication(request, user.getRegistrationDate());
@@ -45,7 +52,7 @@ public class Registration extends Command {
             for (Map.Entry<String, String> entry : applicationErrorMap.entrySet()) {
                 request.setAttribute(entry.getKey(), entry.getValue());
             }
-            return new Forward("jsp/registration.jsp");
+            return new Forward(REGISTRATION_JSP);
         }
 
         UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
@@ -57,11 +64,11 @@ public class Registration extends Command {
             userInfoService.create(userInfo);
             application.setUserId(userId);
             applicationService.add(application);
-            return new Forward("/campaign/list", true);
+            return new Forward(REDIRECT_PATH, true);
         } catch (ServiceException e) {
             LOGGER.error(e);
-            request.setAttribute("errorMessage", "Ошибка регистрации пользователя");
-            return new Forward("jsp/error.jsp");
+            request.setAttribute(ERROR_MESSAGE_ATTRIBUTE, e.getMessage());
+            return new Forward(ERROR_JSP);
         }
 
     }

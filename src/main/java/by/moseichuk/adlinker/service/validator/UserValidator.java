@@ -3,10 +3,12 @@ package by.moseichuk.adlinker.service.validator;
 import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.bean.UserInfo;
 import by.moseichuk.adlinker.service.Validator;
+import sun.jvm.hotspot.ui.action.FindAction;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,38 +30,39 @@ public class UserValidator implements Validator<User> {
                     + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?){2}\\d{3}$"
                     + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?)(\\d{2}[ ]?){2}\\d{2}$";
     private static final Pattern PHONE_PATTERN = Pattern.compile(PHONE_REGEX);
+    private static final String REGISTRATION_ERROR = "registration.feedback.error";
 
     @Override
     public Map<String, String> validate(User user) {
         String email = user.getEmail();
         if (email == null || email.isEmpty() || !isValidEmail(email)) {
-            errorMap.put("emailError", "emailError");
+            errorMap.put("emailError", REGISTRATION_ERROR);
         }
         String password = user.getPassword();
         if (!isValidPassword(password)) {
-            errorMap.put("passwordError", "passwordError");
+            errorMap.put("passwordError", REGISTRATION_ERROR);
         }
 
         UserInfo userInfo = user.getUserInfo();
         String lastName = userInfo.getLastName();
         if (lastName == null || lastName.isEmpty() || lastName.length() < 2) {
-            errorMap.put("lastNameError", "lastNameError");
+            errorMap.put("lastNameError", REGISTRATION_ERROR);
         }
         String firstName = userInfo.getFirstName();
         if (firstName == null || firstName.isEmpty() || firstName.length() < 2) {
-            errorMap.put("firstNameError", "firstNameError");
+            errorMap.put("firstNameError", REGISTRATION_ERROR);
         }
         String secondName = userInfo.getSecondName();
         if (secondName == null || secondName.isEmpty() || secondName.length() < 2) {
-            errorMap.put("secondNameError", "firstNameError");
+            errorMap.put("secondNameError", REGISTRATION_ERROR);
         }
         String description = userInfo.getDescription();
         if (description == null || description.isEmpty() || description.length() < 50) {
-            errorMap.put("descriptionError", "descriptionError");
+            errorMap.put("descriptionError", REGISTRATION_ERROR);
         }
         String phoneNumber = userInfo.getPhoneNumber();
         if (!isValidPhoneNumber(phoneNumber)) {
-            errorMap.put("phoneNumberError", "descriptionError");
+            errorMap.put("phoneNumberError", REGISTRATION_ERROR);
         }
         return errorMap;
     }
