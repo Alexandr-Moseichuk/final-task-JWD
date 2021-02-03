@@ -1,6 +1,7 @@
 package by.moseichuk.adlinker.bean;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Advertiser extends User {
     private UserInfo userInfo;
@@ -23,6 +24,20 @@ public class Advertiser extends User {
 
     public void setCampaignList(List<Campaign> campaignList) {
         this.campaignList = campaignList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Advertiser)) return false;
+        if (!super.equals(o)) return false;
+        Advertiser that = (Advertiser) o;
+        return Objects.equals(userInfo, that.userInfo) && Objects.equals(campaignList, that.campaignList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), userInfo, campaignList);
     }
 
     @Override

@@ -3,6 +3,7 @@ package by.moseichuk.adlinker.bean;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 public class Campaign extends Entity {
     private String title;
@@ -88,6 +89,25 @@ public class Campaign extends Entity {
 
     public void setInfluencerList(List<Influencer> influencerList) {
         this.influencerList = influencerList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Campaign)) return false;
+        if (!super.equals(o)) return false;
+        Campaign campaign = (Campaign) o;
+        return Objects.equals(title, campaign.title) && Objects.equals(createDate, campaign.createDate)
+                && Objects.equals(beginDate, campaign.beginDate) && Objects.equals(endDate, campaign.endDate)
+                && Objects.equals(description, campaign.description) && Objects.equals(requirement, campaign.requirement)
+                && Objects.equals(budget, campaign.budget) && Objects.equals(userFileList, campaign.userFileList)
+                && Objects.equals(influencerList, campaign.influencerList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), title, createDate, beginDate, endDate,
+                description, requirement, budget, userFileList, influencerList);
     }
 
     @Override

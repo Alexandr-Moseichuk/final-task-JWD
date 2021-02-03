@@ -89,7 +89,9 @@ public class User extends Entity {
         if (!(o instanceof User)) return false;
         if (!super.equals(o)) return false;
         User user = (User) o;
-        return email.equals(user.email) && password.equals(user.password) && role == user.role && registrationDate.equals(user.registrationDate) && status == user.status && Objects.equals(userInfo, user.userInfo);
+        return email.equals(user.email) && password.equals(user.password)
+                && role == user.role && registrationDate.equals(user.registrationDate)
+                && status == user.status && Objects.equals(userInfo, user.userInfo);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package by.moseichuk.adlinker.bean;
 
+import java.util.Objects;
+
 public class MenuItem {
     private String name;
     private String url;
@@ -26,6 +28,19 @@ public class MenuItem {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MenuItem)) return false;
+        MenuItem menuItem = (MenuItem) o;
+        return Objects.equals(name, menuItem.name) && Objects.equals(url, menuItem.url);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, url);
     }
 
     @Override

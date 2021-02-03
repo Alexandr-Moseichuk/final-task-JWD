@@ -2,6 +2,7 @@ package by.moseichuk.adlinker.bean;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 public class Influencer extends User {
     private UserInfo userInfo;
@@ -55,6 +56,20 @@ public class Influencer extends User {
 
     public void setCampaignList(List<Campaign> campaignList) {
         this.campaignList = campaignList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Influencer)) return false;
+        if (!super.equals(o)) return false;
+        Influencer that = (Influencer) o;
+        return Objects.equals(userInfo, that.userInfo) && Objects.equals(manager, that.manager) && Objects.equals(managerBeginDate, that.managerBeginDate) && Objects.equals(linkList, that.linkList) && Objects.equals(campaignList, that.campaignList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), userInfo, manager, managerBeginDate, linkList, campaignList);
     }
 
     @Override

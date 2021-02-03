@@ -1,5 +1,7 @@
 package by.moseichuk.adlinker.bean;
 
+import java.util.Objects;
+
 public class UserFile extends Entity{
     private String path;
 
@@ -12,6 +14,20 @@ public class UserFile extends Entity{
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserFile)) return false;
+        if (!super.equals(o)) return false;
+        UserFile userFile = (UserFile) o;
+        return Objects.equals(path, userFile.path);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), path);
     }
 
     @Override
