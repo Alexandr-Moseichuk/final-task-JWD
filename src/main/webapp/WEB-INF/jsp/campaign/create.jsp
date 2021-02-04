@@ -78,6 +78,10 @@
         }
         let locale = f2c('${ cookie.language.value }');
 
+        if (locale.length === 0) {
+            locale = 'ru-ru';
+        }
+
         $('#beginDate').datepicker({
             locale: locale,
             format: 'dd.mm.yyyy',
