@@ -8,6 +8,7 @@ import by.moseichuk.adlinker.controller.command.application.ApplicationList;
 import by.moseichuk.adlinker.controller.command.application.ApplicationListAction;
 import by.moseichuk.adlinker.controller.command.application.ApplicationUpdate;
 import by.moseichuk.adlinker.controller.command.campaign.*;
+import by.moseichuk.adlinker.controller.command.influencer.InfluencerCampaignListVisual;
 import by.moseichuk.adlinker.controller.command.influencer.InfluencerSubscribe;
 import by.moseichuk.adlinker.controller.command.manager.ManagerSubscribe;
 import by.moseichuk.adlinker.controller.command.show.*;
@@ -61,6 +62,7 @@ public class CommandFilter implements Filter {
         commandGet.put("/campaign/create", new CreateCampaignVisual());
         commandGet.put("/campaign/edit", new EditCampaignVisual());
         commandGet.put("/advertiser/campaign/list", new AdvertiserCampaignListVisual());
+        commandGet.put("/influencer/campaign/list", new InfluencerCampaignListVisual());
 
         commandPost.put("/login", new Login());
         commandPost.put("/registration", new Registration());
