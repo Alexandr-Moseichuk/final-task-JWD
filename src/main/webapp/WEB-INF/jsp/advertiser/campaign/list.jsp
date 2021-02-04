@@ -15,11 +15,11 @@
         <thead>
         <tr>
             <th></th>
-            <th><fmt:message key="advertiser.campaign.list.table.header.id" bundle="${rb}" /></th>
-            <th><fmt:message key="advertiser.campaign.list.table.header.title" bundle="${rb}" /></th>
-            <th><fmt:message key="advertiser.campaign.list.table.header.begin_date" bundle="${rb}" /></th>
-            <th><fmt:message key="advertiser.campaign.list.table.header.end_date" bundle="${rb}" /></th>
-            <th><fmt:message key="advertiser.campaign.list.table.header.edit_link" bundle="${rb}" /></th>
+            <th><fmt:message key="campaign.list.table.header.id" bundle="${rb}" /></th>
+            <th><fmt:message key="campaign.list.table.header.title" bundle="${rb}" /></th>
+            <th><fmt:message key="campaign.list.table.header.begin_date" bundle="${rb}" /></th>
+            <th><fmt:message key="campaign.list.table.header.end_date" bundle="${rb}" /></th>
+            <th><fmt:message key="campaign.list.table.header.edit_link" bundle="${rb}" /></th>
         </tr>
         </thead>
         <tbody>
@@ -37,7 +37,7 @@
                 <td><fmt:formatDate type="both" value="${campaign.endDate.time}" dateStyle="medium" timeStyle="medium"/></td>
                 <td>
                     <a href="<c:url value="/campaign/edit.html?campaignId=${campaign.id}"/>">
-                        <fmt:message key="advertiser.campaign.list.table.edit_link" bundle="${rb}" />
+                        <fmt:message key="campaign.list.table.edit_link" bundle="${rb}" />
                     </a>
                 </td>
             </tr>
