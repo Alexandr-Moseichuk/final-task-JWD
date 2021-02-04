@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ApplicationListAction extends Command {
     private static final Logger LOGGER = LogManager.getLogger(ApplicationListAction.class);
-    private static final String RESULT_PATH = "/application/list";
+    private static final String RESULT_PATH = "/application/list.html";
     private static final String ERROR_JSP = "jsp/error.jsp";
 
     public ApplicationListAction() {

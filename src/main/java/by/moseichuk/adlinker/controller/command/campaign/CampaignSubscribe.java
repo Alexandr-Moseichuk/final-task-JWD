@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class CampaignSubscribe extends Command {
     private static final Logger LOGGER = LogManager.getLogger(CampaignSubscribe.class);
-    private static final String RESULT_PATH = "/campaign/list";
+    private static final String RESULT_PATH = "/campaign/list.html";
     private static final String ERROR_JSP = "jsp/error.jsp";
 
     public CampaignSubscribe() {

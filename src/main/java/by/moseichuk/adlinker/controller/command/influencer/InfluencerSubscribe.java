@@ -20,8 +20,8 @@ public class InfluencerSubscribe extends Command {
     private static final Logger LOGGER = LogManager.getLogger(InfluencerSubscribe.class);
     private static final String PERMISSION_DENIED_JSP = "jsp/permission_denied.jsp";
     private static final String ERROR_JSP = "jsp/error.jsp";
-    private static final String INFLUENCER_LIST_PATH = "/influencer/list";
-    private static final String LOGIN_PATH = "/login";
+    private static final String INFLUENCER_LIST_PATH = "/influencer/list.html";
+    private static final String LOGIN_PATH = "/login.html";
 
     public InfluencerSubscribe() {
         getPermissionSet().add(UserRole.MANAGER);

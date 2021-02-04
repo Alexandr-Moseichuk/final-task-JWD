@@ -19,7 +19,7 @@ public class Registration extends Command {
 
     private static final String REGISTRATION_JSP = "jsp/registration.jsp";
     private static final String ERROR_JSP = "jsp/error.jsp";
-    private static final String REDIRECT_PATH = "/campaign/list";
+    private static final String REDIRECT_PATH = "/campaign/list.html";
     private static final String ERROR_MESSAGE_ATTRIBUTE = "errorMessage";
     private static final String PASSWORD_CHECK_ATTRIBUTE = "passwordCheckError";
     private static final String REGISTRATION_ERROR = "registration.feedback.error";

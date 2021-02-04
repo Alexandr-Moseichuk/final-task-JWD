@@ -23,7 +23,7 @@ import java.util.Map;
 
 public class CreateCampaign extends Command {
     private static final Logger LOGGER = LogManager.getLogger(CreateCampaign.class);
-    private static final String RESULT_PATH = "/campaign/list";
+    private static final String RESULT_PATH = "/campaign/list.html";
     private static final String ERROR_JSP = "jsp/error.jsp";
     private static final String CREATE_JSP = "jsp/campaign/create.jsp";
 

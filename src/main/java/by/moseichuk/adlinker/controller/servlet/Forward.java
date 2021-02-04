@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Forward {
-    private static final String SUFFIX = ".html";
     private String pagePath;
     private boolean redirect;
     private Map<String, Object> attributes = new HashMap<>();
@@ -20,7 +19,7 @@ public class Forward {
 
     public String getPagePath() {
         if (redirect) {
-            return pagePath + SUFFIX;
+            return pagePath;
         } else {
             return "/WEB-INF/" + pagePath;
         }

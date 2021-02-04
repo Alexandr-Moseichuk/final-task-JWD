@@ -16,7 +16,7 @@ import java.util.*;
 
 public class Login extends Command {
     private static final Logger LOGGER = LogManager.getLogger(Login.class);
-    private static final String SUCCESS_REDIRECT = "/campaign/list";
+    private static final String SUCCESS_REDIRECT = "/campaign/list.html";
     private static final String FAILED_FORWARD = "jsp/login.jsp";
     private static final String ERROR_JSP = "jsp/error.jsp";
 

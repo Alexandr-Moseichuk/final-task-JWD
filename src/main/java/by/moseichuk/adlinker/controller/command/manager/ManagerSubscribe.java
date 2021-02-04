@@ -20,8 +20,8 @@ public class ManagerSubscribe extends Command {
     private static final Logger LOGGER = LogManager.getLogger(ManagerSubscribe.class);
     private static final String PERMISSION_DENIED_JSP = "jsp/permission_denied.jsp";
     private static final String ERROR_JSP = "jsp/error.jsp";
-    private static final String MANAGER_LIST_PATH = "/manager/list";
-    private static final String LOGIN_PATH = "/login";
+    private static final String MANAGER_LIST_PATH = "/manager/list.html";
+    private static final String LOGIN_PATH = "/login.html";
 
     public ManagerSubscribe() {
         getPermissionSet().add(UserRole.INFLUENCER);

@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 public class IndexVisual extends Command {
     private static final String INDEX_JSP = "jsp/index.jsp";
-    private static final String CAMPAIGN_LIST_PATH = "/campaign/list";
+    private static final String CAMPAIGN_LIST_PATH = "/campaign/list.html";
 
     public IndexVisual() {
         getPermissionSet().addAll(Arrays.asList(UserRole.values()));

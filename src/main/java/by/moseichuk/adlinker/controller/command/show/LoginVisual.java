@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 public class LoginVisual extends Command {
     private static final String LOGIN_JSP = "jsp/login.jsp";
-    private static final String CAMPAIGN_LIST_PATH = "/campaign/list";
+    private static final String CAMPAIGN_LIST_PATH = "/campaign/list.html";
 
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
