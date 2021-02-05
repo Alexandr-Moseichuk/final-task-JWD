@@ -69,6 +69,7 @@ public class CommandFilter implements Filter {
         commandGet.put("/influencer/manager", new MyManagerVisual());
         commandGet.put("/manager/influencer/list", new ManagerInfluencersListVisual());
         commandGet.put("/manager/campaign/list", new ManagerCampaingsListVisual());
+        commandGet.put("/campaign", new CampaignPageVisual());
 
         commandPost.put("/login", new Login());
         commandPost.put("/registration", new Registration());
