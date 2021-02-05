@@ -3,10 +3,7 @@ package by.moseichuk.adlinker.service.impl;
 import by.moseichuk.adlinker.bean.Campaign;
 import by.moseichuk.adlinker.bean.Influencer;
 import by.moseichuk.adlinker.bean.User;
-import by.moseichuk.adlinker.dao.CampaignDao;
-import by.moseichuk.adlinker.dao.DaoEnum;
-import by.moseichuk.adlinker.dao.UserDao;
-import by.moseichuk.adlinker.dao.UserInfoDao;
+import by.moseichuk.adlinker.dao.*;
 import by.moseichuk.adlinker.dao.exception.DaoException;
 import by.moseichuk.adlinker.dao.exception.TransactionException;
 import by.moseichuk.adlinker.service.BaseService;
@@ -112,6 +109,16 @@ public class CampaignServiceImpl extends BaseService implements CampaignService 
         CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
         try {
             return campaignDao.readSublistByOwner(ownerId, limit, offset);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<Campaign> readAllByOwner(Integer ownerId) throws ServiceException {
+        CampaignDao campaignDao = (CampaignDao) transaction.getDao(DaoEnum.CAMPAIGN);
+        try {
+            return campaignDao.readAllByOwner(ownerId);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

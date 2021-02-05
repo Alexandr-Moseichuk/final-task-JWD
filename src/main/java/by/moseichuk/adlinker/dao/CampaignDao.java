@@ -18,6 +18,8 @@ public interface CampaignDao extends Dao<Campaign> {
 
     List<Campaign> readSublistByOwner(Integer ownerId, int limit, int offset) throws DaoException;
 
+    List<Campaign> readAllByOwner(Integer ownerId) throws DaoException;
+
     int readRowCount() throws DaoException;
 
     int readRowCountByUser(Integer userId) throws DaoException;

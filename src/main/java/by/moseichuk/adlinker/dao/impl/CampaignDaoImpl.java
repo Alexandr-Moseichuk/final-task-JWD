@@ -24,9 +24,8 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
     private static final String READ_ROW_COUNT_BY_USER = "SELECT COUNT(*) FROM campaign JOIN user_campaign ON user_campaign.campaign_id=campaign.id WHERE user_id=?";
     private static final String SUBSCRIBE_INFLUENCER = "INSERT INTO `user_campaign` (`user_id`, `campaign_id`) VALUES (?, ?)";
     private static final String READ_OWNER_ID = "SELECT user_campaign.user_id FROM user_campaign JOIN user ON user_campaign.user_id=user.id WHERE user.role=1 AND user_campaign.campaign_id=?";
-    private static final String READ_SUBLIST_BY_OWNER = "SELECT `id`, `title`, `create_date`, `begin_date`, `end_date`, `description`, `requirement`, `budget` FROM" +
-            " `campaign` JOIN `user_campaign` ON user_campaign.campaign_id=campaign.id WHERE user_campaign.user_id= ? ORDER BY `id` LIMIT ? OFFSET ?";
-
+    private static final String READ_SUBLIST_BY_OWNER = "SELECT `id`, `title`, `create_date`, `begin_date`, `end_date`, `description`, `requirement`, `budget` FROM `campaign` JOIN `user_campaign` ON user_campaign.campaign_id=campaign.id WHERE user_campaign.user_id= ? ORDER BY `id` LIMIT ? OFFSET ?";
+    private static final String READ_ALL_BY_OWNER = "SELECT `id`, `title`, `create_date`, `begin_date`, `end_date`, `description`, `requirement`, `budget` FROM `campaign` JOIN `user_campaign` ON user_campaign.campaign_id=campaign.id WHERE user_campaign.user_id= ? ORDER BY `id`";
 
     @Override
     public Integer create(Campaign campaign) throws DaoException {
@@ -179,6 +178,22 @@ public class CampaignDaoImpl extends BaseDao implements CampaignDao {
             statement.setInt(1, ownerId);
             statement.setInt(2, limit);
             statement.setInt(3, offset);
+            ResultSet resultSet = statement.executeQuery();
+
+            List<Campaign> campaignList = new ArrayList<>();
+            while (resultSet.next()) {
+                campaignList.add(buildCampaign(resultSet));
+            }
+            return campaignList;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public List<Campaign> readAllByOwner(Integer ownerId) throws DaoException {
+        try (PreparedStatement statement = connection.prepareStatement(READ_ALL_BY_OWNER)) {
+            statement.setInt(1, ownerId);
             ResultSet resultSet = statement.executeQuery();
 
             List<Campaign> campaignList = new ArrayList<>();

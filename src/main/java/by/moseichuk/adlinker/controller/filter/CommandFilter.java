@@ -11,6 +11,7 @@ import by.moseichuk.adlinker.controller.command.campaign.*;
 import by.moseichuk.adlinker.controller.command.influencer.InfluencerCampaignListVisual;
 import by.moseichuk.adlinker.controller.command.influencer.InfluencerSubscribe;
 import by.moseichuk.adlinker.controller.command.influencer.MyManagerVisual;
+import by.moseichuk.adlinker.controller.command.manager.ManagerCampaingsListVisual;
 import by.moseichuk.adlinker.controller.command.manager.ManagerInfluencersListVisual;
 import by.moseichuk.adlinker.controller.command.manager.ManagerSubscribe;
 import by.moseichuk.adlinker.controller.command.show.*;
@@ -67,6 +68,7 @@ public class CommandFilter implements Filter {
         commandGet.put("/influencer/campaign/list", new InfluencerCampaignListVisual());
         commandGet.put("/influencer/manager", new MyManagerVisual());
         commandGet.put("/manager/influencer/list", new ManagerInfluencersListVisual());
+        commandGet.put("/manager/campaign/list", new ManagerCampaingsListVisual());
 
         commandPost.put("/login", new Login());
         commandPost.put("/registration", new Registration());
@@ -80,7 +82,8 @@ public class CommandFilter implements Filter {
     }
 
     /**
-     *
+     * Converts request URL into command object and puts command in request attribute "command".
+     * Considers URL after context path and before .html
      *
      * @param servletRequest  http request
      * @param servletResponse http response

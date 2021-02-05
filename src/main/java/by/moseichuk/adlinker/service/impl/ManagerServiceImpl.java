@@ -1,5 +1,6 @@
 package by.moseichuk.adlinker.service.impl;
 
+import by.moseichuk.adlinker.bean.Campaign;
 import by.moseichuk.adlinker.bean.Manager;
 import by.moseichuk.adlinker.dao.DaoEnum;
 import by.moseichuk.adlinker.dao.ManagerInfluencerDao;
@@ -8,6 +9,8 @@ import by.moseichuk.adlinker.dao.exception.DaoException;
 import by.moseichuk.adlinker.service.BaseService;
 import by.moseichuk.adlinker.service.ManagerService;
 import by.moseichuk.adlinker.service.exception.ServiceException;
+
+import java.util.List;
 
 public class ManagerServiceImpl extends BaseService implements ManagerService {
     @Override
@@ -24,5 +27,10 @@ public class ManagerServiceImpl extends BaseService implements ManagerService {
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
+    }
+
+    @Override
+    public List<Campaign> readCampaigns(Integer managerId) throws ServiceException {
+        return null;
     }
 }
