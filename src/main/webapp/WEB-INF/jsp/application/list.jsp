@@ -13,14 +13,14 @@
     <c:import url="/WEB-INF/jsp/particles/menu.jsp"/>
     <h3 class="text-center"><fmt:message key="application.list.label.title" bundle="${rb}" /></h3>
     <div class="container">
-        <form action="action.html" method="post">
+        <form class="col-sm-auto" action="action.html" method="post">
             <button type="submit" name="action" value="approve" class="btn btn-outline-success">
                 <fmt:message key="application.list.table.button.approve" bundle="${rb}" />
             </button>
             <button type="submit" name="action" value="reject" class="btn btn-outline-danger">
                 <fmt:message key="application.list.table.button.reject" bundle="${rb}" />
             </button>
-            <table class="table table-striped">
+            <table class="table table-striped col-sm-auto">
                 <thead>
                 <tr>
                     <th></th>
