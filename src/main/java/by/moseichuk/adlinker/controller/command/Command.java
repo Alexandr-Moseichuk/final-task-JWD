@@ -68,7 +68,7 @@ public abstract class Command {
      * Executes user command
      *
      * @param request  http request
-     * @param response http responce
+     * @param response http response
      * @return {@code Forward} witch leds to result page
      */
     public abstract Forward execute(HttpServletRequest request, HttpServletResponse response);
