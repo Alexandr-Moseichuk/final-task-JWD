@@ -8,6 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 
+/**
+ * Changing user language by setting new locale to cookies
+ *
+ * @author Alexandr Moseichuk
+ */
 public class Lang extends Command {
     private static final String COOKIE_NAME = "language";
     private static final String LOCALIZATION_PARAM = "loc";
@@ -15,10 +20,20 @@ public class Lang extends Command {
     private static final String JSP_PATH = "/WEB-INF/jsp";
     private static final char DELIMITER = '.';
 
+    /**
+     * Sets user role permissions
+     */
     public Lang() {
         getPermissionSet().addAll(Arrays.asList(UserRole.values()));
     }
 
+    /**
+     * Changes localisation in cookies and redirects to current page
+     *
+     * @param request  http request
+     * @param response http response
+     * @return         redirect to current page
+     */
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
         Cookie cookie = getCookie(request, COOKIE_NAME);
@@ -32,13 +47,19 @@ public class Lang extends Command {
         response.addCookie(cookie);
 
         String previousPage = request.getSession(false).getAttribute(PREVIOUS_PAGE_ATTR).toString();
-        System.out.println(previousPage);
         int begin = request.getContextPath().length() + JSP_PATH.length();
         int end = previousPage.lastIndexOf(DELIMITER);
         String redirect = previousPage.substring(begin, end);
         return new Forward(redirect, true);
     }
 
+    /**
+     * Searches cookie in request by name
+     *
+     * @param request http request
+     * @param name    cookie name
+     * @return        cookie object or null if there is no cookie with such name
+     */
     private Cookie getCookie(HttpServletRequest request, String name) {
         if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
