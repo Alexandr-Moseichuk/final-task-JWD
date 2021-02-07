@@ -14,6 +14,11 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Map;
 
+/**
+ * Creating new user, user info and registration application after passing validation.
+ *
+ * @author Moseichuk Alexandr
+ */
 public class Registration extends Command {
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -24,6 +29,13 @@ public class Registration extends Command {
     private static final String PASSWORD_CHECK_ATTRIBUTE = "passwordCheckError";
     private static final String REGISTRATION_ERROR = "registration.feedback.error";
 
+    /**
+     * Validates params from registration form and creates new user with registration application
+     *
+     * @param request  http request
+     * @param response http response
+     * @return         forward to result page or error page
+     */
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
         User user = buildUser(request);
@@ -73,6 +85,12 @@ public class Registration extends Command {
 
     }
 
+    /**
+     * Builds user by params from registration form
+     *
+     * @param request http request
+     * @return        user object
+     */
     private User buildUser(HttpServletRequest request) {
         User user = new User();
 
@@ -87,6 +105,12 @@ public class Registration extends Command {
         return user;
     }
 
+    /**
+     * Builds user info by params from registration form
+     *
+     * @param request httm request
+     * @return        user info object
+     */
     private UserInfo buildUserInfo(HttpServletRequest request) {
         UserInfo userInfo = new UserInfo();
         
@@ -103,6 +127,13 @@ public class Registration extends Command {
         return userInfo;
     }
 
+    /**
+     * Builds registration application by params from registration form
+     *
+     * @param request     http request
+     * @param currentTime current time
+     * @return            application object
+     */
     private Application buildApplication(HttpServletRequest request, Calendar currentTime) {
         Application application = new Application();
         application.setComment(request.getParameter("comment"));
