@@ -14,13 +14,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
+/**
+ * Login user by creating session and setting corresponding {@code User} object into session attributes
+ *
+ * @author Moseichuk Alexandr
+ */
 public class Login extends Command {
     private static final Logger LOGGER = LogManager.getLogger(Login.class);
     private static final String SUCCESS_REDIRECT = "/campaign/list.html";
     private static final String FAILED_FORWARD = "jsp/login.jsp";
     private static final String ERROR_JSP = "jsp/error.jsp";
 
-
+    /**
+     * Searches user in BD by email and password. If user exists then sets corresponding user object
+     * and list of menu items into session attributes
+     *
+     * @param request  http request
+     * @param response http responce
+     * @return
+     */
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
         String email = request.getParameter("email");
@@ -51,6 +63,12 @@ public class Login extends Command {
         return new Forward(FAILED_FORWARD);
     }
 
+    /**
+     * Builds user menu by role.
+     *
+     * @param userRole role
+     * @return         list of {@code MenuItem}
+     */
     private List<MenuItem> buildMenu(UserRole userRole) {
         List<MenuItem> menuItemList = new ArrayList<>();
 
