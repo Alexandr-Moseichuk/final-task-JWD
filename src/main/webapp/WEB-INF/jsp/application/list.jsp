@@ -44,7 +44,7 @@
                         <td><c:out value="${application.userId}"/></td>
                         <td><c:out value="${application.user.email}"/></td>
                         <td><c:out value="${application.user.role}"/></td>
-                        <td><c:out value="${application.comment}"/></td>
+                        <td><textarea class="form-control" cols="100" disabled><c:out value="${application.comment}"/></textarea></td>
                         <td><fmt:formatDate type="both" value="${application.date.time}" dateStyle="medium" timeStyle="medium"/></td>
                         <td>
                             <a href="<c:url value="/user/profile.html?userId=${application.user.id}"/>">
