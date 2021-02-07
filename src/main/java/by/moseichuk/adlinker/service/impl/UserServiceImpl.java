@@ -1,8 +1,10 @@
 package by.moseichuk.adlinker.service.impl;
 
+import by.moseichuk.adlinker.bean.Application;
 import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.bean.UserInfo;
 import by.moseichuk.adlinker.bean.UserRole;
+import by.moseichuk.adlinker.dao.ApplicationDao;
 import by.moseichuk.adlinker.dao.DaoEnum;
 import by.moseichuk.adlinker.dao.UserDao;
 import by.moseichuk.adlinker.dao.UserInfoDao;
@@ -33,6 +35,25 @@ public class UserServiceImpl extends BaseService implements UserService {
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
+    }
+
+    @Override
+    public void register(User user, UserInfo userInfo, Application application) throws ServiceException {
+        UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
+        UserInfoDao userInfoDao = (UserInfoDao) transaction.getDao(DaoEnum.USER_INFO);
+        ApplicationDao applicationDao = (ApplicationDao) transaction.getDao(DaoEnum.APPLICATION);
+        try {
+            Integer userId = userDao.create(user);
+            userInfo.setUserId(userId);
+            userInfoDao.create(userInfo);
+            application.setUserId(userId);
+            applicationDao.create(application);
+            transaction.commit();
+        } catch (DaoException | TransactionException e) {
+            transaction.rollback();
+            throw new ServiceException(e);
+        }
+
     }
 
     @Override
