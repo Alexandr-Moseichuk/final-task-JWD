@@ -19,6 +19,7 @@ public class Lang extends Command {
     private static final String PREVIOUS_PAGE_ATTR = "previousPage";
     private static final String JSP_PATH = "/WEB-INF/jsp";
     private static final char DELIMITER = '.';
+    private static final String POSTFIX = ".html";
 
     /**
      * Sets user role permissions
@@ -50,6 +51,7 @@ public class Lang extends Command {
         int begin = request.getContextPath().length() + JSP_PATH.length();
         int end = previousPage.lastIndexOf(DELIMITER);
         String redirect = previousPage.substring(begin, end);
+        redirect = redirect.concat(POSTFIX);
         return new Forward(redirect, true);
     }
 

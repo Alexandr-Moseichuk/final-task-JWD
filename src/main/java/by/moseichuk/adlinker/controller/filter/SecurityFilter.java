@@ -2,9 +2,7 @@ package by.moseichuk.adlinker.controller.filter;
 
 import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.bean.UserStatus;
-import by.moseichuk.adlinker.controller.command.Command;
-import by.moseichuk.adlinker.controller.command.Login;
-import by.moseichuk.adlinker.controller.command.Logout;
+import by.moseichuk.adlinker.controller.command.*;
 import by.moseichuk.adlinker.controller.command.Registration;
 import by.moseichuk.adlinker.controller.command.application.ApplicationUpdate;
 import by.moseichuk.adlinker.controller.command.show.IndexVisual;
@@ -27,6 +25,7 @@ public class SecurityFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
+        publicCommands.add(Lang.class);
         publicCommands.add(Login.class);
         publicCommands.add(Logout.class);
         publicCommands.add(LoginVisual.class);
