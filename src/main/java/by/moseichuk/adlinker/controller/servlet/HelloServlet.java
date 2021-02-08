@@ -13,6 +13,11 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 
+/**
+ * Main servlet. Process all requests.
+ *
+ * @author Moseichuk Alexandr
+ */
 @MultipartConfig
 public class HelloServlet extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(HelloServlet.class);
@@ -22,6 +27,9 @@ public class HelloServlet extends HttpServlet {
     private static final String PAGE_URL_ATTRIBUTE = "pageURL";
     private static final String COMMAND_ATTRIBUTE = "command";
 
+    /**
+     * Inits service factory. Otherwise destroys servlet
+     */
     public void init() {
         try {
             ServiceFactoryImpl.init();
@@ -30,14 +38,35 @@ public class HelloServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Process GET requests
+     *
+     * @param request      http request
+     * @param response     http response
+     * @throws IOException if cant send redirect or forward
+     */
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         executeRequest(request, response);
     }
 
+    /**
+     * Process POST requests
+     *
+     * @param request      http request
+     * @param response     http response
+     * @throws IOException if cant send redirect or forward
+     */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         executeRequest(request, response);
     }
 
+    /**
+     * Executes command from request attributes.
+     *
+     * @param request      http request
+     * @param response     http response
+     * @throws IOException if cant send redirect or forward
+     */
     private void executeRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             request.setAttribute(PAGE_URL_ATTRIBUTE, request.getRequestURL());
@@ -64,6 +93,9 @@ public class HelloServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Destroys service factory.
+     */
     public void destroy() {
         ServiceFactoryImpl.destroy();
     }
