@@ -10,21 +10,21 @@ INSERT INTO `user` (
 ) VALUES
 (   5,
     'influencer2@mail.ru',
-	'$2y$12$zxhbiFdWbJNiVi2ij4kXuuv2iSb2iZteG4QcSqMiPCjFZPaQd264O', /* MD5 хэш пароля "influencer" */
+	'$2a$10$GzvU4CSmDNalRmzs6f070OMqN7.c6ykMit7G0rCj.p1DCuFeWkpey', /* MD5 хэш пароля "influencer" */
 	2,
     '2021-01-01 00:01:15',
 	1
 ),
 (   6,
     'influencer3@mail.ru',
-    '$2y$12$zxhbiFdWbJNiVi2ij4kXuuv2iSb2iZteG4QcSqMiPCjFZPaQd264O', /* MD5 хэш пароля "influencer" */
+    '$2a$10$GzvU4CSmDNalRmzs6f070OMqN7.c6ykMit7G0rCj.p1DCuFeWkpey', /* MD5 хэш пароля "influencer" */
     2,
     '2021-01-01 12:01:15',
     1
 ),
 (   7,
     'influencer4@mail.ru',
-    '$2y$12$zxhbiFdWbJNiVi2ij4kXuuv2iSb2iZteG4QcSqMiPCjFZPaQd264O', /* MD5 хэш пароля "influencer" */
+    '$2a$10$GzvU4CSmDNalRmzs6f070OMqN7.c6ykMit7G0rCj.p1DCuFeWkpey', /* MD5 хэш пароля "influencer" */
     2,
     '2021-01-01 12:01:15',
     1
