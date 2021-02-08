@@ -69,7 +69,7 @@ VALUES
 (3,     'profile/kot-3.jpg'),
 (4,     'profile/kot-4.jpg'),
 (5,     'profile/kot-5.jpg'),
-(6,     'profile/kot-6.jpg');
+(6,     'profile/kot-6.png');
 
 INSERT INTO `user_campaign`
 (`user_id`, `campaign_id`)
