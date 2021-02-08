@@ -27,6 +27,7 @@
                     <th><fmt:message key="application.list.table.header.id" bundle="${rb}" /></th>
                     <th><fmt:message key="application.list.table.header.email" bundle="${rb}" /></th>
                     <th><fmt:message key="application.list.table.header.role" bundle="${rb}" /></th>
+                    <th><fmt:message key="application.list.table.header.status" bundle="${rb}" /></th>
                     <th><fmt:message key="application.list.table.header.comment" bundle="${rb}" /></th>
                     <th><fmt:message key="application.list.table.header.date" bundle="${rb}" /></th>
                     <th><fmt:message key="application.list.table.header.user_info" bundle="${rb}" /></th>
@@ -44,6 +45,7 @@
                         <td><c:out value="${application.userId}"/></td>
                         <td><c:out value="${application.user.email}"/></td>
                         <td><c:out value="${application.user.role}"/></td>
+                        <td><c:out value="${application.user.status}"/></td>
                         <td><textarea class="form-control" cols="100" disabled><c:out value="${application.comment}"/></textarea></td>
                         <td><fmt:formatDate type="both" value="${application.date.time}" dateStyle="medium" timeStyle="medium"/></td>
                         <td>
