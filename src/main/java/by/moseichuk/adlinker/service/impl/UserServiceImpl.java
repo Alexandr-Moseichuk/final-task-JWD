@@ -3,7 +3,7 @@ package by.moseichuk.adlinker.service.impl;
 import by.moseichuk.adlinker.bean.Application;
 import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.bean.UserInfo;
-import by.moseichuk.adlinker.bean.UserRole;
+import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.dao.*;
 import by.moseichuk.adlinker.dao.exception.DaoException;
 import by.moseichuk.adlinker.dao.exception.TransactionException;

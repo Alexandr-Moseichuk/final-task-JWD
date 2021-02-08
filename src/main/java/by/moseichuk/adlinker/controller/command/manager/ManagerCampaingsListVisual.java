@@ -1,6 +1,7 @@
 package by.moseichuk.adlinker.controller.command.manager;
 
 import by.moseichuk.adlinker.bean.*;
+import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.servlet.Forward;
 import by.moseichuk.adlinker.service.*;

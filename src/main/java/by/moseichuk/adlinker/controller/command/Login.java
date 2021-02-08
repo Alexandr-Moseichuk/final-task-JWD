@@ -2,7 +2,7 @@ package by.moseichuk.adlinker.controller.command;
 
 import by.moseichuk.adlinker.bean.MenuItem;
 import by.moseichuk.adlinker.bean.User;
-import by.moseichuk.adlinker.bean.UserRole;
+import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.servlet.Forward;
 import by.moseichuk.adlinker.service.ServiceEnum;
 import by.moseichuk.adlinker.service.UserService;

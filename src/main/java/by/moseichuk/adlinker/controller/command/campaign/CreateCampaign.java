@@ -2,7 +2,7 @@ package by.moseichuk.adlinker.controller.command.campaign;
 
 import by.moseichuk.adlinker.bean.Advertiser;
 import by.moseichuk.adlinker.bean.Campaign;
-import by.moseichuk.adlinker.bean.UserRole;
+import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.servlet.Forward;
 import by.moseichuk.adlinker.service.CampaignService;

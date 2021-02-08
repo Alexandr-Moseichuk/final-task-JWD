@@ -1,7 +1,7 @@
 package by.moseichuk.adlinker.controller.filter;
 
 import by.moseichuk.adlinker.bean.User;
-import by.moseichuk.adlinker.bean.UserStatus;
+import by.moseichuk.adlinker.constant.UserStatus;
 import by.moseichuk.adlinker.controller.command.*;
 import by.moseichuk.adlinker.controller.command.Registration;
 import by.moseichuk.adlinker.controller.command.application.ApplicationUpdate;

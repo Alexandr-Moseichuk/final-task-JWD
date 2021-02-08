@@ -1,8 +1,8 @@
 package by.moseichuk.adlinker.dao.impl;
 
 import by.moseichuk.adlinker.bean.User;
-import by.moseichuk.adlinker.bean.UserRole;
-import by.moseichuk.adlinker.bean.UserStatus;
+import by.moseichuk.adlinker.constant.UserRole;
+import by.moseichuk.adlinker.constant.UserStatus;
 import by.moseichuk.adlinker.dao.UserDao;
 import by.moseichuk.adlinker.dao.exception.DaoException;
 import org.mindrot.jbcrypt.BCrypt;

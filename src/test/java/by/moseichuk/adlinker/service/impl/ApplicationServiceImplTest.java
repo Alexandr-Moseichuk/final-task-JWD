@@ -1,11 +1,12 @@
 package by.moseichuk.adlinker.service.impl;
 
 import by.moseichuk.adlinker.bean.*;
+import by.moseichuk.adlinker.constant.UserRole;
+import by.moseichuk.adlinker.constant.UserStatus;
 import by.moseichuk.adlinker.dao.exception.ConnectionPoolException;
 import by.moseichuk.adlinker.dao.exception.TransactionException;
 import by.moseichuk.adlinker.dao.pool.ConnectionPool;
 import by.moseichuk.adlinker.dao.transaction.TransactionFactoryImpl;
-import by.moseichuk.adlinker.dao.transaction.TransactionImpl;
 import by.moseichuk.adlinker.service.exception.ServiceException;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.testng.Assert;

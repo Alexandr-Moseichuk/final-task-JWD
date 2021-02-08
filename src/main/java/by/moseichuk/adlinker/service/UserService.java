@@ -3,7 +3,7 @@ package by.moseichuk.adlinker.service;
 import by.moseichuk.adlinker.bean.Application;
 import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.bean.UserInfo;
-import by.moseichuk.adlinker.bean.UserRole;
+import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.service.exception.ServiceException;
 
 import java.util.List;

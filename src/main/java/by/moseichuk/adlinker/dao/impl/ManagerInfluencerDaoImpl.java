@@ -1,6 +1,8 @@
 package by.moseichuk.adlinker.dao.impl;
 
 import by.moseichuk.adlinker.bean.*;
+import by.moseichuk.adlinker.constant.UserRole;
+import by.moseichuk.adlinker.constant.UserStatus;
 import by.moseichuk.adlinker.dao.ManagerInfluencerDao;
 import by.moseichuk.adlinker.dao.exception.DaoException;
 

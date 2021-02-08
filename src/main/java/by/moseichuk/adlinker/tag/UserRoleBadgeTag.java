@@ -1,6 +1,6 @@
 package by.moseichuk.adlinker.tag;
 
-import by.moseichuk.adlinker.bean.UserRole;
+import by.moseichuk.adlinker.constant.UserRole;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
