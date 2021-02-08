@@ -7,4 +7,6 @@ public interface UserFileService {
 
     Integer create(UserFile userFile) throws ServiceException;
 
+    void update(UserFile userFile) throws ServiceException;
+
 }

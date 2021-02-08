@@ -53,12 +53,19 @@ public class UploadPhoto extends Command {
             UserFileService userFileService = (UserFileService) serviceFactory.getService(ServiceEnum.FILE);
             UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
             User authorizedUser = (User) request.getSession(false).getAttribute("authorizedUser");
-            UserFile userFile = new UserFile(PROFILE_PHOTO_DIR + fileName);
-            Integer fileId = userFileService.create(userFile);
-            userFile.setId(fileId);
-            authorizedUser.getUserInfo().setUserFile(userFile);
-            userService.update(authorizedUser);
 
+            String photoSrc = PROFILE_PHOTO_DIR + fileName;
+            if (authorizedUser.getUserInfo().getUserFile() == null) {
+                UserFile userFile = new UserFile(photoSrc);
+                Integer fileId = userFileService.create(userFile);
+                userFile.setId(fileId);
+                authorizedUser.getUserInfo().setUserFile(userFile);
+                userService.update(authorizedUser);
+            } else {
+                UserFile userFile = authorizedUser.getUserInfo().getUserFile();
+                userFile.setPath(photoSrc);
+                userFileService.update(userFile);
+            }
             return new Forward("/user/profile.html", true);
         } catch (ServletException | IOException | ServiceException e) {
             LOGGER.error(e);

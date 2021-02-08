@@ -24,4 +24,16 @@ public class UserFileServiceImpl extends BaseService implements UserFileService 
         }
     }
 
+    @Override
+    public void update(UserFile userFile) throws ServiceException {
+        UserFileDao userFileDao = (UserFileDao) transaction.getDao(DaoEnum.FILE);
+        try {
+            userFileDao.update(userFile);
+            transaction.commit();
+        } catch (DaoException | TransactionException e) {
+            transaction.rollback();
+            throw new ServiceException(e);
+        }
+    }
+
 }
