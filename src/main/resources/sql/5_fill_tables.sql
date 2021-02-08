@@ -64,12 +64,12 @@ VALUES
 INSERT INTO `file`
 (`id`, `path`)
 VALUES
-(1,     '/somedir/text.txt'),
-(2,     '/somedir2/photo.png'),
-(3,     '/somedir2/text.txt'),
-(4,     '/somedir2/photo2.png'),
-(5,     '/userphoto/user1.png'),
-(6,     '/userphoto/user2.png');
+(1,     'profile/kot-1.jpg'),
+(2,     'profile/kot-2.jpeg'),
+(3,     'profile/kot-3.jpg'),
+(4,     'profile/kot-4.jpg'),
+(5,     'profile/kot-5.jpg'),
+(6,     'profile/kot-6.jpg');
 
 INSERT INTO `user_campaign`
 (`user_id`, `campaign_id`)
@@ -91,7 +91,7 @@ INSERT INTO `user_info`
 (2,         'Алексеев ',    'Май',      'Валерьянович',
  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet nibh consequat, facilisis metus eu, consectetur risus. Cras ut arcu a elit dapibus ultrices. Suspendisse scelerisque fringilla arcu eget efficitur. Pellentesque malesuada et arcu at congue. Nam consequat risus vitae aliquam aliquam.',
  375444568714,
- 1),
+ 2),
 (3,         'Копылов',     'Родион',      'Созонович',
  'Nulla porttitor quis nunc sit amet sollicitudin. Proin vitae neque posuere dui bibendum cursus. Praesent vitae elit porta, blandit lectus vel, dignissim lacus. Sed faucibus egestas mauris vel faucibus. Maecenas vitae est vitae leo gravida lacinia porttitor at neque.',
  375897584425,
@@ -99,19 +99,19 @@ INSERT INTO `user_info`
  (4,         'Овчинников',     'Клемент',      'Денисович',
   'Nunc aliquet at odio vitae consequat. Etiam eu elit felis. In ultricies tortor vel semper scelerisque. Curabitur interdum lectus enim, sed accumsan diam accumsan quis.',
   375897584425,
-  1),
+  3),
  (5,         'Белозёров',     'Станислав',      'Федотович',
   'Nulla pulvinar lectus a ex semper, sed mollis justo vestibulum. Ut nec metus vitae ligula rhoncus sagittis. Quisque porta tincidunt libero, ut faucibus lacus ullamcorper in.',
   375897584425,
-  1),
+  4),
  (6,         'Белозёров',     'Станислав',      'Федотович',
   'Nulla pulvinar lectus a ex semper, sed mollis justo vestibulum. Ut nec metus vitae ligula rhoncus sagittis. Quisque porta tincidunt libero, ut faucibus lacus ullamcorper in.',
   375897584425,
-  1),
+  5),
  (7,         'Белозёров',     'Станислав',      'Федотович',
   'Nulla pulvinar lectus a ex semper, sed mollis justo vestibulum. Ut nec metus vitae ligula rhoncus sagittis. Quisque porta tincidunt libero, ut faucibus lacus ullamcorper in.',
   375897584425,
-  1);
+  6);
 
 INSERT INTO `social_link`
 (`id`, `user_id` , `title`, `link`, `views`)

@@ -24,6 +24,7 @@ import java.util.Arrays;
 public class UploadPhoto extends Command {
     private static final Logger LOGGER = LogManager.getLogger(UploadPhoto.class);
     private static final String ERROR_JSP = "jsp/error.jsp";
+    private static final String PROFILE_PHOTO_DIR = "profile/";
 
     public UploadPhoto() {
         getPermissionSet().addAll(Arrays.asList(UserRole.values()));
@@ -31,7 +32,9 @@ public class UploadPhoto extends Command {
 
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
-        String uploadPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+        String uploadPath = request.getServletContext().getRealPath("");
+        uploadPath = uploadPath.replace('\\', '/');
+        uploadPath = uploadPath.concat(PROFILE_PHOTO_DIR);
 
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
@@ -43,14 +46,14 @@ public class UploadPhoto extends Command {
             String filePath = "";
             for (Part part : request.getParts()) {
                 fileName = part.getSubmittedFileName();
-                filePath = uploadPath + File.separator + fileName;
+                filePath = uploadPath + fileName;
                 part.write(filePath);
             }
 
             UserFileService userFileService = (UserFileService) serviceFactory.getService(ServiceEnum.FILE);
             UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
             User authorizedUser = (User) request.getSession(false).getAttribute("authorizedUser");
-            UserFile userFile = new UserFile(filePath);
+            UserFile userFile = new UserFile(PROFILE_PHOTO_DIR + fileName);
             Integer fileId = userFileService.create(userFile);
             userFile.setId(fileId);
             authorizedUser.getUserInfo().setUserFile(userFile);

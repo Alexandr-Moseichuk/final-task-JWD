@@ -14,7 +14,15 @@
     <div class="container col-12 col-sm-6 mt-3">
         <div class="row  justify-content-center">
             <div class="col-4">
-                <img class="img-thumbnail img-fluid" src="../img/icon-user.svg" alt="User photo"><br>
+                <c:choose>
+                    <c:when test="${user.userInfo.userFile.path eq null}">
+                        <img class="img-thumbnail img-fluid" src="../img/icon-user.svg" alt="User photo"><br>
+                    </c:when>
+                    <c:otherwise>
+                        <img class="img-thumbnail img-fluid" src="../${user.userInfo.userFile.path}" alt="User photo"><br>
+                    </c:otherwise>
+                </c:choose>
+
                 <c:if test="${sessionScope.authorizedUser.id == user.id}">
                     <form action="upload_photo.html" method="post" enctype="multipart/form-data">
                         <input type="file" name="photo" size="100">
