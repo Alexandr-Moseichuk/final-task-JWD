@@ -13,7 +13,7 @@ public class UserFileDaoImpl extends BaseDao implements UserFileDao {
     private static final String READ = "SELECT `path` FROM `file` WHERE `id` = ?";
     private static final String UPDATE = "UPDATE `file` SET `path` = ? WHERE `id` = ?";
     private static final String DELETE = "DELETE FROM `file` WHERE `id` = ?";
-    private static final String READ_ALL = "SELECT * FROM `file`";
+    private static final String READ_ALL = "SELECT `path` FROM `file`";
 
     @Override
     public Integer create(UserFile userFile) throws DaoException {
