@@ -20,7 +20,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
     private static final String READ_CAMPAIGN_IDS = "SELECT `campaign_id` FROM `user_campaign` WHERE `user_id` = ?";
     private static final String LOGIN = "SELECT `id`, `password`, `role`, `registration_date`, `status` FROM `user` WHERE `email` = ?";
-    private static final String READ_USERS_BY_ROLE = "SELECT `id`, `email`, `registration_date`, `status` FROM `user` WHERE `role` = ?";
+    private static final String READ_USERS_BY_ROLE = "SELECT `id`, `email`, `registration_date`, `status` FROM `user` WHERE `role` = ? and `status`=1";
     private static final String UPDATE_STATUS = "UPDATE `user` SET `status` = ? WHERE `id` = ?";
 
     @Override
