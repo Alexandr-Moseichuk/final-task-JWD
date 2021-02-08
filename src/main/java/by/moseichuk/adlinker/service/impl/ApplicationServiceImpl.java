@@ -1,7 +1,7 @@
 package by.moseichuk.adlinker.service.impl;
 
 import by.moseichuk.adlinker.bean.Application;
-import by.moseichuk.adlinker.bean.UserStatus;
+import by.moseichuk.adlinker.constant.UserStatus;
 import by.moseichuk.adlinker.dao.DaoEnum;
 import by.moseichuk.adlinker.dao.ApplicationDao;
 import by.moseichuk.adlinker.dao.UserDao;

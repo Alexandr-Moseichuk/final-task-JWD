@@ -37,7 +37,7 @@
             <name>userRole</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>by.moseichuk.adlinker.bean.UserRole</type>
+            <type>by.moseichuk.adlinker.constant.UserRole</type>
         </attribute>
     </tag>
     <tag>

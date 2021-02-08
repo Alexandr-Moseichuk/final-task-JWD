@@ -1,5 +1,8 @@
 package by.moseichuk.adlinker.bean;
 
+import by.moseichuk.adlinker.constant.UserRole;
+import by.moseichuk.adlinker.constant.UserStatus;
+
 import java.util.Calendar;
 import java.util.Objects;
 
