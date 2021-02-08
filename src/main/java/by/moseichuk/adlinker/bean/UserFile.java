@@ -8,6 +8,10 @@ public class UserFile extends Entity{
     public UserFile() {
     }
 
+    public UserFile(String path) {
+        this.path = path;
+    }
+
     public String getPath() {
         return path;
     }

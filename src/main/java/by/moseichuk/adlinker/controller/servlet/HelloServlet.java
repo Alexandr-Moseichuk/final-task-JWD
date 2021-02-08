@@ -10,8 +10,10 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 
+@MultipartConfig
 public class HelloServlet extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(HelloServlet.class);
 

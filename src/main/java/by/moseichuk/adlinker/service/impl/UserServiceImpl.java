@@ -4,10 +4,7 @@ import by.moseichuk.adlinker.bean.Application;
 import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.bean.UserInfo;
 import by.moseichuk.adlinker.bean.UserRole;
-import by.moseichuk.adlinker.dao.ApplicationDao;
-import by.moseichuk.adlinker.dao.DaoEnum;
-import by.moseichuk.adlinker.dao.UserDao;
-import by.moseichuk.adlinker.dao.UserInfoDao;
+import by.moseichuk.adlinker.dao.*;
 import by.moseichuk.adlinker.dao.exception.DaoException;
 import by.moseichuk.adlinker.dao.exception.TransactionException;
 import by.moseichuk.adlinker.service.BaseService;
@@ -78,6 +75,20 @@ public class UserServiceImpl extends BaseService implements UserService {
             UserInfo userInfo = userInfoDao.read(userId);
             user.setUserInfo(userInfo);
             return user;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void update(User user) throws ServiceException {
+        UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
+        UserInfoDao userInfoDao = (UserInfoDao) transaction.getDao(DaoEnum.USER_INFO);
+        UserFileDao userFileDao = (UserFileDao) transaction.getDao(DaoEnum.FILE);
+        try {
+            userDao.update(user);
+            userInfoDao.update(user.getUserInfo());
+            userFileDao.update(user.getUserInfo().getUserFile());
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

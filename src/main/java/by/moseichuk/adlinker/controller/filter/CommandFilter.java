@@ -15,6 +15,7 @@ import by.moseichuk.adlinker.controller.command.manager.ManagerCampaingsListVisu
 import by.moseichuk.adlinker.controller.command.manager.ManagerInfluencersListVisual;
 import by.moseichuk.adlinker.controller.command.manager.ManagerSubscribe;
 import by.moseichuk.adlinker.controller.command.show.*;
+import by.moseichuk.adlinker.controller.command.user.UploadPhoto;
 import by.moseichuk.adlinker.controller.command.user.UserProfile;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -80,6 +81,7 @@ public class CommandFilter implements Filter {
         commandPost.put("/campaign/create", new CreateCampaign());
         commandPost.put("/campaign/subscribe", new CampaignSubscribe());
         commandPost.put("/campaign/edit", new EditCampaign());
+        commandPost.put("/user/upload_photo", new UploadPhoto());
     }
 
     /**

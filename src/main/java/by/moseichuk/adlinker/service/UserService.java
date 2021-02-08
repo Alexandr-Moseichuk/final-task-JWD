@@ -17,6 +17,8 @@ public interface UserService {
 
     User read(Integer userId) throws ServiceException;
 
+    void update(User user) throws ServiceException;
+
     List<User> readAll() throws ServiceException;
     
     List<User> readUsersByRole(UserRole userRole) throws ServiceException;

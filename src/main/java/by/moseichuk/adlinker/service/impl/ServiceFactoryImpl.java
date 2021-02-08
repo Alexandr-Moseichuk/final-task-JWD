@@ -68,6 +68,9 @@ public class ServiceFactoryImpl implements ServiceFactory {
             case INFLUENCER:
                 service = new InfluencerServiceImpl();
                 break;
+            case FILE:
+                service = new UserFileServiceImpl();
+                break;
         }
         service.setTransaction(transactionFactory.createTransaction());
         return service;

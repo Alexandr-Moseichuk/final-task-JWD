@@ -57,7 +57,7 @@ public class UserFileDaoImpl extends BaseDao implements UserFileDao {
     public void update(UserFile userFile) throws DaoException {
         try (PreparedStatement statement = connection.prepareStatement(UPDATE)) {
             statement.setString(1, userFile.getPath());
-            statement.setInt(4, userFile.getId());
+            statement.setInt(2, userFile.getId());
 
             statement.executeUpdate();
         } catch (SQLException e) {

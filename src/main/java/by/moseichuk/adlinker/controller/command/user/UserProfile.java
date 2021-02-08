@@ -24,13 +24,19 @@ public class UserProfile extends Command {
 
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
+        String userIdParameter = request.getParameter("userId");
         Integer userId;
-        try {
-            userId = Integer.parseInt(request.getParameter("userId"));
-        } catch (NumberFormatException e) {
-            LOGGER.error(e);
-            request.setAttribute("errorMessage", "User id is not a number");
-            return new Forward(ERROR_JSP);
+        if (userIdParameter == null) {
+            User authorizedUser = (User) request.getSession(false).getAttribute("authorizedUser");
+            userId = authorizedUser.getId();
+        } else {
+            try {
+                userId = Integer.parseInt(userIdParameter);
+            } catch (NumberFormatException e) {
+                LOGGER.error(e);
+                request.setAttribute("errorMessage", "User id is not a number");
+                return new Forward(ERROR_JSP);
+            }
         }
 
         UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
