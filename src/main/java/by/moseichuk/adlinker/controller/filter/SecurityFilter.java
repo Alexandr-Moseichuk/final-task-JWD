@@ -19,10 +19,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Filtrates invalid requests and prevents unauthorized access.
+ *
+ * @author Moseichuk Alexandr
+ */
 public class SecurityFilter implements Filter {
     private static final Logger LOGGER = LogManager.getLogger(SecurityFilter.class);
     private static final List<Class<? extends Command>> publicCommands = new ArrayList<>();
 
+    /**
+     * Fills map of public commands.
+     *
+     * @param filterConfig      a FilterConfig object containing the filter's configuration and initialization parameters
+     * @throws ServletException if an exception has occurred that interferes with the filter's normal operation
+     */
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         publicCommands.add(Lang.class);
@@ -35,6 +46,15 @@ public class SecurityFilter implements Filter {
         publicCommands.add(ApplicationUpdate.class);
     }
 
+    /**
+     * Allows only http requests and prevents unauthorized access to non public commands.
+     *
+     * @param servletRequest    the ServletRequest object contains the client's request
+     * @param servletResponse   the ServletResponse object contains the filter's response
+     * @param filterChain       the FilterChain for invoking the next filter or the resource
+     * @throws IOException      if an I/O related error has occurred during the processing
+     * @throws ServletException if an exception occurs that interferes with the filter's normal operation
+     */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         if (servletRequest instanceof HttpServletRequest && servletResponse instanceof HttpServletResponse) {

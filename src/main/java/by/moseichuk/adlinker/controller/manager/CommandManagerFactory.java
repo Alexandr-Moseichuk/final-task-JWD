@@ -24,7 +24,7 @@ public class CommandManagerFactory {
 
     /**
      * Creates new {@code CommandManager} with new {@code ServiceFactoryImpl}
-     * 
+     *
      * @return new {@code CommandManager} object
      * @throws TransactionException if cant create service factory
      */
