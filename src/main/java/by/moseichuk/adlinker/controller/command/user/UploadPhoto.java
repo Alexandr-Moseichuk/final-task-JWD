@@ -32,11 +32,10 @@ public class UploadPhoto extends Command {
 
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
-        String uploadPath = request.getServletContext().getRealPath("");
-        uploadPath = uploadPath.replace('\\', '/');
-        uploadPath = uploadPath.concat(PROFILE_PHOTO_DIR);
+        String servletWorkPath = request.getServletContext().getRealPath("");
+        servletWorkPath = servletWorkPath.replace('\\', '/');
 
-        File uploadDir = new File(uploadPath);
+        File uploadDir = new File(servletWorkPath + PROFILE_PHOTO_DIR);
         if (!uploadDir.exists()) {
             uploadDir.mkdir();
         }
@@ -46,7 +45,7 @@ public class UploadPhoto extends Command {
             String filePath = "";
             for (Part part : request.getParts()) {
                 fileName = part.getSubmittedFileName();
-                filePath = uploadPath + fileName;
+                filePath = servletWorkPath + PROFILE_PHOTO_DIR + fileName;
                 part.write(filePath);
             }
 
@@ -63,8 +62,16 @@ public class UploadPhoto extends Command {
                 userService.update(authorizedUser);
             } else {
                 UserFile userFile = authorizedUser.getUserInfo().getUserFile();
+                File oldPhoto = new File(servletWorkPath + userFile.getPath());
+                if (oldPhoto.delete()) {
+                    LOGGER.debug("DELETED " + oldPhoto.getAbsolutePath());
+                } else {
+                    LOGGER.debug("NOT DELETED " + oldPhoto.getAbsolutePath());
+                }
                 userFile.setPath(photoSrc);
                 userFileService.update(userFile);
+
+
             }
             return new Forward("/user/profile.html", true);
         } catch (ServletException | IOException | ServiceException e) {

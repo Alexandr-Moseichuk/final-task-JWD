@@ -21,9 +21,12 @@ public class UserServiceImpl extends BaseService implements UserService {
         try {
             UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
             UserInfoDao userInfoDao = (UserInfoDao) transaction.getDao(DaoEnum.USER_INFO);
+            UserFileDao userFileDao = (UserFileDao) transaction.getDao(DaoEnum.FILE);
             User user = userDao.readByEmail(mail);
             if (user != null && BCrypt.checkpw(password, user.getPassword())) {
-                user.setUserInfo(userInfoDao.read(user.getId()));
+                UserInfo userInfo = userInfoDao.read(user.getId());
+                userInfo.setUserFile(userFileDao.read(userInfo.getUserFile().getId()));
+                user.setUserInfo(userInfo);
                 return user;
             } else {
                 return null;
