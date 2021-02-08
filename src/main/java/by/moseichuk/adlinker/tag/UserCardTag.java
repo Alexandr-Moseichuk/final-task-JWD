@@ -27,7 +27,6 @@ public class UserCardTag extends BodyTagSupport {
     public int doStartTag() throws JspException {
         JspWriter out = pageContext.getOut();
         UserInfo userInfo = user.getUserInfo();
-        LOGGER.debug("USER_INFO " + userInfo);
         try {
             out.write("<div class=\"card ml-2 mr-2 mt-2 mb-2\" style=\"width:300px\">");
             out.write("<img class=\"card-img-top\" src=\"" + photoSrc + "\" alt=\"Card image\" style=\"width:100%\">");

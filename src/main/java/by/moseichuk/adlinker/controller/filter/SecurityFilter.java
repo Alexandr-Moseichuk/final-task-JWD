@@ -49,7 +49,6 @@ public class SecurityFilter implements Filter {
             }
 
             LOGGER.debug("Command: " + command.getClass());
-            LOGGER.debug("User: " + user);
 
             if (publicCommands.contains(command.getClass())) {
                 LOGGER.debug("Public command...");
