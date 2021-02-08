@@ -21,8 +21,16 @@
         <div class="row justify-content-center">
             <jsp:useBean id="advertiserList" scope="request" type="java.util.List"/>
             <c:forEach var="advertiser" items="${advertiserList}">
+                <c:choose>
+                    <c:when test="${advertiser.userInfo.userFile eq null}">
+                        <c:set var="userPhoto" value="../img/icon-user.svg"/>
+                    </c:when>
+                    <c:otherwise>
+                        <c:set var="userPhoto" value="../${advertiser.userInfo.userFile.path}"/>
+                    </c:otherwise>
+                </c:choose>
                 <div class="card ml-2 mr-2 mt-2 mb-2" style="width:300px">
-                    <img class="card-img-top" src="../img/icon-user.svg" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="${userPhoto}" alt="Card image" style="width:100%">
                     <div class="card-body">
                         <h4><c:out value="${advertiser.userInfo.lastName}"/></h4>
                         <h5><c:out value="${advertiser.userInfo.firstName} ${advertiser.userInfo.secondName}"/></h5>
