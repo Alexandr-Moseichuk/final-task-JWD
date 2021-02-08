@@ -24,14 +24,11 @@ public class UserServiceImpl extends BaseService implements UserService {
             UserFileDao userFileDao = (UserFileDao) transaction.getDao(DaoEnum.FILE);
             User user = userDao.readByEmail(mail);
             if (user != null && BCrypt.checkpw(password, user.getPassword())) {
-                UserInfo userInfo = userInfoDao.read(user.getId());
-                userInfo.setUserFile(userFileDao.read(userInfo.getUserFile().getId()));
-                user.setUserInfo(userInfo);
+                buildUser(user);
                 return user;
             } else {
                 return null;
             }
-
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -72,13 +69,10 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public User read(Integer userId) throws ServiceException {
         UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
-        UserInfoDao userInfoDao = (UserInfoDao) transaction.getDao(DaoEnum.USER_INFO);
-        UserFileDao userFileDao = (UserFileDao) transaction.getDao(DaoEnum.FILE);
+
         try {
             User user = userDao.read(userId);
-            UserInfo userInfo = userInfoDao.read(userId);
-            userInfo.setUserFile(userFileDao.read(userInfo.getUserFile().getId()));
-            user.setUserInfo(userInfo);
+            buildUser(user);
             return user;
         } catch (DaoException e) {
             throw new ServiceException(e);
@@ -104,6 +98,9 @@ public class UserServiceImpl extends BaseService implements UserService {
         UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
         try {
             List<User> userList = userDao.readAll();
+            for (User user : userList) {
+                buildUser(user);
+            }
             return userList;
         } catch (DaoException e) {
             throw new ServiceException(e);
@@ -118,12 +115,20 @@ public class UserServiceImpl extends BaseService implements UserService {
             List<User> userList = userDao.readUsersByRole(userRole);
 
             for (User user : userList) {
-                UserInfo userInfo = userInfoDao.read(user.getId());
-                user.setUserInfo(userInfo);
+                buildUser(user);
             }
             return userList;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
+    }
+
+    private void buildUser(User user) throws DaoException {
+        UserInfoDao userInfoDao = (UserInfoDao) transaction.getDao(DaoEnum.USER_INFO);
+        UserFileDao userFileDao = (UserFileDao) transaction.getDao(DaoEnum.FILE);
+
+        UserInfo userInfo = userInfoDao.read(user.getId());
+        userInfo.setUserFile(userFileDao.read(userInfo.getUserFile().getId()));
+        user.setUserInfo(userInfo);
     }
 }
