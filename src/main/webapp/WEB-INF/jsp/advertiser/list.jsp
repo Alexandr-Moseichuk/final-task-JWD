@@ -27,7 +27,7 @@
                         <h4><c:out value="${advertiser.userInfo.lastName}"/></h4>
                         <h5><c:out value="${advertiser.userInfo.firstName} ${advertiser.userInfo.secondName}"/></h5>
                         <p class="card-text"><c:out value="${advertiser.userInfo.description}"/></p>
-                        <a href="#" class="btn btn-primary stretched-link">See Profile</a>
+                        <a href="<c:url value="/user/profile.html?userId=${advertiser.id}"/>" class="btn btn-primary stretched-link">See Profile</a>
                     </div>
                     <div class="card-footer">
                         <h6><c:out value="${advertiser.userInfo.phoneNumber}"/></h6>
