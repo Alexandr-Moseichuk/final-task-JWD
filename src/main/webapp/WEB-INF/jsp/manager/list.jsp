@@ -10,7 +10,7 @@
 </head>
 <body class="bg-light">
 <c:import url="/WEB-INF/jsp/particles/menu.jsp"/>
-<h3 class="text-center">Список менеджеров</h3>
+<h3 class="text-center"><fmt:message key="manager.list.title" bundle="${rb}" /></h3>
     <div class="container">
         <div class="row justify-content-center">
             <jsp:useBean id="managerList" scope="request" type="java.util.List"/>

@@ -16,7 +16,7 @@
 </head>
 <body  class="bg-light">
     <c:import url="/WEB-INF/jsp/particles/menu.jsp"/>
-    <h3 class="text-center">Список рекламодателей</h3>
+    <h3 class="text-center"><fmt:message key="advertiser.list.title" bundle="${rb}" /></h3>
     <div class="container">
         <div class="row justify-content-center">
             <jsp:useBean id="advertiserList" scope="request" type="java.util.List"/>

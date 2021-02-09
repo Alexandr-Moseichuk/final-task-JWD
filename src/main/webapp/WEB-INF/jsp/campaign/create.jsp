@@ -58,12 +58,12 @@
                 <div class="invalid-feedback"><fmt:message key="form.feedback.empty" bundle="${rb}" /></div>
                 <p class="text-danger"><c:out value="${budgetError}"/></p>
             </div>
-            <div class="form-group col-md-12 d-flex justify-content-start">
-                <form method="post" enctype="multipart/form-data">
-                    <label for="file_upload"><fmt:message key="campaign.create.label.file_upload" bundle="${rb}" /></label>
-                    <input id="file_upload" type="file" name="uploadFile" size="100"/>
-                </form>
-            </div>
+<%--            <div class="form-group col-md-12 d-flex justify-content-start">--%>
+<%--                <form method="post" enctype="multipart/form-data">--%>
+<%--                    <label for="file_upload"><fmt:message key="campaign.create.label.file_upload" bundle="${rb}" /></label>--%>
+<%--                    <input id="file_upload" type="file" name="uploadFile" size="100"/>--%>
+<%--                </form>--%>
+<%--            </div>--%>
             <input form="create-campaign" type="hidden" name="advertiserId" value="${sessionScope.authorizedUser.id}"/>
         </form>
         <div class="container">

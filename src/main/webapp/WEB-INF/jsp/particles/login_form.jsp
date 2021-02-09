@@ -23,11 +23,11 @@
             <fmt:message key="${authorizationFailedMessage}" bundle="${rb}"/>
         </label>
     </c:if>
-    <div class="form-group form-check">
-        <label class="form-check-label line">
-            <input class="form-check-input" type="checkbox"> <fmt:message key="login_form.label.remember" bundle="${rb}" />
-        </label>
-    </div>
+<%--    <div class="form-group form-check">--%>
+<%--        <label class="form-check-label line">--%>
+<%--            <input class="form-check-input" type="checkbox"> <fmt:message key="login_form.label.remember" bundle="${rb}" />--%>
+<%--        </label>--%>
+<%--    </div>--%>
     <button type="submit" class="btn btn-primary"><fmt:message key="login_form.button.login" bundle="${rb}" /></button>
     <a href="<c:url value='/registration.html'/>">
         <fmt:message key="login_form.label.registration" bundle="${rb}" />
