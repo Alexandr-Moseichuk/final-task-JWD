@@ -18,6 +18,7 @@ import by.moseichuk.adlinker.controller.command.manager.ManagerVisual;
 import by.moseichuk.adlinker.controller.command.show.*;
 import by.moseichuk.adlinker.controller.command.user.UploadPhoto;
 import by.moseichuk.adlinker.controller.command.user.UserProfile;
+import by.moseichuk.adlinker.controller.command.user.UserVisual;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
