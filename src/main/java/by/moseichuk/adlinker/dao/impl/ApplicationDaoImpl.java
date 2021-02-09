@@ -15,7 +15,7 @@ public class ApplicationDaoImpl extends BaseDao implements ApplicationDao {
     private static final String DELETE = "DELETE FROM `registration_application` WHERE `user_id` = ?";
     private static final String READ_ALL = "SELECT `user_id`, `comment`, `date` FROM `registration_application`";
 
-    private static final String READ_SUBLIST = "SELECT `user_id`, `comment`, `date` FROM `registration_application` LIMIT ? OFFSET ?";
+    private static final String READ_UNVERIFIED_SUBLIST = "SELECT `user_id`, `comment`, `date` FROM `registration_application` JOIN `user` ON `registration_application`.user_id = `user`.id WHERE `user`.status = 0 LIMIT ? OFFSET ?";
     private static final String READ_ROW_COUNT = "SELECT COUNT(*) FROM `campaign`";
 
     @Override
@@ -98,8 +98,8 @@ public class ApplicationDaoImpl extends BaseDao implements ApplicationDao {
     }
 
     @Override
-    public List<Application> readSubList(int count, int offset) throws DaoException {
-        try (PreparedStatement statement = connection.prepareStatement(READ_SUBLIST)) {
+    public List<Application> readUnverifiedSubList(int count, int offset) throws DaoException {
+        try (PreparedStatement statement = connection.prepareStatement(READ_UNVERIFIED_SUBLIST)) {
             statement.setInt(1, count);
             statement.setInt(2, offset);
             ResultSet resultSet = statement.executeQuery();
