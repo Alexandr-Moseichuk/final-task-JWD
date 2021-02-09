@@ -14,12 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class UserVisual extends Command {
-    private static final Logger LOGGER = LogManager.getLogger(UserVisual.class);
+public class UserListVisual extends Command {
+    private static final Logger LOGGER = LogManager.getLogger(UserListVisual.class);
     private static final String USER_LIST_JSP = "jsp/user/list.jsp";
     private static final String ERROR_JSP = "jsp/error.jsp";
 
-    public UserVisual() {
+    public UserListVisual() {
         getPermissionSet().add(UserRole.ADMINISTRATOR);
     }
 

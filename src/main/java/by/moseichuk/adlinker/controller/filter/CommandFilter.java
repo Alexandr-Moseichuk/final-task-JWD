@@ -18,7 +18,7 @@ import by.moseichuk.adlinker.controller.command.manager.ManagerVisual;
 import by.moseichuk.adlinker.controller.command.show.*;
 import by.moseichuk.adlinker.controller.command.user.UploadPhoto;
 import by.moseichuk.adlinker.controller.command.user.UserProfile;
-import by.moseichuk.adlinker.controller.command.user.UserVisual;
+import by.moseichuk.adlinker.controller.command.user.UserListVisual;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -57,7 +57,7 @@ public class CommandFilter implements Filter {
         commandGet.put("/logout", new Logout());
         commandGet.put("/campaign/list", new CampaignListVisual());
         commandGet.put("/registration", new RegistrationVisual());
-        commandGet.put("/user/list", new UserVisual());
+        commandGet.put("/user/list", new UserListVisual());
         commandGet.put("/influencer/list", new InfluencerVisual());
         commandGet.put("/advertiser/list", new AdvertiserVisual());
         commandGet.put("/manager/list", new ManagerVisual());
