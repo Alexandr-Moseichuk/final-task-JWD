@@ -37,7 +37,7 @@ public class ApplicationList extends Command {
             }
             int offset = PaginationService.offset(PAGE_SIZE, currentPage);
 
-            List<Application> applicationSubList = applicationService.readSubList(PAGE_SIZE, offset);
+            List<Application> applicationSubList = applicationService.readUnverifiedSubList(PAGE_SIZE, offset);
             int totalRecords = applicationService.readRowCount();
             int pages = PaginationService.pages(totalRecords, PAGE_SIZE);
             int lastPage = PaginationService.lastPage(pages, PAGE_SIZE, totalRecords);

@@ -1,7 +1,7 @@
 package by.moseichuk.adlinker.controller.manager;
 
 import by.moseichuk.adlinker.dao.exception.TransactionException;
-import by.moseichuk.adlinker.service.impl.ServiceFactoryImpl;
+import by.moseichuk.adlinker.service.factory.ServiceFactoryImpl;
 
 /**
  * Singleton factory witch produce command manager with service factory.

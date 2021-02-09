@@ -55,11 +55,11 @@ public class ApplicationServiceImpl extends BaseService implements ApplicationSe
     }
 
     @Override
-    public List<Application> readSubList(int count, int offset) throws ServiceException {
+    public List<Application> readUnverifiedSubList(int count, int offset) throws ServiceException {
         ApplicationDao appDao = (ApplicationDao) transaction.getDao(DaoEnum.APPLICATION);
         UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
         try {
-            List<Application> subList = appDao.readSubList(count, offset);
+            List<Application> subList = appDao.readUnverifiedSubList(count, offset);
             for (Application application : subList) {
                 application.setUser(userDao.read(application.getUserId()));
             }

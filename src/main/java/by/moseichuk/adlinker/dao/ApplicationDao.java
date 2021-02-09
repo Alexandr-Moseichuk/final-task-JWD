@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ApplicationDao extends Dao<Application> {
 
-    List<Application> readSubList(int count, int offset) throws DaoException;
+    List<Application> readUnverifiedSubList(int count, int offset) throws DaoException;
 
     int readRowCount() throws DaoException;
 }

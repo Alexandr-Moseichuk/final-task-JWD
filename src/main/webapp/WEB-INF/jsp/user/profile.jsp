@@ -15,7 +15,7 @@
         <div class="row  justify-content-center">
             <div class="col-4">
                 <c:choose>
-                    <c:when test="${user.userInfo.userFile.path eq null}">
+                    <c:when test="${empty user.userInfo.userFile.path}">
                         <img class="img-thumbnail img-fluid" src="../img/icon-user.svg" alt="User photo"><br>
                     </c:when>
                     <c:otherwise>

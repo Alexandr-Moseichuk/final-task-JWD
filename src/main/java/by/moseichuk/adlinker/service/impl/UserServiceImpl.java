@@ -110,7 +110,6 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public List<User> readUsersByRole(UserRole userRole) throws ServiceException {
         UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
-        UserInfoDao userInfoDao = (UserInfoDao) transaction.getDao(DaoEnum.USER_INFO);
         try {
             List<User> userList = userDao.readUsersByRole(userRole);
 

@@ -13,7 +13,7 @@ public interface ApplicationService {
 
     List<Application> readAll() throws ServiceException;
 
-    List<Application> readSubList(int count, int offset) throws ServiceException;
+    List<Application> readUnverifiedSubList(int count, int offset) throws ServiceException;
 
     int readRowCount() throws ServiceException;
 
