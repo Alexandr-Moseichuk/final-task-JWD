@@ -30,3 +30,5 @@ VALUES (1,
         3,
         '2020-12-31 14:14:14' ,
         1);
+INSERT INTO `file` (`id`, `path`)
+VALUES (1, 'profile/icon-user.svg');
