@@ -69,8 +69,8 @@ VALUES
 (4,     'profile/kot-3.jpg'),
 (5,     'profile/kot-4.jpg'),
 (6,     'profile/kot-5.jpg'),
-(7,     'profile/kot-6.png'),
-(8,     'profile/kot-7.png');
+(7,     ''),
+(8,     '');
 
 INSERT INTO `user_campaign`
 (`user_id`, `campaign_id`)
@@ -108,11 +108,11 @@ INSERT INTO `user_info`
  (6,         'Белозёров',     'Станислав',      'Федотович',
   'Nulla pulvinar lectus a ex semper, sed mollis justo vestibulum. Ut nec metus vitae ligula rhoncus sagittis. Quisque porta tincidunt libero, ut faucibus lacus ullamcorper in.',
   375897584425,
-  1),
+  7),
  (7,         'Белозёров',     'Станислав',      'Федотович',
   'Nulla pulvinar lectus a ex semper, sed mollis justo vestibulum. Ut nec metus vitae ligula rhoncus sagittis. Quisque porta tincidunt libero, ut faucibus lacus ullamcorper in.',
   375897584425,
-  1);
+  8);
 
 INSERT INTO `social_link`
 (`id`, `user_id` , `title`, `link`, `views`)

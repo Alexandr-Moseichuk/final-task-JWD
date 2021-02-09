@@ -40,9 +40,12 @@ public class UserServiceImpl extends BaseService implements UserService {
         UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
         UserInfoDao userInfoDao = (UserInfoDao) transaction.getDao(DaoEnum.USER_INFO);
         ApplicationDao applicationDao = (ApplicationDao) transaction.getDao(DaoEnum.APPLICATION);
+        UserFileDao userFileDao = (UserFileDao) transaction.getDao(DaoEnum.FILE);
         try {
             Integer userId = userDao.create(user);
+            Integer photoId = userFileDao.create(userInfo.getUserFile());
             userInfo.setUserId(userId);
+            userInfo.getUserFile().setId(photoId);
             userInfoDao.create(userInfo);
             application.setUserId(userId);
             applicationDao.create(application);

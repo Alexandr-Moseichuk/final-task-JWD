@@ -116,7 +116,6 @@ public class Registration extends Command {
         userInfo.setDescription(request.getParameter("description"));
         userInfo.setPhoneNumber(request.getParameter("phoneNumber"));
         UserFile userFile = new UserFile();
-        userFile.setId(1);
         userFile.setPath("");
 
         userInfo.setUserFile(userFile);

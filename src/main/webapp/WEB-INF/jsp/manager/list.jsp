@@ -16,7 +16,7 @@
             <jsp:useBean id="managerList" scope="request" type="java.util.List"/>
             <c:forEach var="manager" items="${managerList}">
                 <c:choose>
-                    <c:when test="${manager.userInfo.userFile eq null}">
+                    <c:when test="${empty manager.userInfo.userFile}">
                         <c:set var="userPhoto" value="../img/icon-user.svg"/>
                     </c:when>
                     <c:otherwise>
