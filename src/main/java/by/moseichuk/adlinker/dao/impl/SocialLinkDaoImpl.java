@@ -15,7 +15,7 @@ public class SocialLinkDaoImpl extends BaseDao implements SocialLinkDao {
     private static final String CREATE = "INSERT INTO `social_link` (`user_id`, `title`, `link`, `views`) VALUES(?, ?, ?, ?)";
     private static final String READ   = "SELECT `user_id`, `title`, `link`, `views` FROM `social_link` WHERE `id` = ?";
     private static final String UPDATE = "UPDATE `social_link` SET `user_id` = ?, `title` = ?, `link` = ?, `views` = ? WHERE `id` = ?";
-    private static final String DELETE = "DELETE FROM `social_link` WHERE `id` = ?";
+    private static final String DELETE = "DELETE FROM `social_link` WHERE `user_id` = ?";
     private static final String READ_ALL = "SELECT `id`, `user_id`, `title`, `link`, `views` FROM `social_link`";
     private static final String READ_BY_USER_ID = "SELECT `id`, `title`, `link`, `views` FROM `social_link` WHERE `user_id` = ?";
 

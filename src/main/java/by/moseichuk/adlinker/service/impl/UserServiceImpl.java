@@ -4,6 +4,7 @@ import by.moseichuk.adlinker.bean.Application;
 import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.bean.UserInfo;
 import by.moseichuk.adlinker.constant.UserRole;
+import by.moseichuk.adlinker.constant.UserStatus;
 import by.moseichuk.adlinker.dao.*;
 import by.moseichuk.adlinker.dao.exception.DaoException;
 import by.moseichuk.adlinker.dao.exception.TransactionException;
@@ -94,6 +95,32 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
+    public void delete(Integer userId) throws ServiceException {
+        UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
+        UserInfoDao userInfoDao = (UserInfoDao) transaction.getDao(DaoEnum.USER_INFO);
+        UserFileDao userFileDao = (UserFileDao) transaction.getDao(DaoEnum.FILE);
+        ApplicationDao applicationDao = (ApplicationDao) transaction.getDao(DaoEnum.APPLICATION);
+        SocialLinkDao socialLinkDao = (SocialLinkDao) transaction.getDao(DaoEnum.SOCIAL_LINK);
+        UserCampaignDao userCampaignDao = (UserCampaignDao) transaction.getDao(DaoEnum.USER_CAMPAIGN);
+        ManagerInfluencerDao managerInfluencerDao = (ManagerInfluencerDao) transaction.getDao(DaoEnum.MANAGER_INFLUENCER);
+        try {
+            UserInfo userInfo = userInfoDao.read(userId);
+            socialLinkDao.delete(userId);
+            applicationDao.delete(userId);
+            userInfoDao.delete(userId);
+            userFileDao.delete(userInfo.getUserFile().getId());
+            userCampaignDao.unsubscribeAll(userId);
+            managerInfluencerDao.delete(userId);
+            userDao.delete(userId);
+
+            transaction.commit();
+        } catch (DaoException | TransactionException e) {
+            transaction.rollback();
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public List<User> readAll() throws ServiceException {
         UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
         try {
@@ -117,6 +144,16 @@ public class UserServiceImpl extends BaseService implements UserService {
                 buildUser(user);
             }
             return userList;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void updateStatus(List<Integer> userIds, UserStatus userStatus) throws ServiceException {
+        UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
+        try {
+            userDao.updateStatus(userIds, userStatus);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

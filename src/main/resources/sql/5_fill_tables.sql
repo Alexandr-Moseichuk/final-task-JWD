@@ -117,24 +117,16 @@ INSERT INTO `user_info`
 INSERT INTO `social_link`
 (`id`, `user_id` , `title`, `link`, `views`)
 VALUES
-(1,    1, 'VK', 'vk.com/user1', 100000),
-(2,    1, 'Twitch', 'twitch.tv/user1', 35000),
-(3,    2, 'YouTube', 'youtube.com/user2', 2000000),
-(4,    2, 'VK', 'vk.com/user2', 55000),
-(5,    2, 'Instagram', 'instagram.com/user2', 135000);
+(1,    3, 'VK', 'vk.com/user1', 100000),
+(2,    3, 'Twitch', 'twitch.tv/user1', 35000),
+(3,    3, 'YouTube', 'youtube.com/user2', 2000000),
+(4,    3, 'VK', 'vk.com/user2', 55000),
+(5,    3, 'Instagram', 'instagram.com/user2', 135000);
 
 INSERT INTO `manager_influencer`
 (`manager_id`, `influencer_id`, `begin_date`, `end_date`)
 VALUES
 (4, 3, '2020-12-11 13:11:11', 0);
-
-INSERT INTO `campaign_file`
-(`campaign_id`, `file_id`)
-VALUES
-(1, 2),
-(1, 1),
-(2, 3),
-(2, 5);
 
 INSERT INTO `registration_application`
 (`user_id`, `comment`, `date`)

@@ -63,6 +63,7 @@ CREATE TABLE  `user_info`
     PRIMARY KEY (`user_id`) ,
     FOREIGN KEY (`user_id`)  REFERENCES `user`(`id`) ,
     FOREIGN KEY (`photo_id`) REFERENCES `file`(`id`)
+
 );
 
 CREATE TABLE `social_link`

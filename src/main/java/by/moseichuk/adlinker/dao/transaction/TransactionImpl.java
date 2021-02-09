@@ -45,6 +45,9 @@ public class TransactionImpl implements Transaction {
             case USER_INFO:
                 baseDao = new UserInfoDaoImpl();
                 break;
+            case USER_CAMPAIGN:
+                baseDao = new UserCampaignDaoImpl();
+                break;
             default:
                 return null;
         }

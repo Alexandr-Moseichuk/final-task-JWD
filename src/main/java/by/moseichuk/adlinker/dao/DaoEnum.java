@@ -7,5 +7,6 @@ public enum  DaoEnum {
     APPLICATION,
     CAMPAIGN,
     FILE,
-    MANAGER_INFLUENCER
+    MANAGER_INFLUENCER,
+    USER_CAMPAIGN
 }

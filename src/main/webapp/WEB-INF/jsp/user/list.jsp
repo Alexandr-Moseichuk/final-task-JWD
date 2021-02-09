@@ -12,8 +12,19 @@
     <c:import url="/WEB-INF/jsp/particles/menu.jsp"/>
     <h3 class="text-center"><fmt:message key="user.list.label.title" bundle="${rb}" /></h3>
     <div class="container">
-        <table class="table table-striped">
-            <thead>
+        <form action="list/action.html" method="post">
+            <button type="submit" name="action" value="block" class="btn btn-outline-success">
+                <fmt:message key="user.list.button.block" bundle="${rb}" />
+            </button>
+            <button type="submit" name="action" value="unblock" class="btn btn-outline-warning">
+                <fmt:message key="user.list.button.unblock" bundle="${rb}" />
+            </button>
+            <button type="submit" name="action" value="delete" class="btn btn-outline-danger">
+                <fmt:message key="user.list.button.delete" bundle="${rb}" />
+            </button>
+            <p>${actionFeedback}</p>
+            <table class="table table-striped">
+                <thead>
                 <tr>
                     <th></th>
                     <th><fmt:message key="user.list.table.header.id" bundle="${rb}" /></th>
@@ -22,14 +33,14 @@
                     <th><fmt:message key="user.list.table.header.registration_date" bundle="${rb}" /></th>
                     <th><fmt:message key="user.list.table.header.status" bundle="${rb}" /></th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <jsp:useBean id="userList" scope="request" type="java.util.List"/>
                 <c:forEach var="user" items="${userList}">
                     <tr>
                         <td><div class="form-check">
                             <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" value="">
+                                <input type="checkbox" class="form-check-input" name="selected" value="${user.id}">
                             </label>
                         </div></td>
                         <td><c:out value="${user.id}"/></td>
@@ -39,8 +50,9 @@
                         <td><c:out value="${user.status}"/></td>
                     </tr>
                 </c:forEach>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </form>
     </div>
     <c:import url="/WEB-INF/jsp/particles/footer.jsp"/>
 </body>
