@@ -1,4 +1,4 @@
-package by.moseichuk.adlinker.controller.command.show;
+package by.moseichuk.adlinker.controller.command.campaign;
 
 import by.moseichuk.adlinker.bean.Campaign;
 import by.moseichuk.adlinker.constant.UserRole;
