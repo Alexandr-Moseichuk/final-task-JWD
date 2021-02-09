@@ -22,15 +22,7 @@ import java.util.*;
 public class ApplicationServiceImplTest {
     private static final String PROPERTIES_FILE = "db_config.properties";
     private Properties props;
-
-//    @DataProvider(name = "dbApplicationList")
-//    public Object[] testTexts() {
-//
-//        return new Object[]{
-//
-//        };
-//    }
-
+    
 
     @BeforeTest
     public void setUp() throws IOException, ConnectionPoolException {
@@ -111,21 +103,5 @@ public class ApplicationServiceImplTest {
         List<Application> applicationList = service.readAll();
         transactionFactory.close();
         Assert.assertEquals(applicationList, testApplicationList);
-    }
-
-    @Test
-    public void testReadSubList() {
-    }
-
-    @Test
-    public void testReadRowCount() {
-    }
-
-    @Test
-    public void testApproveByIds() {
-    }
-
-    @Test
-    public void testRejectByIds() {
     }
 }
