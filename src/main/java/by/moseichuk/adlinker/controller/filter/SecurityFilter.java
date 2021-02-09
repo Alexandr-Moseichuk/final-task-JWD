@@ -4,6 +4,7 @@ import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.constant.UserStatus;
 import by.moseichuk.adlinker.controller.command.*;
 import by.moseichuk.adlinker.controller.command.Registration;
+import by.moseichuk.adlinker.controller.command.application.ApplicationDelete;
 import by.moseichuk.adlinker.controller.command.application.ApplicationUpdate;
 import by.moseichuk.adlinker.controller.command.show.IndexVisual;
 import by.moseichuk.adlinker.controller.command.show.LoginVisual;
@@ -45,6 +46,7 @@ public class SecurityFilter implements Filter {
         publicCommands.add(IndexVisual.class);
         publicCommands.add(ApplicationUpdate.class);
         publicCommands.add(NotApprovedVisual.class);
+        publicCommands.add(ApplicationDelete.class);
     }
 
     /**

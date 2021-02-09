@@ -1,6 +1,7 @@
 package by.moseichuk.adlinker.service;
 
 import by.moseichuk.adlinker.bean.Application;
+import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.service.exception.ServiceException;
 
 import java.util.List;
@@ -12,6 +13,8 @@ public interface ApplicationService {
     Application read(Integer userId) throws ServiceException;
 
     void update(Application application) throws ServiceException;
+
+    void delete(User user) throws ServiceException;
 
     List<Application> readAll() throws ServiceException;
 

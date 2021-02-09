@@ -4,6 +4,7 @@ import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.command.*;
 import by.moseichuk.adlinker.controller.command.Registration;
 import by.moseichuk.adlinker.controller.command.advertiser.AdvertiserCampaignListVisual;
+import by.moseichuk.adlinker.controller.command.application.ApplicationDelete;
 import by.moseichuk.adlinker.controller.command.application.ApplicationList;
 import by.moseichuk.adlinker.controller.command.application.ApplicationListAction;
 import by.moseichuk.adlinker.controller.command.application.ApplicationUpdate;
@@ -83,6 +84,7 @@ public class CommandFilter implements Filter {
         commandPost.put("/campaign/subscribe", new CampaignSubscribe());
         commandPost.put("/campaign/edit", new EditCampaign());
         commandPost.put("/user/upload_photo", new UploadPhoto());
+        commandPost.put("/application/delete" , new ApplicationDelete());
     }
 
     /**

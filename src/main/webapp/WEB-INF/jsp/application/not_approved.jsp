@@ -19,7 +19,10 @@
                 <p class="text-danger"><c:out value="${updateFeedback}"/></p>
                 <button type="submit" class="btn btn-primary">Обновить</button>
                 <a href="<c:url value='/logout.html'/>">Выход</a>
-                <a href="<c:url value='/delete_application.html'/>">Удалить заявку</a>
+
+            </form>
+            <form action="application/delete.html" method="post">
+                <button type="submit" class="btn btn-primary">Удалить заявку</button>
             </form>
         </div>
     </div>
