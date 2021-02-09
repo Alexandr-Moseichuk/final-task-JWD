@@ -37,28 +37,28 @@ INSERT INTO `campaign`
  `budget`)
 VALUES
 ( 1,   '2020-12-07 12:00:00',     '2020-12-10 16:00:00',   '2020-12-10 18:00:00', 'BigBon',
- 'Рекламная кампания лапши быстрого приготовления',
- '50 тыс. просмотров, нативная интерграция',
+ 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus arcu nulla, elementum vel turpis a, scelerisque facilisis orci.',
+ 'Praesent semper magna at erat cursus, id mollis justo tempor. Phasellus posuere tristique mi, vel interdum lorem ornare tristique.',
  50),
 ( 2,   '2020-11-30 08:36:00',     '2020-11-30 14:00:00',    '2020-12-01 18:00:00', 'RAID',
- 'Реклама мобильной игры в стиле дарк фентези',
- '100 тыс. просмотров',
+ 'Suspendisse nec vehicula augue. Aenean mattis, mi nec aliquet condimentum, eros nulla rutrum sem, ac iaculis nisi sem et nulla. Sed imperdiet scelerisque nibh eu rhoncus.',
+ 'Vestibulum vehicula efficitur magna. Mauris sodales metus ante, non imperdiet odio feugiat sit amet. Fusce mattis sodales laoreet. Donec semper dui ac mi maximus tincidunt. Aliquam at porta quam.',
  100),
 ( 3,   '2020-11-26 18:22:00',     '2020-12-31 15:01:00',    '2021-01-01 18:00:00', 'Analgin Renewal',
-  'Реклама средства от головной боли',
-  '200 тыс. просмотров',
+  'Praesent rutrum dui nec mauris euismod, ac rhoncus dui tempus. Suspendisse nulla velit, sollicitudin ut sapien sed, cursus tempor dui. Suspendisse potenti.',
+  'Donec laoreet, risus faucibus iaculis condimentum, ipsum libero sollicitudin lorem, nec ornare elit eros sit amet arcu. In eget porta turpis.',
   165),
 ( 4,   '2020-11-30 08:36:00',     '2020-11-30 14:00:00',    '2020-12-01 18:00:00', 'KASPERSKIY',
-  'Акция Лаборатории Касперского для покупателей комплекта Kaspersky Total Security + Cyberpunk 2077. Реклама комплекта.',
-  '500 тыс. просмотров. 5000 переходов по реферальной ссылке',
+  'Curabitur eget libero eu lacus interdum fringilla sed vitae velit. Suspendisse potenti. Nullam nec elementum justo.',
+  'Nulla erat lorem, iaculis vitae orci id, suscipit auctor nibh. Praesent semper magna at erat cursus, id mollis justo tempor.',
   800),
 ( 5,   '2020-12-11 11:12:00',     '2020-11-30 14:00:00',    '2020-12-01 18:00:00', 'RAID',
-  'Реклама мобильной игры в стиле дарк фентези',
-  '100 тыс. просмотров',
+  'Nunc dignissim posuere purus sed placerat. Nulla facilisi. Phasellus eros nunc, bibendum dictum dapibus non, pharetra eget enim.',
+  'Phasellus volutpat lectus nisl. Nullam eu eros scelerisque turpis fermentum dignissim nec a lectus. Suspendisse rhoncus lacus at ligula imperdiet, ut vehicula ipsum varius.',
   100),
 ( 6,   '2020-11-29 13:04:00',     '2020-11-30 14:00:00',    '2020-12-01 18:00:00', 'RAID',
-  'Реклама мобильной игры в стиле дарк фентези',
-  '100 тыс. просмотров',
+  'Suspendisse nec consequat libero. Vivamus lacus nisl, egestas sit amet posuere quis, porttitor ut enim. Maecenas id orci nisi.',
+  'Morbi varius massa eget mollis semper. Proin molestie imperdiet tortor, vitae sodales leo ornare in. Vestibulum non vehicula diam, sed mattis massa.',
   100);
 
 INSERT INTO `file`
@@ -75,9 +75,9 @@ VALUES
 INSERT INTO `user_campaign`
 (`user_id`, `campaign_id`)
 VALUES
-(2,         1),
-(2,         2),
-(2,         3);
+(3,         1),
+(3,         2),
+(3,         3);
 
 INSERT INTO `user_info`
 (`user_id`, `last_name`, `first_name`, `second_name`,
