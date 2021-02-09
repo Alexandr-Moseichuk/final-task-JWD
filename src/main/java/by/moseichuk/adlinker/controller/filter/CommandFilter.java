@@ -9,6 +9,7 @@ import by.moseichuk.adlinker.controller.command.application.*;
 import by.moseichuk.adlinker.controller.command.campaign.*;
 import by.moseichuk.adlinker.controller.command.influencer.InfluencerCampaignListVisual;
 import by.moseichuk.adlinker.controller.command.influencer.InfluencerSubscribe;
+import by.moseichuk.adlinker.controller.command.influencer.InfluencerVisual;
 import by.moseichuk.adlinker.controller.command.influencer.MyManagerVisual;
 import by.moseichuk.adlinker.controller.command.manager.ManagerCampaingsListVisual;
 import by.moseichuk.adlinker.controller.command.manager.ManagerInfluencersListVisual;

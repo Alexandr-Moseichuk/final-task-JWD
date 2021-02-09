@@ -1,13 +1,11 @@
-package by.moseichuk.adlinker.controller.command.show;
+package by.moseichuk.adlinker.controller.command.influencer;
 
 import by.moseichuk.adlinker.bean.Influencer;
-import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.servlet.Forward;
 import by.moseichuk.adlinker.service.InfluencerService;
 import by.moseichuk.adlinker.service.ServiceEnum;
-import by.moseichuk.adlinker.service.UserService;
 import by.moseichuk.adlinker.service.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
