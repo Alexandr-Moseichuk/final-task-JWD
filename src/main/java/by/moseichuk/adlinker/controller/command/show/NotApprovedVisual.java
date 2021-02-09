@@ -1,8 +1,9 @@
-package by.moseichuk.adlinker.controller.command;
+package by.moseichuk.adlinker.controller.command.show;
 
 import by.moseichuk.adlinker.bean.Application;
 import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.constant.UserStatus;
+import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.servlet.Forward;
 import by.moseichuk.adlinker.service.ApplicationService;
 import by.moseichuk.adlinker.service.ServiceEnum;

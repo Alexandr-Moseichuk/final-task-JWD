@@ -8,6 +8,7 @@ import by.moseichuk.adlinker.controller.command.application.ApplicationDelete;
 import by.moseichuk.adlinker.controller.command.application.ApplicationUpdate;
 import by.moseichuk.adlinker.controller.command.show.IndexVisual;
 import by.moseichuk.adlinker.controller.command.show.LoginVisual;
+import by.moseichuk.adlinker.controller.command.show.NotApprovedVisual;
 import by.moseichuk.adlinker.controller.command.show.RegistrationVisual;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
