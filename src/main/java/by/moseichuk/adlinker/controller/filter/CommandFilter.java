@@ -4,6 +4,7 @@ import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.command.*;
 import by.moseichuk.adlinker.controller.command.Registration;
 import by.moseichuk.adlinker.controller.command.advertiser.AdvertiserCampaignListVisual;
+import by.moseichuk.adlinker.controller.command.advertiser.AdvertiserVisual;
 import by.moseichuk.adlinker.controller.command.application.ApplicationDelete;
 import by.moseichuk.adlinker.controller.command.application.ApplicationList;
 import by.moseichuk.adlinker.controller.command.application.ApplicationListAction;
