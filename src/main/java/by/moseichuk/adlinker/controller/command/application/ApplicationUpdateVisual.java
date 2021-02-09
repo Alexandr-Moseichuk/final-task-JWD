@@ -1,4 +1,4 @@
-package by.moseichuk.adlinker.controller.command.show;
+package by.moseichuk.adlinker.controller.command.application;
 
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
