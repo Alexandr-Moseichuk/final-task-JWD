@@ -14,6 +14,7 @@ import by.moseichuk.adlinker.controller.command.influencer.MyManagerVisual;
 import by.moseichuk.adlinker.controller.command.manager.ManagerCampaingsListVisual;
 import by.moseichuk.adlinker.controller.command.manager.ManagerInfluencersListVisual;
 import by.moseichuk.adlinker.controller.command.manager.ManagerSubscribe;
+import by.moseichuk.adlinker.controller.command.manager.ManagerVisual;
 import by.moseichuk.adlinker.controller.command.show.*;
 import by.moseichuk.adlinker.controller.command.user.UploadPhoto;
 import by.moseichuk.adlinker.controller.command.user.UserProfile;
