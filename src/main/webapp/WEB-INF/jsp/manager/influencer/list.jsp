@@ -15,7 +15,15 @@
     <div class="row justify-content-center">
         <jsp:useBean id="influencerList" scope="request" type="java.util.List"/>
         <c:forEach var="influencer" items="${influencerList}">
-            <ctg:userCard photoSrc="../../img/icon-user.svg" user="${influencer}">
+            <c:choose>
+                <c:when test="${empty influencer.userInfo.userFile.path}">
+                    <c:set var="userPhoto" value="../../profile/icon-user.svg"/>
+                </c:when>
+                <c:otherwise>
+                    <c:set var="userPhoto" value="../../${influencer.userInfo.userFile.path}"/>
+                </c:otherwise>
+            </c:choose>
+            <ctg:userCard photoSrc="${userPhoto}" user="${influencer}">
                 <a href="<c:url value="/user/profile.html?userId=${influencer.id}"/>" class="btn btn-primary stretched-link">See Profile</a>
             </ctg:userCard>
         </c:forEach>

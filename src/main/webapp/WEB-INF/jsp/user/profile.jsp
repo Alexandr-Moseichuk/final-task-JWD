@@ -16,7 +16,7 @@
             <div class="col-4">
                 <c:choose>
                     <c:when test="${empty user.userInfo.userFile.path}">
-                        <img class="img-thumbnail img-fluid" src="../img/icon-user.svg" alt="User photo"><br>
+                        <img class="img-thumbnail img-fluid" src="../profile/icon-user.svg" alt="User photo"><br>
                     </c:when>
                     <c:otherwise>
                         <img class="img-thumbnail img-fluid" src="../${user.userInfo.userFile.path}" alt="User photo"><br>

@@ -29,7 +29,7 @@
                 <h5><fmt:message key="campaign.list.label.requirement" bundle="${rb}"/></h5>
                 <p><c:out value="${campaign.requirement}"/></p>
                 <h5><fmt:message key="campaign.list.label.budget" bundle="${rb}"/></h5>
-                <p class="front-weight-bold"><c:out value="${campaign.budget}"/></p>
+                <p class="front-weight-bold"><c:out value="${campaign.budget}"/> $</p>
                 <ul>
                     <c:forEach var="influencer" items="${campaign.influencerList}">
                         <a href="<c:url value="../user/profile.html?userId=${influencer.id}"/> ">
