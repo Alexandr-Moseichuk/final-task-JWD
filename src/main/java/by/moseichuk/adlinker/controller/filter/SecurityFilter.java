@@ -44,6 +44,7 @@ public class SecurityFilter implements Filter {
         publicCommands.add(RegistrationVisual.class);
         publicCommands.add(IndexVisual.class);
         publicCommands.add(ApplicationUpdate.class);
+        publicCommands.add(NotApprovedVisual.class);
     }
 
     /**
@@ -78,7 +79,8 @@ public class SecurityFilter implements Filter {
                 response.sendRedirect(request.getContextPath() + "/login.html");
             } else if (user.getStatus() != UserStatus.VERIFIED) {
                 LOGGER.debug("User not verified...");
-                request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/application/not_approved.jsp").forward(servletRequest, servletResponse);
+                response.sendRedirect(request.getContextPath() + "/not_approved.html");
+                //request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/application/not_approved.jsp").forward(servletRequest, servletResponse);
             } else if (command.getPermissionSet().contains(user.getRole())) {
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {

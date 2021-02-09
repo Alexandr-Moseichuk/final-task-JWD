@@ -9,6 +9,8 @@ public interface ApplicationService {
 
     void add(Application application) throws ServiceException;
 
+    Application read(Integer userId) throws ServiceException;
+
     void update(Application application) throws ServiceException;
 
     List<Application> readAll() throws ServiceException;

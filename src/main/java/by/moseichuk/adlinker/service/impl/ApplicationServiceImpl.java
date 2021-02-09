@@ -28,6 +28,16 @@ public class ApplicationServiceImpl extends BaseService implements ApplicationSe
     }
 
     @Override
+    public Application read(Integer userId) throws ServiceException {
+        ApplicationDao applicationDao = (ApplicationDao) transaction.getDao(DaoEnum.APPLICATION);
+        try {
+            return applicationDao.read(userId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public void update(Application application) throws ServiceException {
         ApplicationDao applicationDao = (ApplicationDao) transaction.getDao(DaoEnum.APPLICATION);
         try {
