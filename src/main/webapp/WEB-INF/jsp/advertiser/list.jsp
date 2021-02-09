@@ -22,7 +22,7 @@
             <jsp:useBean id="advertiserList" scope="request" type="java.util.List"/>
             <c:forEach var="advertiser" items="${advertiserList}">
                 <c:choose>
-                    <c:when test="${advertiser.userInfo.userFile eq null}">
+                    <c:when test="${empty advertiser.userInfo.userFile}">
                         <c:set var="userPhoto" value="../img/icon-user.svg"/>
                     </c:when>
                     <c:otherwise>

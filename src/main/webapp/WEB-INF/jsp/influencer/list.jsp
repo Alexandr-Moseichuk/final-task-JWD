@@ -16,8 +16,8 @@
             <jsp:useBean id="influencerList" scope="request" type="java.util.List"/>
             <c:forEach var="influencer" items="${influencerList}">
                 <c:choose>
-                    <c:when test="${influencer.userInfo.userFile eq null}">
-                        <c:set var="userPhoto" value="../img/icon-user.svg"/>
+                    <c:when test="${empty influencer.userInfo.userFile.path}">
+                        <c:set var="userPhoto" value="../profile/icon-user.svg"/>
                     </c:when>
                     <c:otherwise>
                         <c:set var="userPhoto" value="../${influencer.userInfo.userFile.path}"/>
