@@ -35,7 +35,7 @@ public class UserProfile extends Command {
                 userId = Integer.parseInt(userIdParameter);
             } catch (NumberFormatException e) {
                 LOGGER.error(e);
-                request.setAttribute("errorMessage", "User id is not a number");
+                request.setAttribute("errorMessage", e.getMessage());
                 return new Forward(ERROR_JSP);
             }
         }
@@ -60,7 +60,7 @@ public class UserProfile extends Command {
             return new Forward(USER_PROFILE_JSP);
         } catch (ServiceException e) {
             LOGGER.error(e);
-            request.setAttribute("errorMessage", "Can't read user profile");
+            request.setAttribute("errorMessage", e.getMessage());
             return new Forward(ERROR_JSP);
         }
     }

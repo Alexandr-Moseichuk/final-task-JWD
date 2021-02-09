@@ -16,7 +16,8 @@ public class SocialLinkDaoImpl extends BaseDao implements SocialLinkDao {
     private static final String READ   = "SELECT `user_id`, `title`, `link`, `views` FROM `social_link` WHERE `id` = ?";
     private static final String UPDATE = "UPDATE `social_link` SET `user_id` = ?, `title` = ?, `link` = ?, `views` = ? WHERE `id` = ?";
     private static final String DELETE = "DELETE FROM `social_link` WHERE `id` = ?";
-    private static final String READ_ALL = "SELECT * FROM `social_link`";
+    private static final String READ_ALL = "SELECT `id`, `user_id`, `title`, `link`, `views` FROM `social_link`";
+    private static final String READ_BY_USER_ID = "SELECT `id`, `title`, `link`, `views` FROM `social_link` WHERE `user_id` = ?";
 
     @Override
     public Integer create(SocialLink socialLink) throws DaoException {
@@ -97,6 +98,28 @@ public class SocialLinkDaoImpl extends BaseDao implements SocialLinkDao {
                 SocialLink socialLink = new SocialLink();
                 socialLink.setId(resultSet.getInt("id"));
                 socialLink.setUserId(resultSet.getInt("user_id"));
+                socialLink.setTitle(resultSet.getString("title"));
+                socialLink.setLink(resultSet.getString("link"));
+                socialLink.setViews(resultSet.getInt("views"));
+                links.add(socialLink);
+            }
+            return links;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public List<SocialLink> readByUserId(Integer userId) throws DaoException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(READ_BY_USER_ID)) {
+            preparedStatement.setInt(1, userId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<SocialLink> links = new ArrayList<>();
+            while (resultSet.next()) {
+                SocialLink socialLink = new SocialLink();
+                socialLink.setId(resultSet.getInt("id"));
+                socialLink.setUserId(userId);
                 socialLink.setTitle(resultSet.getString("title"));
                 socialLink.setLink(resultSet.getString("link"));
                 socialLink.setViews(resultSet.getInt("views"));

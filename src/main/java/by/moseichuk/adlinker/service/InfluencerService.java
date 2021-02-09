@@ -6,5 +6,9 @@ import by.moseichuk.adlinker.service.exception.ServiceException;
 import java.util.List;
 
 public interface InfluencerService {
+
     List<Influencer> readByManagerId(Integer managerId) throws ServiceException;
+
+    List<Influencer> readAll() throws ServiceException;
+
 }

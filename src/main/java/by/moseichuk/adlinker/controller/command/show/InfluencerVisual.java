@@ -1,9 +1,11 @@
 package by.moseichuk.adlinker.controller.command.show;
 
+import by.moseichuk.adlinker.bean.Influencer;
 import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.service.InfluencerService;
 import by.moseichuk.adlinker.service.ServiceEnum;
 import by.moseichuk.adlinker.service.UserService;
 import by.moseichuk.adlinker.service.exception.ServiceException;
@@ -26,14 +28,14 @@ public class InfluencerVisual extends Command {
 
     @Override
     public Forward execute(HttpServletRequest request, HttpServletResponse response) {
-        UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
+        InfluencerService influencerService = (InfluencerService) serviceFactory.getService(ServiceEnum.INFLUENCER);
         try {
-            List<User> influencerList = userService.readUsersByRole(UserRole.INFLUENCER);
+            List<Influencer> influencerList = influencerService.readAll();
             request.setAttribute("influencerList", influencerList);
             return new Forward(INFLUENCER_LIST_JSP);
         } catch (ServiceException e) {
             LOGGER.error(e);
-            request.setAttribute("errorMessage", "Ошибка получения списка инфлюенсеров");
+            request.setAttribute("errorMessage", e.getMessage());
             return new Forward(ERROR_JSP);
         }
     }
