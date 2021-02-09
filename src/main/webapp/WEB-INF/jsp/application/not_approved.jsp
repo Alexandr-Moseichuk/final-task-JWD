@@ -4,17 +4,25 @@
 <html>
 <head>
     <title>Not approved</title>
+    <c:import url="/WEB-INF/jsp/style.jsp"/>
 </head>
 <body class="bg-light">
-    <form action="application/update.html" method="post">
-        <div class="form-group">
-            <textarea class="form-control" placeholder="Comment" id="comment" name="comment"><c:out value="${applicationComment}"/></textarea>
+    <div class="d-flex justify-content-center">
+        <h3>Ваша заявка еще не одобрена!</h3>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="col-sm-6">
+            <form action="application/update.html" method="post">
+                <div class="form-group">
+                    <textarea class="form-control" placeholder="Comment" id="comment" name="comment"><c:out value="${applicationComment}"/></textarea>
+                </div>
+                <p class="text-danger"><c:out value="${updateFeedback}"/></p>
+                <button type="submit" class="btn btn-primary">Обновить</button>
+                <a href="<c:url value='/logout.html'/>">Выход</a>
+                <a href="<c:url value='/delete_application.html'/>">Удалить заявку</a>
+            </form>
         </div>
-        <p class="text-danger"><c:out value="${updateFeedback}"/></p>
-        <button type="submit" class="btn btn-primary">Обновить</button>
-        <a href="<c:url value='/logout.html'/>">Выход</a>
-
-    </form>
+    </div>
     <c:import url="/WEB-INF/jsp/particles/footer.jsp"/>
 </body>
 </html>
