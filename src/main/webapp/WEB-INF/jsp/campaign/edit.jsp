@@ -42,13 +42,13 @@
         </div>
         <div class="form-group d-flex justify-content-center col-md-6">
             <label for="beginDate"><fmt:message key="campaign.create.label.begin_date" bundle="${rb}" /></label>
-            <input id="beginDate" name="beginDate" width="200" value="<fmt:formatDate value="${campaign.beginDate.time}" pattern="dd.MM.yyyy"/>" readonly>
+            <input id="beginDate" name="beginDate" width="200" value="<fmt:formatDate value="${campaign.beginDate.time}" pattern="dd.MM.yyyy"/>">
             <div class="valid-feedback"><fmt:message key="form.feedback.valid" bundle="${rb}" /></div>
             <div class="invalid-feedback"><fmt:message key="form.feedback.empty" bundle="${rb}" /></div>
         </div>
         <div class= "form-group d-flex justify-content-center col-md-6">
             <label for="endDate"><fmt:message key="campaign.create.label.end_date" bundle="${rb}" /></label>
-            <input id="endDate" name="endDate" width="200" value="<fmt:formatDate value="${campaign.endDate.time}" pattern="dd.MM.yyyy"/>" readonly>
+            <input id="endDate" name="endDate" width="200" value="<fmt:formatDate value="${campaign.endDate.time}" pattern="dd.MM.yyyy"/>">
             <div class="valid-feedback"><fmt:message key="form.feedback.valid" bundle="${rb}" /></div>
             <div class="invalid-feedback"><fmt:message key="form.feedback.empty" bundle="${rb}" /></div>
         </div>
@@ -60,15 +60,15 @@
             <div class="invalid-feedback"><fmt:message key="form.feedback.empty" bundle="${rb}" /></div>
             <p class="text-danger"><c:out value="${budgetError}"/></p>
         </div>
-        <div class="form-group col-md-12 d-flex justify-content-start">
-            <form method="post" enctype="multipart/form-data">
-                <label for="file_upload"><fmt:message key="campaign.create.label.file_upload" bundle="${rb}" /></label>
-                <input id="file_upload" type="file" name="uploadFile" size="100"/>
-            </form>
-        </div>
+<%--        <div class="form-group col-md-12 d-flex justify-content-start">--%>
+<%--            <form method="post" enctype="multipart/form-data">--%>
+<%--                <label for="file_upload"><fmt:message key="campaign.create.label.file_upload" bundle="${rb}" /></label>--%>
+<%--                <input id="file_upload" type="file" name="uploadFile" size="100"/>--%>
+<%--            </form>--%>
+<%--        </div>--%>
     </form>
     <div class="container">
-        <button type="submit" class="btn btn-primary btn-block" form="create-campaign"><fmt:message key="campaign.create.form.submit_button" bundle="${rb}" /></button>
+        <button type="submit" class="btn btn-primary btn-block" form="create-campaign"><fmt:message key="campaign.edit.label.title" bundle="${rb}" /></button>
     </div>
 </div>
 <c:import url="/WEB-INF/jsp/particles/footer.jsp"/>
