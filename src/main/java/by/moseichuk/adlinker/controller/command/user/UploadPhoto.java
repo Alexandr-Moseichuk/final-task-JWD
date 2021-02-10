@@ -69,12 +69,10 @@ public class UploadPhoto extends Command {
                 }
                 userFile.setPath(photoSrc);
                 userFileService.update(userFile);
-
-
             }
             return new Forward("/user/profile.html", true);
         } catch (ServletException | IOException | ServiceException e) {
-            LOGGER.error(e);
+            LOGGER.error(e.getMessage());
             request.setAttribute("errorMessage", e.getMessage());
             return new Forward(ERROR_JSP);
         }

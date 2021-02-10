@@ -31,7 +31,7 @@ public class UserListVisual extends Command {
             request.setAttribute("userList", userList);
             return new Forward(USER_LIST_JSP);
         } catch (ServiceException e) {
-            LOGGER.error(e);
+            LOGGER.error(e.getMessage());
             request.setAttribute("jsp/error.jsp", "Ошибка при чтении всех пользователей из БД");
             return new Forward(ERROR_JSP);
         }

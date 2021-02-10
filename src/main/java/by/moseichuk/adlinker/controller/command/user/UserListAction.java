@@ -52,7 +52,7 @@ public class UserListAction extends Command {
                 forward = new Forward(ERROR_JSP);
             }
         } catch (ServiceException e) {
-            LOGGER.error(e);
+            LOGGER.error(e.getMessage());
             request.setAttribute("errorMessage", e.getMessage());
             forward = new Forward(ERROR_JSP);
         }
@@ -66,7 +66,7 @@ public class UserListAction extends Command {
             try {
                 integerList.add(Integer.parseInt(s));
             } catch (NumberFormatException e) {
-                LOGGER.error(e);
+                LOGGER.error(e.getMessage());
             }
         }
         return integerList;

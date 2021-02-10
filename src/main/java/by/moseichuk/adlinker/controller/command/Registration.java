@@ -74,7 +74,7 @@ public class Registration extends Command {
             userService.register(user, userInfo, application);
             return new Forward(REDIRECT_PATH, true);
         } catch (ServiceException e) {
-            LOGGER.error(e);
+            LOGGER.error(e.getMessage());
             request.setAttribute(ERROR_MESSAGE_ATTRIBUTE, e.getMessage());
             return new Forward(ERROR_JSP);
         }

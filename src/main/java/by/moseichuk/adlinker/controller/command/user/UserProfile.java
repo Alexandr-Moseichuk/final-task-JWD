@@ -34,7 +34,7 @@ public class UserProfile extends Command {
             try {
                 userId = Integer.parseInt(userIdParameter);
             } catch (NumberFormatException e) {
-                LOGGER.error(e);
+                LOGGER.error(e.getMessage());
                 request.setAttribute("errorMessage", e.getMessage());
                 return new Forward(ERROR_JSP);
             }
@@ -59,7 +59,7 @@ public class UserProfile extends Command {
             }
             return new Forward(USER_PROFILE_JSP);
         } catch (ServiceException e) {
-            LOGGER.error(e);
+            LOGGER.error(e.getMessage());
             request.setAttribute("errorMessage", e.getMessage());
             return new Forward(ERROR_JSP);
         }

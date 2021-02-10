@@ -55,7 +55,7 @@ public class Login extends Command {
                     return new Forward(FAILED_FORWARD);
                 }
             } catch (ServiceException e) {
-                LOGGER.error(e);
+                LOGGER.error(e.getMessage());
                 request.getSession().setAttribute("errorMessage", "Ошибка авторизации! Свяжитесь с администратором.");
                 return new Forward(ERROR_JSP);
             }
