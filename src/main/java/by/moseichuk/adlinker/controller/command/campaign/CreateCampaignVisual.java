@@ -2,7 +2,7 @@ package by.moseichuk.adlinker.controller.command.campaign;
 
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,8 +15,8 @@ public class CreateCampaignVisual extends Command {
     }
 
     @Override
-    public Forward execute(HttpServletRequest request, HttpServletResponse response) {
-        return new Forward(CREATE_JSP);
+    public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
+        return new ResultPage(CREATE_JSP);
     }
 
 }

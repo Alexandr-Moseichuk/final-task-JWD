@@ -1,7 +1,7 @@
 package by.moseichuk.adlinker.controller.command;
 
 import by.moseichuk.adlinker.constant.UserRole;
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,11 +31,11 @@ public class Logout extends Command {
      * @return         redirect to index page
      */
     @Override
-    public Forward execute(HttpServletRequest request, HttpServletResponse response) {
+    public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
         }
-        return new Forward(PAGE_PATH, true);
+        return new ResultPage(PAGE_PATH, true);
     }
 }

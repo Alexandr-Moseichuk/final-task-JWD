@@ -7,7 +7,7 @@ import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 import by.moseichuk.adlinker.service.ManagerInfluencerService;
 import by.moseichuk.adlinker.service.ServiceEnum;
 import by.moseichuk.adlinker.service.exception.ServiceException;
@@ -29,12 +29,12 @@ public class InfluencerSubscribe extends Command {
     }
 
     @Override
-    public Forward execute(HttpServletRequest request, HttpServletResponse response) {
+    public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
         if (session != null) {
             User authorizedUser = (User) session.getAttribute("authorizedUser");
             if (authorizedUser.getRole() != UserRole.MANAGER) {
-                return new Forward(PERMISSION_DENIED_JSP);
+                return new ResultPage(PERMISSION_DENIED_JSP);
             }
             Integer influencerId;
             ManagerInfluencerService service =
@@ -47,14 +47,14 @@ public class InfluencerSubscribe extends Command {
                 manager.setId(authorizedUser.getId());
                 influencer.setManager(manager);
                 service.create(influencer);
-                return new Forward(INFLUENCER_LIST_PATH, true);
+                return new ResultPage(INFLUENCER_LIST_PATH, true);
             } catch (NumberFormatException | ServiceException e) {
                 LOGGER.error(e.getMessage());
                 request.setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
-                return new Forward(Jsp.ERROR);
+                return new ResultPage(Jsp.ERROR);
             }
         } else {
-            return new Forward(LOGIN_PATH, true);
+            return new ResultPage(LOGIN_PATH, true);
         }
     }
 }

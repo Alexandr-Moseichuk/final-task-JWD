@@ -1,7 +1,7 @@
 package by.moseichuk.adlinker.controller.manager;
 
 import by.moseichuk.adlinker.controller.command.Command;
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 import by.moseichuk.adlinker.service.ServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +33,7 @@ public class CommandManagerImpl implements CommandManger {
      * @return         forward to result page
      */
     @Override
-    public Forward execute(Command command, HttpServletRequest request, HttpServletResponse response) {
+    public ResultPage execute(Command command, HttpServletRequest request, HttpServletResponse response) {
         command.setServiceFactory(serviceFactory);
         return command.execute(request, response);
     }

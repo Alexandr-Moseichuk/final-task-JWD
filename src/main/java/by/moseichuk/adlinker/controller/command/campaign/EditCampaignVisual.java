@@ -6,7 +6,7 @@ import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 import by.moseichuk.adlinker.service.CampaignService;
 import by.moseichuk.adlinker.service.ServiceEnum;
 import by.moseichuk.adlinker.service.exception.ServiceException;
@@ -26,22 +26,22 @@ public class EditCampaignVisual extends Command {
     }
 
     @Override
-    public Forward execute(HttpServletRequest request, HttpServletResponse response) {
+    public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         CampaignService campaignService = (CampaignService) serviceFactory.getService(ServiceEnum.CAMPAIGN);
         try {
             Integer campaignId = Integer.parseInt(request.getParameter("campaignId"));
             Integer ownerId = campaignService.readOwnerId(campaignId);
             User authorizedUser = (User) request.getSession(false).getAttribute("authorizedUser");
             if (!authorizedUser.getId().equals(ownerId)) {
-                return new Forward(PERMISSION_DENIED_JSP);
+                return new ResultPage(PERMISSION_DENIED_JSP);
             }
             Campaign campaign = campaignService.read(campaignId);
             request.setAttribute("campaign", campaign);
-            return new Forward(EDIT_JSP);
+            return new ResultPage(EDIT_JSP);
         } catch (ServiceException | NumberFormatException e) {
             LOGGER.error(e.getMessage());
             request.setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
-            return new Forward(Jsp.ERROR);
+            return new ResultPage(Jsp.ERROR);
         }
     }
 }

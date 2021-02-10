@@ -3,7 +3,7 @@ package by.moseichuk.adlinker.controller.command.show;
 import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,16 +19,16 @@ public class IndexVisual extends Command {
     }
 
     @Override
-    public Forward execute(HttpServletRequest request, HttpServletResponse response) {
+    public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
         if (session == null) {
-            return new Forward(INDEX_JSP);
+            return new ResultPage(INDEX_JSP);
         } else {
             User authorizedUser = (User) session.getAttribute("authorizedUser");
             if (authorizedUser == null) {
-                return new Forward(INDEX_JSP);
+                return new ResultPage(INDEX_JSP);
             } else {
-                return new Forward(CAMPAIGN_LIST_PATH, true);
+                return new ResultPage(CAMPAIGN_LIST_PATH, true);
             }
 
         }

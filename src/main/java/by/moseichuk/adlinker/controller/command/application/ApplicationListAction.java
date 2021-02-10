@@ -4,7 +4,7 @@ import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 import by.moseichuk.adlinker.service.ApplicationService;
 import by.moseichuk.adlinker.service.ServiceEnum;
 import by.moseichuk.adlinker.service.exception.ServiceException;
@@ -25,13 +25,13 @@ public class ApplicationListAction extends Command {
     }
 
     @Override
-    public Forward execute(HttpServletRequest request, HttpServletResponse response) {
+    public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         String action = request.getParameter("action");
         String[] userIdArray = request.getParameterValues("selected");
-        Forward forward = new Forward(RESULT_PATH, true);
+        ResultPage resultPage = new ResultPage(RESULT_PATH, true);
 
         if (action == null || userIdArray == null) {
-            return forward;
+            return resultPage;
         }
 
         ApplicationService service =
@@ -46,15 +46,15 @@ public class ApplicationListAction extends Command {
                 String errorMessage = "Invalid action";
                 LOGGER.error(errorMessage + " URI: " + request.getRequestURI());
                 request.setAttribute(Attribute.ERROR_MESSAGE, errorMessage);
-                forward = new Forward(Jsp.ERROR);
+                resultPage = new ResultPage(Jsp.ERROR);
             }
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
             request.setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
-            forward = new Forward(Jsp.ERROR);
+            resultPage = new ResultPage(Jsp.ERROR);
         }
 
-        return forward;
+        return resultPage;
     }
 
     private List<Integer> convertArrayToList(String[] userIdArray) {

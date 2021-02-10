@@ -5,7 +5,7 @@ import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserStatus;
 import by.moseichuk.adlinker.controller.command.Command;
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 import by.moseichuk.adlinker.service.ApplicationService;
 import by.moseichuk.adlinker.service.ServiceEnum;
 import by.moseichuk.adlinker.service.exception.ServiceException;
@@ -22,24 +22,24 @@ public class ApplicationDelete extends Command {
     private static final String PERMISSION_DENIED_JSP = "jsp/permission_denied.jsp";
 
     @Override
-    public Forward execute(HttpServletRequest request, HttpServletResponse response) {
+    public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
         if (session == null) {
-            return new Forward(PERMISSION_DENIED_JSP);
+            return new ResultPage(PERMISSION_DENIED_JSP);
         }
         User authorizedUser = (User) session.getAttribute("authorizedUser");
         if (authorizedUser.getStatus() != UserStatus.UNVERIFIED) {
-            return new Forward(PERMISSION_DENIED_JSP);
+            return new ResultPage(PERMISSION_DENIED_JSP);
         }
         ApplicationService applicationService = (ApplicationService) serviceFactory.getService(ServiceEnum.APPLICATION);
         try {
             applicationService.delete(authorizedUser);
             session.invalidate();
-            return new Forward(RESULT_PAGE, true);
+            return new ResultPage(RESULT_PAGE, true);
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
             request.getSession().setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
-            return new Forward(Jsp.ERROR);
+            return new ResultPage(Jsp.ERROR);
         }
     }
 }

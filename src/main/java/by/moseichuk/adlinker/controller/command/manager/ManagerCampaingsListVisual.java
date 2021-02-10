@@ -5,7 +5,7 @@ import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 import by.moseichuk.adlinker.service.*;
 import by.moseichuk.adlinker.service.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
@@ -23,7 +23,7 @@ public class ManagerCampaingsListVisual extends Command {
     }
 
     @Override
-    public Forward execute(HttpServletRequest request, HttpServletResponse response) {
+    public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         InfluencerService influencerService = (InfluencerService) serviceFactory.getService(ServiceEnum.INFLUENCER);
         CampaignService campaignService = (CampaignService) serviceFactory.getService(ServiceEnum.CAMPAIGN);
         try {
@@ -34,11 +34,11 @@ public class ManagerCampaingsListVisual extends Command {
             }
             LOGGER.debug(influencerList);
             request.setAttribute("influencerList", influencerList);
-            return new Forward("jsp/manager/campaign/list.jsp");
+            return new ResultPage("jsp/manager/campaign/list.jsp");
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
             request.setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
-            return new Forward(Jsp.ERROR);
+            return new ResultPage(Jsp.ERROR);
         }
     }
 }

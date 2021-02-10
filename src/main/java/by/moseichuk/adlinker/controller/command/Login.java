@@ -5,7 +5,7 @@ import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 import by.moseichuk.adlinker.service.ServiceEnum;
 import by.moseichuk.adlinker.service.UserService;
 import by.moseichuk.adlinker.service.exception.ServiceException;
@@ -35,7 +35,7 @@ public class Login extends Command {
      * @return
      */
     @Override
-    public Forward execute(HttpServletRequest request, HttpServletResponse response) {
+    public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         LOGGER.debug(email);
@@ -48,20 +48,20 @@ public class Login extends Command {
                     request.getSession().setAttribute("authorizedUser", user);
                     request.getSession().setAttribute("menuList", buildMenu(user.getRole()));
                     LOGGER.debug("Authorization success...");
-                    return new Forward(SUCCESS_REDIRECT, true);
+                    return new ResultPage(SUCCESS_REDIRECT, true);
                 } else {
                     LOGGER.debug("Authorization failed...");
                     request.setAttribute("email", email);
                     request.setAttribute("authorizationFailedMessage", "login.authorization_failed");
-                    return new Forward(FAILED_FORWARD);
+                    return new ResultPage(FAILED_FORWARD);
                 }
             } catch (ServiceException e) {
                 LOGGER.error(e.getMessage());
                 request.getSession().setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
-                return new Forward(Jsp.ERROR);
+                return new ResultPage(Jsp.ERROR);
             }
         }
-        return new Forward(FAILED_FORWARD);
+        return new ResultPage(FAILED_FORWARD);
     }
 
     /**
