@@ -46,7 +46,7 @@ public class ServiceFactoryImpl implements ServiceFactory {
 
     @Override
     public BaseService getService(ServiceEnum serviceType) {
-        BaseService service = null;
+        BaseService service;
         switch (serviceType) {
             case CAMPAIGN:
                 service = new CampaignServiceImpl();
@@ -72,6 +72,8 @@ public class ServiceFactoryImpl implements ServiceFactory {
             case FILE:
                 service = new UserFileServiceImpl();
                 break;
+            default:
+                throw new IllegalArgumentException("Illegal service type");
         }
         service.setTransaction(transactionFactory.createTransaction());
         return service;
