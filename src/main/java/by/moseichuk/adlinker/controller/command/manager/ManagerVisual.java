@@ -32,7 +32,7 @@ public class ManagerVisual extends Command {
             request.setAttribute("managerList", managerList);
             return new Forward(MANAGER_LIST_JSP);
         } catch (ServiceException e) {
-            LOGGER.error(e);
+            LOGGER.error(e.getMessage());
             request.setAttribute("errorMessage", "Ошибка получения списка менеджеров");
             return new Forward(ERROR_JSP);
         }

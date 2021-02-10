@@ -33,7 +33,7 @@ public class ApplicationUpdate extends Command {
             service.update(application);
             request.setAttribute("updateFeedback", "Заявка обновлена");
         } catch (ServiceException e) {
-            LOGGER.error(e);
+            LOGGER.error(e.getMessage());
             request.setAttribute("updateFeedback", "Произошла ошибка!");
         }
         return new Forward(RESULT_PAGE, true);

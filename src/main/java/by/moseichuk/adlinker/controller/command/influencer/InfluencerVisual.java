@@ -32,7 +32,7 @@ public class InfluencerVisual extends Command {
             request.setAttribute("influencerList", influencerList);
             return new Forward(INFLUENCER_LIST_JSP);
         } catch (ServiceException e) {
-            LOGGER.error(e);
+            LOGGER.error(e.getMessage());
             request.setAttribute("errorMessage", e.getMessage());
             return new Forward(ERROR_JSP);
         }

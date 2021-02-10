@@ -20,7 +20,7 @@ public class AdvertiserVisual extends Command {
     private static final String ERROR_JSP = "jsp/error.jsp";
     private static final String ADVERTISER_LIST_JSP = "jsp/advertiser/list.jsp";
 
-    {
+    public AdvertiserVisual() {
         getPermissionSet().addAll(Arrays.asList(UserRole.values()));
     }
 
@@ -32,7 +32,7 @@ public class AdvertiserVisual extends Command {
             request.setAttribute("advertiserList" ,advertiserList);
             return new Forward(ADVERTISER_LIST_JSP);
         } catch (ServiceException e) {
-            LOGGER.error(e);
+            LOGGER.error(e.getMessage());
             request.setAttribute("errorMessage", "Ошибка получения списка рекламодателей");
             return new Forward(ERROR_JSP);
         }

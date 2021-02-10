@@ -33,7 +33,7 @@ public class NotApprovedVisual extends Command {
             request.setAttribute("applicationComment", application.getComment());
             return new Forward(NOT_APPROVED_JSP);
         } catch (ServiceException e) {
-            LOGGER.error(e);
+            LOGGER.error(e.getMessage());
             request.setAttribute("errorMessage", e.getMessage());
             return new Forward(ERROR_JSP);
         }

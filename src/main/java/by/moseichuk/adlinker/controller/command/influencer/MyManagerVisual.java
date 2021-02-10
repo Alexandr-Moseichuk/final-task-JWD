@@ -31,7 +31,7 @@ public class MyManagerVisual extends Command {
             String redirectPage = String.format("/user/profile.html?userId=%d", manager.getId());
             return new Forward(redirectPage, true);
         } catch (ServiceException e) {
-            LOGGER.error(e);
+            LOGGER.error(e.getMessage());
             request.setAttribute("errorMessage", "Ошибка получения менеджера");
             return new Forward(ERROR_JSP);
         }

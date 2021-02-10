@@ -30,7 +30,6 @@ public class ApplicationListAction extends Command {
         Forward forward = new Forward(RESULT_PATH, true);
 
         if (action == null || userIdArray == null) {
-            //TODO add message
             return forward;
         }
 
@@ -49,7 +48,7 @@ public class ApplicationListAction extends Command {
                 forward = new Forward(ERROR_JSP);
             }
         } catch (ServiceException e) {
-            LOGGER.error(e);
+            LOGGER.error(e.getMessage());
             request.setAttribute("errorMessage", e.getMessage());
             forward = new Forward(ERROR_JSP);
         }
@@ -63,7 +62,7 @@ public class ApplicationListAction extends Command {
             try {
                 integerList.add(Integer.parseInt(s));
             } catch (NumberFormatException e) {
-                LOGGER.error(e);
+                LOGGER.error(e.getMessage());
             }
         }
         return integerList;

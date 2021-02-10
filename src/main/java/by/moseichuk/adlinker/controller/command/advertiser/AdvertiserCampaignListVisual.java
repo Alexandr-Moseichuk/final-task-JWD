@@ -48,7 +48,7 @@ public class AdvertiserCampaignListVisual extends Command {
             request.setAttribute("lastPage", lastPage);
             return new Forward(RESULT_JSP);
         } catch (ServiceException | NumberFormatException e) {
-            LOGGER.error(e);
+            LOGGER.error(e.getMessage());
             request.getSession().setAttribute("errorMessage", "Ошибка получения заявок");
             return new Forward(ERROR_JSP);
         }

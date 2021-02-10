@@ -32,7 +32,7 @@ public class CampaignPageVisual extends Command {
             request.setAttribute("campaign", campaign);
             return new Forward(RESULT_PAGE);
         } catch (ServiceException e) {
-            LOGGER.error(e);
+            LOGGER.error(e.getMessage());
             request.setAttribute("errorMessage", e.getMessage());
             return new Forward(ERROR_JSP);
         }

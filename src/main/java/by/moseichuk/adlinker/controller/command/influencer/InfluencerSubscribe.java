@@ -48,7 +48,7 @@ public class InfluencerSubscribe extends Command {
                 service.create(influencer);
                 return new Forward(INFLUENCER_LIST_PATH, true);
             } catch (NumberFormatException | ServiceException e) {
-                LOGGER.error(e);
+                LOGGER.error(e.getMessage());
                 request.setAttribute("errorMessage", e.getMessage());
                 return new Forward(ERROR_JSP);
             }

@@ -53,7 +53,7 @@ public class CreateCampaign extends Command {
             campaignService.subscribe(advertiser, campaign);
             return new Forward(RESULT_PATH, true);
         } catch (ServiceException e) {
-            LOGGER.error(e);
+            LOGGER.error(e.getMessage());
             request.setAttribute("errorMessage", e.getMessage());
             return new Forward(ERROR_JSP);
         }

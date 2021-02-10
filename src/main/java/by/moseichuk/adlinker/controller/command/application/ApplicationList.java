@@ -47,7 +47,7 @@ public class ApplicationList extends Command {
             request.setAttribute("applicationList", applicationSubList);
             return new Forward(RESULT_JSP);
         } catch (ServiceException e) {
-            LOGGER.error(e);
+            LOGGER.error(e.getMessage());
             request.getSession().setAttribute("errorMessage", "Ошибка получения заявок");
             return new Forward(ERROR_JSP);
         }

@@ -36,7 +36,7 @@ public class CampaignSubscribe extends Command {
             campaignService.subscribe(influencer, campaign);
             return new Forward(RESULT_PATH, true);
         } catch (ServiceException | NumberFormatException e) {
-            LOGGER.error(e);
+            LOGGER.error(e.getMessage());
             request.setAttribute("errorMessage", e.getMessage());
             return new Forward(ERROR_JSP);
         }
