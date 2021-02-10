@@ -42,7 +42,7 @@ public class EditCampaign extends Command {
             request.setAttribute("campaign", campaign);
             return new Forward(EDIT_JSP);
         } catch (ServiceException | NumberFormatException e) {
-            LOGGER.error(e);
+            LOGGER.error(e.getMessage());
             request.setAttribute("errorMessage", e.getMessage());
             return new Forward(ERROR_JSP);
         }

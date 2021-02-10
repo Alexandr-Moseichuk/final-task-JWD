@@ -36,7 +36,7 @@ public class ApplicationDelete extends Command {
             session.invalidate();
             return new Forward(RESULT_PAGE, true);
         } catch (ServiceException e) {
-            LOGGER.error(e);
+            LOGGER.error(e.getMessage());
             request.getSession().setAttribute("errorMessage", e.getMessage());
             return new Forward(ERROR_JSP);
         }
