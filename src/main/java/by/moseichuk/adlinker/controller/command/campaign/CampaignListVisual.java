@@ -5,7 +5,7 @@ import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 import by.moseichuk.adlinker.service.CampaignService;
 import by.moseichuk.adlinker.service.PaginationService;
 import by.moseichuk.adlinker.service.ServiceEnum;
@@ -29,7 +29,7 @@ public class CampaignListVisual extends Command {
     }
 
     @Override
-    public Forward execute(HttpServletRequest request, HttpServletResponse response) {
+    public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         CampaignService campaignService = (CampaignService) serviceFactory.getService(ServiceEnum.CAMPAIGN);
         try {
             String currentPageParameter =  request.getParameter("currentPage");
@@ -47,11 +47,11 @@ public class CampaignListVisual extends Command {
             request.setAttribute("campaignSubList", campaignSubList);
             request.setAttribute("currentPage", currentPage);
             request.setAttribute("lastPage", lastPage);
-            return new Forward(CAMPAIGN_LIST_JSP);
+            return new ResultPage(CAMPAIGN_LIST_JSP);
         } catch (ServiceException | NumberFormatException e) {
             LOGGER.error(e.getMessage());
             request.setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
-            return new Forward(Jsp.ERROR);
+            return new ResultPage(Jsp.ERROR);
         }
     }
 }

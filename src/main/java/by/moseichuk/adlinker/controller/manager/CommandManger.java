@@ -1,6 +1,6 @@
 package by.moseichuk.adlinker.controller.manager;
 
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 import by.moseichuk.adlinker.controller.command.Command;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +21,7 @@ public interface CommandManger {
      * @param response http response
      * @return         forward to result page
      */
-    Forward execute(Command command, HttpServletRequest request, HttpServletResponse response);
+    ResultPage execute(Command command, HttpServletRequest request, HttpServletResponse response);
 
     /**
      * Shuts down manager and closes all resources.

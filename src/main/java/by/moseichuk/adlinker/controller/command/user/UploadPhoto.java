@@ -6,7 +6,7 @@ import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 import by.moseichuk.adlinker.service.ServiceEnum;
 import by.moseichuk.adlinker.service.UserFileService;
 import by.moseichuk.adlinker.service.UserService;
@@ -31,7 +31,7 @@ public class UploadPhoto extends Command {
     }
 
     @Override
-    public Forward execute(HttpServletRequest request, HttpServletResponse response) {
+    public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         String servletWorkPath = request.getServletContext().getRealPath("");
         servletWorkPath = servletWorkPath.replace('\\', '/');
 
@@ -39,7 +39,7 @@ public class UploadPhoto extends Command {
         if (!uploadDir.exists()) {
             if (!uploadDir.mkdir()) {
                 request.setAttribute(Attribute.ERROR_MESSAGE, "Cant upload photo");
-                return new Forward(Jsp.ERROR);
+                return new ResultPage(Jsp.ERROR);
             }
         }
 
@@ -74,11 +74,11 @@ public class UploadPhoto extends Command {
                 userFile.setPath(photoSrc);
                 userFileService.update(userFile);
             }
-            return new Forward("/user/profile.html", true);
+            return new ResultPage("/user/profile.html", true);
         } catch (ServletException | IOException | ServiceException e) {
             LOGGER.error(e.getMessage());
             request.setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
-            return new Forward(Jsp.ERROR);
+            return new ResultPage(Jsp.ERROR);
         }
     }
 

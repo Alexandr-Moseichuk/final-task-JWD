@@ -3,7 +3,7 @@ package by.moseichuk.adlinker.controller.command.application;
 import by.moseichuk.adlinker.bean.Application;
 import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.controller.command.Command;
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 import by.moseichuk.adlinker.service.ApplicationService;
 import by.moseichuk.adlinker.service.ServiceEnum;
 import by.moseichuk.adlinker.service.exception.ServiceException;
@@ -20,7 +20,7 @@ public class ApplicationUpdate extends Command {
     private static final String RESULT_PAGE = "/application/update.html";
 
     @Override
-    public Forward execute(HttpServletRequest request, HttpServletResponse response) {
+    public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("authorizedUser");
         Application application = new Application();
@@ -36,6 +36,6 @@ public class ApplicationUpdate extends Command {
             LOGGER.error(e.getMessage());
             request.setAttribute("updateFeedback", "Произошла ошибка!");
         }
-        return new Forward(RESULT_PAGE, true);
+        return new ResultPage(RESULT_PAGE, true);
     }
 }

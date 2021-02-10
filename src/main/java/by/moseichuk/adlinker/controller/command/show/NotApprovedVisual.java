@@ -6,7 +6,7 @@ import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserStatus;
 import by.moseichuk.adlinker.controller.command.Command;
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 import by.moseichuk.adlinker.service.ApplicationService;
 import by.moseichuk.adlinker.service.ServiceEnum;
 import by.moseichuk.adlinker.service.exception.ServiceException;
@@ -22,21 +22,21 @@ public class NotApprovedVisual extends Command {
     private static final String NOT_APPROVED_JSP = "jsp/application/not_approved.jsp";
 
     @Override
-    public Forward execute(HttpServletRequest request, HttpServletResponse response) {
+    public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         User authorizedUser = (User) request.getSession(false).getAttribute("authorizedUser");
         if (authorizedUser.getStatus() != UserStatus.UNVERIFIED) {
-            return new Forward(PERMISSION_DENIED_JSP);
+            return new ResultPage(PERMISSION_DENIED_JSP);
         }
 
         ApplicationService applicationService = (ApplicationService) serviceFactory.getService(ServiceEnum.APPLICATION);
         try {
             Application application = applicationService.read(authorizedUser.getId());
             request.setAttribute("applicationComment", application.getComment());
-            return new Forward(NOT_APPROVED_JSP);
+            return new ResultPage(NOT_APPROVED_JSP);
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
             request.setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
-            return new Forward(Jsp.ERROR);
+            return new ResultPage(Jsp.ERROR);
         }
     }
 }

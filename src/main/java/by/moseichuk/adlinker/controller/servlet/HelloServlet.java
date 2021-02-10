@@ -72,15 +72,15 @@ public class HelloServlet extends HttpServlet {
             request.setAttribute(PAGE_URL_ATTRIBUTE, request.getRequestURL());
             Command command = (Command) request.getAttribute(COMMAND_ATTRIBUTE);
             CommandManger commandManger = CommandManagerFactory.getInstance().getManager();
-            Forward forward = commandManger.execute(command, request, response);
+            ResultPage resultPage = commandManger.execute(command, request, response);
             commandManger.close();
-            if (forward == null) {
+            if (resultPage == null) {
                 return;
             }
-            if (forward.isRedirect()) {
-                response.sendRedirect(request.getContextPath() + forward.getPagePath());
+            if (resultPage.isRedirect()) {
+                response.sendRedirect(request.getContextPath() + resultPage.getPagePath());
             } else {
-                getServletContext().getRequestDispatcher(forward.getPagePath()).forward(request, response);
+                getServletContext().getRequestDispatcher(resultPage.getPagePath()).forward(request, response);
             }
         } catch (ServletException | TransactionException e) {
             LOGGER.error(e);

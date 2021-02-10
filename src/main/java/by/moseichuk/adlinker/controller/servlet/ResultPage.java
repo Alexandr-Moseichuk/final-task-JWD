@@ -1,17 +1,15 @@
 package by.moseichuk.adlinker.controller.servlet;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Objects;
 
 /**
  * Contains forward path. Or can be redirect if {@code redirect} true
  *
  * @author Moseichuk Alexadr
  */
-public class Forward {
+public class ResultPage {
     private String pagePath;
     private boolean redirect;
-    private Map<String, Object> attributes = new HashMap<>();
 
     /**
      * Constructs forward with path and sets redirect by boolean value
@@ -19,7 +17,7 @@ public class Forward {
      * @param pagePath forward path
      * @param redirect {@code true} if redirect, {@code false} if forward
      */
-    public Forward(String pagePath, boolean redirect) {
+    public ResultPage(String pagePath, boolean redirect) {
         this.pagePath = pagePath;
         this.redirect = redirect;
     }
@@ -29,7 +27,7 @@ public class Forward {
      *
      * @param pagePath forward path
      */
-    public Forward(String pagePath) {
+    public ResultPage(String pagePath) {
         this(pagePath, false);
     }
 
@@ -46,7 +44,6 @@ public class Forward {
         }
     }
 
-
     public void setPagePath(String pagePath) {
         this.pagePath = pagePath;
     }
@@ -59,8 +56,17 @@ public class Forward {
         this.redirect = redirect;
     }
 
-    public Map<String, Object> getAttributes() {
-        return attributes;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ResultPage resultPage = (ResultPage) o;
+        return redirect == resultPage.redirect &&
+                Objects.equals(pagePath, resultPage.pagePath);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(pagePath, redirect);
+    }
 }

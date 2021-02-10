@@ -1,7 +1,7 @@
 package by.moseichuk.adlinker.controller.command;
 
 import by.moseichuk.adlinker.constant.UserRole;
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 import by.moseichuk.adlinker.service.ServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;
@@ -71,7 +71,7 @@ public abstract class Command {
      * @param response http response
      * @return {@code Forward} witch leads to result page
      */
-    public abstract Forward execute(HttpServletRequest request, HttpServletResponse response);
+    public abstract ResultPage execute(HttpServletRequest request, HttpServletResponse response);
 
     @Override
     public String toString() {

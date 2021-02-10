@@ -6,7 +6,7 @@ import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 import by.moseichuk.adlinker.service.CampaignService;
 import by.moseichuk.adlinker.service.ServiceEnum;
 import by.moseichuk.adlinker.service.Validator;
@@ -33,7 +33,7 @@ public class CreateCampaign extends Command {
     }
 
     @Override
-    public Forward execute(HttpServletRequest request, HttpServletResponse response) {
+    public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         Campaign campaign = buildCampaign(request);
 
         Validator<Campaign> campaignValidator = ValidatorFactory.getValidator(ValidatorEnum.CAMPAIGN);
@@ -42,7 +42,7 @@ public class CreateCampaign extends Command {
             for (Map.Entry<String, String> entry : errorMap.entrySet()) {
                 request.setAttribute(entry.getKey(), entry.getValue());
             }
-            return new Forward(CREATE_JSP);
+            return new ResultPage(CREATE_JSP);
         }
 
         CampaignService campaignService = (CampaignService) serviceFactory.getService(ServiceEnum.CAMPAIGN);
@@ -52,11 +52,11 @@ public class CreateCampaign extends Command {
             int campaignId = campaignService.add(campaign);
             campaign.setId(campaignId);
             campaignService.subscribe(advertiser, campaign);
-            return new Forward(RESULT_PATH, true);
+            return new ResultPage(RESULT_PATH, true);
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
             request.setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
-            return new Forward(Jsp.ERROR);
+            return new ResultPage(Jsp.ERROR);
         }
     }
 

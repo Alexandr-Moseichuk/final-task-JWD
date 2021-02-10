@@ -6,7 +6,7 @@ import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 import by.moseichuk.adlinker.service.CampaignService;
 import by.moseichuk.adlinker.service.PaginationService;
 import by.moseichuk.adlinker.service.ServiceEnum;
@@ -28,7 +28,7 @@ public class AdvertiserCampaignListVisual extends Command {
     }
 
     @Override
-    public Forward execute(HttpServletRequest request, HttpServletResponse response) {
+    public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         CampaignService campaignService = (CampaignService) serviceFactory.getService(ServiceEnum.CAMPAIGN);
         try {
             User authorizedUser = (User) request.getSession(false).getAttribute("authorizedUser");
@@ -47,11 +47,11 @@ public class AdvertiserCampaignListVisual extends Command {
             request.setAttribute("campaignList", campaignList);
             request.setAttribute("currentPage", currentPage);
             request.setAttribute("lastPage", lastPage);
-            return new Forward(RESULT_JSP);
+            return new ResultPage(RESULT_JSP);
         } catch (ServiceException | NumberFormatException e) {
             LOGGER.error(e.getMessage());
             request.getSession().setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
-            return new Forward(Jsp.ERROR);
+            return new ResultPage(Jsp.ERROR);
         }
     }
 }

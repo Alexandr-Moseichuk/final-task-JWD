@@ -5,7 +5,7 @@ import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 import by.moseichuk.adlinker.service.ServiceEnum;
 import by.moseichuk.adlinker.service.UserService;
 import by.moseichuk.adlinker.service.exception.ServiceException;
@@ -26,16 +26,16 @@ public class AdvertiserVisual extends Command {
     }
 
     @Override
-    public Forward execute(HttpServletRequest request, HttpServletResponse response) {
+    public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
         try {
             List<User> advertiserList = userService.readUsersByRole(UserRole.ADVERTISER);
             request.setAttribute("advertiserList" ,advertiserList);
-            return new Forward(ADVERTISER_LIST_JSP);
+            return new ResultPage(ADVERTISER_LIST_JSP);
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
             request.setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
-            return new Forward(Jsp.ERROR);
+            return new ResultPage(Jsp.ERROR);
         }
     }
 }

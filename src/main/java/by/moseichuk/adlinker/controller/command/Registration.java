@@ -5,7 +5,7 @@ import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.constant.UserStatus;
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 import by.moseichuk.adlinker.service.*;
 import by.moseichuk.adlinker.service.exception.ServiceException;
 import by.moseichuk.adlinker.service.validator.ValidatorEnum;
@@ -39,7 +39,7 @@ public class Registration extends Command {
      * @return         forward to result page or error page
      */
     @Override
-    public Forward execute(HttpServletRequest request, HttpServletResponse response) {
+    public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         User user = buildUser(request);
         UserInfo userInfo = buildUserInfo(request);
         user.setUserInfo(userInfo);
@@ -50,13 +50,13 @@ public class Registration extends Command {
             for (Map.Entry<String, String> entry : userErrorMap.entrySet()) {
                 request.setAttribute(entry.getKey(), entry.getValue());
             }
-            return new Forward(REGISTRATION_JSP);
+            return new ResultPage(REGISTRATION_JSP);
         }
 
         String passwordCheck = request.getParameter("passwordCheck");
         if (!user.getPassword().equals(passwordCheck)) {
             request.setAttribute(PASSWORD_CHECK_ATTRIBUTE, REGISTRATION_ERROR);
-            return new Forward(REGISTRATION_JSP);
+            return new ResultPage(REGISTRATION_JSP);
         }
 
         Application application = buildApplication(request, user.getRegistrationDate());
@@ -66,17 +66,17 @@ public class Registration extends Command {
             for (Map.Entry<String, String> entry : applicationErrorMap.entrySet()) {
                 request.setAttribute(entry.getKey(), entry.getValue());
             }
-            return new Forward(REGISTRATION_JSP);
+            return new ResultPage(REGISTRATION_JSP);
         }
 
         UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
         try {
             userService.register(user, userInfo, application);
-            return new Forward(REDIRECT_PATH, true);
+            return new ResultPage(REDIRECT_PATH, true);
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
             request.setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
-            return new Forward(Jsp.ERROR);
+            return new ResultPage(Jsp.ERROR);
         }
 
     }

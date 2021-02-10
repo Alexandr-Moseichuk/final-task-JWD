@@ -1,7 +1,7 @@
 package by.moseichuk.adlinker.controller.command;
 
 import by.moseichuk.adlinker.constant.UserRole;
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +36,7 @@ public class Lang extends Command {
      * @return         redirect to current page
      */
     @Override
-    public Forward execute(HttpServletRequest request, HttpServletResponse response) {
+    public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         Cookie cookie = getCookie(request, COOKIE_NAME);
         String localization = request.getParameter(LOCALIZATION_PARAM);
 
@@ -52,7 +52,7 @@ public class Lang extends Command {
         int end = previousPage.lastIndexOf(DELIMITER);
         String redirect = previousPage.substring(begin, end);
         redirect = redirect.concat(POSTFIX);
-        return new Forward(redirect, true);
+        return new ResultPage(redirect, true);
     }
 
     /**

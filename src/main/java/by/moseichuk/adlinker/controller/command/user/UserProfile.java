@@ -5,7 +5,7 @@ import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
-import by.moseichuk.adlinker.controller.servlet.Forward;
+import by.moseichuk.adlinker.controller.servlet.ResultPage;
 import by.moseichuk.adlinker.service.*;
 import by.moseichuk.adlinker.service.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
@@ -25,7 +25,7 @@ public class UserProfile extends Command {
     }
 
     @Override
-    public Forward execute(HttpServletRequest request, HttpServletResponse response) {
+    public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         String userIdParameter = request.getParameter("userId");
         Integer userId;
         if (userIdParameter == null) {
@@ -37,7 +37,7 @@ public class UserProfile extends Command {
             } catch (NumberFormatException e) {
                 LOGGER.error(e.getMessage());
                 request.setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
-                return new Forward(Jsp.ERROR);
+                return new ResultPage(Jsp.ERROR);
             }
         }
 
@@ -58,11 +58,11 @@ public class UserProfile extends Command {
                     request.setAttribute("influencerList", influencerList);
                     break;
             }
-            return new Forward(USER_PROFILE_JSP);
+            return new ResultPage(USER_PROFILE_JSP);
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
             request.setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
-            return new Forward(Jsp.ERROR);
+            return new ResultPage(Jsp.ERROR);
         }
     }
 }
