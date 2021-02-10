@@ -36,7 +36,10 @@ public class UploadPhoto extends Command {
 
         File uploadDir = new File(servletWorkPath + PROFILE_PHOTO_DIR);
         if (!uploadDir.exists()) {
-            uploadDir.mkdir();
+            if (!uploadDir.mkdir()) {
+                request.setAttribute("errorMessage", "Cant upload photo");
+                return new Forward(ERROR_JSP);
+            }
         }
 
         try {
