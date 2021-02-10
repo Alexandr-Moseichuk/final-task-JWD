@@ -1,6 +1,7 @@
 package by.moseichuk.adlinker.controller.command.application;
 
 import by.moseichuk.adlinker.bean.User;
+import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserStatus;
 import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.servlet.Forward;
@@ -16,7 +17,6 @@ import javax.servlet.http.HttpSession;
 
 public class ApplicationDelete extends Command {
     private static final Logger LOGGER = LogManager.getLogger(ApplicationDelete.class);
-    private static final String ERROR_JSP = "jsp/error.jsp";
     private static final String RESULT_PAGE = "/";
     private static final String PERMISSION_DENIED_JSP = "jsp/permission_denied.jsp";
 
@@ -38,7 +38,7 @@ public class ApplicationDelete extends Command {
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
             request.getSession().setAttribute("errorMessage", e.getMessage());
-            return new Forward(ERROR_JSP);
+            return new Forward(Jsp.ERROR);
         }
     }
 }

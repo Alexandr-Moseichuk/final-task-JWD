@@ -1,5 +1,6 @@
 package by.moseichuk.adlinker.controller.command.application;
 
+import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.servlet.Forward;
@@ -17,7 +18,6 @@ import java.util.List;
 public class ApplicationListAction extends Command {
     private static final Logger LOGGER = LogManager.getLogger(ApplicationListAction.class);
     private static final String RESULT_PATH = "/application/list.html";
-    private static final String ERROR_JSP = "jsp/error.jsp";
 
     public ApplicationListAction() {
         getPermissionSet().add(UserRole.ADMINISTRATOR);
@@ -45,12 +45,12 @@ public class ApplicationListAction extends Command {
                 String errorMessage = "Invalid action";
                 LOGGER.error(errorMessage + " URI: " + request.getRequestURI());
                 request.setAttribute("errorMessage", errorMessage);
-                forward = new Forward(ERROR_JSP);
+                forward = new Forward(Jsp.ERROR);
             }
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
             request.setAttribute("errorMessage", e.getMessage());
-            forward = new Forward(ERROR_JSP);
+            forward = new Forward(Jsp.ERROR);
         }
 
         return forward;

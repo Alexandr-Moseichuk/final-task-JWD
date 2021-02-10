@@ -1,6 +1,7 @@
 package by.moseichuk.adlinker.controller.command.advertiser;
 
 import by.moseichuk.adlinker.bean.User;
+import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.servlet.Forward;
@@ -17,7 +18,6 @@ import java.util.List;
 
 public class AdvertiserVisual extends Command {
     private static final Logger LOGGER = LogManager.getLogger(AdvertiserVisual.class);
-    private static final String ERROR_JSP = "jsp/error.jsp";
     private static final String ADVERTISER_LIST_JSP = "jsp/advertiser/list.jsp";
 
     public AdvertiserVisual() {
@@ -34,7 +34,7 @@ public class AdvertiserVisual extends Command {
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
             request.setAttribute("errorMessage", "Ошибка получения списка рекламодателей");
-            return new Forward(ERROR_JSP);
+            return new Forward(Jsp.ERROR);
         }
     }
 }
