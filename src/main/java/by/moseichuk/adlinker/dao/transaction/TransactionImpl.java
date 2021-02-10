@@ -22,7 +22,7 @@ public class TransactionImpl implements Transaction {
 
     @Override
     public BaseDao getDao(DaoEnum daoType) {
-        BaseDao baseDao = null;
+        BaseDao baseDao;
         switch (daoType) {
             case CAMPAIGN:
                 baseDao = new CampaignDaoImpl();
@@ -49,7 +49,7 @@ public class TransactionImpl implements Transaction {
                 baseDao = new UserCampaignDaoImpl();
                 break;
             default:
-                return null;
+                throw new IllegalArgumentException("Illegal DAO type");
         }
         baseDao.setConnection(connection);
         return baseDao;
