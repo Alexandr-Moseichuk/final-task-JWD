@@ -1,6 +1,7 @@
 package by.moseichuk.adlinker.controller.command.application;
 
 import by.moseichuk.adlinker.bean.User;
+import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserStatus;
 import by.moseichuk.adlinker.controller.command.Command;
@@ -37,7 +38,7 @@ public class ApplicationDelete extends Command {
             return new Forward(RESULT_PAGE, true);
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
-            request.getSession().setAttribute("errorMessage", e.getMessage());
+            request.getSession().setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
             return new Forward(Jsp.ERROR);
         }
     }

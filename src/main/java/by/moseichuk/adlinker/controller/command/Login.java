@@ -2,6 +2,7 @@ package by.moseichuk.adlinker.controller.command;
 
 import by.moseichuk.adlinker.bean.MenuItem;
 import by.moseichuk.adlinker.bean.User;
+import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.servlet.Forward;
@@ -56,7 +57,7 @@ public class Login extends Command {
                 }
             } catch (ServiceException e) {
                 LOGGER.error(e.getMessage());
-                request.getSession().setAttribute("errorMessage", "Ошибка авторизации! Свяжитесь с администратором.");
+                request.getSession().setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
                 return new Forward(Jsp.ERROR);
             }
         }

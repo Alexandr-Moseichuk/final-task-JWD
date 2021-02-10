@@ -1,6 +1,7 @@
 package by.moseichuk.adlinker.controller.command;
 
 import by.moseichuk.adlinker.bean.*;
+import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.constant.UserStatus;
@@ -27,7 +28,6 @@ public class Registration extends Command {
 
     private static final String REGISTRATION_JSP = "jsp/registration.jsp";
     private static final String REDIRECT_PATH = "/campaign/list.html";
-    private static final String ERROR_MESSAGE_ATTRIBUTE = "errorMessage";
     private static final String PASSWORD_CHECK_ATTRIBUTE = "passwordCheckError";
     private static final String REGISTRATION_ERROR = "registration.feedback.error";
 
@@ -75,7 +75,7 @@ public class Registration extends Command {
             return new Forward(REDIRECT_PATH, true);
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
-            request.setAttribute(ERROR_MESSAGE_ATTRIBUTE, e.getMessage());
+            request.setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
             return new Forward(Jsp.ERROR);
         }
 

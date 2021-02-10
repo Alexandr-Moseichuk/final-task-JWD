@@ -1,6 +1,7 @@
 package by.moseichuk.adlinker.controller.command.manager;
 
 import by.moseichuk.adlinker.bean.*;
+import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
@@ -36,7 +37,7 @@ public class ManagerCampaingsListVisual extends Command {
             return new Forward("jsp/manager/campaign/list.jsp");
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
-            request.setAttribute("errorMessage", e.getMessage());
+            request.setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
             return new Forward(Jsp.ERROR);
         }
     }

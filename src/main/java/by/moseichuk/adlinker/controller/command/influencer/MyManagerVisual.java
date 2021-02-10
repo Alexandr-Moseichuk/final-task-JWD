@@ -2,6 +2,7 @@ package by.moseichuk.adlinker.controller.command.influencer;
 
 import by.moseichuk.adlinker.bean.Manager;
 import by.moseichuk.adlinker.bean.User;
+import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
@@ -32,7 +33,7 @@ public class MyManagerVisual extends Command {
             return new Forward(redirectPage, true);
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
-            request.setAttribute("errorMessage", "Ошибка получения менеджера");
+            request.setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
             return new Forward(Jsp.ERROR);
         }
     }

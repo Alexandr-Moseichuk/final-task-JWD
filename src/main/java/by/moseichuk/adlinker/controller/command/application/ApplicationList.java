@@ -1,6 +1,7 @@
 package by.moseichuk.adlinker.controller.command.application;
 
 import by.moseichuk.adlinker.bean.Application;
+import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
@@ -48,7 +49,7 @@ public class ApplicationList extends Command {
             return new Forward(RESULT_JSP);
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
-            request.getSession().setAttribute("errorMessage", "Ошибка получения заявок");
+            request.getSession().setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
             return new Forward(Jsp.ERROR);
         }
     }

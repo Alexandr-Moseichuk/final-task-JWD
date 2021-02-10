@@ -2,6 +2,7 @@ package by.moseichuk.adlinker.controller.command.user;
 
 import by.moseichuk.adlinker.bean.User;
 import by.moseichuk.adlinker.bean.UserFile;
+import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
@@ -37,7 +38,7 @@ public class UploadPhoto extends Command {
         File uploadDir = new File(servletWorkPath + PROFILE_PHOTO_DIR);
         if (!uploadDir.exists()) {
             if (!uploadDir.mkdir()) {
-                request.setAttribute("errorMessage", "Cant upload photo");
+                request.setAttribute(Attribute.ERROR_MESSAGE, "Cant upload photo");
                 return new Forward(Jsp.ERROR);
             }
         }
@@ -76,7 +77,7 @@ public class UploadPhoto extends Command {
             return new Forward("/user/profile.html", true);
         } catch (ServletException | IOException | ServiceException e) {
             LOGGER.error(e.getMessage());
-            request.setAttribute("errorMessage", e.getMessage());
+            request.setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
             return new Forward(Jsp.ERROR);
         }
     }

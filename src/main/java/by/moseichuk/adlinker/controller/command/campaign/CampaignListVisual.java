@@ -1,6 +1,7 @@
 package by.moseichuk.adlinker.controller.command.campaign;
 
 import by.moseichuk.adlinker.bean.Campaign;
+import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
@@ -49,7 +50,7 @@ public class CampaignListVisual extends Command {
             return new Forward(CAMPAIGN_LIST_JSP);
         } catch (ServiceException | NumberFormatException e) {
             LOGGER.error(e.getMessage());
-            request.setAttribute("errorMessage", "Ошибка получения кампаний");
+            request.setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
             return new Forward(Jsp.ERROR);
         }
     }

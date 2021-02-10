@@ -1,5 +1,6 @@
 package by.moseichuk.adlinker.controller.command.user;
 
+import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.constant.UserStatus;
@@ -48,12 +49,12 @@ public class UserListAction extends Command {
             } else {
                 String errorMessage = "Invalid action";
                 LOGGER.error(errorMessage + " URI: " + request.getRequestURI());
-                request.setAttribute("errorMessage", errorMessage);
+                request.setAttribute(Attribute.ERROR_MESSAGE, errorMessage);
                 forward = new Forward(Jsp.ERROR);
             }
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
-            request.setAttribute("errorMessage", e.getMessage());
+            request.setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
             forward = new Forward(Jsp.ERROR);
         }
 

@@ -2,6 +2,7 @@ package by.moseichuk.adlinker.controller.command.influencer;
 
 import by.moseichuk.adlinker.bean.Campaign;
 import by.moseichuk.adlinker.bean.User;
+import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
@@ -50,7 +51,7 @@ public class InfluencerCampaignListVisual extends Command {
             return new Forward(CAMPAIGN_LIST_JSP);
         } catch (ServiceException | NumberFormatException e) {
             LOGGER.error(e.getMessage());
-            request.setAttribute("errorMessage", "Ошибка получения кампаний");
+            request.setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
             return new Forward(Jsp.ERROR);
         }
 

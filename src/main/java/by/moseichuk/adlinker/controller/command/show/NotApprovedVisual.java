@@ -2,6 +2,7 @@ package by.moseichuk.adlinker.controller.command.show;
 
 import by.moseichuk.adlinker.bean.Application;
 import by.moseichuk.adlinker.bean.User;
+import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserStatus;
 import by.moseichuk.adlinker.controller.command.Command;
@@ -34,7 +35,7 @@ public class NotApprovedVisual extends Command {
             return new Forward(NOT_APPROVED_JSP);
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
-            request.setAttribute("errorMessage", e.getMessage());
+            request.setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
             return new Forward(Jsp.ERROR);
         }
     }

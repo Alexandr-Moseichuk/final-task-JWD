@@ -2,6 +2,7 @@ package by.moseichuk.adlinker.controller.command.advertiser;
 
 import by.moseichuk.adlinker.bean.Campaign;
 import by.moseichuk.adlinker.bean.User;
+import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
@@ -49,7 +50,7 @@ public class AdvertiserCampaignListVisual extends Command {
             return new Forward(RESULT_JSP);
         } catch (ServiceException | NumberFormatException e) {
             LOGGER.error(e.getMessage());
-            request.getSession().setAttribute("errorMessage", "Ошибка получения заявок");
+            request.getSession().setAttribute(Attribute.ERROR_MESSAGE, e.getMessage());
             return new Forward(Jsp.ERROR);
         }
     }
