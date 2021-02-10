@@ -2,6 +2,7 @@ package by.moseichuk.adlinker.controller.command.campaign;
 
 import by.moseichuk.adlinker.bean.Campaign;
 import by.moseichuk.adlinker.bean.Influencer;
+import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.servlet.Forward;
@@ -17,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 public class CampaignSubscribe extends Command {
     private static final Logger LOGGER = LogManager.getLogger(CampaignSubscribe.class);
     private static final String RESULT_PATH = "/campaign/list.html";
-    private static final String ERROR_JSP = "jsp/error.jsp";
 
     public CampaignSubscribe() {
         getPermissionSet().add(UserRole.INFLUENCER);
@@ -38,7 +38,7 @@ public class CampaignSubscribe extends Command {
         } catch (ServiceException | NumberFormatException e) {
             LOGGER.error(e.getMessage());
             request.setAttribute("errorMessage", e.getMessage());
-            return new Forward(ERROR_JSP);
+            return new Forward(Jsp.ERROR);
         }
 
     }

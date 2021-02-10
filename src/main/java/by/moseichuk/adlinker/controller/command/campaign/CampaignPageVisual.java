@@ -1,6 +1,7 @@
 package by.moseichuk.adlinker.controller.command.campaign;
 
 import by.moseichuk.adlinker.bean.Campaign;
+import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.servlet.Forward;
@@ -17,7 +18,6 @@ import java.util.Arrays;
 public class CampaignPageVisual extends Command {
     private static final Logger LOGGER = LogManager.getLogger(CampaignPageVisual.class);
     private static final String RESULT_PAGE = "jsp/campaign/display_page.jsp";
-    private static final String ERROR_JSP = "jsp/error.jsp";
 
     public CampaignPageVisual() {
         getPermissionSet().addAll(Arrays.asList(UserRole.values()));
@@ -34,7 +34,7 @@ public class CampaignPageVisual extends Command {
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
             request.setAttribute("errorMessage", e.getMessage());
-            return new Forward(ERROR_JSP);
+            return new Forward(Jsp.ERROR);
         }
     }
 }

@@ -2,6 +2,7 @@ package by.moseichuk.adlinker.controller.command.manager;
 
 import by.moseichuk.adlinker.bean.Influencer;
 import by.moseichuk.adlinker.bean.User;
+import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.servlet.Forward;
@@ -17,7 +18,6 @@ import java.util.List;
 
 public class ManagerInfluencersListVisual extends Command {
     private static final Logger LOGGER = LogManager.getLogger(ManagerInfluencersListVisual.class);
-    private static final String ERROR_JSP = "jsp/error.jsp";
 
     public ManagerInfluencersListVisual() {
         getPermissionSet().add(UserRole.MANAGER);
@@ -34,7 +34,7 @@ public class ManagerInfluencersListVisual extends Command {
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
             request.setAttribute("errorMessage", e.getMessage());
-            return new Forward(ERROR_JSP);
+            return new Forward(Jsp.ERROR);
         }
     }
 }

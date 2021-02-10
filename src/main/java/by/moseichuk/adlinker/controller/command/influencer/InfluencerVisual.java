@@ -1,6 +1,7 @@
 package by.moseichuk.adlinker.controller.command.influencer;
 
 import by.moseichuk.adlinker.bean.Influencer;
+import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.servlet.Forward;
@@ -18,7 +19,6 @@ import java.util.List;
 public class InfluencerVisual extends Command {
     private static final Logger LOGGER = LogManager.getLogger(InfluencerVisual.class);
     private static final String INFLUENCER_LIST_JSP = "jsp/influencer/list.jsp";
-    private static final String ERROR_JSP = "jsp/error.jsp";
 
     public InfluencerVisual() {
         getPermissionSet().addAll(Arrays.asList(UserRole.values()));
@@ -34,7 +34,7 @@ public class InfluencerVisual extends Command {
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
             request.setAttribute("errorMessage", e.getMessage());
-            return new Forward(ERROR_JSP);
+            return new Forward(Jsp.ERROR);
         }
     }
 }

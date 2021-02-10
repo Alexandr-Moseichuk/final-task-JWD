@@ -1,6 +1,7 @@
 package by.moseichuk.adlinker.controller.command.manager;
 
 import by.moseichuk.adlinker.bean.*;
+import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.servlet.Forward;
@@ -15,7 +16,6 @@ import java.util.List;
 
 public class ManagerCampaingsListVisual extends Command {
     private static final Logger LOGGER = LogManager.getLogger(ManagerCampaingsListVisual.class);
-    private static final String ERROR_JSP = "jsp/error.jsp";
 
     public ManagerCampaingsListVisual() {
         getPermissionSet().add(UserRole.MANAGER);
@@ -37,7 +37,7 @@ public class ManagerCampaingsListVisual extends Command {
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
             request.setAttribute("errorMessage", e.getMessage());
-            return new Forward(ERROR_JSP);
+            return new Forward(Jsp.ERROR);
         }
     }
 }

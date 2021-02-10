@@ -2,6 +2,7 @@ package by.moseichuk.adlinker.controller.command.campaign;
 
 import by.moseichuk.adlinker.bean.Advertiser;
 import by.moseichuk.adlinker.bean.Campaign;
+import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.servlet.Forward;
@@ -24,7 +25,6 @@ import java.util.Map;
 public class CreateCampaign extends Command {
     private static final Logger LOGGER = LogManager.getLogger(CreateCampaign.class);
     private static final String RESULT_PATH = "/campaign/list.html";
-    private static final String ERROR_JSP = "jsp/error.jsp";
     private static final String CREATE_JSP = "jsp/campaign/create.jsp";
 
     public CreateCampaign() {
@@ -55,7 +55,7 @@ public class CreateCampaign extends Command {
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
             request.setAttribute("errorMessage", e.getMessage());
-            return new Forward(ERROR_JSP);
+            return new Forward(Jsp.ERROR);
         }
     }
 
