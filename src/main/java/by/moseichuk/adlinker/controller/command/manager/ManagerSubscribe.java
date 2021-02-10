@@ -3,6 +3,7 @@ package by.moseichuk.adlinker.controller.command.manager;
 import by.moseichuk.adlinker.bean.Influencer;
 import by.moseichuk.adlinker.bean.Manager;
 import by.moseichuk.adlinker.bean.User;
+import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.servlet.Forward;
@@ -19,7 +20,6 @@ import javax.servlet.http.HttpSession;
 public class ManagerSubscribe extends Command {
     private static final Logger LOGGER = LogManager.getLogger(ManagerSubscribe.class);
     private static final String PERMISSION_DENIED_JSP = "jsp/permission_denied.jsp";
-    private static final String ERROR_JSP = "jsp/error.jsp";
     private static final String MANAGER_LIST_PATH = "/manager/list.html";
     private static final String LOGIN_PATH = "/login.html";
 
@@ -50,7 +50,7 @@ public class ManagerSubscribe extends Command {
             } catch (NumberFormatException | ServiceException e) {
                 LOGGER.error(e.getMessage());
                 request.setAttribute("errorMessage", e.getMessage());
-                return new Forward(ERROR_JSP);
+                return new Forward(Jsp.ERROR);
             }
         } else {
             return new Forward(LOGIN_PATH, true);

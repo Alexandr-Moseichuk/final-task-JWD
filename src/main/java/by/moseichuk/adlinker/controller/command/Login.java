@@ -2,6 +2,7 @@ package by.moseichuk.adlinker.controller.command;
 
 import by.moseichuk.adlinker.bean.MenuItem;
 import by.moseichuk.adlinker.bean.User;
+import by.moseichuk.adlinker.constant.Jsp;
 import by.moseichuk.adlinker.constant.UserRole;
 import by.moseichuk.adlinker.controller.servlet.Forward;
 import by.moseichuk.adlinker.service.ServiceEnum;
@@ -23,7 +24,6 @@ public class Login extends Command {
     private static final Logger LOGGER = LogManager.getLogger(Login.class);
     private static final String SUCCESS_REDIRECT = "/campaign/list.html";
     private static final String FAILED_FORWARD = "jsp/login.jsp";
-    private static final String ERROR_JSP = "jsp/error.jsp";
 
     /**
      * Searches user in BD by email and password. If user exists then sets corresponding user object
@@ -57,7 +57,7 @@ public class Login extends Command {
             } catch (ServiceException e) {
                 LOGGER.error(e.getMessage());
                 request.getSession().setAttribute("errorMessage", "Ошибка авторизации! Свяжитесь с администратором.");
-                return new Forward(ERROR_JSP);
+                return new Forward(Jsp.ERROR);
             }
         }
         return new Forward(FAILED_FORWARD);
