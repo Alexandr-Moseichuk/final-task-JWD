@@ -30,7 +30,7 @@ public class AdvertiserVisual extends Command {
         UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
         try {
             List<User> advertiserList = userService.readUsersByRole(UserRole.ADVERTISER);
-            request.setAttribute("advertiserList" ,advertiserList);
+            request.setAttribute(Attribute.ADVERTISER_LIST ,advertiserList);
             return new ResultPage(ADVERTISER_LIST_JSP);
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());

@@ -21,6 +21,7 @@ public class ApplicationList extends Command {
     private static final Logger LOGGER = LogManager.getLogger(ApplicationList.class);
     private static final String RESULT_JSP = "jsp/application/list.jsp";
     private static final int PAGE_SIZE = 10;
+    private static final int DEFAULT_PAGE = 1;
 
     public ApplicationList() {
         getPermissionSet().add(UserRole.ADMINISTRATOR);
@@ -32,7 +33,7 @@ public class ApplicationList extends Command {
                 (ApplicationService) serviceFactory.getService(ServiceEnum.APPLICATION);
         try {
             String currentPageParameter =  request.getParameter(Attribute.CURRENT_PAGE);
-            int currentPage = 1;
+            int currentPage = DEFAULT_PAGE;
             if (currentPageParameter != null) {
                 currentPage = Integer.parseInt(currentPageParameter);
             }
@@ -45,7 +46,7 @@ public class ApplicationList extends Command {
 
             request.setAttribute(Attribute.CURRENT_PAGE, currentPage);
             request.setAttribute(Attribute.LAST_PAGE, lastPage);
-            request.setAttribute("applicationList", applicationSubList);
+            request.setAttribute(Attribute.APPLICATION_LIST, applicationSubList);
             return new ResultPage(RESULT_JSP);
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());

@@ -32,10 +32,10 @@ public class ApplicationUpdate extends Command {
         ApplicationService service = (ApplicationService) serviceFactory.getService(ServiceEnum.APPLICATION);
         try {
             service.update(application);
-            request.setAttribute("updateFeedback", "Заявка обновлена");
+            request.setAttribute(Attribute.UPDATE_FEEDBACK, "Заявка обновлена");
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
-            request.setAttribute("updateFeedback", "Произошла ошибка!");
+            request.setAttribute(Attribute.UPDATE_FEEDBACK, "Произошла ошибка!");
         }
         return new ResultPage(RESULT_PAGE, true);
     }

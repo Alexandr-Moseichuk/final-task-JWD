@@ -21,7 +21,9 @@ import java.util.List;
 public class AdvertiserCampaignListVisual extends Command {
     private static final Logger LOGGER = LogManager.getLogger(AdvertiserCampaignListVisual.class);
     private static final String RESULT_JSP = "jsp/advertiser/campaign/list.jsp";
-    private static final int PAGE_SIZE = 3;
+
+    private static final int PAGE_SIZE = 5;
+    private static final int DEFAULT_PAGE = 1;
 
     public AdvertiserCampaignListVisual() {
         getPermissionSet().add(UserRole.ADVERTISER);
@@ -34,7 +36,7 @@ public class AdvertiserCampaignListVisual extends Command {
             User authorizedUser = (User) request.getSession(false).getAttribute(Attribute.AUTHORIZED_USER);
 
             String currentPageParameter =  request.getParameter(Attribute.CURRENT_PAGE);
-            int currentPage = 1;
+            int currentPage = DEFAULT_PAGE;
             if (currentPageParameter != null) {
                 currentPage = Integer.parseInt(currentPageParameter);
             }
@@ -44,7 +46,7 @@ public class AdvertiserCampaignListVisual extends Command {
             int totalRecords = campaignService.readRowCountByUser(authorizedUser.getId());
             int pages = PaginationService.pages(totalRecords, PAGE_SIZE);
             int lastPage = PaginationService.lastPage(pages, PAGE_SIZE, totalRecords);
-            request.setAttribute("campaignList", campaignList);
+            request.setAttribute(Attribute.CAMPAIGN_LIST, campaignList);
             request.setAttribute(Attribute.CURRENT_PAGE, currentPage);
             request.setAttribute(Attribute.LAST_PAGE, lastPage);
             return new ResultPage(RESULT_JSP);
