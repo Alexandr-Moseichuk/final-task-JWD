@@ -20,7 +20,7 @@
             <AppenderRef ref="ConnectionPool" level="DEBUG"/>
         </Logger>
         <Root level="all">
-            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Application"/>
         </Root>
 
     </Loggers>
