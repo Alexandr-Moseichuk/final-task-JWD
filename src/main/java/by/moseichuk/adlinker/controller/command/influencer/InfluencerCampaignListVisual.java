@@ -31,7 +31,7 @@ public class InfluencerCampaignListVisual extends Command {
     public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         CampaignService campaignService = (CampaignService) serviceFactory.getService(ServiceEnum.CAMPAIGN);
         try {
-            String currentPageParameter =  request.getParameter("currentPage");
+            String currentPageParameter =  request.getParameter(Attribute.CURRENT_PAGE);
             int currentPage = 1;
             if (currentPageParameter != null) {
                 currentPage = Integer.parseInt(currentPageParameter);
@@ -46,8 +46,8 @@ public class InfluencerCampaignListVisual extends Command {
             int lastPage = PaginationService.lastPage(pages, PAGE_SIZE, totalRecords);
 
             request.setAttribute("campaignSubList", campaignSubList);
-            request.setAttribute("currentPage", currentPage);
-            request.setAttribute("lastPage", lastPage);
+            request.setAttribute(Attribute.CURRENT_PAGE, currentPage);
+            request.setAttribute(Attribute.LAST_PAGE, lastPage);
             return new ResultPage(CAMPAIGN_LIST_JSP);
         } catch (ServiceException | NumberFormatException e) {
             LOGGER.error(e.getMessage());

@@ -33,7 +33,7 @@ public class AdvertiserCampaignListVisual extends Command {
         try {
             User authorizedUser = (User) request.getSession(false).getAttribute(Attribute.AUTHORIZED_USER);
 
-            String currentPageParameter =  request.getParameter("currentPage");
+            String currentPageParameter =  request.getParameter(Attribute.CURRENT_PAGE);
             int currentPage = 1;
             if (currentPageParameter != null) {
                 currentPage = Integer.parseInt(currentPageParameter);
@@ -45,8 +45,8 @@ public class AdvertiserCampaignListVisual extends Command {
             int pages = PaginationService.pages(totalRecords, PAGE_SIZE);
             int lastPage = PaginationService.lastPage(pages, PAGE_SIZE, totalRecords);
             request.setAttribute("campaignList", campaignList);
-            request.setAttribute("currentPage", currentPage);
-            request.setAttribute("lastPage", lastPage);
+            request.setAttribute(Attribute.CURRENT_PAGE, currentPage);
+            request.setAttribute(Attribute.LAST_PAGE, lastPage);
             return new ResultPage(RESULT_JSP);
         } catch (ServiceException | NumberFormatException e) {
             LOGGER.error(e.getMessage());
