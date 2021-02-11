@@ -30,7 +30,7 @@ public class ManagerInfluencersListVisual extends Command {
         try {
             User authorizedUser = (User) request.getSession(false).getAttribute(Attribute.AUTHORIZED_USER);
             List<Influencer> influencerList = influencerService.readByManagerId(authorizedUser.getId());
-            request.setAttribute("influencerList", influencerList);
+            request.setAttribute(Attribute.INFLUENCER_LIST, influencerList);
             return new ResultPage("jsp/manager/influencer/list.jsp");
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());

@@ -30,7 +30,7 @@ public class ManagerVisual extends Command {
         UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
         try {
             List<User> managerList = userService.readUsersByRole(UserRole.MANAGER);
-            request.setAttribute("managerList", managerList);
+            request.setAttribute(Attribute.MANAGER_LIST, managerList);
             return new ResultPage(MANAGER_LIST_JSP);
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());

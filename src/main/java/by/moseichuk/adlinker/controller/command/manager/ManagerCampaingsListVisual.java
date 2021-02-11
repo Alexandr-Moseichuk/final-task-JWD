@@ -33,7 +33,7 @@ public class ManagerCampaingsListVisual extends Command {
                 influencer.setCampaignList(campaignService.readAllByOwner(influencer.getId()));
             }
             LOGGER.debug(influencerList);
-            request.setAttribute("influencerList", influencerList);
+            request.setAttribute(Attribute.INFLUENCER_LIST, influencerList);
             return new ResultPage("jsp/manager/campaign/list.jsp");
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());

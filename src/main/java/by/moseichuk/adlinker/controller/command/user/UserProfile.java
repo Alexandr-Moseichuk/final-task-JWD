@@ -55,7 +55,7 @@ public class UserProfile extends Command {
                     InfluencerService influencerService = (InfluencerService) serviceFactory.getService(ServiceEnum.INFLUENCER);
                     List<Influencer> influencerList = influencerService.readByManagerId(user.getId());
                     LOGGER.debug(influencerList);
-                    request.setAttribute("influencerList", influencerList);
+                    request.setAttribute(Attribute.INFLUENCER_LIST, influencerList);
                     break;
             }
             return new ResultPage(USER_PROFILE_JSP);

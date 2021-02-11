@@ -30,7 +30,7 @@ public class InfluencerVisual extends Command {
         InfluencerService influencerService = (InfluencerService) serviceFactory.getService(ServiceEnum.INFLUENCER);
         try {
             List<Influencer> influencerList = influencerService.readAll();
-            request.setAttribute("influencerList", influencerList);
+            request.setAttribute(Attribute.INFLUENCER_LIST, influencerList);
             return new ResultPage(INFLUENCER_LIST_JSP);
         } catch (ServiceException e) {
             LOGGER.error(e.getMessage());
