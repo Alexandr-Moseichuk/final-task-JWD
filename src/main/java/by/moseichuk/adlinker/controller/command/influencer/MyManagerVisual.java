@@ -27,7 +27,7 @@ public class MyManagerVisual extends Command {
     public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         ManagerService managerService = (ManagerService) serviceFactory.getService(ServiceEnum.MANAGER);
         try {
-            User user = (User) request.getSession(false).getAttribute("authorizedUser");
+            User user = (User) request.getSession(false).getAttribute(Attribute.AUTHORIZED_USER);
             Manager manager = managerService.readByInfluencerId(user.getId());
             String redirectPage = String.format("/user/profile.html?userId=%d", manager.getId());
             return new ResultPage(redirectPage, true);

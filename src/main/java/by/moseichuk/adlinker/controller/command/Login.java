@@ -45,7 +45,7 @@ public class Login extends Command {
             try {
                 User user = userService.login(email, password);
                 if (user != null) {
-                    request.getSession().setAttribute("authorizedUser", user);
+                    request.getSession().setAttribute(Attribute.AUTHORIZED_USER, user);
                     request.getSession().setAttribute("menuList", buildMenu(user.getRole()));
                     LOGGER.debug("Authorization success...");
                     return new ResultPage(SUCCESS_REDIRECT, true);

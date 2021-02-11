@@ -29,7 +29,7 @@ public class UserProfile extends Command {
         String userIdParameter = request.getParameter("userId");
         Integer userId;
         if (userIdParameter == null) {
-            User authorizedUser = (User) request.getSession(false).getAttribute("authorizedUser");
+            User authorizedUser = (User) request.getSession(false).getAttribute(Attribute.AUTHORIZED_USER);
             userId = authorizedUser.getId();
         } else {
             try {

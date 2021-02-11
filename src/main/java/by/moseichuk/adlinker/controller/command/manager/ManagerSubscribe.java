@@ -32,7 +32,7 @@ public class ManagerSubscribe extends Command {
     public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
         if (session != null) {
-            User authorizedUser = (User) session.getAttribute("authorizedUser");
+            User authorizedUser = (User) session.getAttribute(Attribute.AUTHORIZED_USER);
             if (authorizedUser.getRole() != UserRole.INFLUENCER) {
                 return new ResultPage(PERMISSION_DENIED_JSP);
             }

@@ -28,7 +28,7 @@ public class ManagerInfluencersListVisual extends Command {
     public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         InfluencerService influencerService = (InfluencerService) serviceFactory.getService(ServiceEnum.INFLUENCER);
         try {
-            User authorizedUser = (User) request.getSession(false).getAttribute("authorizedUser");
+            User authorizedUser = (User) request.getSession(false).getAttribute(Attribute.AUTHORIZED_USER);
             List<Influencer> influencerList = influencerService.readByManagerId(authorizedUser.getId());
             request.setAttribute("influencerList", influencerList);
             return new ResultPage("jsp/manager/influencer/list.jsp");

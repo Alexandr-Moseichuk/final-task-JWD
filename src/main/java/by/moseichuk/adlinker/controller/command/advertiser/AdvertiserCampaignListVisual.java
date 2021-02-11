@@ -31,7 +31,7 @@ public class AdvertiserCampaignListVisual extends Command {
     public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         CampaignService campaignService = (CampaignService) serviceFactory.getService(ServiceEnum.CAMPAIGN);
         try {
-            User authorizedUser = (User) request.getSession(false).getAttribute("authorizedUser");
+            User authorizedUser = (User) request.getSession(false).getAttribute(Attribute.AUTHORIZED_USER);
 
             String currentPageParameter =  request.getParameter("currentPage");
             int currentPage = 1;

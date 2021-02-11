@@ -54,7 +54,7 @@ public class UploadPhoto extends Command {
 
             UserFileService userFileService = (UserFileService) serviceFactory.getService(ServiceEnum.FILE);
             UserService userService = (UserService) serviceFactory.getService(ServiceEnum.USER);
-            User authorizedUser = (User) request.getSession(false).getAttribute("authorizedUser");
+            User authorizedUser = (User) request.getSession(false).getAttribute(Attribute.AUTHORIZED_USER);
 
             String photoSrc = PROFILE_PHOTO_DIR + fileName;
             if (authorizedUser.getUserInfo().getUserFile() == null) {

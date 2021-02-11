@@ -1,6 +1,7 @@
 package by.moseichuk.adlinker.controller.command.show;
 
 import by.moseichuk.adlinker.bean.User;
+import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.servlet.ResultPage;
 
@@ -18,7 +19,7 @@ public class LoginVisual extends Command {
         if (session == null) {
             return new ResultPage(LOGIN_JSP);
         } else {
-            User authorizedUser = (User) session.getAttribute("authorizedUser");
+            User authorizedUser = (User) session.getAttribute(Attribute.AUTHORIZED_USER);
             if (authorizedUser == null) {
                 return new ResultPage(LOGIN_JSP);
             } else {

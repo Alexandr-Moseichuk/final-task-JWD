@@ -23,7 +23,7 @@ public class NotApprovedVisual extends Command {
 
     @Override
     public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
-        User authorizedUser = (User) request.getSession(false).getAttribute("authorizedUser");
+        User authorizedUser = (User) request.getSession(false).getAttribute(Attribute.AUTHORIZED_USER);
         if (authorizedUser.getStatus() != UserStatus.UNVERIFIED) {
             return new ResultPage(PERMISSION_DENIED_JSP);
         }

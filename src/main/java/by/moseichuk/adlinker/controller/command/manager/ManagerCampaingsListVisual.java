@@ -27,7 +27,7 @@ public class ManagerCampaingsListVisual extends Command {
         InfluencerService influencerService = (InfluencerService) serviceFactory.getService(ServiceEnum.INFLUENCER);
         CampaignService campaignService = (CampaignService) serviceFactory.getService(ServiceEnum.CAMPAIGN);
         try {
-            User authorizedUser = (User) request.getSession(false).getAttribute("authorizedUser");
+            User authorizedUser = (User) request.getSession(false).getAttribute(Attribute.AUTHORIZED_USER);
             List<Influencer> influencerList = influencerService.readByManagerId(authorizedUser.getId());
             for (Influencer influencer : influencerList) {
                 influencer.setCampaignList(campaignService.readAllByOwner(influencer.getId()));

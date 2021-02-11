@@ -27,7 +27,7 @@ public class ApplicationDelete extends Command {
         if (session == null) {
             return new ResultPage(PERMISSION_DENIED_JSP);
         }
-        User authorizedUser = (User) session.getAttribute("authorizedUser");
+        User authorizedUser = (User) session.getAttribute(Attribute.AUTHORIZED_USER);
         if (authorizedUser.getStatus() != UserStatus.UNVERIFIED) {
             return new ResultPage(PERMISSION_DENIED_JSP);
         }

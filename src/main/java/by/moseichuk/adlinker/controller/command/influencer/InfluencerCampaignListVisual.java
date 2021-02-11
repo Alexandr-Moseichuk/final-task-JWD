@@ -36,7 +36,7 @@ public class InfluencerCampaignListVisual extends Command {
             if (currentPageParameter != null) {
                 currentPage = Integer.parseInt(currentPageParameter);
             }
-            User authorizedUser = (User) request.getSession(false).getAttribute("authorizedUser");
+            User authorizedUser = (User) request.getSession(false).getAttribute(Attribute.AUTHORIZED_USER);
             int userId = authorizedUser.getId();
 
             int offset = PaginationService.offset(PAGE_SIZE, currentPage);

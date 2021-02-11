@@ -31,7 +31,7 @@ public class EditCampaignVisual extends Command {
         try {
             Integer campaignId = Integer.parseInt(request.getParameter("campaignId"));
             Integer ownerId = campaignService.readOwnerId(campaignId);
-            User authorizedUser = (User) request.getSession(false).getAttribute("authorizedUser");
+            User authorizedUser = (User) request.getSession(false).getAttribute(Attribute.AUTHORIZED_USER);
             if (!authorizedUser.getId().equals(ownerId)) {
                 return new ResultPage(PERMISSION_DENIED_JSP);
             }

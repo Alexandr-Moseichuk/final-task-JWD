@@ -2,6 +2,7 @@ package by.moseichuk.adlinker.controller.command.application;
 
 import by.moseichuk.adlinker.bean.Application;
 import by.moseichuk.adlinker.bean.User;
+import by.moseichuk.adlinker.constant.Attribute;
 import by.moseichuk.adlinker.controller.command.Command;
 import by.moseichuk.adlinker.controller.servlet.ResultPage;
 import by.moseichuk.adlinker.service.ApplicationService;
@@ -22,7 +23,7 @@ public class ApplicationUpdate extends Command {
     @Override
     public ResultPage execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
-        User user = (User) session.getAttribute("authorizedUser");
+        User user = (User) session.getAttribute(Attribute.AUTHORIZED_USER);
         Application application = new Application();
         application.setUserId(user.getId());
         application.setComment(request.getParameter("comment"));
