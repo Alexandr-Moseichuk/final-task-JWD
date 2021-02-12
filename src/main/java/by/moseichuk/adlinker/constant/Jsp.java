@@ -1,5 +1,7 @@
 package by.moseichuk.adlinker.constant;
 
-public interface Jsp {
-    String ERROR = "jsp/error.jsp";
+public final class Jsp {
+    public static final String ERROR = "jsp/error.jsp";
+
+    private Jsp() {}
 }
