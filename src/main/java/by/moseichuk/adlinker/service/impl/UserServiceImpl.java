@@ -21,8 +21,6 @@ public class UserServiceImpl extends BaseService implements UserService {
     public User login(String mail, String password) throws ServiceException {
         try {
             UserDao userDao = (UserDao) transaction.getDao(DaoEnum.USER);
-            UserInfoDao userInfoDao = (UserInfoDao) transaction.getDao(DaoEnum.USER_INFO);
-            UserFileDao userFileDao = (UserFileDao) transaction.getDao(DaoEnum.FILE);
             User user = userDao.readByEmail(mail);
             if (user != null && BCrypt.checkpw(password, user.getPassword())) {
                 buildUser(user);
