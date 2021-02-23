@@ -36,7 +36,7 @@
             <td><fmt:formatDate type="both" value="${campaign.beginDate.time}" dateStyle="medium" timeStyle="medium"/></td>
             <td><fmt:formatDate type="both" value="${campaign.endDate.time}" dateStyle="medium" timeStyle="medium"/></td>
             <td>
-                <a href="<c:url value="/campaign.html?campaignId=${campaign.id}"/>">
+                <a href="<c:url value="/campaign/page.html?campaignId=${campaign.id}"/>">
                     <fmt:message key="campaign.list.table.campaign_page_link" bundle="${rb}" />
                 </a>
             </td>

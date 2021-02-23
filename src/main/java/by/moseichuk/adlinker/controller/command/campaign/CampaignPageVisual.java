@@ -18,7 +18,7 @@ import java.util.Arrays;
 
 public class CampaignPageVisual extends Command {
     private static final Logger LOGGER = LogManager.getLogger(CampaignPageVisual.class);
-    private static final String RESULT_PAGE = "jsp/campaign/display_page.jsp";
+    private static final String RESULT_PAGE = "jsp/campaign/page.jsp";
 
     public CampaignPageVisual() {
         getPermissionSet().addAll(Arrays.asList(UserRole.values()));
