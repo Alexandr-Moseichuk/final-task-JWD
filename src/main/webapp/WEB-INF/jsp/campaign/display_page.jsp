@@ -35,7 +35,7 @@
     </div>
     <div class="col-md-12">
         <label for="budget"><fmt:message key="campaign.list.label.budget" bundle="${rb}" /></label>
-        <input type="text" class="form-control" id="budget" name="budget" value="${campaign.budget}" required>
+        <input type="text" class="form-control" id="budget" name="budget" value="${campaign.budget}" disabled>
     </div>
 </div>
 <c:import url="/WEB-INF/jsp/particles/footer.jsp"/>
